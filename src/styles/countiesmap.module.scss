@@ -1,0 +1,25 @@
+#rtMap {
+  margin-top: -3rem;
+  width: 90rem;
+}
+
+/* unvisited counties */
+#rtMap > path {
+  fill: var(--unvisited);
+  stroke: #fff;
+  cursor: pointer;
+}
+
+/* interstates */
+
+#highways path {
+  stroke: var(--highways);
+  cursor: pointer;
+}
+
+/* state borders */
+
+#state_borders path {
+  stroke: #fff;
+  cursor: pointer;
+}
