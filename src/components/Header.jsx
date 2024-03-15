@@ -1,11 +1,11 @@
 import styles from "../styles/header.module.scss";
 import logo from "../assets/car.svg";
 import account from "../assets/account.svg";
-import pin from "../assets/pin.svg";
-import go from "../assets/go.svg";
+import GoPin from "./GoPin";
 
 export default function Header() {
   let loggedIn = true;
+  let trackSelected = true;
 
   return (
     <div className={styles.headerContainer}>
@@ -15,23 +15,25 @@ export default function Header() {
       </div>
       <div className={styles.headerRightContainer}>
         {loggedIn ? (
-          <>
-            <input
-              type="checkbox"
-              id="toggle"
-              className={styles.toggleCheckbox}
-            />
-            <label htmlFor="toggle" className={styles.toggleContainer}>
-              <div>
-                <img src={go} alt="Go" />
-                <p>Plan</p>
-              </div>
-              <div>
-                <img src={pin} alt="Pin" />
-                <p>Track</p>
-              </div>
-            </label>
-          </>
+          <div className={styles.toggleContainer}>
+            <div className={styles.planBtn}>
+              <GoPin width="2.6rem" go={true} blue={trackSelected} />
+              <p
+                className={trackSelected ? styles.unselected : styles.selected}
+              >
+                Plan
+              </p>
+            </div>
+            <div className={styles.trackBtn}>
+              <GoPin width="2.6rem" go={false} blue={!trackSelected} />
+              <p
+                className={trackSelected ? styles.selected : styles.unselected}
+              >
+                Track
+              </p>
+            </div>
+            <div className={styles.animation}></div>
+          </div>
         ) : (
           <div className={styles.login}>Login</div>
         )}

@@ -1,20 +1,22 @@
-#rtMap {
-  margin-top: -3rem;
-  width: 90rem;
-}
+@use '../styles' as global;
 
-/* unvisited counties */
-#rtMap > path {
-  fill: var(--unvisited);
-  stroke: #fff;
-  cursor: pointer;
+#countiesMap {
+  width: 95rem;
+
+  /* unvisited counties */
+  > path {
+    fill: global.$default-gray;
+    stroke: #fff;
+    cursor: pointer;
+  }
 }
 
 /* interstates */
 
 #highways path {
-  stroke: var(--highways);
+  stroke: global.$highways;
   cursor: pointer;
+  display: none; // only hidden for landing page animation
 }
 
 /* state borders */

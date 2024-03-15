@@ -20,6 +20,7 @@
     .gravl {
       font-size: 2.8rem;
       font-weight: 400;
+      color: global.$dark;
     }
   }
   .headerRightContainer {
@@ -28,104 +29,105 @@
     justify-content: end;
     align-items: center;
 
-
-
-
-    
-
     /* toggle button */
 
     .toggleCheckbox {
       display: none;
+
+      &:checked + .toggleContainer::before {
+        left: 50%;
+      }
+  
+      &:checked + .toggleContainer div:first-child {
+        color: global.$white;
+        transition: color 0.3s;
+  
+        .icon {
+          filter: brightness(0) invert(1);
+        }
+      }
+      &:checked + .toggleContainer div:last-child {
+        color: global.$gravl-blue;
+        transition: color 0.3s;
+  
+        .icon {
+          filter: none;
+        }
+      }
+      & + .toggleContainer div:first-child {
+        color: global.$gravl-blue;
+        transition: color 0.3s;
+  
+        .icon {
+          filter: none;
+        }
+      }
+      & + .toggleContainer div:last-child {
+        color: global.$white;
+        transition: color 0.3s;
+  
+        .icon {
+          filter: brightness(0) invert(1);
+        }
+      }
     }
     
     .toggleContainer {
       margin-right: 3.5rem;
       position: relative;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      width: fit-content;
-      border: 3px solid global.$gravlblue;
-      border-radius: 20px;
-      background: global.$gravlblue;
-      font-weight: bold;
-      color: global.$gravlblue;
+      display: flex;
+      border: 3px solid global.$gravl-blue;
+      border-radius: 2rem;
+      height: 3rem;
+      color: global.$gravl-blue;
       cursor: pointer;
 
+      .planBtn {
+        width: 9rem;
+      }
+      
+      .trackBtn {
+        width: 11rem;
+      }
+
       div {
+        height: 100%;
+        position: relative;
         display: flex;
-        align-items: center;
         justify-content: center;
-        padding: 0 0.4rem;
-        margin-right: 0.3rem;
-        height: 3rem;
-        text-align: center;
+        align-items: center;
         z-index: 1;
-        img {
-          width: 2.7rem;
-          aspect-ratio: 1;
-        }
+        cursor: pointer;
+        transition: 0.5s;
+
         p {
-          text-transform: uppercase;
-          font-size: 1.7rem;
-          font-weight: 500;
           margin-top: 0.2rem;
+          font-size: 1.8rem;
+          text-transform: uppercase;
+          font-weight: 500;
         }
       }
-    }
-
-    .toggleContainer::before {
-      content: '';
-      position: absolute;
-      width: 50%;
-      height: 100%;
-      left: 0%;
-      border-radius: 20px;
-      background: global.$white;
-      transition: all 0.3s;
-    }
-
-    .toggleCheckbox:checked + .toggleContainer::before {
-      left: 50%;
-    }
-
-    .toggleCheckbox:checked + .toggleContainer div:first-child {
-      color: global.$white;
-      transition: color 0.3s;
-
-      img {
-        filter: brightness(0) invert(1);
+      
+      .unselected {
+        color: global.$gravl-blue;
       }
-    }
-    .toggleCheckbox:checked + .toggleContainer div:last-child {
-      color: global.$gravlblue;
-      transition: color 0.3s;
-
-      img {
-        filter: none;
+      
+      .selected {
+        color: global.$white;
       }
+      
+      .animation {
+        position: absolute;
+        height: 100%;
+        top: 0;
+        z-index: 0;
+        transition: all 0.5s ease 0s;
+        border-radius: 2rem;
+        width: 11rem;
+        left: 9rem;
+        background: global.$gravl-blue;
+      }      
     }
-    .toggleCheckbox + .toggleContainer div:first-child {
-      color: global.$gravlblue;
-      transition: color 0.3s;
-
-      img {
-        filter: none;
-      }
-    }
-    .toggleCheckbox + .toggleContainer div:last-child {
-      color: global.$white;
-      transition: color 0.3s;
-
-      img {
-        filter: brightness(0) invert(1);
-      }
-    }
-
-
-
-
-
 
     /* if not logged in */
 
