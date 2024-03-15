@@ -1,4 +1,4 @@
-import countiesStyles from "../../styles/countiesmap.module.scss";
+import styles from "../../styles/countiesmap.module.scss";
 
 export default function CountiesMap() {
   return (
