@@ -30,47 +30,6 @@
     align-items: center;
 
     /* toggle button */
-
-    .toggleCheckbox {
-      display: none;
-
-      &:checked + .toggleContainer::before {
-        left: 50%;
-      }
-  
-      &:checked + .toggleContainer div:first-child {
-        color: global.$white;
-        transition: color 0.3s;
-  
-        .icon {
-          filter: brightness(0) invert(1);
-        }
-      }
-      &:checked + .toggleContainer div:last-child {
-        color: global.$gravl-blue;
-        transition: color 0.3s;
-  
-        .icon {
-          filter: none;
-        }
-      }
-      & + .toggleContainer div:first-child {
-        color: global.$gravl-blue;
-        transition: color 0.3s;
-  
-        .icon {
-          filter: none;
-        }
-      }
-      & + .toggleContainer div:last-child {
-        color: global.$white;
-        transition: color 0.3s;
-  
-        .icon {
-          filter: brightness(0) invert(1);
-        }
-      }
-    }
     
     .toggleContainer {
       margin-right: 3.5rem;
@@ -90,7 +49,7 @@
         width: 11rem;
       }
 
-      div {
+      button {
         height: 100%;
         position: relative;
         display: flex;
@@ -105,6 +64,7 @@
           font-size: 1.8rem;
           text-transform: uppercase;
           font-weight: 500;
+          transition: all 0.3s;
         }
       }
       
@@ -126,7 +86,7 @@
         width: 11rem;
         left: 9rem;
         background: global.$gravl-blue;
-      }      
+      }
     }
 
     /* if not logged in */
