@@ -1,8 +1,52 @@
 import styles from "../../styles/countiesmap.module.scss";
+import countiesData from "../../assets/mapdata/MyTravels.json";
+import { useEffect, useRef, useState } from "react";
+import { interpolateColors } from "../../utils/color";
 
 export default function CountiesMap() {
+  const mapRef = useRef(null);
+  const [data, setData] = useState(countiesData);
+  const colors = interpolateColors(
+    "#ffff33",
+    "#319fff",
+    "#54e8d7",
+    Object.keys(data).length
+  );
+
+  useEffect(() => {
+    loadMap();
+  }, []);
+
+  const loadMap = () => {
+    resetMap();
+
+    let counter = 0;
+
+    Object.keys(data).forEach((key, index) => {
+      const { counties } = data[key];
+      const color = colors[index];
+
+      counties.forEach(({ name }) => {
+        let pause = name === "Fulton__GA" ? 205 : counter++;
+        setTimeout(() => {
+          const element = document.getElementById(name);
+          if (element) {
+            element.style.fill = color;
+          }
+        }, 800 + 20 * pause);
+      });
+    });
+  };
+
+  const resetMap = () => {
+    mapRef.current?.querySelectorAll("svg > path").forEach((county) => {
+      county.style.fill = "#d1dbdd"; // default gray
+    });
+  };
+
   return (
     <svg
+      ref={mapRef}
       viewBox="0 0 1460 1000"
       xmlns="http://www.w3.org/2000/svg"
       id={styles.countiesMap}

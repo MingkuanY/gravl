@@ -1,4 +1,4 @@
-@use '../styles' as global;
+@use './mixin' as mixin;
 
 .headerContainer {
   height: 10rem;
@@ -20,7 +20,7 @@
     .gravl {
       font-size: 2.8rem;
       font-weight: 400;
-      color: global.$dark;
+      color: mixin.$dark;
     }
   }
   .headerRightContainer {
@@ -35,10 +35,10 @@
       margin-right: 3.5rem;
       position: relative;
       display: flex;
-      border: 3px solid global.$gravl-blue;
+      border: 3px solid mixin.$gravl-blue;
       border-radius: 2rem;
       height: 3rem;
-      color: global.$gravl-blue;
+      color: mixin.$gravl-blue;
       cursor: pointer;
 
       .planBtn {
@@ -69,11 +69,11 @@
       }
       
       .unselected {
-        color: global.$gravl-blue;
+        color: mixin.$gravl-blue;
       }
       
       .selected {
-        color: global.$white;
+        color: mixin.$white;
       }
       
       .animation {
@@ -85,7 +85,7 @@
         border-radius: 2rem;
         width: 11rem;
         left: 9rem;
-        background: global.$gravl-blue;
+        background: mixin.$gravl-blue;
       }
     }
 

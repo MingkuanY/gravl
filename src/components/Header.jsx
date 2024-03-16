@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "../styles/header.module.scss";
-import logo from "../assets/car.svg";
-import account from "../assets/account.svg";
+import logo from "../assets/icons/car.svg";
+import account from "../assets/icons/account.svg";
 import GoPin from "./GoPin";
 
 export default function Header() {
@@ -9,11 +9,15 @@ export default function Header() {
   const [trackSelected, setTrackSelected] = useState(true);
 
   const planClicked = () => {
-    setTrackSelected(false);
+    if (trackSelected) {
+      setTrackSelected(false);
+    }
   };
 
   const trackClicked = () => {
-    setTrackSelected(true);
+    if (!trackSelected) {
+      setTrackSelected(true);
+    }
   };
 
   return (

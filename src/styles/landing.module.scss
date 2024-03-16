@@ -1,4 +1,4 @@
-@use "../styles.scss" as global;
+@use "./mixin" as mixin;
 
 .mainContainer {
   display: flex;
@@ -24,9 +24,9 @@
       z-index: 1;
       border-radius: 2.25rem;
       font-weight: bold;
-      color: global.$white;
+      color: mixin.$white;
       cursor: pointer;
-      background: global.$gravl-blue;
+      background: mixin.$gravl-blue;
       transition: transform 0.3s;
 
       &:hover {

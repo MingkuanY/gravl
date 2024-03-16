@@ -1,11 +1,11 @@
-@use '../styles' as global;
+@use './mixin' as mixin;
 
 #countiesMap {
   width: 95rem;
 
   /* unvisited counties */
   > path {
-    fill: global.$default-gray;
+    fill: mixin.$default-gray;
     stroke: #fff;
     cursor: pointer;
   }
@@ -14,7 +14,7 @@
 /* interstates */
 
 #highways path {
-  stroke: global.$highways;
+  stroke: mixin.$highways;
   cursor: pointer;
   display: none; // only hidden for landing page animation
 }
