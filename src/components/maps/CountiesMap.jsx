@@ -4,12 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import { interpolateColors } from "../../utils/color";
 
 export default function CountiesMap() {
+  const livedInColor = "#ffff33";
+  const startColor = "#319fff";
+  const endColor = "#c0e2ff";
+  const defaultColor = "#012241";
+
   const mapRef = useRef(null);
   const [data, setData] = useState(countiesData);
   const colors = interpolateColors(
-    "#ffff33",
-    "#319fff",
-    "#54e8d7",
+    livedInColor,
+    startColor,
+    endColor,
     Object.keys(data).length
   );
 
@@ -40,7 +45,7 @@ export default function CountiesMap() {
 
   const resetMap = () => {
     mapRef.current?.querySelectorAll("svg > path").forEach((county) => {
-      county.style.fill = "#d1dbdd"; // default gray
+      county.style.fill = defaultColor;
     });
   };
 

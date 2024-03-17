@@ -1,11 +1,11 @@
 @use './mixin' as mixin;
 
 #countiesMap {
-  width: 95rem;
+  width: 85rem;
 
   /* unvisited counties */
   > path {
-    fill: mixin.$default-gray;
+    fill: mixin.$default-dark;
     stroke: #fff;
     cursor: pointer;
   }

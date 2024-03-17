@@ -6,8 +6,40 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: 12px;
+@media (max-width: 2000px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 1380px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 1124px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 868px) {
+  html {
+    font-size: 6px;
+  }
+}
+
+@media (max-width: 740px) {
+  html {
+    font-size: 5px;
+  }
+}
+
+@media (max-width: 575px) {
+  html {
+    font-size: 4px;
+  }
 }
 
 button {
