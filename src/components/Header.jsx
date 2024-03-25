@@ -1,14 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import styles from "../styles/header.module.scss";
 import logo from "../assets/icons/car.svg";
 import account from "../assets/icons/account.svg";
 import GoPin from "./GoPin";
-import { Link } from "react-router-dom";
-import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
+import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "../services/AuthContext";
 
 export default function Header() {
-  let loggedIn = false;
+  const [isLoggedIn, setIsLoggedIn] = useContext(AuthContext);
   const [trackSelected, setTrackSelected] = useState(true);
 
   const planClicked = () => {
@@ -23,16 +22,26 @@ export default function Header() {
     }
   };
 
+  const navigate = useNavigate();
+  const loginClicked = () => {
+    setIsLoggedIn(true);
+    navigate("/track");
+  };
+
   return (
     <div className={styles.headerContainer}>
-      <Link to="/" style={{ textDecoration: "none" }}>
+      <Link
+        to="/"
+        style={{ textDecoration: "none" }}
+        onClick={() => setIsLoggedIn(false)}
+      >
         <div className={styles.logoContainer}>
           <img className={styles.logo} src={logo} alt="Gravl Logo" />
           <p className={styles.gravl}>Gravl</p>
         </div>
       </Link>
       <div className={styles.headerRightContainer}>
-        {loggedIn ? (
+        {isLoggedIn ? (
           <div className={styles.toggleContainer}>
             <button className={styles.planBtn} onClick={planClicked}>
               <GoPin width="2.6rem" go={true} blue={trackSelected} />
@@ -59,19 +68,15 @@ export default function Header() {
             ></div>
           </div>
         ) : (
-          <div className={styles.login}>Login</div>
+          <div className={styles.login} onClick={loginClicked}>
+            Login
+          </div>
         )}
-        <img src={account} alt="Account" className={styles.account} />
-        <GoogleLogin
-          onSuccess={(credentialResponse) => {
-            const credentialResponseDecoded = jwtDecode(
-              credentialResponse.credential
-            );
-            console.log(credentialResponseDecoded);
-          }}
-          onError={() => {
-            console.log("Login Failed");
-          }}
+        <img
+          src={account}
+          alt="Account"
+          className={styles.account}
+          onClick={loginClicked}
         />
       </div>
     </div>
