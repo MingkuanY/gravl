@@ -1,7 +1,8 @@
 @use './mixin' as mixin;
 
 #countiesMap {
-  width: 85rem;
+  width: 80rem;
+  margin-top: -2rem;
 
   /* unvisited counties */
   > path {

@@ -6,7 +6,7 @@ import { interpolateColors } from "../../utils/color";
 export default function CountiesMap() {
   const livedInColor = "#ffff33";
   const startColor = "#319fff";
-  const endColor = "#c0e2ff";
+  const endColor = "#89c7ff";
   const defaultColor = "#012241";
 
   const mapRef = useRef(null);

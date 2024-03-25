@@ -2313,5 +2313,35 @@
         "countyName": "St. Charles, LA"
       }
     ]
+  },
+  "visited2024": {
+    "label": "Visited 2024",
+    "counties": [
+      {
+        "name": "DeKalb__AL",
+        "visitDate": "2024-03-24",
+        "countyName": "DeKalb, AL"
+      },
+      {
+        "name": "Cherokee__AL",
+        "visitDate": "2024-03-24",
+        "countyName": "Cherokee, AL"
+      },
+      {
+        "name": "Floyd__GA",
+        "visitDate": "2024-03-24",
+        "countyName": "Floyd, GA"
+      },
+      {
+        "name": "Polk__GA",
+        "visitDate": "2024-03-24",
+        "countyName": "Polk, GA"
+      },
+      {
+        "name": "Paulding__GA",
+        "visitDate": "2024-03-24",
+        "countyName": "Paulding, GA"
+      }
+    ]
   }
 }

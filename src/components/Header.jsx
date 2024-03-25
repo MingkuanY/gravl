@@ -3,9 +3,12 @@ import styles from "../styles/header.module.scss";
 import logo from "../assets/icons/car.svg";
 import account from "../assets/icons/account.svg";
 import GoPin from "./GoPin";
+import { Link } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 export default function Header() {
-  let loggedIn = true;
+  let loggedIn = false;
   const [trackSelected, setTrackSelected] = useState(true);
 
   const planClicked = () => {
@@ -22,10 +25,12 @@ export default function Header() {
 
   return (
     <div className={styles.headerContainer}>
-      <div className={styles.logoContainer}>
-        <img className={styles.logo} src={logo} alt="Gravl Logo" />
-        <p className={styles.gravl}>Gravl</p>
-      </div>
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <div className={styles.logoContainer}>
+          <img className={styles.logo} src={logo} alt="Gravl Logo" />
+          <p className={styles.gravl}>Gravl</p>
+        </div>
+      </Link>
       <div className={styles.headerRightContainer}>
         {loggedIn ? (
           <div className={styles.toggleContainer}>
@@ -57,6 +62,17 @@ export default function Header() {
           <div className={styles.login}>Login</div>
         )}
         <img src={account} alt="Account" className={styles.account} />
+        <GoogleLogin
+          onSuccess={(credentialResponse) => {
+            const credentialResponseDecoded = jwtDecode(
+              credentialResponse.credential
+            );
+            console.log(credentialResponseDecoded);
+          }}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+        />
       </div>
     </div>
   );

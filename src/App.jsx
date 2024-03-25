@@ -8,9 +8,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/gravl/track" element={<Track />} />
-        <Route path="/gravl/plan" element={<Plan />} />
-        <Route path="/gravl/*" element={<Landing />} />
+        <Route path="track" element={<Track />} />
+        <Route path="plan" element={<Plan />} />
+        <Route path="*" element={<Landing />} />
       </Routes>
     </BrowserRouter>
   );
