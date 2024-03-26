@@ -1,31 +1,42 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import styles from "../styles/header.module.scss";
 import logo from "../assets/icons/car.svg";
 import account from "../assets/icons/account.svg";
 import GoPin from "./GoPin";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../services/AuthContext";
 
 export default function Header() {
+  const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useContext(AuthContext);
-  const [trackSelected, setTrackSelected] = useState(true);
+  const [trackSelected, setTrackSelected] = useState(
+    location.pathname === "/track"
+  );
 
   const planClicked = () => {
     if (trackSelected) {
       setTrackSelected(false);
+      setTimeout(() => {
+        navigate("/plan");
+      }, 500);
     }
   };
 
   const trackClicked = () => {
     if (!trackSelected) {
       setTrackSelected(true);
+      setTimeout(() => {
+        navigate("/track");
+      }, 500);
     }
   };
 
   const navigate = useNavigate();
   const loginClicked = () => {
-    setIsLoggedIn(true);
-    navigate("/track");
+    if (!isLoggedIn) {
+      setIsLoggedIn(true);
+      navigate("/track");
+    }
   };
 
   return (
