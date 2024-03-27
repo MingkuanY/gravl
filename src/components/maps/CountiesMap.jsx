@@ -7,7 +7,7 @@ export default function CountiesMap() {
   const livedInColor = "#ffff33";
   const startColor = "#319fff";
   const endColor = "#89c7ff";
-  const defaultColor = "#012241";
+  const defaultColor = "#012241"; // gray: #d1dbdd
 
   const mapRef = useRef(null);
   const [data, setData] = useState(countiesData);
@@ -54,7 +54,7 @@ export default function CountiesMap() {
       ref={mapRef}
       viewBox="0 0 1460 1000"
       xmlns="http://www.w3.org/2000/svg"
-      id={styles.countiesMap}
+      id={styles.map}
       version={1}
     >
       {/* COUNTIES */}

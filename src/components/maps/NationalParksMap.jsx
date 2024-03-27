@@ -1,8 +1,56 @@
-import npStyles from "../../styles/nationalparksmap.module.scss";
+import styles from "../../styles/nationalparksmap.module.scss";
+import nationalparksData from "../../assets/mapdata/MyNationalParks.json";
+import { useEffect, useRef, useState } from "react";
+import { interpolateColors } from "../../utils/color";
 
 export default function NationalParksMap() {
+  const livedInColor = "#ffff33";
+  const startColor = "#319fff";
+  const endColor = "#89c7ff";
+  const defaultColor = "#012241";
+
+  const mapRef = useRef(null);
+  const [data, setData] = useState(nationalparksData);
+  const colors = interpolateColors(
+    livedInColor,
+    startColor,
+    endColor,
+    Object.keys(data).length
+  );
+
+  useEffect(() => {
+    loadMap();
+  }, []);
+
+  const loadMap = () => {
+    resetMap();
+
+    let counter = 0;
+
+    Object.keys(data).forEach((key, index) => {
+      const { parks } = data[key];
+      const color = colors[index];
+
+      parks.forEach(({ name }) => {
+        let pause = counter++;
+        setTimeout(() => {
+          const element = document.getElementById(name);
+          if (element) {
+            element.style.fill = color;
+          }
+        }, 800 + 200 * pause);
+      });
+    });
+  };
+
+  const resetMap = () => {
+    mapRef.current?.querySelectorAll("svg > path").forEach((park) => {
+      park.style.fill = defaultColor;
+    });
+  };
+
   return (
-    <svg id="rtNationalParks" viewBox="0 0 1000 700">
+    <svg id={styles.map} viewBox="0 0 1000 700">
       <g id="ID_" className="state">
         <path
           id="ID"

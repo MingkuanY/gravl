@@ -1,0 +1,68 @@
+@use "./mixin" as mixin;
+
+.statContainer {
+  display: flex;
+  justify-content: center;
+
+  .stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .progressContainer {
+      width: 24rem;
+      height: 24rem;
+
+      .countContainer {
+        display: flex;
+        align-items: end;
+
+        .count {
+          font-size: 8rem;
+          color: mixin.$dark;
+          margin: 0 -0.6rem 0.6rem 0;
+          font-weight: 400;
+        }
+
+        .totalCount {
+          font-size: 4rem;
+          color: mixin.$dark;
+          font-weight: 400;
+        }
+      }
+
+      .type {
+        margin-top: 1rem;
+        font-size: 2.8rem;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+    }
+
+    .statsNavbar {
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+
+.timelineContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .myTimeline {
+    font-size: 5rem;
+    font-weight: 400;
+    color: mixin.$dark;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

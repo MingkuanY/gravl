@@ -1,10 +1,58 @@
-import countriesStyles from "../../styles/countriesmap.module.scss";
+import styles from "../../styles/countriesmap.module.scss";
+import countriesData from "../../assets/mapdata/MyCountries.json";
+import { useEffect, useRef, useState } from "react";
+import { interpolateColors } from "../../utils/color";
 
 export default function CountriesMap() {
+  const livedInColor = "#ffff33";
+  const startColor = "#319fff";
+  const endColor = "#89c7ff";
+  const defaultColor = "#012241";
+
+  const mapRef = useRef(null);
+  const [data, setData] = useState(countriesData);
+  const colors = interpolateColors(
+    livedInColor,
+    startColor,
+    endColor,
+    Object.keys(data).length
+  );
+
+  useEffect(() => {
+    loadMap();
+  }, []);
+
+  const loadMap = () => {
+    resetMap();
+
+    let counter = 0;
+
+    Object.keys(data).forEach((key, index) => {
+      const { countries } = data[key];
+      const color = colors[index];
+
+      countries.forEach(({ name }) => {
+        let pause = counter++;
+        setTimeout(() => {
+          const element = document.getElementById(name);
+          if (element) {
+            element.style.fill = color;
+          }
+        }, 800 + 250 * pause);
+      });
+    });
+  };
+
+  const resetMap = () => {
+    mapRef.current?.querySelectorAll("svg > path").forEach((country) => {
+      country.style.fill = defaultColor;
+    });
+  };
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      id="rtCountries"
+      id={styles.map}
       viewBox="0 0 895.92 471.76"
       strokeLinecap="round"
       strokeLinejoin="round"
