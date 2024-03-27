@@ -36,7 +36,10 @@ export default function NationalParksMap() {
         setTimeout(() => {
           const element = document.getElementById(name);
           if (element) {
-            element.style.fill = color;
+            const childPaths = element.querySelectorAll("path");
+            childPaths.forEach((path) => {
+              path.style.fill = color;
+            });
           }
         }, 800 + 200 * pause);
       });
