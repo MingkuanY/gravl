@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { interpolateColors } from "../../utils/color";
 
 export default function NationalParksMap() {
-  const livedInColor = "#ffff33";
+  const livedInColor = "#319fff";
   const startColor = "#319fff";
   const endColor = "#89c7ff";
   const defaultColor = "#012241";
@@ -44,14 +44,14 @@ export default function NationalParksMap() {
   };
 
   const resetMap = () => {
-    mapRef.current?.querySelectorAll("svg > path").forEach((park) => {
+    mapRef.current?.querySelectorAll(`.${styles.park}`).forEach((park) => {
       park.style.fill = defaultColor;
     });
   };
 
   return (
-    <svg id={styles.map} viewBox="0 0 1000 700">
-      <g id="ID_" className="state">
+    <svg ref={mapRef} id={styles.map} viewBox="0 0 1000 700">
+      <g id="ID_" className={styles.state}>
         <path
           id="ID"
           fill="#d1dbdd"
@@ -88,7 +88,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="HI_" className="state">
+      <g id="HI_" className={styles.state}>
         <path
           id="HI"
           fill="#d1dbdd"
@@ -125,49 +125,49 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="haleakala"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,322.3997,513.03239)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-34"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-19"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-59"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="hawaiiVolcanoes"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,341.35137,537.70525)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-91"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-41"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-250"
           />
         </g>
       </g>
-      <g id="AK_" className="state">
+      <g id="AK_" className={styles.state}>
         <path
           id="AK"
           fill="#d1dbdd"
@@ -182,23 +182,23 @@ export default function NationalParksMap() {
           className="state ak"
         />
         <g
-          style={{ fill: "none" }}
           id="kobukValley"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,119.5113,452.70525)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-51"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-60"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-023"
           />
         </g>
@@ -225,154 +225,154 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="gatesOfTheArctic"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,140.15441,450.735)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-47"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-407"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-50"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="wrangellStElias"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,172.38112,503.37811)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-38"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-89"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-68"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="glacierBay"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,197.80492,519.49335)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-68"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-69"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-47"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="kenaiFjords"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,149.3589,518.79074)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-808"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-11"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-87"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="katmai"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,112.5113,523.36694)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-35"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-68"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-89"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="lakeClark"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,124.71943,508.2517)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-835"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-15"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-42"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="denali"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,136.85325,485.89857)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-43"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-54"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-56"
           />
         </g>
       </g>
-      <g id="FL_" className="state">
+      <g id="FL_" className={styles.state}>
         <path
           id="FL"
           fill="#d1dbdd"
@@ -409,70 +409,70 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="everglades"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,736.54469,516.20337)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-48"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-39"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-64"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="biscayne"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,760.27329,520.13646)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-72"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-358"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-35"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="dryTortugas"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,714.99084,548.38928)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-233"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-58"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-18"
           />
         </g>
       </g>
-      <g id="NH_" className="state">
+      <g id="NH_" className={styles.state}>
         <path
           id="NH"
           fill="#d1dbdd"
@@ -511,7 +511,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="VT_" className="state">
+      <g id="VT_" className={styles.state}>
         <path
           id="VT"
           fill="#d1dbdd"
@@ -557,7 +557,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="ME_" className="state">
+      <g id="ME_" className={styles.state}>
         <path
           id="ME"
           fill="#d1dbdd"
@@ -596,28 +596,28 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="acadia"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,849.39001,130.10938)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-01"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-054"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-267"
           />
         </g>
       </g>
-      <g id="RI_" className="state">
+      <g id="RI_" className={styles.state}>
         <path
           id="RI"
           fill="#d1dbdd"
@@ -663,7 +663,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="NY_" className="state">
+      <g id="NY_" className={styles.state}>
         <path
           id="NY"
           fill="#d1dbdd"
@@ -700,7 +700,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="PA_" className="state">
+      <g id="PA_" className={styles.state}>
         <path
           id="PA"
           fill="#d1dbdd"
@@ -737,7 +737,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="VA_" className="state">
+      <g id="VA_" className={styles.state}>
         <path
           id="VA"
           fill="#d1dbdd"
@@ -774,28 +774,28 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="shenandoah"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,738.44803,286.93573)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-74"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-96"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-980"
           />
         </g>
       </g>
-      <g id="WV_" className="state">
+      <g id="WV_" className={styles.state}>
         <path
           id="WV"
           fill="#d1dbdd"
@@ -810,23 +810,23 @@ export default function NationalParksMap() {
           className="state wv"
         />
         <g
-          style={{ fill: "none" }}
           id="newRiverGorge"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,708.09114,275.66809)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-423"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-12"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-12"
           />
         </g>
@@ -853,7 +853,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="OH_" className="state">
+      <g id="OH_" className={styles.state}>
         <path
           id="OH"
           fill="#d1dbdd"
@@ -890,28 +890,28 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="cuyahogaValley"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,679.3516,223.42347)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-77"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-9"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-6"
           />
         </g>
       </g>
-      <g id="IN_" className="state">
+      <g id="IN_" className={styles.state}>
         <path
           id="IN"
           fill="#d1dbdd"
@@ -948,7 +948,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="IL_" className="state">
+      <g id="IL_" className={styles.state}>
         <path
           id="IL"
           fill="#d1dbdd"
@@ -985,7 +985,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="CT_" className="state">
+      <g id="CT_" className={styles.state}>
         <path
           id="CT"
           fill="#d1dbdd"
@@ -1024,7 +1024,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="WI_" className="state">
+      <g id="WI_" className={styles.state}>
         <path
           id="WI"
           fill="#d1dbdd"
@@ -1061,7 +1061,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="NC_" className="state">
+      <g id="NC_" className={styles.state}>
         <path
           id="NC"
           fill="#d1dbdd"
@@ -1098,7 +1098,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="MA_" className="state">
+      <g id="MA_" className={styles.state}>
         <path
           id="MA"
           fill="#d1dbdd"
@@ -1137,7 +1137,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="MO_" className="state">
+      <g id="MO_" className={styles.state}>
         <path
           id="MO"
           fill="#d1dbdd"
@@ -1174,28 +1174,28 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="gatewayArch"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,556.92016,289.61236)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-85"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-92"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-55"
           />
         </g>
       </g>
-      <g id="GA_" className="state">
+      <g id="GA_" className={styles.state}>
         <path
           id="GA"
           fill="#d1dbdd"
@@ -1232,7 +1232,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="SC_" className="state">
+      <g id="SC_" className={styles.state}>
         <path
           id="SC"
           fill="#d1dbdd"
@@ -1247,23 +1247,23 @@ export default function NationalParksMap() {
           className="state sc"
         />
         <g
-          style={{ fill: "none" }}
           id="congaree"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,717.78634,369.62717)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-69"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-53"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-294"
           />
         </g>
@@ -1290,7 +1290,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="KY_" className="state">
+      <g id="KY_" className={styles.state}>
         <path
           id="KY"
           fill="#d1dbdd"
@@ -1305,23 +1305,23 @@ export default function NationalParksMap() {
           className="state ky"
         />
         <g
-          style={{ fill: "none" }}
           id="mammothCave"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,626.39229,309.93573)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-426"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-36"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-91"
           />
         </g>
@@ -1348,7 +1348,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="AL_" className="state">
+      <g id="AL_" className={styles.state}>
         <path
           id="AL"
           fill="#d1dbdd"
@@ -1383,7 +1383,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="LA_" className="state">
+      <g id="LA_" className={styles.state}>
         <path
           id="LA"
           fill="#d1dbdd"
@@ -1420,7 +1420,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="MS_" className="state">
+      <g id="MS_" className={styles.state}>
         <path
           id="MS"
           fill="#d1dbdd"
@@ -1457,7 +1457,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="IA_" className="state">
+      <g id="IA_" className={styles.state}>
         <path
           id="IA"
           fill="#d1dbdd"
@@ -1494,7 +1494,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="MN_" className="state">
+      <g id="MN_" className={styles.state}>
         <path
           id="MN"
           fill="#d1dbdd"
@@ -1531,28 +1531,28 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="voyageurs"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,506.5505,101.61688)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-96"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-7"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-09"
           />
         </g>
       </g>
-      <g id="OK_" className="state">
+      <g id="OK_" className={styles.state}>
         <path
           id="OK"
           fill="#d1dbdd"
@@ -1589,7 +1589,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="TX_" className="state">
+      <g id="TX_" className={styles.state}>
         <path
           id="TX"
           fill="#d1dbdd"
@@ -1626,28 +1626,28 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="bigBend"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,345.7306,460.42268)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-963"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-18"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-130"
           />
         </g>
       </g>
-      <g id="NM_" className="state">
+      <g id="NM_" className={styles.state}>
         <path
           id="NM"
           fill="#d1dbdd"
@@ -1684,49 +1684,49 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="carlsbadCaverns"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,326.89041,404.79074)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-07"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-99"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-944"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="whiteSands"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,290.49272,397.616)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-70"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-211"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-43"
           />
         </g>
       </g>
-      <g id="KS_" className="state">
+      <g id="KS_" className={styles.state}>
         <path
           id="KS"
           fill="#d1dbdd"
@@ -1763,7 +1763,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="WY_" className="state">
+      <g id="WY_" className={styles.state}>
         <path
           id="WY"
           fill="#d1dbdd"
@@ -1800,7 +1800,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="MT_" className="state">
+      <g id="MT_" className={styles.state}>
         <path
           id="MT"
           fill="#d1dbdd"
@@ -1837,28 +1837,28 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="glacier"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,237.67574,74.766189)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84"
           />
         </g>
       </g>
-      <g id="CO_" className="state">
+      <g id="CO_" className={styles.state}>
         <path
           id="CO"
           fill="#d1dbdd"
@@ -1873,86 +1873,86 @@ export default function NationalParksMap() {
           className="state co"
         />
         <g
-          style={{ fill: "none" }}
           id="blackCanyonOfTheGunnison"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,301.06515,275.85765)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-66"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-64"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-44"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="greatSandDunes"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,326.15064,299.21454)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-33"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-219"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-163"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="rockyMountain"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,328.59302,261.40786)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-80"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-08"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-25"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="mesaVerde"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,281.47037,303.65316)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-429"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-28"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-92"
           />
         </g>
@@ -1979,7 +1979,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="UT_" className="state">
+      <g id="UT_" className={styles.state}>
         <path
           id="UT"
           fill="#d1dbdd"
@@ -1994,44 +1994,44 @@ export default function NationalParksMap() {
           className="state ut"
         />
         <g
-          style={{ fill: "none" }}
           id="capitolReef"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,236.75316,273.61381)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-95"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-823"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-26"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="canyonlands"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,257.6246,276.05861)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-61"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-21"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-36"
           />
         </g>
@@ -2058,70 +2058,70 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="arches"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,267.74634,268.71825)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-325"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-03"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-735"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="zion"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,206.54433,293.62512)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-32"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-97"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-34"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="bryceCanyon"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,223.14859,290.02497)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-56"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-98"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-02"
           />
         </g>
       </g>
-      <g id="AZ_" className="state">
+      <g id="AZ_" className={styles.state}>
         <path
           id="AZ"
           fill="#d1dbdd"
@@ -2158,70 +2158,70 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="grandCanyon"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,212.34474,327.61962)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-83"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-1"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-00"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="petrifiedForest"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,246.34817,352.42552)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-6"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-16"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-14"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="saguaro"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,223.14309,393.23211)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-84"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-4"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-98"
           />
         </g>
       </g>
-      <g id="NV_" className="state">
+      <g id="NV_" className={styles.state}>
         <path
           id="NV"
           fill="#d1dbdd"
@@ -2258,28 +2258,28 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="greatBasin"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,192.35777,263.4365)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-8"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-2"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-3"
           />
         </g>
       </g>
-      <g id="OR_" className="state">
+      <g id="OR_" className={styles.state}>
         <path
           id="OR"
           fill="#d1dbdd"
@@ -2316,28 +2316,28 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="craterLake"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,107.5409,163.22388)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-3"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-5"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-5"
           />
         </g>
       </g>
-      <g id="WA_" className="state">
+      <g id="WA_" className={styles.state}>
         <path
           id="WA"
           fill="#d1dbdd"
@@ -2352,65 +2352,65 @@ export default function NationalParksMap() {
           className="state wa"
         />
         <g
-          style={{ fill: "none" }}
           id="northCascades"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,143.95037,54.223874)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-1"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-6"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-1"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="mountRainier"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,129.1479,87.22799)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-79"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-8"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-0"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="olympic"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,111.34405,63.219758)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-2"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-50"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-7"
           />
         </g>
@@ -2437,7 +2437,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="CA_" className="state">
+      <g id="CA_" className={styles.state}>
         <path
           id="CA"
           fill="#d1dbdd"
@@ -2452,128 +2452,128 @@ export default function NationalParksMap() {
           className="state ca"
         />
         <g
-          style={{ fill: "none" }}
           id="deathValley"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,152.95105,313.42209)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-08"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-82"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-80"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="joshuaTree"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,152.95174,354.42552)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-5"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-35"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-989"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="channelIslands"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,93.536096,334.22319)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-10"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-81"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-4"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="kingsCanyon"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,134.74254,300.81853)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-23"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-59"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-01"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="sequoia"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,122.54639,305.62374)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-02"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-44"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-19"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="yosemite"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,113.34131,273.21496)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-90"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-20"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-38"
           />
         </g>
@@ -2600,70 +2600,70 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="pinnacles"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,87.545015,294.4317)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-0"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-49"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-94"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="lassenVolcanic"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,105.1527,210.21839)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-31"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-32"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-16"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="redwood"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,65.14378,192.02017)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-42"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-40"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-29"
           />
         </g>
       </g>
-      <g id="TN_" className="state">
+      <g id="TN_" className={styles.state}>
         <path
           id="TN"
           fill="#d1dbdd"
@@ -2700,28 +2700,28 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="greatSmokyMountains"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,674.60419,336.62717)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-216"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-084"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-78"
           />
         </g>
       </g>
-      <g id="AR_" className="state">
+      <g id="AR_" className={styles.state}>
         <path
           id="AR"
           fill="#d1dbdd"
@@ -2736,23 +2736,23 @@ export default function NationalParksMap() {
           className="state ar"
         />
         <g
-          style={{ fill: "none" }}
           id="hotSprings"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,516.59302,373.06214)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-806"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-05"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-928"
           />
         </g>
@@ -2779,7 +2779,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="MD_" className="state">
+      <g id="MD_" className={styles.state}>
         <path
           id="MD"
           fill="#d1dbdd"
@@ -2825,7 +2825,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="DE_" className="state">
+      <g id="DE_" className={styles.state}>
         <path
           id="DE"
           fill="#d1dbdd"
@@ -2871,7 +2871,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="NJ_" className="state">
+      <g id="NJ_" className={styles.state}>
         <path
           id="NJ"
           fill="#d1dbdd"
@@ -2917,7 +2917,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="MI_" className="state">
+      <g id="MI_" className={styles.state}>
         <path
           id="MI"
           fill="#d1dbdd"
@@ -2953,28 +2953,28 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="isleRoyale"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,563.34268,105.81853)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-64"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-51"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-2"
           />
         </g>
       </g>
-      <g id="DC_" className="state">
+      <g id="DC_" className={styles.state}>
         <path
           id="DC_line"
           stroke="#000"
@@ -3019,7 +3019,7 @@ export default function NationalParksMap() {
           d="M772.86 280.3a5.35 5.35 0 0 1-10.7 0 5.34 5.34 0 0 1 10.68 0Z"
         />
       </g>
-      <g id="NE_" className="state">
+      <g id="NE_" className={styles.state}>
         <path
           id="NE"
           fill="#d1dbdd"
@@ -3056,7 +3056,7 @@ export default function NationalParksMap() {
           </tspan>
         </text>
       </g>
-      <g id="SD_" className="state">
+      <g id="SD_" className={styles.state}>
         <path
           id="SD"
           fill="#d1dbdd"
@@ -3093,49 +3093,49 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="badlands"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,383.74941,190.02635)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-4"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-34"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-81"
           />
         </g>
         <g
-          style={{ fill: "none" }}
           id="windCave"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,368.5457,185.22456)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-99"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-61"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-73"
           />
         </g>
       </g>
-      <g id="ND_" className="state">
+      <g id="ND_" className={styles.state}>
         <path
           id="ND"
           fill="#d1dbdd"
@@ -3172,108 +3172,108 @@ export default function NationalParksMap() {
           </tspan>
         </text>
         <g
-          style={{ fill: "none" }}
           id="theodoreRoosevelt"
+          className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,375.14858,129.62511)"
         >
           <path
             d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path1-46-63"
           />
           <path
             d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path2-43-46"
           />
           <path
             d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-            fill="#292d32"
+            fill="currentColor"
             id="path3-84-97"
           />
         </g>
       </g>
       <g
-        style={{ fill: "none" }}
         id="yellowstone"
+        className={styles.park}
         transform="matrix(1.0179873,0,0,1.2197711,274.95037,158.42209)"
       >
         <path
           d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-          fill="#292d32"
+          fill="currentColor"
           id="path1-46-7"
         />
         <path
           d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-          fill="#292d32"
+          fill="currentColor"
           id="path2-43-3"
         />
         <path
           d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-          fill="#292d32"
+          fill="currentColor"
           id="path3-84-8"
         />
       </g>
       <g
-        style={{ fill: "none" }}
         id="grandTeton"
+        className={styles.park}
         transform="matrix(1.0179873,0,0,1.2197711,263.14447,164.82539)"
       >
         <path
           d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-          fill="#292d32"
+          fill="currentColor"
           id="path1-46-9"
         />
         <path
           d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-          fill="#292d32"
+          fill="currentColor"
           id="path2-43-0"
         />
         <path
           d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-          fill="#292d32"
+          fill="currentColor"
           id="path3-84-9"
         />
       </g>
       <g
-        style={{ fill: "none" }}
         id="indianaDunes"
+        className={styles.park}
         transform="matrix(1.0179873,0,0,1.2197711,601.14584,227.61962)"
       >
         <path
           d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-          fill="#292d32"
+          fill="currentColor"
           id="path1-46-21"
         />
         <path
           d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-          fill="#292d32"
+          fill="currentColor"
           id="path2-43-10"
         />
         <path
           d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-          fill="#292d32"
+          fill="currentColor"
           id="path3-84-13"
         />
       </g>
       <g
-        style={{ fill: "none" }}
         id="guadalupeMountains"
+        className={styles.park}
         transform="matrix(1.0179873,0,0,1.2197711,314.61536,411.41903)"
       >
         <path
           d="M 16.1693,10.0603 H 7.82934 c -1.18,0 -1.59,-0.78999 -0.9,-1.74999 l 4.16996,-5.84 c 0.49,-0.7 1.31,-0.7 1.8,0 l 4.17,5.84 c 0.69,0.96 0.28,1.74999 -0.9,1.74999 z"
-          fill="#292d32"
+          fill="currentColor"
           id="path1-46-73"
         />
         <path
           d="m 17.5896,17.9986 h -11.18 c -1.58,0 -2.12,-1.05 -1.19,-2.33 l 3.99,-5.61 h 5.58 l 3.99,5.61 c 0.93,1.28 0.39,2.33 -1.19,2.33 z"
-          fill="#292d32"
+          fill="currentColor"
           id="path2-43-09"
         />
         <path
           d="m 12.75,18 v 4 c 0,0.41 -0.34,0.75 -0.75,0.75 -0.41,0 -0.75,-0.34 -0.75,-0.75 v -4 z"
-          fill="#292d32"
+          fill="currentColor"
           id="path3-84-03"
         />
       </g>

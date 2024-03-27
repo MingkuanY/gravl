@@ -1,0 +1,23 @@
+@use "./mixin" as mixin;
+
+#map {
+  width: 84rem;
+  margin-top: -2rem;
+
+  /* unvisited parks */
+  .park > path {
+    fill: mixin.$default-dark;
+    cursor: pointer;
+  }
+
+  .state > path {
+    fill: mixin.$default-gray;
+    stroke: #fff;
+    stroke-width: 0.15rem;
+    cursor: pointer;
+  }
+
+  text {
+    display: none;
+  }
+}

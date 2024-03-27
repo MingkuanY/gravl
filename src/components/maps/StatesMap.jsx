@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { interpolateColors } from "../../utils/color";
 
 export default function StatesMap() {
-  const livedInColor = "#ffff33";
+  const livedInColor = "#319fff";
   const startColor = "#319fff";
   const endColor = "#89c7ff";
   const defaultColor = "#012241";

@@ -1,0 +1,18 @@
+@use "./mixin" as mixin;
+
+#map {
+  margin-top: 3rem;
+  width: 88rem;
+  margin-bottom: 7rem;
+
+  /* unvisited countries */
+  > g > path {
+    fill: mixin.$default-dark;
+    stroke: #fff;
+    cursor: pointer;
+  }
+
+  text {
+    display: none;
+  }
+}

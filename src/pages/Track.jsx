@@ -16,14 +16,26 @@ export default function Track() {
 
   const navClicked = (btn) => {
     setMapType(btn);
-    console.log(btn + " clicked");
+  };
+
+  const renderMap = (index) => {
+    switch (index) {
+      case 0:
+        return <CountiesMap />;
+      case 1:
+        return <StatesMap />;
+      case 2:
+        return <CountriesMap />;
+      case 3:
+        return <NationalParksMap />;
+    }
   };
 
   return (
     <>
       <Header />
       <div className={styles.statContainer}>
-        <CountiesMap />
+        {renderMap(mapType)}
         <div className={styles.stats}>
           <div className={styles.progressContainer}>
             <CircularProgressbarWithChildren
