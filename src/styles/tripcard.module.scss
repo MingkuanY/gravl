@@ -1,0 +1,51 @@
+@use "./mixin" as mixin;
+
+.container {
+  margin-bottom: 2rem;
+  display: flex;
+  width: 84rem;
+  height: 16rem;
+  border-radius: 2rem;
+  background-color: mixin.$very-light;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 4px 0 rgba(36, 41, 47, 0.25);
+  transition: 0.3s;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+
+  img {
+    height: 100%;
+    width: 27rem;
+    object-fit: cover;
+  }
+
+  .right {
+    flex: auto;
+    padding: 1rem 2rem;
+
+    .titleAndDates {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: mixin.$dark;
+      font-weight: 400;
+
+      .title {
+        font-size: 3rem;
+      }
+      .dates {
+        font-size: 1.6rem;
+      }
+    }
+
+    .locations {
+      margin-top: 0.3rem;
+      color: mixin.$faded;
+      font-size: 1.3rem;
+      font-weight: 400;
+    }
+  }
+}

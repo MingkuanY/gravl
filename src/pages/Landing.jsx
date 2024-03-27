@@ -1,7 +1,7 @@
 import styles from "../styles/landing.module.scss";
-import Header from "../components/Header";
+import Header from "../components/header/Header";
 import CountiesMap from "../components/maps/CountiesMap";
-import GoPin from "../components/GoPin";
+import GoPin from "../components/header/GoPin";
 
 import AuthContext from "../services/AuthContext";
 import { useContext } from "react";

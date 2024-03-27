@@ -1,5 +1,5 @@
 import styles from "../styles/track.module.scss";
-import Header from "../components/Header";
+import Header from "../components/header/Header";
 import CountiesMap from "../components/maps/CountiesMap";
 import StatesMap from "../components/maps/StatesMap";
 import CountriesMap from "../components/maps/CountriesMap";
@@ -7,6 +7,7 @@ import NationalParksMap from "../components/maps/NationalParksMap";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "../styles/circularprogressbar.scss";
 import { useState } from "react";
+import TimelineYear from "../components/track/TimelineYear";
 
 export default function Track() {
   const [count, setCount] = useState(30);
@@ -93,7 +94,9 @@ export default function Track() {
       </div>
       <div className={styles.timelineContainer}>
         <p className={styles.myTimeline}>My Timeline</p>
-        <div className={styles.timeline}></div>
+        <div className={styles.timeline}>
+          <TimelineYear year={2024} />
+        </div>
       </div>
     </>
   );

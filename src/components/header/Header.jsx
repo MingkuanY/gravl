@@ -1,10 +1,10 @@
-import { useState, useContext, useEffect } from "react";
-import styles from "../styles/header.module.scss";
-import logo from "../assets/icons/car.svg";
-import account from "../assets/icons/account.svg";
+import { useState, useContext } from "react";
+import styles from "../../styles/header.module.scss";
+import logo from "../../assets/icons/car.svg";
+import account from "../../assets/icons/account.svg";
 import GoPin from "./GoPin";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import AuthContext from "../services/AuthContext";
+import AuthContext from "../../services/AuthContext";
 
 export default function Header() {
   const location = useLocation();
