@@ -9,13 +9,15 @@ import "../styles/circularprogressbar.scss";
 import { useState } from "react";
 
 export default function Track() {
-  const navClicked = (btn) => {
-    console.log(btn, " clicked");
-  };
-
   const [count, setCount] = useState(30);
   const totalCount = 50;
-  const mapType = "states";
+  const [mapType, setMapType] = useState(1);
+  const types = ["counties", "states", "countries", "national parks"];
+
+  const navClicked = (btn) => {
+    setMapType(btn);
+    console.log(btn + " clicked");
+  };
 
   return (
     <>
@@ -32,35 +34,48 @@ export default function Track() {
                 <p className={styles.count}>{count}</p>
                 <p className={styles.totalCount}>/{totalCount}</p>
               </div>
-              <p className={styles.type}>{mapType}</p>
+              <p className={styles.type}>{types[mapType]}</p>
             </CircularProgressbarWithChildren>
           </div>
           <div className={styles.statsNavbar}>
             <button
-              className={styles.counties}
-              onClick={() => navClicked("counties")}
+              className={`${styles.counties} ${
+                mapType === 0 ? styles.selected : styles.unselected
+              }`}
+              onClick={() => navClicked(0)}
             >
               Counties
             </button>
             <button
-              className={styles.states}
-              onClick={() => navClicked("states")}
+              className={`${styles.states} ${
+                mapType === 1 ? styles.selected : styles.unselected
+              }`}
+              onClick={() => navClicked(1)}
             >
               States
             </button>
             <button
-              className={styles.countries}
-              onClick={() => navClicked("countries")}
+              className={`${styles.countries} ${
+                mapType === 2 ? styles.selected : styles.unselected
+              }`}
+              onClick={() => navClicked(2)}
             >
               Countries
             </button>
             <button
-              className={styles.nationalparks}
-              onClick={() => navClicked("nationalparks")}
+              className={`${styles.nationalparks} ${
+                mapType === 3 ? styles.selected : styles.unselected
+              }`}
+              onClick={() => navClicked(3)}
             >
               National Parks
             </button>
-            <div className={styles.animation}></div>
+            <div
+              className={styles.animation}
+              style={{
+                top: `${mapType * 2}rem`,
+              }}
+            ></div>
           </div>
         </div>
       </div>
