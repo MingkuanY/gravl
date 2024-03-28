@@ -1,4 +1,4 @@
-@use './mixin' as mixin;
+@use "./mixin" as mixin;
 
 #map {
   width: 80rem;
@@ -9,6 +9,7 @@
     fill: mixin.$default-dark;
     stroke: #fff;
     cursor: pointer;
+    transition: 0.2s;
   }
 }
 

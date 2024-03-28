@@ -28,6 +28,7 @@
   }
 
   .CircularProgressbar-text {
+    display: none;
     fill: mixin.$dark;
     font-size: 20px;
     dominant-baseline: middle;

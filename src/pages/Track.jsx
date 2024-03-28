@@ -36,7 +36,7 @@ export default function Track() {
     <>
       <Header />
       <div className={styles.statContainer}>
-        {renderMap(mapType)}
+        <div className={styles.mapContainer}>{renderMap(mapType)}</div>
         <div className={styles.stats}>
           <div className={styles.progressContainer}>
             <CircularProgressbarWithChildren

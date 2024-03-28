@@ -2,6 +2,7 @@ import styles from "../../styles/countiesmap.module.scss";
 import countiesData from "../../assets/mapdata/MyTravels.json";
 import { useEffect, useRef, useState } from "react";
 import { interpolateColors } from "../../utils/color";
+import { loadMap } from "../../utils/map";
 
 export default function CountiesMap() {
   const livedInColor = "#ffff33";
@@ -12,36 +13,19 @@ export default function CountiesMap() {
   const mapRef = useRef(null);
   const [data, setData] = useState(countiesData);
   const colors = interpolateColors(
-    livedInColor,
+    data.steps,
     startColor,
     endColor,
-    Object.keys(data).length
+    livedInColor
   );
 
   useEffect(() => {
-    loadMap();
-  }, []);
-
-  const loadMap = () => {
     resetMap();
-
-    let counter = 0;
-
-    Object.keys(data).forEach((key, index) => {
-      const { counties } = data[key];
-      const color = colors[index];
-
-      counties.forEach(({ name }) => {
-        let pause = name === "Fulton__GA" ? 205 : counter++;
-        setTimeout(() => {
-          const element = document.getElementById(name);
-          if (element) {
-            element.style.fill = color;
-          }
-        }, 800 + 20 * pause);
-      });
-    });
-  };
+    const clearTimeouts = loadMap(data, "counties", 20, colors);
+    return () => {
+      clearTimeouts();
+    };
+  }, []);
 
   const resetMap = () => {
     mapRef.current?.querySelectorAll("svg > path").forEach((county) => {

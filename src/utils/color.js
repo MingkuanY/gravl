@@ -1,5 +1,4 @@
-export const interpolateColors = (livedInColor, startColor, endColor, steps) => {
-  steps -= 2;
+export const interpolateColors = (steps, startColor, endColor, livedInColor="#319fff") => {
   const startRGB = hexToRGB(startColor);
   const endRGB = hexToRGB(endColor);
 
@@ -8,7 +7,7 @@ export const interpolateColors = (livedInColor, startColor, endColor, steps) => 
   const stepB = (endRGB.b - startRGB.b) / steps;
 
   const interpolatedColors = [];
-  interpolatedColors.push(livedInColor);
+  interpolatedColors.push(livedInColor); // colors[0] = livedInColor always
   for (let i = 0; i <= steps; i++) {
     const r = Math.round(startRGB.r + stepR * i);
     const g = Math.round(startRGB.g + stepG * i);

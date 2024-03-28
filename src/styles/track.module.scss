@@ -4,6 +4,14 @@
   display: flex;
   justify-content: center;
 
+  .mapContainer {
+    width: 90rem;
+    height: 55rem;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+
   .stats {
     display: flex;
     flex-direction: column;
@@ -37,6 +45,7 @@
         font-weight: 400;
         text-transform: uppercase;
         text-align: center;
+        max-height: 2.8rem;
       }
     }
 

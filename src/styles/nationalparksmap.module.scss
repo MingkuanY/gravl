@@ -8,6 +8,7 @@
   .park > path {
     fill: mixin.$default-dark;
     cursor: pointer;
+    transition: 0.3s;
   }
 
   [id*="_line"] {

@@ -1,172 +1,135 @@
 {
-  "visited2006": {
-    "label": "Visited by 2006",
-    "parks": [
-      {
-        "name": "yosemite",
-        "visitDate": "2006-07-30",
-        "parkName": "Yosemite"
-      }
-    ]
-  },
-  "visited2013": {
-    "label": "Visited 2013",
-    "parks": [
-      {
-        "name": "sequoia",
-        "visitDate": "2013-07-18",
-        "parkName": "Sequoia"
-      },
-      {
-        "name": "kingsCanyon",
-        "visitDate": "2013-07-20",
-        "parkName": "Kings Canyon"
-      }
-    ]
-  },
-  "visited2016": {
-    "label": "Visited 2016",
-    "parks": [
-      {
-        "name": "lassenVolcanic",
-        "visitDate": "2016-08-05",
-        "parkName": "Lassen Volcanic"
-      },
-      {
-        "name": "craterLake",
-        "visitDate": "2016-08-07",
-        "parkName": "Crater Lake"
-      },
-      {
-        "name": "redwood",
-        "visitDate": "2016-08-09",
-        "parkName": "Redwood"
-      }
-    ]
-  },
-  "visited2018": {
-    "label": "Visited 2018",
-    "parks": [
-      {
-        "name": "hawaiiVolcanoes",
-        "visitDate": "2018-02-22",
-        "parkName": "Hawaii Volcanoes"
-      }
-    ]
-  },
-  "visited2019": {
-    "label": "Visited 2019",
-    "parks": [
-      {
-        "name": "zion",
-        "visitDate": "2019-12-20",
-        "parkName": "Zion"
-      },
-      {
-        "name": "bryceCanyon",
-        "visitDate": "2019-12-20",
-        "parkName": "Bryce Canyon"
-      },
-      {
-        "name": "capitolReef",
-        "visitDate": "2019-12-20",
-        "parkName": "Capitol Reef"
-      },
-      {
-        "name": "canyonlands",
-        "visitDate": "2019-12-20",
-        "parkName": "Canyonlands"
-      },
-      {
-        "name": "arches",
-        "visitDate": "2019-12-20",
-        "parkName": "Arches"
-      }
-    ]
-  },
-  "visited2020": {
-    "label": "Visited 2020",
-    "parks": [
-      {
-        "name": "mountRainier",
-        "visitDate": "2020-08-06",
-        "parkName": "Mount Rainier"
-      },
-      {
-        "name": "pinnacles",
-        "visitDate": "2020-10-10",
-        "parkName": "Pinnacles"
-      }
-    ]
-  },
-  "visited2021": {
-    "label": "Visited 2021",
-    "parks": [
-      {
-        "name": "deathValley",
-        "visitDate": "2021-04-13",
-        "parkName": "Death Valley"
-      },
-      {
-        "name": "grandTeton",
-        "visitDate": "2021-06-12",
-        "parkName": "Grand Teton"
-      },
-      {
-        "name": "yellowstone",
-        "visitDate": "2021-06-14",
-        "parkName": "Yellowstone"
-      },
-      {
-        "name": "glacier",
-        "visitDate": "2021-06-17",
-        "parkName": "Glacier"
-      },
-      {
-        "name": "northCascades",
-        "visitDate": "2021-06-20",
-        "parkName": "North Cascades"
-      },
-      {
-        "name": "olympic",
-        "visitDate": "2021-06-25",
-        "parkName": "Olympic"
-      },
-      {
-        "name": "joshuaTree",
-        "visitDate": "2021-12-20",
-        "parkName": "Joshua Tree"
-      },
-      {
-        "name": "saguaro",
-        "visitDate": "2021-12-21",
-        "parkName": "Saguaro"
-      },
-      {
-        "name": "grandCanyon",
-        "visitDate": "2021-12-26",
-        "parkName": "Grand Canyon"
-      }
-    ]
-  },
-  "visited2022": {
-    "label": "Visited 2022",
-    "parks": [
-      {
-        "name": "greatBasin",
-        "visitDate": "2022-07-12",
-        "parkName": "Great Basin"
-      },
-      {
-        "name": "petrifiedForest",
-        "visitDate": "2022-07-31",
-        "parkName": "Petrified Forest"
-      },
-      {
-        "name": "greatSmokyMountains",
-        "visitDate": "2022-10-15",
-        "parkName": "Great Smoky Mountains"
-      }
-    ]
-  }
+  "steps": 8,
+  "parks": [
+    {
+      "id": "yosemite",
+      "visitDate": "2006-07-30",
+      "parkName": "Yosemite"
+    },
+    {
+      "id": "sequoia",
+      "visitDate": "2013-07-18",
+      "parkName": "Sequoia"
+    },
+    {
+      "id": "kingsCanyon",
+      "visitDate": "2013-07-20",
+      "parkName": "Kings Canyon"
+    },
+    {
+      "id": "lassenVolcanic",
+      "visitDate": "2016-08-05",
+      "parkName": "Lassen Volcanic"
+    },
+    {
+      "id": "craterLake",
+      "visitDate": "2016-08-07",
+      "parkName": "Crater Lake"
+    },
+    {
+      "id": "redwood",
+      "visitDate": "2016-08-09",
+      "parkName": "Redwood"
+    },
+    {
+      "id": "hawaiiVolcanoes",
+      "visitDate": "2018-02-22",
+      "parkName": "Hawaii Volcanoes"
+    },
+    {
+      "id": "zion",
+      "visitDate": "2019-12-20",
+      "parkName": "Zion"
+    },
+    {
+      "id": "bryceCanyon",
+      "visitDate": "2019-12-20",
+      "parkName": "Bryce Canyon"
+    },
+    {
+      "id": "capitolReef",
+      "visitDate": "2019-12-20",
+      "parkName": "Capitol Reef"
+    },
+    {
+      "id": "canyonlands",
+      "visitDate": "2019-12-20",
+      "parkName": "Canyonlands"
+    },
+    {
+      "id": "arches",
+      "visitDate": "2019-12-20",
+      "parkName": "Arches"
+    },
+    {
+      "id": "mountRainier",
+      "visitDate": "2020-08-06",
+      "parkName": "Mount Rainier"
+    },
+    {
+      "id": "pinnacles",
+      "visitDate": "2020-10-10",
+      "parkName": "Pinnacles"
+    },
+    {
+      "id": "deathValley",
+      "visitDate": "2021-04-13",
+      "parkName": "Death Valley"
+    },
+    {
+      "id": "grandTeton",
+      "visitDate": "2021-06-12",
+      "parkName": "Grand Teton"
+    },
+    {
+      "id": "yellowstone",
+      "visitDate": "2021-06-14",
+      "parkName": "Yellowstone"
+    },
+    {
+      "id": "glacier",
+      "visitDate": "2021-06-17",
+      "parkName": "Glacier"
+    },
+    {
+      "id": "northCascades",
+      "visitDate": "2021-06-20",
+      "parkName": "North Cascades"
+    },
+    {
+      "id": "olympic",
+      "visitDate": "2021-06-25",
+      "parkName": "Olympic"
+    },
+    {
+      "id": "joshuaTree",
+      "visitDate": "2021-12-20",
+      "parkName": "Joshua Tree"
+    },
+    {
+      "id": "saguaro",
+      "visitDate": "2021-12-21",
+      "parkName": "Saguaro"
+    },
+    {
+      "id": "grandCanyon",
+      "visitDate": "2021-12-26",
+      "parkName": "Grand Canyon"
+    },
+    {
+      "id": "greatBasin",
+      "visitDate": "2022-07-12",
+      "parkName": "Great Basin"
+    },
+    {
+      "id": "petrifiedForest",
+      "visitDate": "2022-07-31",
+      "parkName": "Petrified Forest"
+    },
+    {
+      "id": "greatSmokyMountains",
+      "visitDate": "2022-10-15",
+      "parkName": "Great Smoky Mountains"
+    }
+  ]
 }

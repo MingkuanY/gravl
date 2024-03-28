@@ -2,6 +2,7 @@ import styles from "../../styles/nationalparksmap.module.scss";
 import nationalparksData from "../../assets/mapdata/MyNationalParks.json";
 import { useEffect, useRef, useState } from "react";
 import { interpolateColors } from "../../utils/color";
+import { loadMapWithChildren } from "../../utils/map";
 
 export default function NationalParksMap() {
   const livedInColor = "#319fff";
@@ -11,40 +12,15 @@ export default function NationalParksMap() {
 
   const mapRef = useRef(null);
   const [data, setData] = useState(nationalparksData);
-  const colors = interpolateColors(
-    livedInColor,
-    startColor,
-    endColor,
-    Object.keys(data).length
-  );
+  const colors = interpolateColors(data.steps, startColor, endColor);
 
   useEffect(() => {
-    loadMap();
-  }, []);
-
-  const loadMap = () => {
     resetMap();
-
-    let counter = 0;
-
-    Object.keys(data).forEach((key, index) => {
-      const { parks } = data[key];
-      const color = colors[index];
-
-      parks.forEach(({ name }) => {
-        let pause = counter++;
-        setTimeout(() => {
-          const element = document.getElementById(name);
-          if (element) {
-            const childPaths = element.querySelectorAll("path");
-            childPaths.forEach((path) => {
-              path.style.fill = color;
-            });
-          }
-        }, 800 + 200 * pause);
-      });
-    });
-  };
+    const clearTimeouts = loadMapWithChildren(data, "parks", 200, colors);
+    return () => {
+      clearTimeouts();
+    };
+  }, []);
 
   const resetMap = () => {
     mapRef.current?.querySelectorAll(`.${styles.park}`).forEach((park) => {
