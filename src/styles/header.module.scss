@@ -1,7 +1,7 @@
-@use './mixin' as mixin;
+@use "./mixin" as mixin;
 
 .headerContainer {
-  height: 10rem;
+  height: mixin.$header-height;
   width: 100vw;
   padding: 0 7.2rem;
   display: flex;
@@ -31,7 +31,7 @@
     align-items: center;
 
     /* toggle button */
-    
+
     .toggleContainer {
       margin-right: 3.5rem;
       position: relative;
@@ -45,7 +45,7 @@
       .planBtn {
         width: 9rem;
       }
-      
+
       .trackBtn {
         width: 11rem;
       }
@@ -68,15 +68,15 @@
           transition: all 0.3s;
         }
       }
-      
+
       .unselected {
         color: mixin.$gravl-blue;
       }
-      
+
       .selected {
         color: mixin.$white;
       }
-      
+
       .animation {
         position: absolute;
         height: 100%;

@@ -1,10 +1,43 @@
+import styles from "../styles/plan.module.scss";
 import Header from "../components/header/Header";
 
+import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
+
+const zoom = 11;
+const center = { lat: 33.7756, lng: -84.2463 }; // Georgia Tech lng: -84.3963
+
 export default function Plan() {
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: "AIzaSyCC0Ea654g-GJnZACL8UfXGUKEvfbiefA8",
+  });
+
+  if (!isLoaded) {
+    return <p>Map is loading...</p>;
+  }
+
   return (
     <>
       <Header />
-      <div>Plan Page</div>
+      <div className={styles.main}>
+        <div className={styles.map}>
+          <GoogleMap
+            center={center}
+            zoom={zoom}
+            mapContainerStyle={{
+              width: "100%",
+              height: "100%",
+            }}
+            options={{
+              zoomControl: false,
+              fullscreenControl: false,
+              streetViewControl: false,
+            }}
+          ></GoogleMap>
+          <div className={styles.sidebar}>
+            <p className={styles.myPlans}>My Plans</p>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
