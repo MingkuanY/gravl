@@ -22,7 +22,7 @@ export default function CountiesMap({ updateCount, setTotal }) {
   );
 
   useEffect(() => {
-    setTotal(total);
+    setTotal && setTotal(total);
     resetMap();
     const clearTimeouts = loadMap(data, "counties", 20, colors, updateCount);
     return () => {

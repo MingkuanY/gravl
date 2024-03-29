@@ -16,7 +16,7 @@ export default function CountriesMap({ updateCount, setTotal }) {
   const colors = interpolateColors(data.steps, startColor, endColor);
 
   useEffect(() => {
-    setTotal(total);
+    setTotal && setTotal(total);
     resetMap();
     const clearTimeouts = loadMap(data, "countries", 250, colors, updateCount);
     return () => {

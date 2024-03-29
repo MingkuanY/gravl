@@ -21,7 +21,9 @@ export const loadMap = (data, type, pause, colors, updateCount) => {
       const element = document.getElementById(place.id);
       if (element) {
         element.style.fill = color;
-        updateCount();
+        (type !== "states" || (type === "states" && place.id !== "DC")) &&
+          updateCount &&
+          updateCount(); // make sure DC doesn't get counted as a state
       }
     }, 800 + pause * timeCounter++);
     timeouts.push(timeoutId);
@@ -54,9 +56,9 @@ export const loadMapWithChildren = (data, type, pause, colors, updateCount) => {
       const element = document.getElementById(place.id);
       if (element) {
         const childPaths = element.querySelectorAll("path");
-          childPaths.forEach((path) => {
-            path.style.fill = color;
-          });
+        childPaths.forEach((path) => {
+          path.style.fill = color;
+        });
         updateCount();
       }
     }, 800 + pause * timeCounter++);

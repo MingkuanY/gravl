@@ -16,7 +16,7 @@ export default function NationalParksMap({ updateCount, setTotal }) {
   const colors = interpolateColors(data.steps, startColor, endColor);
 
   useEffect(() => {
-    setTotal(total);
+    setTotal && setTotal(total);
     resetMap();
     const clearTimeouts = loadMapWithChildren(
       data,
