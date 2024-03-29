@@ -4,8 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { interpolateColors } from "../../utils/color";
 import { loadMapWithChildren } from "../../utils/map";
 
-export default function NationalParksMap() {
-  const livedInColor = "#319fff";
+export default function NationalParksMap({ updateCount, setTotal }) {
+  const total = 63;
+
   const startColor = "#319fff";
   const endColor = "#89c7ff";
   const defaultColor = "#012241";
@@ -15,8 +16,15 @@ export default function NationalParksMap() {
   const colors = interpolateColors(data.steps, startColor, endColor);
 
   useEffect(() => {
+    setTotal(total);
     resetMap();
-    const clearTimeouts = loadMapWithChildren(data, "parks", 200, colors);
+    const clearTimeouts = loadMapWithChildren(
+      data,
+      "parks",
+      200,
+      colors,
+      updateCount
+    );
     return () => {
       clearTimeouts();
     };

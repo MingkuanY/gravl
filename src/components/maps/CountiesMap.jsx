@@ -4,7 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { interpolateColors } from "../../utils/color";
 import { loadMap } from "../../utils/map";
 
-export default function CountiesMap() {
+export default function CountiesMap({ updateCount, setTotal }) {
+  const total = 3143;
+
   const livedInColor = "#ffff33";
   const startColor = "#319fff";
   const endColor = "#89c7ff";
@@ -20,8 +22,9 @@ export default function CountiesMap() {
   );
 
   useEffect(() => {
+    setTotal(total);
     resetMap();
-    const clearTimeouts = loadMap(data, "counties", 20, colors);
+    const clearTimeouts = loadMap(data, "counties", 20, colors, updateCount);
     return () => {
       clearTimeouts();
     };

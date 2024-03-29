@@ -4,14 +4,12 @@
     {
       "id": "Santa_Clara__CA",
       "visitDate": "2004-07-30",
-      "countyName": "Santa Clara, CA",
-      "label": "Lived in"
+      "countyName": "Santa Clara, CA"
     },
     {
       "id": "Alameda__CA",
       "visitDate": "2004-07-30",
-      "countyName": "Alameda, CA",
-      "label": "Lived in"
+      "countyName": "Alameda, CA"
     },
     {
       "id": "San_Mateo__CA",
@@ -1026,8 +1024,7 @@
     {
       "id": "Fulton__GA",
       "visitDate": "2022-08-08",
-      "countyName": "Fulton, GA",
-      "label": "Lived in"
+      "countyName": "Fulton, GA"
     },
     {
       "id": "DeKalb__GA",

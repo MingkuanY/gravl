@@ -10,26 +10,33 @@ import { useState } from "react";
 import TimelineYear from "../components/track/TimelineYear";
 
 export default function Track() {
-  const [count, setCount] = useState(30);
-  const totalCount = 50;
-  const [mapType, setMapType] = useState(1);
+  const [count, setCount] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [mapType, setMapType] = useState(1); //defaults to states map
   const types = ["counties", "states", "countries", "national parks"];
 
   const navClicked = (btn) => {
+    setCount(0);
     setMapType(btn);
   };
 
   const renderMap = (index) => {
     switch (index) {
       case 0:
-        return <CountiesMap />;
+        return <CountiesMap updateCount={updateCount} setTotal={setTotal} />;
       case 1:
-        return <StatesMap />;
+        return <StatesMap updateCount={updateCount} setTotal={setTotal} />;
       case 2:
-        return <CountriesMap />;
+        return <CountriesMap updateCount={updateCount} setTotal={setTotal} />;
       case 3:
-        return <NationalParksMap />;
+        return (
+          <NationalParksMap updateCount={updateCount} setTotal={setTotal} />
+        );
     }
+  };
+
+  const updateCount = () => {
+    setCount((count) => count + 1);
   };
 
   return (
@@ -39,13 +46,10 @@ export default function Track() {
         <div className={styles.mapContainer}>{renderMap(mapType)}</div>
         <div className={styles.stats}>
           <div className={styles.progressContainer}>
-            <CircularProgressbarWithChildren
-              value={count}
-              maxValue={totalCount}
-            >
+            <CircularProgressbarWithChildren value={count} maxValue={total}>
               <div className={styles.countContainer}>
                 <p className={styles.count}>{count}</p>
-                <p className={styles.totalCount}>/{totalCount}</p>
+                <p className={styles.totalCount}>/{total}</p>
               </div>
               <p className={styles.type}>{types[mapType]}</p>
             </CircularProgressbarWithChildren>

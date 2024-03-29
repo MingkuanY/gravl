@@ -1,4 +1,4 @@
-export const loadMap = (data, type, pause, colors) => {
+export const loadMap = (data, type, pause, colors, updateCount) => {
   let timeCounter = 0;
   let timeouts = [];
   let stepCounter = 0;
@@ -21,6 +21,7 @@ export const loadMap = (data, type, pause, colors) => {
       const element = document.getElementById(place.id);
       if (element) {
         element.style.fill = color;
+        updateCount();
       }
     }, 800 + pause * timeCounter++);
     timeouts.push(timeoutId);
@@ -31,7 +32,7 @@ export const loadMap = (data, type, pause, colors) => {
   };
 };
 
-export const loadMapWithChildren = (data, type, pause, colors) => {
+export const loadMapWithChildren = (data, type, pause, colors, updateCount) => {
   let timeCounter = 0;
   let timeouts = [];
   let stepCounter = 0;
@@ -56,6 +57,7 @@ export const loadMapWithChildren = (data, type, pause, colors) => {
           childPaths.forEach((path) => {
             path.style.fill = color;
           });
+        updateCount();
       }
     }, 800 + pause * timeCounter++);
     timeouts.push(timeoutId);
