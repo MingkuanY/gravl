@@ -25,6 +25,7 @@ export default function StatesMap({ updateCount, setTotal }) {
   }, []);
 
   const resetMap = () => {
+    updateCount && updateCount(0);
     mapRef.current?.querySelectorAll("svg > path").forEach((state) => {
       state.style.fill = defaultColor;
     });

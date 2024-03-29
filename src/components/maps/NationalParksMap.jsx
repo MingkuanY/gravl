@@ -31,6 +31,7 @@ export default function NationalParksMap({ updateCount, setTotal }) {
   }, []);
 
   const resetMap = () => {
+    updateCount && updateCount(0);
     mapRef.current?.querySelectorAll(`.${styles.park}`).forEach((park) => {
       park.style.fill = defaultColor;
     });

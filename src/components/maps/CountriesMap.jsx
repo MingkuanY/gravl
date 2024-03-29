@@ -25,6 +25,7 @@ export default function CountriesMap({ updateCount, setTotal }) {
   }, []);
 
   const resetMap = () => {
+    updateCount && updateCount(0);
     mapRef.current?.querySelectorAll("svg > path").forEach((country) => {
       country.style.fill = defaultColor;
     });

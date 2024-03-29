@@ -31,6 +31,7 @@ export default function CountiesMap({ updateCount, setTotal }) {
   }, []);
 
   const resetMap = () => {
+    updateCount && updateCount(0);
     mapRef.current?.querySelectorAll("svg > path").forEach((county) => {
       county.style.fill = defaultColor;
     });

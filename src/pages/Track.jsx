@@ -16,10 +16,14 @@ export default function Track() {
   const types = ["counties", "states", "countries", "national parks"];
 
   const navClicked = (btn) => {
-    setCount(0);
     setMapType(btn);
   };
 
+  /**
+   * Renders the correct map based on the types index
+   * @param {number} index the index in the types array that indicates which map should be rendered
+   * @returns the map component to be rendered
+   */
   const renderMap = (index) => {
     switch (index) {
       case 0:
@@ -35,8 +39,12 @@ export default function Track() {
     }
   };
 
-  const updateCount = () => {
-    setCount((count) => count + 1);
+  /**
+   * If a parameter (reset) is passed in, then set count to reset. Else, increment count by one.
+   * @param {number} reset the value to set count to if provided
+   */
+  const updateCount = (reset) => {
+    setCount(reset !== undefined ? reset : (count) => count + 1);
   };
 
   return (
