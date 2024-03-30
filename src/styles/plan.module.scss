@@ -10,10 +10,10 @@
 
     .sidebar {
       width: 35rem;
-      height: calc(100% - 2rem);
+      height: calc(100% - 4rem);
       position: absolute;
-      top: 1rem;
-      right: 1rem;
+      top: 2rem;
+      right: 5rem;
       background-color: mixin.$very-light;
       border: 0.02rem solid mixin.$default-gray;
       border-radius: 2rem;

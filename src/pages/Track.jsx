@@ -1,5 +1,6 @@
 import styles from "../styles/track.module.scss";
 import Header from "../components/header/Header";
+import Timeline from "../components/track/Timeline";
 import CountiesMap from "../components/maps/CountiesMap";
 import StatesMap from "../components/maps/StatesMap";
 import CountriesMap from "../components/maps/CountriesMap";
@@ -7,7 +8,6 @@ import NationalParksMap from "../components/maps/NationalParksMap";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "../styles/circularprogressbar.scss";
 import { useState } from "react";
-import TimelineYear from "../components/track/TimelineYear";
 
 export default function Track() {
   const [count, setCount] = useState(0);
@@ -18,6 +18,58 @@ export default function Track() {
   const navClicked = (btn) => {
     setMapType(btn);
   };
+
+  const mockTrips = [
+    {
+      title: "Solar Eclipse in Texas",
+      locations: ["Austin", "Houston"],
+      dates: ["2024-04-05", "2024-04-09"],
+      thumbnail:
+        "https://res.cloudinary.com/simpleview/image/upload/v1648755098/clients/austin/Austin_Skyline_Credit_Christopher_Sherman_lifetime__4f60343d-9f69-450c-8ad3-fa636761786d.jpg",
+    },
+    {
+      title: "The Windy City",
+      locations: ["Chicago"],
+      dates: ["2024-01-07", "2024-01-09"],
+      thumbnail:
+        "https://cdn.britannica.com/59/94459-050-DBA42467/Skyline-Chicago.jpg",
+    },
+    {
+      title: "Southern California",
+      locations: ["Santa Barbara", "San Diego"],
+      dates: ["2023-12-15", "2023-12-22"],
+      thumbnail:
+        "https://lajolla.com/wp-content/uploads/2018/12/Southern-California.jpg",
+    },
+    {
+      title: "Louisiana",
+      locations: ["New Orleans", "Lake Pontchartrain"],
+      dates: ["2023-11-20", "2023-11-25"],
+      thumbnail:
+        "https://cdn.britannica.com/74/93074-050-F81FFDD7/home-plantation-Louisiana.jpg",
+    },
+    {
+      title: "Germany",
+      locations: ["Berlin", "Hamburg", "Jasmund National Park"],
+      dates: ["2023-05-15", "2023-08-07"],
+      thumbnail:
+        "https://www.germany.travel/media/redaktion/staedte_kultur_content/Berlin_Brandenburger_Tor_im_Sonnenuntergang_Leitmotiv_German_Summer_Cities.jpg",
+    },
+    {
+      title: "Philadelphia",
+      locations: ["Pennsauken", "Independence Hall", "Elfreth's Alley"],
+      dates: ["2023-05-12", "2023-05-14"],
+      thumbnail:
+        "https://www.tripsavvy.com/thmb/6AbCUK2IzOMaMfG-Qc-f0FocVfE=/2121x1414/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1062250032-110de1d7c76d4f49804555d75dffbfa1.jpg",
+    },
+    {
+      title: "Senior trip w/ da boiz",
+      locations: ["Loneliest Road in America", "Banff", "Mt. Rainier"],
+      dates: ["2022-07-11", "2022-07-27"],
+      thumbnail:
+        "https://i0.wp.com/beautahfulworld.com/wp-content/uploads/2022/07/IMG-6248-1-scaled.jpg?fit=2560%2C1920&ssl=1",
+    },
+  ];
 
   /**
    * Renders the correct map based on the types index
@@ -104,12 +156,7 @@ export default function Track() {
           </div>
         </div>
       </div>
-      <div className={styles.timelineContainer}>
-        <p className={styles.myTimeline}>My Timeline</p>
-        <div className={styles.timeline}>
-          <TimelineYear year={2024} />
-        </div>
-      </div>
+      <Timeline trips={mockTrips} />
     </>
   );
 }

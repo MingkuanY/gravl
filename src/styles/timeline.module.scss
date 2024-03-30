@@ -1,0 +1,60 @@
+@use "./mixin" as mixin;
+
+.timelineContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .myTimeline {
+    font-size: 5rem;
+    font-weight: 400;
+    color: mixin.$dark;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 6rem 0 10rem;
+
+    .yearContainer {
+      margin-bottom: 4rem;
+      display: flex;
+      align-items: start;
+
+      .year {
+        font-size: 5rem;
+        width: 14rem;
+        font-weight: 400;
+      }
+
+      .allMonthsContainer {
+        margin-top: 0.5rem;
+        display: flex;
+        flex-direction: column;
+
+        .monthContainer {
+          display: flex;
+          align-items: start;
+
+          .month {
+            font-size: 2rem;
+            font-weight: 400;
+            width: 7rem;
+          }
+
+          .allTripsContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .trips {
+              display: flex;
+              flex-direction: column;
+            }
+          }
+        }
+      }
+    }
+  }
+}
