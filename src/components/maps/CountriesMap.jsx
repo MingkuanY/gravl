@@ -4,9 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { interpolateColors } from "../../utils/color";
 import { loadMap } from "../../utils/map";
 
-export default function CountriesMap({ updateCount, setTotal }) {
-  const total = 195;
-
+export default function CountriesMap({ updateCount, total, reload }) {
   const startColor = "#319fff";
   const endColor = "#89c7ff";
   const defaultColor = "#012241";
@@ -16,17 +14,17 @@ export default function CountriesMap({ updateCount, setTotal }) {
   const colors = interpolateColors(data.steps, startColor, endColor);
 
   useEffect(() => {
-    setTotal && setTotal(total);
     resetMap();
     const clearTimeouts = loadMap(data, "countries", 250, colors, updateCount);
     return () => {
       clearTimeouts();
+      updateCount && updateCount(total);
     };
-  }, []);
+  }, [reload]);
 
   const resetMap = () => {
     updateCount && updateCount(0);
-    mapRef.current?.querySelectorAll("svg > path").forEach((country) => {
+    mapRef.current?.querySelectorAll("svg > g > path").forEach((country) => {
       country.style.fill = defaultColor;
     });
   };
@@ -39,6 +37,7 @@ export default function CountriesMap({ updateCount, setTotal }) {
       strokeLinecap="round"
       strokeLinejoin="round"
       version="1.2"
+      ref={mapRef}
     >
       <g id="g4311" fillOpacity={1}>
         <path

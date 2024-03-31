@@ -20,7 +20,9 @@ export default function Landing() {
     <>
       <Header />
       <div className={styles.mainContainer}>
-        <CountiesMap />
+        <div className={styles.map}>
+          <CountiesMap />
+        </div>
         <p className={styles.motto}>Travel sets you free.</p>
         <button onClick={loginClicked}>
           <img src={go} alt="Go" />

@@ -11,6 +11,7 @@
    * https://github.com/kevinsqi/react-circular-progressbar/issues/94
    */
   vertical-align: middle;
+  border-radius: 50%;
 
   .CircularProgressbar-path {
     stroke: mixin.$gravl-blue;

@@ -1,8 +1,8 @@
 @use "./mixin" as mixin;
 
 #map {
-  width: 84rem;
   margin-top: -2rem;
+  margin-left: 4rem;
 
   /* unvisited parks */
   .park > path {

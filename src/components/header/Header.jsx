@@ -50,17 +50,10 @@ export default function Header() {
             </div>
           </>
         ) : (
-          <>
-            <div className={styles.login} onClick={loginClicked}>
-              Login
-            </div>
-            <img
-              src={account}
-              alt="Account"
-              className={styles.account}
-              onClick={loginClicked}
-            />
-          </>
+          <div className={styles.loginContainer} onClick={loginClicked}>
+            <div className={styles.login}>Login</div>
+            <img src={account} alt="Account" className={styles.account} />
+          </div>
         )}
       </div>
     </div>

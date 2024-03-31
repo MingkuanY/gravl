@@ -1,0 +1,179 @@
+@use "./mixin" as mixin;
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60rem;
+  margin: auto;
+
+  /* user profile */
+
+  .profile {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    .pfpContainer {
+      position: relative;
+
+      img {
+        width: 12rem;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .badgeContainer {
+        position: absolute;
+        bottom: 0.6rem;
+        right: 0.6rem;
+        width: 2.6rem;
+        aspect-ratio: 1;
+        background-color: mixin.$gravl-blue;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 2.1rem;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .userInfo {
+      margin-left: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      flex: auto;
+
+      .usernameAndEdit {
+        display: flex;
+        align-items: center;
+
+        .username {
+          color: mixin.$dark;
+          font-size: 2.6rem;
+          font-weight: 400;
+        }
+
+        img {
+          margin-left: 1rem;
+          width: 2rem;
+          cursor: pointer;
+        }
+      }
+
+      .location {
+        margin-top: 0.3rem;
+        font-size: 1rem;
+        color: mixin.$dark;
+        font-weight: 400;
+        cursor: pointer;
+      }
+
+      .bio {
+        margin-top: 0.4rem;
+        font-size: 1.4rem;
+        font-style: italic;
+        font-weight: 300;
+        color: mixin.$faded;
+      }
+    }
+
+    .userStats {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 12rem;
+
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .stat {
+          font-size: 2.6rem;
+          color: mixin.$gravl-blue;
+          font-weight: 400;
+          cursor: pointer;
+        }
+        .desc {
+          font-size: 1.2rem;
+          font-weight: 400;
+          color: mixin.$dark;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  /* map */
+
+  .mapContainer {
+    margin-bottom: -3rem;
+    width: 110%;
+    height: 45rem;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+
+  /* circular progress stats */
+
+  .stats {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    .progressContainer {
+      width: 12rem;
+      position: relative;
+
+      .countContainer {
+        display: flex;
+        align-items: end;
+
+        .count {
+          font-size: 3.5rem;
+          color: mixin.$dark;
+          margin: 0 -0.3rem 0.3rem 0;
+          font-weight: 400;
+        }
+        .totalCount {
+          font-size: 1.75rem;
+          color: mixin.$dark;
+          font-weight: 400;
+        }
+      }
+
+      .type {
+        margin-top: 0.5rem;
+        font-size: 1.4rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+        max-height: 1.4rem;
+      }
+
+      .progressbarBackground {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: mixin.$white;
+        opacity: 0.5;
+        cursor: pointer;
+      }
+
+      .selected {
+        opacity: 0;
+      }
+    }
+  }
+}

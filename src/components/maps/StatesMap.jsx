@@ -4,9 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { interpolateColors } from "../../utils/color";
 import { loadMap } from "../../utils/map";
 
-export default function StatesMap({ updateCount, setTotal }) {
-  const total = 50;
-
+export default function StatesMap({ updateCount, total, reload }) {
   const startColor = "#319fff";
   const endColor = "#89c7ff";
   const defaultColor = "#012241";
@@ -16,23 +14,24 @@ export default function StatesMap({ updateCount, setTotal }) {
   const colors = interpolateColors(data.steps, startColor, endColor);
 
   useEffect(() => {
-    setTotal && setTotal(total);
     resetMap();
     const clearTimeouts = loadMap(data, "states", 200, colors, updateCount);
     return () => {
       clearTimeouts();
+      updateCount && updateCount(total);
     };
-  }, []);
+  }, [reload]);
 
   const resetMap = () => {
     updateCount && updateCount(0);
-    mapRef.current?.querySelectorAll("svg > path").forEach((state) => {
+    mapRef.current?.querySelectorAll("svg > g > path").forEach((state) => {
       state.style.fill = defaultColor;
     });
   };
 
   return (
     <svg
+      ref={mapRef}
       xmlns="http://www.w3.org/2000/svg"
       id={styles.map}
       viewBox="0 0 1000 700"

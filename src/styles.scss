@@ -6,25 +6,31 @@
   box-sizing: border-box;
 }
 
-@media (max-width: 2000px) {
+@media (max-width: 2000px), (max-height: 1100px) {
   html {
     font-size: 12px;
   }
 }
 
-@media (max-width: 1380px) {
+@media (max-width: 1480px), (max-height: 950px) {
+  html {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 1380px), (max-height: 900px) {
   html {
     font-size: 10px;
   }
 }
 
-@media (max-width: 1124px) {
+@media (max-width: 1124px), (max-height: 850px) {
   html {
     font-size: 8px;
   }
 }
 
-@media (max-width: 868px) {
+@media (max-width: 868px), (max-height: 700px) {
   html {
     font-size: 6px;
   }
