@@ -1,7 +1,7 @@
 import styles from "../styles/landing.module.scss";
 import Header from "../components/header/Header";
 import CountiesMap from "../components/maps/CountiesMap";
-import GoPin from "../components/header/GoPin";
+import go from "../assets/icons/go.svg";
 
 import AuthContext from "../services/AuthContext";
 import { useContext } from "react";
@@ -13,7 +13,7 @@ export default function Landing() {
   const navigate = useNavigate();
   const loginClicked = () => {
     setIsLoggedIn(true);
-    navigate("/track");
+    navigate("/dashboard");
   };
 
   return (
@@ -21,16 +21,11 @@ export default function Landing() {
       <Header />
       <div className={styles.mainContainer}>
         <CountiesMap />
-        <div className={styles.btnsContainer}>
-          <button className={styles.planBtn} onClick={loginClicked}>
-            <GoPin width="4rem" blue={false} go={true} />
-            <p>Plan</p>
-          </button>
-          <button className={styles.trackBtn} onClick={loginClicked}>
-            <GoPin width="4rem" blue={false} go={false} />
-            <p>Track</p>
-          </button>
-        </div>
+        <p className={styles.motto}>Travel sets you free.</p>
+        <button onClick={loginClicked}>
+          <img src={go} alt="Go" />
+          <p>Sign Up</p>
+        </button>
       </div>
     </>
   );

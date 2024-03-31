@@ -8,7 +8,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="track" element={<Track />} />
+        <Route path="dashboard" element={<Track />} />
         <Route path="plan" element={<Plan />} />
         <Route path="*" element={<Landing />} />
       </Routes>

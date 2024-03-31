@@ -1,42 +1,26 @@
-import { useState, useContext } from "react";
+import { useContext, useState } from "react";
 import styles from "../../styles/header.module.scss";
 import logo from "../../assets/icons/car.svg";
 import account from "../../assets/icons/account.svg";
-import GoPin from "./GoPin";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import friends from "../../assets/icons/friends.svg";
+import pfpMD from "../../assets/images/pfpMD.jpg";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../services/AuthContext";
 
 export default function Header() {
-  const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useContext(AuthContext);
-  const [trackSelected, setTrackSelected] = useState(
-    location.pathname === "/track"
-  );
-
-  const planClicked = () => {
-    if (trackSelected) {
-      setTrackSelected(false);
-      setTimeout(() => {
-        navigate("/plan");
-      }, 500);
-    }
-  };
-
-  const trackClicked = () => {
-    if (!trackSelected) {
-      setTrackSelected(true);
-      setTimeout(() => {
-        navigate("/track");
-      }, 500);
-    }
-  };
+  const [notif, setNotif] = useState(2);
 
   const navigate = useNavigate();
   const loginClicked = () => {
     if (!isLoggedIn) {
       setIsLoggedIn(true);
-      navigate("/track");
+      navigate("/dashboard");
     }
+  };
+
+  const pfpClicked = () => {
+    /* show account menu dropdown */
   };
 
   return (
@@ -53,42 +37,31 @@ export default function Header() {
       </Link>
       <div className={styles.headerRightContainer}>
         {isLoggedIn ? (
-          <div className={styles.toggleContainer}>
-            <button className={styles.planBtn} onClick={planClicked}>
-              <GoPin width="2.6rem" go={true} blue={trackSelected} />
-              <p
-                className={trackSelected ? styles.unselected : styles.selected}
-              >
-                Plan
-              </p>
-            </button>
-            <button className={styles.trackBtn} onClick={trackClicked}>
-              <GoPin width="2.6rem" go={false} blue={!trackSelected} />
-              <p
-                className={trackSelected ? styles.selected : styles.unselected}
-              >
-                Track
-              </p>
-            </button>
-            <div
-              className={styles.animation}
-              style={{
-                left: trackSelected ? "9rem" : "0",
-                width: trackSelected ? "11rem" : "10rem",
-              }}
-            ></div>
-          </div>
+          <>
+            <div className={styles.friendsContainer}>
+              <img src={friends} alt="Friends" />
+              <p>Friends</p>
+            </div>
+            <div className={styles.pfpContainer} onClick={pfpClicked}>
+              <img src={pfpMD} alt="PFP" className={styles.pfp} />
+              <div className={styles.notifContainer}>
+                <p>{notif}</p>
+              </div>
+            </div>
+          </>
         ) : (
-          <div className={styles.login} onClick={loginClicked}>
-            Login
-          </div>
+          <>
+            <div className={styles.login} onClick={loginClicked}>
+              Login
+            </div>
+            <img
+              src={account}
+              alt="Account"
+              className={styles.account}
+              onClick={loginClicked}
+            />
+          </>
         )}
-        <img
-          src={account}
-          alt="Account"
-          className={styles.account}
-          onClick={loginClicked}
-        />
       </div>
     </div>
   );

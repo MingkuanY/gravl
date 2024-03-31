@@ -30,66 +30,6 @@
     justify-content: end;
     align-items: center;
 
-    /* toggle button */
-
-    .toggleContainer {
-      margin-right: 3.5rem;
-      position: relative;
-      display: flex;
-      border: 0.2rem solid mixin.$gravl-blue;
-      border-radius: 2rem;
-      height: 3rem;
-      color: mixin.$gravl-blue;
-      cursor: pointer;
-
-      .planBtn {
-        width: 9rem;
-      }
-
-      .trackBtn {
-        width: 11rem;
-      }
-
-      button {
-        height: 100%;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1;
-        cursor: pointer;
-        transition: 0.5s;
-
-        p {
-          margin-top: 0.2rem;
-          font-size: 1.8rem;
-          text-transform: uppercase;
-          font-weight: 500;
-          transition: all 0.3s;
-        }
-      }
-
-      .unselected {
-        color: mixin.$gravl-blue;
-      }
-
-      .selected {
-        color: mixin.$white;
-      }
-
-      .animation {
-        position: absolute;
-        height: 100%;
-        top: 0;
-        z-index: 0;
-        transition: all 0.5s ease 0s;
-        border-radius: 2rem;
-        width: 11rem;
-        left: 9rem;
-        background: mixin.$gravl-blue;
-      }
-    }
-
     /* if not logged in */
 
     .login {
@@ -99,13 +39,57 @@
       cursor: pointer;
     }
 
+    /* if logged in */
+
+    .friendsContainer {
+      display: flex;
+      align-items: center;
+      margin-right: 3rem;
+
+      img {
+        width: 2rem;
+      }
+
+      p {
+        margin-left: 0.6rem;
+        margin-top: 0.2rem;
+        font-size: 1.4rem;
+        color: mixin.$gravl-blue;
+      }
+    }
+
     /* account icon */
 
     .account {
       width: 2.7rem;
       aspect-ratio: 1;
-      margin-right: 1rem;
       cursor: pointer;
+    }
+
+    .pfpContainer {
+      position: relative;
+      cursor: pointer;
+
+      .pfp {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .notifContainer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.4rem;
+        aspect-ratio: 1;
+        background-color: mixin.$gravl-blue;
+        border-radius: 50%;
+        color: mixin.$white;
+      }
     }
   }
 }
