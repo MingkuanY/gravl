@@ -1,7 +1,6 @@
 import styles from "../../styles/tripcard.module.scss";
-import { formatDates } from "../../utils/date";
 
-export default function TripCard({ title, locations, dates, thumbnail }) {
+export default function TripCard({ title, locations, thumbnail }) {
   return (
     <button className={styles.container}>
       <img src={thumbnail} alt="Trip Thumbnail" />

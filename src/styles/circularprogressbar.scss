@@ -17,14 +17,14 @@
     stroke: mixin.$gravl-blue;
     stroke-width: 0.3rem;
     stroke-linecap: round;
-    box-shadow: 0 0 17px 0 rgba(49, 159, 255, 1); //not showing up
+    box-shadow: 0 0 1.5rem 0 rgba(49, 159, 255, 1); //not showing up
     transition: stroke-dashoffset 0.5s ease 0s;
   }
 
   .CircularProgressbar-trail {
     stroke: mixin.$gravl-blue;
     stroke-opacity: 0.2;
-    stroke-width: 0.05rem;
+    stroke-width: 0.2rem;
     stroke-linecap: round;
   }
 

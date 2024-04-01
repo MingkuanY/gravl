@@ -13,6 +13,7 @@ import edit from "../assets/icons/edit.svg";
 import badge from "../assets/icons/badge.svg";
 import plus from "../assets/icons/plus.svg";
 import dropdown from "../assets/icons/dropdown.svg";
+import { formatDates } from "../utils/date";
 
 export default function Dashboard() {
   /* mock data */
@@ -20,8 +21,6 @@ export default function Dashboard() {
     username: "funnyufo",
     location: "Atlanta, Georgia",
     bio: "Not all who wander are lost... but I am.",
-    tripsTotal: 32,
-    tripsThisYear: 9,
     pfp: "",
     hasBadge: true,
     bucketMaps: [
@@ -39,11 +38,11 @@ export default function Dashboard() {
           "https://res.cloudinary.com/simpleview/image/upload/v1648755098/clients/austin/Austin_Skyline_Credit_Christopher_Sherman_lifetime__4f60343d-9f69-450c-8ad3-fa636761786d.jpg",
       },
       {
-        title: "The Windy City",
-        locations: ["Chicago"],
-        dates: ["2024-01-07", "2024-01-09"],
+        title: "Spring Break of Gains",
+        locations: ["Gainesville"],
+        dates: ["2024-03-15", "2024-03-23"],
         thumbnail:
-          "https://cdn.britannica.com/59/94459-050-DBA42467/Skyline-Chicago.jpg",
+          "https://www.campspot.com/c/images/cms/1920w/2023/07/Campgrounds-near-Gainesville-FL.jpg",
       },
       {
         title: "Southern California",
@@ -60,6 +59,13 @@ export default function Dashboard() {
           "https://cdn.britannica.com/74/93074-050-F81FFDD7/home-plantation-Louisiana.jpg",
       },
       {
+        title: "HackMIT",
+        locations: ["Boston"],
+        dates: ["2023-09-14", "2023-09-17"],
+        thumbnail:
+          "https://www.trolleytours.com/wp-content/uploads/2016/05/boston-mit.jpg",
+      },
+      {
         title: "Germany",
         locations: ["Berlin", "Hamburg", "Jasmund National Park"],
         dates: ["2023-05-15", "2023-08-07"],
@@ -74,13 +80,75 @@ export default function Dashboard() {
           "https://www.tripsavvy.com/thmb/6AbCUK2IzOMaMfG-Qc-f0FocVfE=/2121x1414/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1062250032-110de1d7c76d4f49804555d75dffbfa1.jpg",
       },
       {
+        title: "Christmas in London",
+        locations: ["The Shard", "Hyde Park"],
+        dates: ["2022-12-20", "2022-12-28"],
+        thumbnail:
+          "https://www.civitatis.com/blog/wp-content/uploads/2022/11/que-ver-navidad-londres.jpg",
+      },
+      {
+        title: "A Floridian Thanksgiving",
+        locations: ["Tampa", "Clearwater", "Crystal River"],
+        dates: ["2022-11-19", "2022-11-27"],
+        thumbnail:
+          "https://www.visitstpeteclearwater.com/sites/default/files/styles/large_horizontal_wide/public/2021-05/clearwater-marina-overview-memorial-causeway.jpg?h=a92f03cd&itok=E9lccMlh",
+      },
+      {
+        title: "The Smokies",
+        locations: ["Dahlonega", "Cades Cove", "Clingmans Dome"],
+        dates: ["2022-10-15", "2022-10-18"],
+        thumbnail:
+          "https://media.istockphoto.com/id/1438541686/photo/colorful-autumn-trees-mountain-views-in-tennessee-during-the-fall-of-2022.jpg?s=612x612&w=0&k=20&c=OpEXUlSKLHaQpOMpbGRZBPwpnq8ZgJPf5Xo27oe0sZ0=",
+      },
+      {
         title: "Senior trip w/ da boiz",
         locations: ["Loneliest Road in America", "Banff", "Mt. Rainier"],
         dates: ["2022-07-11", "2022-07-27"],
         thumbnail:
           "https://i0.wp.com/beautahfulworld.com/wp-content/uploads/2022/07/IMG-6248-1-scaled.jpg?fit=2560%2C1920&ssl=1",
       },
+      {
+        title: "Central European Tour",
+        locations: ["Prague", "Wrocław", "Krakow", "Budapest"],
+        dates: ["2022-06-25", "2022-07-03"],
+        thumbnail:
+          "https://static.independent.co.uk/s3fs-public/thumbnails/image/2019/02/19/16/budapest-1.jpg",
+      },
+      {
+        title: "Butte County Wildflowers",
+        locations: ["Phantom Falls", "Clear Lake"],
+        dates: ["2022-04-10", "2022-04-11"],
+        thumbnail:
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Phantom_Falls.jpg/1200px-Phantom_Falls.jpg",
+      },
+      {
+        title: "Winter in the Southwest",
+        locations: ["Joshua Tree", "Sedona", "Grand Canyon"],
+        dates: ["2021-12-19", "2021-12-30"],
+        thumbnail:
+          "https://upload.wikimedia.org/wikipedia/commons/a/aa/Dawn_on_the_S_rim_of_the_Grand_Canyon_%288645178272%29.jpg",
+      },
     ],
+  };
+
+  /**
+   * Counts number of trips that start or end in the current year for display in the user profile
+   * @returns count the number of trips
+   */
+  const countTripsThisYear = () => {
+    const thisYear = new Date().getFullYear();
+    let count = 0;
+    for (let i = 0; i < user.trips.length; i++) {
+      const trip = user.trips[i];
+      const startYear = new Date(trip.dates[0]).getFullYear();
+      const endYear = new Date(trip.dates[1]).getFullYear();
+      if (startYear === thisYear || endYear === thisYear) {
+        count += 1;
+      } else {
+        break;
+      }
+    }
+    return count;
   };
 
   const [currentMap, setCurrentMap] = useState(0); //defaults to counties map
@@ -168,13 +236,24 @@ export default function Dashboard() {
             </button>
           </div>
           <div className={styles.pastTrips}>
-            {user.trips.map((trip, index) => (
-              <div className={styles.tripCheckpoint} key={index}>
-                <div>
-                  <TripCard {...trip} />
+            {user.trips.map((trip, index) => {
+              const previousTrip =
+                index - 1 >= 0 ? user.trips[index - 1] : null;
+              const tripYear = new Date(trip.dates[0]).getFullYear();
+              const showYear =
+                !previousTrip ||
+                new Date(previousTrip.dates[0]).getFullYear() !== tripYear;
+
+              return (
+                <div className={styles.tripCheckpoint} key={index}>
+                  <div>
+                    <TripCard {...trip} />
+                    {showYear && <p className={styles.year}>{tripYear}</p>}
+                    <p className={styles.dates}>{formatDates(...trip.dates)}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
@@ -198,11 +277,11 @@ export default function Dashboard() {
             </div>
             <div className={styles.userStats}>
               <div>
-                <p className={styles.stat}>{user.tripsTotal}</p>
+                <p className={styles.stat}>{user.trips.length}</p>
                 <p className={styles.desc}>Trips</p>
               </div>
               <div>
-                <p className={styles.stat}>{user.tripsThisYear}</p>
+                <p className={styles.stat}>{countTripsThisYear()}</p>
                 <p className={styles.desc}>This Year</p>
               </div>
             </div>

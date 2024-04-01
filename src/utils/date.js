@@ -22,6 +22,7 @@ export const formatDate = (dateString) => {
   const formattedDate = `${month} ${day}`;
   return formattedDate;
 };
+
 export const formatDates = (date1, date2) => {
   const sameMonth = new Date(date1).getMonth() === new Date(date2).getMonth();
 

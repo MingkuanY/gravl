@@ -22,6 +22,8 @@
     aspect-ratio: 1;
     border-radius: 50%;
     object-fit: cover;
+    transform: translateZ(0);
+    image-rendering: -webkit-optimize-contrast;
   }
 
   .right {
