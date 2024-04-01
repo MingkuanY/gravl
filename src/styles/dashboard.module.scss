@@ -84,9 +84,9 @@
     }
 
     .pastTrips {
-      margin-left: -15rem;
-      padding-right: 15rem;
-      transform: translateX(15rem);
+      margin-left: -13rem;
+      padding-right: 13rem;
+      transform: translateX(13rem);
       position: relative;
       flex: auto;
       overflow-y: auto;
@@ -143,7 +143,8 @@
           font-weight: 300;
           font-style: italic;
           color: mixin.$dark;
-          text-wrap: nowrap;
+          white-space: nowrap;
+          width: fit-content;
         }
 
         .year {
