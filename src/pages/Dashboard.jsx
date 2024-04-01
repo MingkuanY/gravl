@@ -1,5 +1,6 @@
 import styles from "../styles/dashboard.module.scss";
 import Header from "../components/header/Header";
+import TripCard from "../components/dashboard/TripCard";
 import CountiesMap from "../components/maps/CountiesMap";
 import StatesMap from "../components/maps/StatesMap";
 import CountriesMap from "../components/maps/CountriesMap";
@@ -10,6 +11,8 @@ import { useState } from "react";
 import pfp from "../assets/images/pfp.jpg";
 import edit from "../assets/icons/edit.svg";
 import badge from "../assets/icons/badge.svg";
+import plus from "../assets/icons/plus.svg";
+import dropdown from "../assets/icons/dropdown.svg";
 
 export default function Dashboard() {
   /* mock data */
@@ -151,61 +154,89 @@ export default function Dashboard() {
     <>
       <Header />
 
-      <div className={styles.timelineContainer}></div>
-
-      <div className={styles.main}>
-        <div className={styles.profile}>
-          <div className={styles.pfpContainer}>
-            <img src={pfp} alt="PFP" />
-            {user.hasBadge && (
-              <div className={styles.badgeContainer}>
-                <img src={badge} alt="Badge" />
+      <div className={styles.container}>
+        <div className={styles.timeline}>
+          <div className={styles.planTripBtn}>
+            <button className={styles.newTrip}>
+              <img src={plus} alt="Plus" />
+            </button>
+            <button className={styles.tripDropdown}>
+              <p className={styles.tripPlans}>Trip Plans</p>
+              <div>
+                <img src={dropdown} alt="Dropdown" />
               </div>
-            )}
+            </button>
           </div>
-          <div className={styles.userInfo}>
-            <div className={styles.usernameAndEdit}>
-              <p className={styles.username}>{user.username}</p>
-              <img src={edit} alt="Edit" />
-            </div>
-            <p className={styles.location}>{user.location}</p>
-            <p className={styles.bio}>{user.bio}</p>
-          </div>
-          <div className={styles.userStats}>
-            <div>
-              <p className={styles.stat}>{user.tripsTotal}</p>
-              <p className={styles.desc}>Trips</p>
-            </div>
-            <div>
-              <p className={styles.stat}>{user.tripsThisYear}</p>
-              <p className={styles.desc}>This Year</p>
-            </div>
+          <div className={styles.pastTrips}>
+            {user.trips.map((trip, index) => (
+              <div className={styles.tripCheckpoint} key={index}>
+                <div>
+                  <TripCard {...trip} />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className={styles.mapContainer}>{renderMap(currentMap)}</div>
-
-        <div className={styles.stats}>
-          {user.bucketMaps.map((map, index) => (
-            <div className={styles.progressContainer} key={index}>
-              <CircularProgressbarWithChildren
-                value={count[index]}
-                maxValue={map.totalCount}
-              >
-                <div className={styles.countContainer}>
-                  <p className={styles.count}>{count[index]}</p>
-                  <p className={styles.totalCount}>/{map.totalCount}</p>
+        <div className={styles.main}>
+          <div className={styles.profile}>
+            <div className={styles.pfpContainer}>
+              <img src={pfp} alt="PFP" />
+              {user.hasBadge && (
+                <div className={styles.badgeContainer}>
+                  <img src={badge} alt="Badge" />
                 </div>
-                <p className={styles.type}>{map.type}</p>
-              </CircularProgressbarWithChildren>
+              )}
+            </div>
+            <div className={styles.userInfo}>
+              <div className={styles.usernameAndEdit}>
+                <p className={styles.username}>{user.username}</p>
+                <img src={edit} alt="Edit" />
+              </div>
+              <p className={styles.location}>{user.location}</p>
+              <p className={styles.bio}>{user.bio}</p>
+            </div>
+            <div className={styles.userStats}>
+              <div>
+                <p className={styles.stat}>{user.tripsTotal}</p>
+                <p className={styles.desc}>Trips</p>
+              </div>
+              <div>
+                <p className={styles.stat}>{user.tripsThisYear}</p>
+                <p className={styles.desc}>This Year</p>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.mapContainer}>{renderMap(currentMap)}</div>
+
+          <div className={styles.stats}>
+            {user.bucketMaps.map((map, index) => (
               <div
-                className={`${styles.progressbarBackground} ${
+                className={`${styles.progressContainer} ${
                   currentMap === index && styles.selected
                 }`}
-                onClick={() => statClicked(index)}
-              ></div>
-            </div>
-          ))}
+                key={index}
+              >
+                <CircularProgressbarWithChildren
+                  value={count[index]}
+                  maxValue={map.totalCount}
+                >
+                  <div className={styles.countContainer}>
+                    <p className={styles.count}>{count[index]}</p>
+                    <p className={styles.totalCount}>/{map.totalCount}</p>
+                  </div>
+                  <p className={styles.type}>{map.type}</p>
+                </CircularProgressbarWithChildren>
+                <div
+                  className={`${styles.progressbarBackground} ${
+                    currentMap === index && styles.selected
+                  }`}
+                  onClick={() => statClicked(index)}
+                ></div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>

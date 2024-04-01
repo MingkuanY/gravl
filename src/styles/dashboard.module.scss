@@ -1,178 +1,323 @@
 @use "./mixin" as mixin;
 
-.main {
+.container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 60rem;
-  margin: auto;
+  padding-bottom: 5rem;
 
-  /* user profile */
-
-  .profile {
+  .timeline {
+    margin-left: 6rem;
+    position: relative;
+    height: calc(
+      100vh - #{mixin.$header-height} - 5rem
+    ); // subtract out header and the padding-bottom of the entire page container
     display: flex;
-    align-items: center;
-    width: 100%;
+    flex-direction: column;
 
-    .pfpContainer {
-      position: relative;
-
-      img {
-        width: 12rem;
-        aspect-ratio: 1;
-        object-fit: cover;
-        border-radius: 50%;
-        cursor: pointer;
-      }
-
-      .badgeContainer {
-        position: absolute;
-        bottom: 0.6rem;
-        right: 0.6rem;
-        width: 2.6rem;
-        aspect-ratio: 1;
-        background-color: mixin.$gravl-blue;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        img {
-          width: 2.1rem;
-          cursor: pointer;
-        }
-      }
+    /* vertical timeline stem */
+    &::before {
+      content: "";
+      position: absolute;
+      width: 0.5rem;
+      height: 100vh;
+      top: -#{mixin.$header-height};
+      right: 0;
+      background: mixin.$gravl-blue;
     }
 
-    .userInfo {
-      margin-left: 2.2rem;
+    .planTripBtn {
+      margin-bottom: 1rem;
       display: flex;
-      flex-direction: column;
-      flex: auto;
+      height: 3rem;
+      width: 26rem;
+      border-radius: 1.5rem;
 
-      .usernameAndEdit {
+      .newTrip {
+        background-color: mixin.$gravl-blue;
+        border-radius: 1.5rem 0 0 1.5rem;
+        width: 4rem;
+        border-right: 0.2rem solid mixin.$white;
         display: flex;
         align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.3s;
 
-        .username {
-          color: mixin.$dark;
-          font-size: 2.6rem;
+        &:hover {
+          background-color: mixin.$darker-blue;
+        }
+
+        img {
+          width: 2.5rem;
+        }
+      }
+
+      .tripDropdown {
+        background-color: mixin.$gravl-blue;
+        border-radius: 0 1.5rem 1.5rem 0;
+        flex: auto;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+          background-color: mixin.$darker-blue;
+        }
+
+        .tripPlans {
+          flex: auto;
+          text-align: center;
+          font-size: 1.6rem;
+          color: mixin.$white;
           font-weight: 400;
         }
 
-        img {
-          margin-left: 1rem;
-          width: 2rem;
-          cursor: pointer;
+        div {
+          width: 4rem;
+
+          img {
+            margin-top: 0.5rem;
+            width: 2.5rem;
+          }
         }
-      }
-
-      .location {
-        margin-top: 0.3rem;
-        font-size: 1rem;
-        color: mixin.$dark;
-        font-weight: 400;
-        cursor: pointer;
-      }
-
-      .bio {
-        margin-top: 0.4rem;
-        font-size: 1.4rem;
-        font-style: italic;
-        font-weight: 300;
-        color: mixin.$faded;
       }
     }
 
-    .userStats {
+    .pastTrips {
+      margin-left: -1rem;
+      padding-right: 1rem;
+      transform: translateX(1rem);
+      position: relative;
+      flex: auto;
+      overflow-y: auto;
+      scrollbar-width: none;
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 1rem,
+        black calc(100% - 4rem),
+        transparent 100%
+      );
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .tripCheckpoint {
+        position: relative;
+        padding: 0.7rem 0 0.7rem;
+        max-width: 30rem;
+        border-right: 0.5rem solid mixin.$gravl-blue;
+        padding-right: 4rem;
+
+        &::before {
+          content: "";
+          background: mixin.$gravl-blue;
+          opacity: 0.25;
+          width: 4rem;
+          height: 0.1rem;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 0;
+          z-index: -1;
+        }
+
+        > *::before {
+          content: "";
+          background: mixin.$gravl-blue;
+          width: 1.5rem;
+          aspect-ratio: 1;
+          border-radius: 50%;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: -1rem;
+        }
+      }
+    }
+  }
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60rem;
+    margin: auto;
+
+    /* user profile */
+
+    .profile {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      width: 12rem;
+      width: 100%;
 
-      div {
+      .pfpContainer {
+        position: relative;
+
+        img {
+          width: 12rem;
+          aspect-ratio: 1;
+          object-fit: cover;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+
+        .badgeContainer {
+          position: absolute;
+          bottom: 0.6rem;
+          right: 0.6rem;
+          width: 2.6rem;
+          aspect-ratio: 1;
+          background-color: mixin.$gravl-blue;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          img {
+            width: 2.1rem;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .userInfo {
+        margin-left: 2.2rem;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        flex: auto;
 
-        .stat {
-          font-size: 2.6rem;
-          color: mixin.$gravl-blue;
+        .usernameAndEdit {
+          display: flex;
+          align-items: center;
+
+          .username {
+            color: mixin.$dark;
+            font-size: 2.6rem;
+            font-weight: 400;
+          }
+
+          img {
+            margin-bottom: 0.8rem;
+            margin-left: 1rem;
+            width: 2rem;
+            cursor: pointer;
+          }
+        }
+
+        .location {
+          margin-top: 0.3rem;
+          font-size: 1rem;
+          color: mixin.$dark;
           font-weight: 400;
           cursor: pointer;
         }
-        .desc {
-          font-size: 1.2rem;
-          font-weight: 400;
-          color: mixin.$dark;
-          text-transform: uppercase;
+
+        .bio {
+          margin-top: 0.4rem;
+          font-size: 1.4rem;
+          font-style: italic;
+          font-weight: 300;
+          color: mixin.$faded;
+        }
+      }
+
+      .userStats {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 12rem;
+
+        div {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .stat {
+            font-size: 2.6rem;
+            color: mixin.$gravl-blue;
+            font-weight: 400;
+            cursor: pointer;
+          }
+          .desc {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: mixin.$dark;
+            text-transform: uppercase;
+          }
         }
       }
     }
-  }
 
-  /* map */
+    /* map */
 
-  .mapContainer {
-    margin-bottom: -3rem;
-    width: 110%;
-    height: 45rem;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-  }
+    .mapContainer {
+      margin-bottom: -3rem;
+      width: 110%;
+      height: 45rem;
+      display: flex;
+      justify-content: end;
+      align-items: center;
+    }
 
-  /* circular progress stats */
+    /* circular progress stats */
 
-  .stats {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
+    .stats {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
 
-    .progressContainer {
-      width: 12rem;
-      position: relative;
+      .progressContainer {
+        width: 12rem;
+        position: relative;
+        transition: 0.3s;
 
-      .countContainer {
-        display: flex;
-        align-items: end;
+        .countContainer {
+          display: flex;
+          align-items: end;
 
-        .count {
-          font-size: 3.5rem;
-          color: mixin.$dark;
-          margin: 0 -0.3rem 0.3rem 0;
-          font-weight: 400;
+          .count {
+            font-size: 3.5rem;
+            color: mixin.$dark;
+            margin: 0 -0.3rem 0.3rem 0;
+            font-weight: 400;
+          }
+          .totalCount {
+            font-size: 1.75rem;
+            color: mixin.$dark;
+            font-weight: 400;
+          }
         }
-        .totalCount {
-          font-size: 1.75rem;
-          color: mixin.$dark;
+
+        .type {
+          margin-top: 0.5rem;
+          font-size: 1.4rem;
           font-weight: 400;
+          text-transform: uppercase;
+          text-align: center;
+          max-height: 1.4rem;
+        }
+
+        .progressbarBackground {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          background-color: mixin.$white;
+          opacity: 0.5;
+          cursor: pointer;
+          transform: scale(1);
+        }
+
+        .selected {
+          opacity: 0;
         }
       }
-
-      .type {
-        margin-top: 0.5rem;
-        font-size: 1.4rem;
-        font-weight: 400;
-        text-transform: uppercase;
-        text-align: center;
-        max-height: 1.4rem;
-      }
-
-      .progressbarBackground {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        background-color: mixin.$white;
-        opacity: 0.5;
-        cursor: pointer;
-      }
-
       .selected {
-        opacity: 0;
+        transform: scale(1.25);
       }
     }
   }
