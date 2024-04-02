@@ -8,9 +8,10 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="" element={<Landing />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="plan" element={<Plan />} />
-        <Route path="*" element={<Landing />} />
+        <Route path="*" element={<NoPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -14,6 +14,7 @@ import badge from "../assets/icons/badge.svg";
 import plus from "../assets/icons/plus.svg";
 import dropdown from "../assets/icons/dropdown.svg";
 import { formatDates } from "../utils/date";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   /* mock data */
@@ -151,6 +152,7 @@ export default function Dashboard() {
     return count;
   };
 
+  const navigate = useNavigate();
   const [currentMap, setCurrentMap] = useState(0); //defaults to counties map
   const [reload, setReload] = useState(false);
   const statClicked = (btn) => {
@@ -225,7 +227,10 @@ export default function Dashboard() {
       <div className={styles.container}>
         <div className={styles.timeline}>
           <div className={styles.planTripBtn}>
-            <button className={styles.newTrip}>
+            <button
+              className={styles.newTrip}
+              onClick={() => navigate("/plan")}
+            >
               <img src={plus} alt="Plus" />
             </button>
             <button className={styles.tripDropdown}>

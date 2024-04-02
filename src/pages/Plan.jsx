@@ -1,5 +1,6 @@
 import styles from "../styles/plan.module.scss";
 import Header from "../components/header/Header";
+import Loading from "./Loading";
 
 import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
 
@@ -12,7 +13,7 @@ export default function Plan() {
   });
 
   if (!isLoaded) {
-    return <p>Map is loading...</p>;
+    return <Loading />;
   }
 
   return (

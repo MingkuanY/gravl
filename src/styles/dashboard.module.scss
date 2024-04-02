@@ -86,6 +86,7 @@
     .pastTrips {
       margin-left: -13rem;
       padding-right: 13rem;
+      padding-bottom: 3rem;
       transform: translateX(13rem);
       position: relative;
       flex: auto;
@@ -95,7 +96,7 @@
         to bottom,
         transparent 0%,
         black 1rem,
-        black calc(100% - 2rem),
+        black calc(100% - 4rem),
         transparent 100%
       );
 
