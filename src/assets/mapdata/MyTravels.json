@@ -2280,6 +2280,256 @@
       "id": "Paulding__GA",
       "visitDate": "2024-03-24",
       "countyName": "Paulding, GA"
+    },
+    {
+      "id": "Harris__TX",
+      "visitDate": "2024-04-05",
+      "countyName": "Harris, TX"
+    },
+    {
+      "id": "Fort_Bend__TX",
+      "visitDate": "2024-04-06",
+      "countyName": "Fort Bend, TX"
+    },
+    {
+      "id": "Waller__TX",
+      "visitDate": "2024-04-06",
+      "countyName": "Waller, TX"
+    },
+    {
+      "id": "Grimes__TX",
+      "visitDate": "2024-04-06",
+      "countyName": "Grimes, TX"
+    },
+    {
+      "id": "Brazos__TX",
+      "visitDate": "2024-04-06",
+      "countyName": "Brazos, TX"
+    },
+    {
+      "id": "Robertson__TX",
+      "visitDate": "2024-04-06",
+      "countyName": "Robertson, TX"
+    },
+    {
+      "id": "Falls__TX",
+      "visitDate": "2024-04-06",
+      "countyName": "Falls, TX"
+    },
+    {
+      "id": "McLennan__TX",
+      "visitDate": "2024-04-06",
+      "countyName": "McLennan, TX"
+    },
+    {
+      "id": "Hill__TX",
+      "visitDate": "2024-04-06",
+      "countyName": "Hill, TX"
+    },
+    {
+      "id": "Johnson__TX",
+      "visitDate": "2024-04-06",
+      "countyName": "Johnson, TX"
+    },
+    {
+      "id": "Tarrant__TX",
+      "visitDate": "2024-04-06",
+      "countyName": "Tarrant, TX"
+    },
+    {
+      "id": "Dallas__TX",
+      "visitDate": "2024-04-06",
+      "countyName": "Dallas, TX"
+    },
+    {
+      "id": "Collin__TX",
+      "visitDate": "2024-04-06",
+      "countyName": "Collin, TX"
+    },
+    {
+      "id": "Grayson__TX",
+      "visitDate": "2024-04-06",
+      "countyName": "Grayson, TX"
+    },
+    {
+      "id": "Bryan__OK",
+      "visitDate": "2024-04-06",
+      "countyName": "Bryan, OK"
+    },
+    {
+      "id": "Marshall__OK",
+      "visitDate": "2024-04-07",
+      "countyName": "Marshall, OK"
+    },
+    {
+      "id": "Atoka__OK",
+      "visitDate": "2024-04-07",
+      "countyName": "Atoka, OK"
+    },
+    {
+      "id": "Pittsburg__OK",
+      "visitDate": "2024-04-07",
+      "countyName": "Pittsburg, OK"
+    },
+    {
+      "id": "McIntosh__OK",
+      "visitDate": "2024-04-07",
+      "countyName": "McIntosh, OK"
+    },
+    {
+      "id": "Okmulgee__OK",
+      "visitDate": "2024-04-07",
+      "countyName": "Okmulgee, OK"
+    },
+    {
+      "id": "Craig__OK",
+      "visitDate": "2024-04-07",
+      "countyName": "Craig, OK"
+    },
+    {
+      "id": "Ottawa__OK",
+      "visitDate": "2024-04-07",
+      "countyName": "Ottawa, OK"
+    },
+    {
+      "id": "Newton__MO",
+      "visitDate": "2024-04-07",
+      "countyName": "Newton, MO"
+    },
+    {
+      "id": "Cherokee__KS",
+      "visitDate": "2024-04-07",
+      "countyName": "Cherokee, KS"
+    },
+    {
+      "id": "Jasper__MO",
+      "visitDate": "2024-04-07",
+      "countyName": "Jasper, MO"
+    },
+    {
+      "id": "Lawrence__MO",
+      "visitDate": "2024-04-07",
+      "countyName": "Lawrence, MO"
+    },
+    {
+      "id": "Greene__MO",
+      "visitDate": "2024-04-07",
+      "countyName": "Greene, MO"
+    },
+    {
+      "id": "Christian__MO",
+      "visitDate": "2024-04-07",
+      "countyName": "Christian, MO"
+    },
+    {
+      "id": "Taney__MO",
+      "visitDate": "2024-04-07",
+      "countyName": "Taney, MO"
+    },
+    {
+      "id": "Boone__AR",
+      "visitDate": "2024-04-08",
+      "countyName": "Boone, AR"
+    },
+    {
+      "id": "Yell__AR",
+      "visitDate": "2024-04-08",
+      "countyName": "Yell, AR"
+    },
+    {
+      "id": "Saline__AR",
+      "visitDate": "2024-04-08",
+      "countyName": "Saline, AR"
+    },
+    {
+      "id": "Garland__AR",
+      "visitDate": "2024-04-08",
+      "countyName": "Garland, AR"
+    },
+    {
+      "id": "Hot_Spring__AR",
+      "visitDate": "2024-04-08",
+      "countyName": "Hot Spring, AR"
+    },
+    {
+      "id": "Clark__AR",
+      "visitDate": "2024-04-08",
+      "countyName": "Clark, AR"
+    },
+    {
+      "id": "Nevada__AR",
+      "visitDate": "2024-04-08",
+      "countyName": "Nevada, AR"
+    },
+    {
+      "id": "Hempstead__AR",
+      "visitDate": "2024-04-08",
+      "countyName": "Hempstead, AR"
+    },
+    {
+      "id": "Miller__AR",
+      "visitDate": "2024-04-08",
+      "countyName": "Miller, AR"
+    },
+    {
+      "id": "Bowie__TX",
+      "visitDate": "2024-04-08",
+      "countyName": "Bowie, TX"
+    },
+    {
+      "id": "Cass__TX",
+      "visitDate": "2024-04-08",
+      "countyName": "Cass, TX"
+    },
+    {
+      "id": "Marion__TX",
+      "visitDate": "2024-04-08",
+      "countyName": "Marion, TX"
+    },
+    {
+      "id": "Harrison__TX",
+      "visitDate": "2024-04-08",
+      "countyName": "Harrison, TX"
+    },
+    {
+      "id": "Panola__TX",
+      "visitDate": "2024-04-08",
+      "countyName": "Panola, TX"
+    },
+    {
+      "id": "Rusk__TX",
+      "visitDate": "2024-04-08",
+      "countyName": "Rusk, TX"
+    },
+    {
+      "id": "Nacogdoches__TX",
+      "visitDate": "2024-04-08",
+      "countyName": "Nacogdoches, TX"
+    },
+    {
+      "id": "Angelina__TX",
+      "visitDate": "2024-04-08",
+      "countyName": "Angelina, TX"
+    },
+    {
+      "id": "Polk__TX",
+      "visitDate": "2024-04-08",
+      "countyName": "Polk, TX"
+    },
+    {
+      "id": "San_Jacinto__TX",
+      "visitDate": "2024-04-08",
+      "countyName": "San Jacinto, TX"
+    },
+    {
+      "id": "Liberty__TX",
+      "visitDate": "2024-04-08",
+      "countyName": "Liberty, TX"
+    },
+    {
+      "id": "Montgomery__TX",
+      "visitDate": "2024-04-08",
+      "countyName": "Montgomery, TX"
     }
   ]
 }

@@ -83,7 +83,7 @@
       }
     }
 
-    .pastTrips {
+    .trips {
       margin-left: -13rem;
       padding-right: 13rem;
       padding-bottom: 3rem;
@@ -146,6 +146,10 @@
           color: mixin.$dark;
           white-space: nowrap;
           width: fit-content;
+        }
+
+        .fade {
+          color: mixin.$fade;
         }
 
         .year {

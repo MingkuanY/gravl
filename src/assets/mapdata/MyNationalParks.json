@@ -130,6 +130,11 @@
       "id": "greatSmokyMountains",
       "visitDate": "2022-10-15",
       "parkName": "Great Smoky Mountains"
+    },
+    {
+      "id": "hotSprings",
+      "visitDate": "2024-04-08",
+      "parkName": "Hot Springs"
     }
   ]
 }

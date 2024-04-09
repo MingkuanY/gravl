@@ -25,18 +25,17 @@ export default function Dashboard() {
     pfp: "",
     hasBadge: true,
     bucketMaps: [
-      { type: "counties", count: 456, totalCount: 3413 },
-      { type: "states", count: 30, totalCount: 50 },
+      { type: "counties", count: 506, totalCount: 3413 },
+      { type: "states", count: 31, totalCount: 50 },
       { type: "countries", count: 19, totalCount: 195 },
-      { type: "national parks", count: 26, totalCount: 63 },
+      { type: "national parks", count: 27, totalCount: 63 },
     ],
     trips: [
       {
         title: "Solar Eclipse in Texas",
         locations: ["Austin", "Houston"],
         dates: ["2024-04-05", "2024-04-09"],
-        thumbnail:
-          "https://res.cloudinary.com/simpleview/image/upload/v1648755098/clients/austin/Austin_Skyline_Credit_Christopher_Sherman_lifetime__4f60343d-9f69-450c-8ad3-fa636761786d.jpg",
+        completed: false,
       },
       {
         title: "Spring Break of Gains",
@@ -44,6 +43,7 @@ export default function Dashboard() {
         dates: ["2024-03-15", "2024-03-23"],
         thumbnail:
           "https://www.campspot.com/c/images/cms/1920w/2023/07/Campgrounds-near-Gainesville-FL.jpg",
+        completed: true,
       },
       {
         title: "Southern California",
@@ -51,6 +51,7 @@ export default function Dashboard() {
         dates: ["2023-12-15", "2023-12-22"],
         thumbnail:
           "https://lajolla.com/wp-content/uploads/2018/12/Southern-California.jpg",
+        completed: true,
       },
       {
         title: "Louisiana",
@@ -58,6 +59,7 @@ export default function Dashboard() {
         dates: ["2023-11-20", "2023-11-25"],
         thumbnail:
           "https://cdn.britannica.com/74/93074-050-F81FFDD7/home-plantation-Louisiana.jpg",
+        completed: true,
       },
       {
         title: "HackMIT",
@@ -65,6 +67,7 @@ export default function Dashboard() {
         dates: ["2023-09-14", "2023-09-17"],
         thumbnail:
           "https://www.trolleytours.com/wp-content/uploads/2016/05/boston-mit.jpg",
+        completed: true,
       },
       {
         title: "Germany",
@@ -72,6 +75,7 @@ export default function Dashboard() {
         dates: ["2023-05-15", "2023-08-07"],
         thumbnail:
           "https://www.germany.travel/media/redaktion/staedte_kultur_content/Berlin_Brandenburger_Tor_im_Sonnenuntergang_Leitmotiv_German_Summer_Cities.jpg",
+        completed: true,
       },
       {
         title: "Philadelphia",
@@ -79,6 +83,7 @@ export default function Dashboard() {
         dates: ["2023-05-12", "2023-05-14"],
         thumbnail:
           "https://www.tripsavvy.com/thmb/6AbCUK2IzOMaMfG-Qc-f0FocVfE=/2121x1414/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1062250032-110de1d7c76d4f49804555d75dffbfa1.jpg",
+        completed: true,
       },
       {
         title: "Christmas in London",
@@ -86,6 +91,7 @@ export default function Dashboard() {
         dates: ["2022-12-20", "2022-12-28"],
         thumbnail:
           "https://www.civitatis.com/blog/wp-content/uploads/2022/11/que-ver-navidad-londres.jpg",
+        completed: true,
       },
       {
         title: "A Floridian Thanksgiving",
@@ -93,6 +99,7 @@ export default function Dashboard() {
         dates: ["2022-11-19", "2022-11-27"],
         thumbnail:
           "https://www.visitstpeteclearwater.com/sites/default/files/styles/large_horizontal_wide/public/2021-05/clearwater-marina-overview-memorial-causeway.jpg?h=a92f03cd&itok=E9lccMlh",
+        completed: true,
       },
       {
         title: "The Smokies",
@@ -100,6 +107,7 @@ export default function Dashboard() {
         dates: ["2022-10-15", "2022-10-18"],
         thumbnail:
           "https://media.istockphoto.com/id/1438541686/photo/colorful-autumn-trees-mountain-views-in-tennessee-during-the-fall-of-2022.jpg?s=612x612&w=0&k=20&c=OpEXUlSKLHaQpOMpbGRZBPwpnq8ZgJPf5Xo27oe0sZ0=",
+        completed: true,
       },
       {
         title: "Senior trip w/ da boiz",
@@ -107,6 +115,7 @@ export default function Dashboard() {
         dates: ["2022-07-11", "2022-07-27"],
         thumbnail:
           "https://i0.wp.com/beautahfulworld.com/wp-content/uploads/2022/07/IMG-6248-1-scaled.jpg?fit=2560%2C1920&ssl=1",
+        completed: true,
       },
       {
         title: "Central European Tour",
@@ -114,6 +123,7 @@ export default function Dashboard() {
         dates: ["2022-06-25", "2022-07-03"],
         thumbnail:
           "https://static.independent.co.uk/s3fs-public/thumbnails/image/2019/02/19/16/budapest-1.jpg",
+        completed: true,
       },
       {
         title: "Butte County Wildflowers",
@@ -121,6 +131,7 @@ export default function Dashboard() {
         dates: ["2022-04-10", "2022-04-11"],
         thumbnail:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Phantom_Falls.jpg/1200px-Phantom_Falls.jpg",
+        completed: true,
       },
       {
         title: "Winter in the Southwest",
@@ -128,6 +139,7 @@ export default function Dashboard() {
         dates: ["2021-12-19", "2021-12-30"],
         thumbnail:
           "https://upload.wikimedia.org/wikipedia/commons/a/aa/Dawn_on_the_S_rim_of_the_Grand_Canyon_%288645178272%29.jpg",
+        completed: true,
       },
     ],
   };
@@ -240,7 +252,7 @@ export default function Dashboard() {
               </div>
             </button>
           </div>
-          <div className={styles.pastTrips}>
+          <div className={styles.trips}>
             {user.trips.map((trip, index) => {
               const previousTrip =
                 index - 1 >= 0 ? user.trips[index - 1] : null;
@@ -253,8 +265,22 @@ export default function Dashboard() {
                 <div className={styles.tripCheckpoint} key={index}>
                   <div>
                     <TripCard {...trip} />
-                    {showYear && <p className={styles.year}>{tripYear}</p>}
-                    <p className={styles.dates}>{formatDates(...trip.dates)}</p>
+                    {showYear && (
+                      <p
+                        className={`${styles.year} ${
+                          !trip.completed && styles.fade
+                        }`}
+                      >
+                        {tripYear}
+                      </p>
+                    )}
+                    <p
+                      className={`${styles.dates} ${
+                        !trip.completed && styles.fade
+                      }`}
+                    >
+                      {formatDates(...trip.dates)}
+                    </p>
                   </div>
                 </div>
               );

@@ -155,6 +155,11 @@
       "id": "LA",
       "visitDate": "2023-11-20",
       "stateName": "Louisiana"
+    },
+    {
+      "id": "KS",
+      "visitDate": "2024-04-07",
+      "stateName": "Kansas"
     }
   ]
 }
