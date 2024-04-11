@@ -1,13 +1,21 @@
 import styles from "../styles/plan.module.scss";
 import Header from "../components/header/Header";
 import Loading from "./Loading";
+import go from "../assets/icons/go.svg";
 
 import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
+import { useState } from "react";
 
 const zoom = 11;
-const center = { lat: 33.7756, lng: -84.2463 }; // Georgia Tech lng: -84.3963
+const center = { lat: 33.7756, lng: -84.3963 }; // Georgia Tech lng: -84.3963
 
 export default function Plan() {
+  const [search, setSearch] = useState("");
+
+  const onChangeHandler = (event) => {
+    setSearch(event.target.value);
+  };
+
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyCC0Ea654g-GJnZACL8UfXGUKEvfbiefA8",
   });
@@ -34,8 +42,14 @@ export default function Plan() {
               streetViewControl: false,
             }}
           ></GoogleMap>
-          <div className={styles.sidebar}>
-            <p className={styles.myPlans}>My Plans</p>
+          <div className={styles.searchContainer}>
+            <input
+              className={styles.searchBar}
+              placeholder="Where to?"
+              onChange={onChangeHandler}
+              value={search}
+            />
+            <img src={go} alt="Go" />
           </div>
         </div>
       </div>

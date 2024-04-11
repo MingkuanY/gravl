@@ -59,3 +59,11 @@ ul {
   list-style-type: none;
   padding: 0;
 }
+
+input {
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+}

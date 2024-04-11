@@ -15,7 +15,7 @@ export default function Header() {
   const dropdownRef = useRef();
   useEffect(() => {
     const handler = (e) => {
-      if (!dropdownRef.current.contains(e.target)) {
+      if (!dropdownRef.current?.contains(e.target)) {
         setUserDropdown(false);
       }
     };
