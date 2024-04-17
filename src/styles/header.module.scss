@@ -48,6 +48,7 @@
       .account {
         width: 2.7rem;
         aspect-ratio: 1;
+        border-radius: 50%;
         cursor: pointer;
       }
     }
@@ -59,7 +60,7 @@
       align-items: center;
       margin-right: 3rem;
 
-      img {
+      .friends {
         width: 2rem;
         cursor: pointer;
       }
@@ -86,16 +87,17 @@
 
       .notifContainer {
         position: absolute;
-        top: 0;
-        right: 0;
+        top: -0.1rem;
+        right: -0.1rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 1.4rem;
+        width: 1.5rem;
         aspect-ratio: 1;
         background-color: mixin.$gravl-blue;
         border-radius: 50%;
         color: mixin.$white;
+        border: 0.2rem solid mixin.$white;
       }
 
       .dropdown {

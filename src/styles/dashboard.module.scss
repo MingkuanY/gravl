@@ -46,7 +46,7 @@
           background-color: mixin.$darker-blue;
         }
 
-        img {
+        .plus {
           width: 2.5rem;
         }
       }
@@ -75,7 +75,7 @@
         div {
           width: 4rem;
 
-          img {
+          .dropdown {
             margin-top: 0.5rem;
             width: 2.5rem;
           }
@@ -205,12 +205,13 @@
           align-items: center;
           cursor: pointer;
           transition: 0.3s;
+          border: 0.2rem solid mixin.$white;
 
           &:hover {
             transform: scale(1.1);
           }
 
-          img {
+          .badge {
             width: 2.1rem;
           }
         }
@@ -232,7 +233,7 @@
             font-weight: 400;
           }
 
-          img {
+          .edit {
             margin-bottom: 0.8rem;
             margin-left: 1rem;
             width: 2rem;

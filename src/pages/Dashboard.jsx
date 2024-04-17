@@ -9,10 +9,7 @@ import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "../styles/circularprogressbar.scss";
 import { useState } from "react";
 import pfp from "../assets/images/pfp.jpg";
-import edit from "../assets/icons/edit.svg";
-import badge from "../assets/icons/badge.svg";
-import plus from "../assets/icons/plus.svg";
-import dropdown from "../assets/icons/dropdown.svg";
+import Icon from "../components/icons/Icon";
 import { formatDates } from "../utils/date";
 import { useNavigate } from "react-router-dom";
 
@@ -243,12 +240,16 @@ export default function Dashboard() {
               className={styles.newTrip}
               onClick={() => navigate("/plan")}
             >
-              <img src={plus} alt="Plus" />
+              <div className={styles.plus}>
+                <Icon type="plus" fill="#fff" />
+              </div>
             </button>
             <button className={styles.tripDropdown}>
               <p className={styles.tripPlans}>Trip Plans</p>
               <div>
-                <img src={dropdown} alt="Dropdown" />
+                <div className={styles.dropdown}>
+                  <Icon type="dropdown" fill="#fff" />
+                </div>
               </div>
             </button>
           </div>
@@ -294,14 +295,18 @@ export default function Dashboard() {
               <img src={pfp} alt="PFP" />
               {user.hasBadge && (
                 <div className={styles.badgeContainer}>
-                  <img src={badge} alt="Badge" />
+                  <div className={styles.badge}>
+                    <Icon type="badge" fill="#fff" />
+                  </div>
                 </div>
               )}
             </div>
             <div className={styles.userInfo}>
               <div className={styles.usernameAndEdit}>
                 <p className={styles.username}>{user.username}</p>
-                <img src={edit} alt="Edit" />
+                <div className={styles.edit}>
+                  <Icon type="edit" fill="#757575" />
+                </div>
               </div>
               <p className={styles.location}>{user.location}</p>
               <p className={styles.bio}>{user.bio}</p>

@@ -1,10 +1,8 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import styles from "../../styles/header.module.scss";
-import logo from "../../assets/icons/car.svg";
-import account from "../../assets/icons/account.svg";
-import friends from "../../assets/icons/friends.svg";
+import Icon from "../icons/Icon";
 import pfpMD from "../../assets/images/pfpMD.jpg";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../../services/AuthContext";
 
 export default function Header() {
@@ -46,14 +44,18 @@ export default function Header() {
         className={styles.logoContainer}
         onClick={() => isLoggedIn && navigate("/dashboard")}
       >
-        <img className={styles.logo} src={logo} alt="Gravl Logo" />
+        <div className={styles.logo}>
+          <Icon type="car" fill="#319fff" />
+        </div>
         <p className={styles.gravl}>Gravl</p>
       </div>
       <div className={styles.headerRightContainer}>
         {isLoggedIn ? (
           <>
             <div className={styles.friendsContainer}>
-              <img src={friends} alt="Friends" />
+              <div className={styles.friends}>
+                <Icon type="friends" fill="#319fff" />
+              </div>
               <p>Friends</p>
             </div>
             <div className={styles.pfpContainer} ref={dropdownRef}>
@@ -82,7 +84,9 @@ export default function Header() {
         ) : (
           <div className={styles.loginContainer} onClick={loginClicked}>
             <div className={styles.login}>Login</div>
-            <img src={account} alt="Account" className={styles.account} />
+            <div className={styles.account}>
+              <Icon type="account" fill="#319fff" />
+            </div>
           </div>
         )}
       </div>

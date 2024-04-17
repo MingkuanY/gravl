@@ -1,7 +1,7 @@
 import styles from "../styles/landing.module.scss";
 import Header from "../components/header/Header";
 import CountiesMap from "../components/maps/CountiesMap";
-import go from "../assets/icons/go.svg";
+import Icon from "../components/icons/Icon";
 
 import AuthContext from "../services/AuthContext";
 import { useContext } from "react";
@@ -25,7 +25,9 @@ export default function Landing() {
         </div>
         <p className={styles.motto}>Travel sets you free.</p>
         <button onClick={loginClicked}>
-          <img src={go} alt="Go" />
+          <div className={styles.go}>
+            <Icon type="go" fill="#fff" />
+          </div>
           <p>Sign Up</p>
         </button>
       </div>

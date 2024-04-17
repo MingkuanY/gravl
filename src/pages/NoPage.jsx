@@ -12,7 +12,7 @@ export default function NoPage() {
         <div className={styles.deadEndSign}>
           <p>Dead End</p>
         </div>
-        <h1>Oops, it looks like this page reached a dead end!</h1>
+        <h1>Oops, it looks like this page doesn't exist!</h1>
         <button onClick={() => navigate("/dashboard")}>
           U-turn to Dashboard
         </button>

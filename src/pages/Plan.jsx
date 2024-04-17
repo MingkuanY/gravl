@@ -1,7 +1,7 @@
 import styles from "../styles/plan.module.scss";
 import Header from "../components/header/Header";
 import Loading from "./Loading";
-import go from "../assets/icons/go.svg";
+import Icon from "../components/icons/Icon";
 
 import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
 import { useState } from "react";
@@ -49,7 +49,9 @@ export default function Plan() {
               onChange={onChangeHandler}
               value={search}
             />
-            <img src={go} alt="Go" />
+            <div className={styles.go}>
+              <Icon type="go" fill="#319fff" />
+            </div>
           </div>
         </div>
       </div>

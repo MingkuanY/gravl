@@ -1,5 +1,5 @@
 import styles from "../../styles/tripcard.module.scss";
-import check from "../../assets/icons/check.svg";
+import Icon from "../icons/Icon";
 
 export default function TripCard({ title, locations, thumbnail, completed }) {
   return (
@@ -11,7 +11,9 @@ export default function TripCard({ title, locations, thumbnail, completed }) {
           alt="Trip Thumbnail"
         />
       ) : (
-        <img className={styles.check} src={check} alt="Check" />
+        <div className={styles.check}>
+          <Icon type={"check"} fill={"#319fff"} />
+        </div>
       )}
       <div className={styles.right}>
         <p className={styles.title}>{title}</p>
