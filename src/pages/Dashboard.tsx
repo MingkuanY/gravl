@@ -292,7 +292,7 @@ export default function Dashboard() {
         <div className={styles.main}>
           <div className={styles.profile}>
             <div className={styles.pfpContainer}>
-              <img src={pfp} alt="PFP" />
+              <img src={pfp.src} alt="PFP" />
               {user.hasBadge && (
                 <div className={styles.badgeContainer}>
                   <div className={styles.badge}>

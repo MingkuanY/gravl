@@ -60,7 +60,7 @@ export default function Header() {
             </div>
             <div className={styles.pfpContainer} ref={dropdownRef}>
               <img
-                src={pfpMD}
+                src={pfpMD.src}
                 alt="PFP"
                 className={styles.pfp}
                 onClick={() => setUserDropdown(!userDropdown)}
