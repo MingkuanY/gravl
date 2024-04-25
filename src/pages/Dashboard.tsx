@@ -1,6 +1,6 @@
 import styles from "../styles/dashboard.module.scss";
 import Header from "../components/header/Header";
-import TripCard from "../components/dashboard/TripCard";
+import TripCard, { TripCardProps } from "../components/dashboard/TripCard";
 import CountiesMap from "../components/maps/CountiesMap";
 import StatesMap from "../components/maps/StatesMap";
 import CountriesMap from "../components/maps/CountriesMap";
@@ -164,7 +164,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [currentMap, setCurrentMap] = useState(0); //defaults to counties map
   const [reload, setReload] = useState(false);
-  const statClicked = (btn) => {
+  const statClicked = (btn: number) => {
     setCurrentMap(btn);
     setReload((reload) => !reload);
   };
@@ -175,7 +175,7 @@ export default function Dashboard() {
    * If a parameter (reset) is passed in, then set count to reset. Else, increment count by one.
    * @param {number} reset the value to set count to if provided
    */
-  const updateCount = (reset) => {
+  const updateCount = (reset: number) => {
     setCount((prevCounts) => {
       const newCounts = [...prevCounts];
       if (reset !== undefined) {
@@ -192,7 +192,7 @@ export default function Dashboard() {
    * @param {number} index the index in the types array that indicates which map should be rendered
    * @returns the map component to be rendered
    */
-  const renderMap = (index) => {
+  const renderMap = (index: number) => {
     switch (index) {
       case 0:
         return (
@@ -265,7 +265,7 @@ export default function Dashboard() {
               return (
                 <div className={styles.tripCheckpoint} key={index}>
                   <div>
-                    <TripCard {...trip} />
+                    <TripCard {...(trip as TripCardProps)} />
                     {showYear && (
                       <p
                         className={`${styles.year} ${
@@ -280,7 +280,7 @@ export default function Dashboard() {
                         !trip.completed && styles.fade
                       }`}
                     >
-                      {formatDates(...trip.dates)}
+                      {formatDates(trip.dates[0], trip.dates[1])}
                     </p>
                   </div>
                 </div>

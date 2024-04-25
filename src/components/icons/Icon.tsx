@@ -1,4 +1,9 @@
-export default function Icon({ type, fill }) {
+type IconProps = {
+  type: string
+  fill: string
+}
+
+export default function Icon({ type, fill }: IconProps) {
   switch (type) {
     case "account":
       return (

@@ -2,14 +2,14 @@ import styles from "../../styles/countriesmap.module.scss";
 import countriesData from "../../assets/mapdata/MyCountries.json";
 import { useEffect, useRef, useState } from "react";
 import { interpolateColors } from "../../utils/color";
-import { loadMap } from "../../utils/map";
+import { loadMap, MapProps } from "../../utils/map";
 
-export default function CountriesMap({ updateCount, total, reload }) {
+export default function CountriesMap({ updateCount, total, reload }: MapProps) {
   const startColor = "#319fff";
   const endColor = "#89c7ff";
   const defaultColor = "#012241";
 
-  const mapRef = useRef(null);
+  const mapRef = useRef<SVGSVGElement>(null);
   const [data, setData] = useState(countriesData);
   const colors = interpolateColors(data.steps, startColor, endColor);
 
@@ -24,7 +24,11 @@ export default function CountriesMap({ updateCount, total, reload }) {
 
   const resetMap = () => {
     updateCount && updateCount(0);
-    mapRef.current?.querySelectorAll("svg > g > path").forEach((country) => {
+    (
+      mapRef.current?.querySelectorAll(
+        "svg > g > path"
+      ) as NodeListOf<SVGPathElement>
+    ).forEach((country: SVGPathElement) => {
       country.style.fill = defaultColor;
     });
   };
@@ -487,7 +491,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             strokeDasharray: "none",
             strokeDashoffset: 0,
             strokeOpacity: 1,
-            InkscapeStroke: "none",
             stopColor: "#000",
             stopOpacity: 1,
           }}
@@ -1446,7 +1449,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             strokeDasharray: "none",
             strokeDashoffset: 0,
             strokeOpacity: 1,
-            InkscapeStroke: "none",
             stopColor: "#000",
           }}
         />
@@ -1614,7 +1616,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan67"
@@ -1629,7 +1630,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             KENYA
           </tspan>
@@ -1664,7 +1664,7 @@ export default function CountriesMap({ updateCount, total, reload }) {
           letterSpacing={0}
           style={{
             lineHeight: "95%",
-            InkscapeFontSpecification: "Arial",
+
             textAlign: "start",
           }}
           textAnchor="start"
@@ -1684,7 +1684,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
               fontStyle="normal"
               fontVariant="normal"
               fontWeight={400}
-              style={{ InkscapeFontSpecification: "Arial" }}
             >
               SOUTH
             </tspan>
@@ -1717,7 +1716,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan75"
@@ -1732,7 +1730,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             MALI
           </tspan>
@@ -1761,7 +1758,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan78"
@@ -1776,7 +1772,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             SOMALIA
           </tspan>
@@ -1805,7 +1800,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan88"
@@ -1820,7 +1814,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             MOZAMBIQUE
           </tspan>
@@ -1849,7 +1842,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan95"
@@ -1864,7 +1856,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             MAURITANIA
           </tspan>
@@ -1893,7 +1884,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan98"
@@ -1908,7 +1898,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             SUDAN
           </tspan>
@@ -1937,7 +1926,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
           transform="rotate(-30)"
         >
           <tspan
@@ -1953,7 +1941,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             MOROCCO
           </tspan>
@@ -1982,7 +1969,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan135"
@@ -1997,7 +1983,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             EGYPT
           </tspan>
@@ -2026,7 +2011,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan134"
@@ -2041,7 +2025,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             SOUTH AFRICA
           </tspan>
@@ -2070,7 +2053,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan150"
@@ -2085,7 +2067,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             LESOTHO
           </tspan>
@@ -2114,7 +2095,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan200"
@@ -2129,7 +2109,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             ESWATINI
           </tspan>
@@ -2158,7 +2137,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan96"
@@ -2173,7 +2151,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             ANGOLA
           </tspan>
@@ -2202,7 +2179,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan109"
@@ -2217,7 +2193,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             ZAMBIA
           </tspan>
@@ -2246,7 +2221,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan184"
@@ -2261,7 +2235,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             ZIMBABWE
           </tspan>
@@ -2290,7 +2263,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan76"
@@ -2305,7 +2277,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             DR CONGO
           </tspan>
@@ -2334,7 +2305,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
           transform="rotate(-60)"
         >
           <tspan
@@ -2350,7 +2320,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             CONGO
           </tspan>
@@ -2379,7 +2348,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan168"
@@ -2394,7 +2362,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             GABON
           </tspan>
@@ -2423,7 +2390,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
           transform="rotate(-30)"
         >
           <tspan
@@ -2439,7 +2405,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             UGANDA
           </tspan>
@@ -2468,7 +2433,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan112"
@@ -2483,7 +2447,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             ETHIOPIA
           </tspan>
@@ -2512,7 +2475,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan179"
@@ -2527,7 +2489,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             LIBERIA
           </tspan>
@@ -2556,7 +2517,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan149"
@@ -2571,7 +2531,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             EQ. GUINEA
           </tspan>
@@ -2600,7 +2559,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan163"
@@ -2615,7 +2573,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             RWANDA
           </tspan>
@@ -2650,7 +2607,7 @@ export default function CountriesMap({ updateCount, total, reload }) {
           letterSpacing={0}
           style={{
             lineHeight: "95%",
-            InkscapeFontSpecification: "Arial",
+
             textAlign: "center",
           }}
           textAnchor="middle"
@@ -2670,7 +2627,7 @@ export default function CountriesMap({ updateCount, total, reload }) {
               fontStyle="normal"
               fontVariant="normal"
               fontWeight={400}
-              style={{ lineHeight: "95%", InkscapeFontSpecification: "Arial" }}
+              style={{ lineHeight: "95%" }}
             >
               CENTRAL AFRICAN
             </tspan>
@@ -2703,7 +2660,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan117"
@@ -2718,7 +2674,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             CHAD
           </tspan>
@@ -2747,7 +2702,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan105"
@@ -2762,7 +2716,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             NIGER
           </tspan>
@@ -2791,7 +2744,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan130"
@@ -2806,7 +2758,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             NIGERIA
           </tspan>
@@ -2835,7 +2786,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan133"
@@ -2850,7 +2800,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             NAMIBIA
           </tspan>
@@ -2885,7 +2834,7 @@ export default function CountriesMap({ updateCount, total, reload }) {
           letterSpacing={0}
           style={{
             lineHeight: "95%",
-            InkscapeFontSpecification: "Arial",
+
             textAlign: "center",
           }}
           textAnchor="middle"
@@ -2905,7 +2854,7 @@ export default function CountriesMap({ updateCount, total, reload }) {
               fontStyle="normal"
               fontVariant="normal"
               fontWeight={400}
-              style={{ lineHeight: "95%", InkscapeFontSpecification: "Arial" }}
+              style={{ lineHeight: "95%" }}
             >
               BURKINA
             </tspan>
@@ -2938,7 +2887,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan136"
@@ -2953,7 +2901,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             TANZANIA
           </tspan>
@@ -2982,7 +2929,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
           transform="rotate(-60.840265)"
         >
           <tspan
@@ -2998,7 +2944,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             BENIN
           </tspan>
@@ -3033,7 +2978,7 @@ export default function CountriesMap({ updateCount, total, reload }) {
           letterSpacing={0}
           style={{
             lineHeight: "95%",
-            InkscapeFontSpecification: "Arial",
+
             textAlign: "start",
           }}
           textAnchor="start"
@@ -3053,7 +2998,7 @@ export default function CountriesMap({ updateCount, total, reload }) {
               fontStyle="normal"
               fontVariant="normal"
               fontWeight={400}
-              style={{ lineHeight: "95%", InkscapeFontSpecification: "Arial" }}
+              style={{ lineHeight: "95%" }}
             >
               WESTERN
             </tspan>
@@ -3086,7 +3031,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan128"
@@ -3101,7 +3045,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             GUINEA
           </tspan>
@@ -3130,7 +3073,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan206"
@@ -3145,7 +3087,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             THE GAMBIA
           </tspan>
@@ -3174,7 +3115,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
           transform="rotate(30)"
         >
           <tspan
@@ -3190,7 +3130,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             SENEGAL
           </tspan>
@@ -3225,7 +3164,7 @@ export default function CountriesMap({ updateCount, total, reload }) {
           letterSpacing={0}
           style={{
             lineHeight: "95%",
-            InkscapeFontSpecification: "Arial",
+
             textAlign: "end",
           }}
           textAnchor="end"
@@ -3245,7 +3184,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
               fontStyle="normal"
               fontVariant="normal"
               fontWeight={400}
-              style={{ InkscapeFontSpecification: "Arial" }}
             >
               SIERRA
             </tspan>
@@ -3279,7 +3217,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontVariant="normal"
           fontWeight={400}
           letterSpacing="-.11"
-          style={{ InkscapeFontSpecification: "Arial" }}
           transform="rotate(-60)"
         >
           <tspan
@@ -3296,7 +3233,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontVariant="normal"
             fontWeight={400}
             letterSpacing="-.11"
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             TOGO
           </tspan>
@@ -3325,7 +3261,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan170"
@@ -3340,7 +3275,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             MALAWI
           </tspan>
@@ -3369,7 +3303,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
           transform="rotate(-28.791289)"
         >
           <tspan
@@ -3385,7 +3318,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             AFGHANISTAN
           </tspan>
@@ -3414,7 +3346,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan186"
@@ -3429,7 +3360,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             ISRAEL
           </tspan>
@@ -3458,7 +3388,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan185"
@@ -3473,7 +3402,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             SRI LANKA
           </tspan>
@@ -3508,7 +3436,7 @@ export default function CountriesMap({ updateCount, total, reload }) {
           letterSpacing={0}
           style={{
             lineHeight: "90%",
-            InkscapeFontSpecification: "Arial",
+
             textAlign: "end",
           }}
           textAnchor="end"
@@ -3528,7 +3456,7 @@ export default function CountriesMap({ updateCount, total, reload }) {
               fontStyle="normal"
               fontVariant="normal"
               fontWeight={400}
-              style={{ InkscapeFontSpecification: "Arial", textAlign: "end" }}
+              style={{ textAlign: "end" }}
               textAnchor="end"
             >
               PALESTINIAN
@@ -3562,7 +3490,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan110"
@@ -3577,7 +3504,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             IRAN
           </tspan>
@@ -3606,7 +3532,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan188"
@@ -3621,7 +3546,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             NORTH KOREA
           </tspan>
@@ -3650,7 +3574,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan131"
@@ -3665,7 +3588,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             TUNISIA
           </tspan>
@@ -3694,7 +3616,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
           transform="rotate(24.008549)"
         >
           <tspan
@@ -3710,7 +3631,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             NEPAL
           </tspan>
@@ -3739,7 +3659,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan190"
@@ -3754,7 +3673,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             TURKMENISTAN
           </tspan>
@@ -3783,7 +3701,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan68"
@@ -3798,7 +3715,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             TAIWAN
           </tspan>
@@ -3827,7 +3743,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan143"
@@ -3842,7 +3757,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             INDIA
           </tspan>
@@ -3871,7 +3785,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan121"
@@ -3886,7 +3799,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             KYRGYZSTAN
           </tspan>
@@ -3915,7 +3827,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan102"
@@ -3930,7 +3841,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             IRAQ
           </tspan>
@@ -3959,7 +3869,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan99"
@@ -3974,7 +3883,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             THAILAND
           </tspan>
@@ -4003,7 +3911,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
           transform="rotate(30)"
         >
           <tspan
@@ -4019,7 +3926,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             UZBEKISTAN
           </tspan>
@@ -4049,7 +3955,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontVariant="normal"
           fontWeight={400}
           letterSpacing="1.02"
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan199"
@@ -4065,7 +3970,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontVariant="normal"
             fontWeight={400}
             letterSpacing="1.02"
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             KAZAKHSTAN
           </tspan>
@@ -4094,7 +3998,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan202"
@@ -4110,7 +4013,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontVariant="normal"
             fontWeight={400}
             letterSpacing="1.02"
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             MONGOLIA
           </tspan>
@@ -4139,7 +4041,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan69"
@@ -4154,7 +4055,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             JORDAN
           </tspan>
@@ -4183,7 +4083,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan120"
@@ -4198,7 +4097,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             SYRIA
           </tspan>
@@ -4227,7 +4125,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
           transform="rotate(-45)"
         >
           <tspan
@@ -4243,7 +4140,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             OMAN
           </tspan>
@@ -4272,7 +4168,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan171"
@@ -4287,7 +4182,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             TAJIKISTAN
           </tspan>
@@ -4316,7 +4210,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan55"
@@ -4331,7 +4224,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             PAKISTAN
           </tspan>
@@ -4360,7 +4252,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan89"
@@ -4375,7 +4266,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             JAPAN
           </tspan>
@@ -4404,7 +4294,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan173"
@@ -4419,7 +4308,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             SOUTH KOREA
           </tspan>
@@ -4448,7 +4336,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan154"
@@ -4463,7 +4350,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             AZERBAIJAN
           </tspan>
@@ -4493,7 +4379,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontVariant="normal"
           fontWeight={400}
           letterSpacing=".51"
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan101"
@@ -4509,7 +4394,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontVariant="normal"
             fontWeight={400}
             letterSpacing=".51"
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             PAPUA NEW GUINEA
           </tspan>
@@ -4538,7 +4422,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan205"
@@ -4553,7 +4436,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             TIMOR-LESTE
           </tspan>
@@ -4583,7 +4465,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontVariant="normal"
           fontWeight={400}
           letterSpacing="-.11"
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan172"
@@ -4599,7 +4480,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontVariant="normal"
             fontWeight={400}
             letterSpacing="-.11"
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             CAMBODIA
           </tspan>
@@ -4628,7 +4508,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan187"
@@ -4643,7 +4522,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             LAOS
           </tspan>
@@ -4672,7 +4550,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan111"
@@ -4687,7 +4564,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             MYANMAR
           </tspan>
@@ -4716,7 +4592,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan80"
@@ -4731,7 +4606,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             BANGLADESH
           </tspan>
@@ -4760,7 +4634,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
           transform="rotate(9.3143624)"
         >
           <tspan
@@ -4776,7 +4649,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             GEORGIA
           </tspan>
@@ -4805,7 +4677,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan156"
@@ -4820,7 +4691,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             PHILIPPINES
           </tspan>
@@ -4849,7 +4719,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan90"
@@ -4864,7 +4733,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             NEW ZEALAND
           </tspan>
@@ -4893,7 +4761,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan214"
@@ -4908,7 +4775,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             BAHRAIN
           </tspan>
@@ -4943,7 +4809,7 @@ export default function CountriesMap({ updateCount, total, reload }) {
           letterSpacing="-.13"
           style={{
             lineHeight: "95%",
-            InkscapeFontSpecification: "Arial",
+
             textAlign: "start",
           }}
           textAnchor="start"
@@ -4964,7 +4830,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
               fontVariant="normal"
               fontWeight={400}
               letterSpacing="-.13"
-              style={{ InkscapeFontSpecification: "Arial" }}
             >
               UNITED ARAB
             </tspan>
@@ -4997,7 +4862,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan207"
@@ -5012,7 +4876,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             QATAR
           </tspan>
@@ -5042,7 +4905,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontVariant="normal"
           fontWeight={400}
           letterSpacing="2.04"
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan144"
@@ -5058,7 +4920,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontVariant="normal"
             fontWeight={400}
             letterSpacing="2.04"
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             CHINA
           </tspan>
@@ -5088,7 +4949,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontVariant="normal"
           fontWeight={400}
           letterSpacing="1.53"
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan140"
@@ -5104,7 +4964,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontVariant="normal"
             fontWeight={400}
             letterSpacing="2.04"
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             RUSSIA
           </tspan>
@@ -5134,7 +4993,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan215"
@@ -5149,7 +5007,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             HONG KONG
           </tspan>
@@ -5178,7 +5035,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan57"
@@ -5193,7 +5049,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             YEMEN
           </tspan>
@@ -5222,7 +5077,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan220"
@@ -5237,7 +5091,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             BRUNEI
           </tspan>
@@ -5267,7 +5120,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontVariant="normal"
           fontWeight={400}
           letterSpacing="1.53"
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan155"
@@ -5283,7 +5135,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontVariant="normal"
             fontWeight={400}
             letterSpacing="1.53"
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             MALAYSIA
           </tspan>
@@ -5312,7 +5163,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan196"
@@ -5327,7 +5177,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             LEBANON
           </tspan>
@@ -5356,7 +5205,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan204"
@@ -5371,7 +5219,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             KUWAIT
           </tspan>
@@ -5401,7 +5248,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontVariant="normal"
           fontWeight={400}
           letterSpacing="3.06"
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan56"
@@ -5417,7 +5263,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontVariant="normal"
             fontWeight={400}
             letterSpacing="3.06"
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             INDONESIA
           </tspan>
@@ -5446,7 +5291,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan139"
@@ -5461,7 +5305,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             VIETNAM
           </tspan>
@@ -5496,7 +5339,7 @@ export default function CountriesMap({ updateCount, total, reload }) {
           letterSpacing="-.04"
           style={{
             lineHeight: "80%",
-            InkscapeFontSpecification: "Arial",
+
             textAlign: "center",
           }}
           textAnchor="middle"
@@ -5515,7 +5358,7 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial", textAlign: "center" }}
+            style={{ textAlign: "center" }}
             textAnchor="middle"
           >
             NORTH
@@ -5532,7 +5375,7 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial", textAlign: "center" }}
+            style={{ textAlign: "center" }}
             textAnchor="middle"
           >
             MACEDONIA
@@ -5562,7 +5405,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan148"
@@ -5577,7 +5419,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             BELGIUM
           </tspan>
@@ -5607,7 +5448,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontVariant="normal"
           fontWeight={400}
           letterSpacing={0}
-          style={{ InkscapeFontSpecification: "Arial" }}
           transform="rotate(-15)"
         >
           <tspan
@@ -5624,7 +5464,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontVariant="normal"
             fontWeight={400}
             letterSpacing={0}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             SLOVENIA
           </tspan>
@@ -5653,7 +5492,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan152"
@@ -5668,7 +5506,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             BURUNDI
           </tspan>
@@ -5697,7 +5534,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan153"
@@ -5712,7 +5548,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             DJIBOUTI
           </tspan>
@@ -5741,7 +5576,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan198"
@@ -5756,7 +5590,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             ERITREA
           </tspan>
@@ -5787,7 +5620,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontVariant="normal"
           fontWeight={400}
           letterSpacing="-.11"
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan219"
@@ -5803,7 +5635,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontVariant="normal"
             fontWeight={400}
             letterSpacing="-.11"
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             SINGAPORE
           </tspan>
@@ -5832,7 +5663,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan127"
@@ -5847,7 +5677,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             PARAGUAY
           </tspan>
@@ -5876,7 +5705,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan203"
@@ -5891,7 +5719,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             BHUTAN
           </tspan>
@@ -5934,7 +5761,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan223"
@@ -5950,7 +5776,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontVariant="normal"
             fontWeight={400}
             letterSpacing="1.67"
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             UNITED STATES
           </tspan>
@@ -5979,7 +5804,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
           fontStyle="normal"
           fontVariant="normal"
           fontWeight={400}
-          style={{ InkscapeFontSpecification: "Arial" }}
         >
           <tspan
             id="tspan151"
@@ -5994,7 +5818,6 @@ export default function CountriesMap({ updateCount, total, reload }) {
             fontStyle="normal"
             fontVariant="normal"
             fontWeight={400}
-            style={{ InkscapeFontSpecification: "Arial" }}
           >
             BULGARIA
           </tspan>

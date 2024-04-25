@@ -2,14 +2,14 @@ import styles from "../../styles/statesmap.module.scss";
 import statesData from "../../assets/mapdata/MyStates.json";
 import { useEffect, useRef, useState } from "react";
 import { interpolateColors } from "../../utils/color";
-import { loadMap } from "../../utils/map";
+import { loadMap, MapProps } from "../../utils/map";
 
-export default function StatesMap({ updateCount, total, reload }) {
+export default function StatesMap({ updateCount, total, reload }: MapProps) {
   const startColor = "#319fff";
   const endColor = "#89c7ff";
   const defaultColor = "#012241";
 
-  const mapRef = useRef(null);
+  const mapRef = useRef<SVGSVGElement>(null);
   const [data, setData] = useState(statesData);
   const colors = interpolateColors(data.steps, startColor, endColor);
 
@@ -24,7 +24,11 @@ export default function StatesMap({ updateCount, total, reload }) {
 
   const resetMap = () => {
     updateCount && updateCount(0);
-    mapRef.current?.querySelectorAll("svg > g > path").forEach((state) => {
+    (
+      mapRef.current?.querySelectorAll(
+        "svg > g > path"
+      ) as NodeListOf<SVGPathElement>
+    ).forEach((state: SVGPathElement) => {
       state.style.fill = defaultColor;
     });
   };

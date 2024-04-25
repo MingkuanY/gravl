@@ -12,8 +12,8 @@ const center = { lat: 33.7756, lng: -84.3963 }; // Georgia Tech lng: -84.3963
 export default function Plan() {
   const [search, setSearch] = useState("");
 
-  const onChangeHandler = (event) => {
-    setSearch(event.target.value);
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
   };
 
   const { isLoaded } = useJsApiLoader({

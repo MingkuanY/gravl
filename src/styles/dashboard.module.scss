@@ -237,7 +237,10 @@
             margin-bottom: 0.8rem;
             margin-left: 1rem;
             width: 2rem;
-            cursor: pointer;
+
+            svg {
+              cursor: pointer;
+            }
           }
         }
 

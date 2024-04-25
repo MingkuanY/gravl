@@ -3,12 +3,12 @@ import Header from "../components/header/Header";
 import CountiesMap from "../components/maps/CountiesMap";
 import Icon from "../components/icons/Icon";
 
-import AuthContext from "../services/AuthContext";
+import AuthContext, { AuthType } from "../services/AuthContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Landing() {
-  const [isLoggedIn, setIsLoggedIn] = useContext(AuthContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext<AuthType>(AuthContext);
 
   const navigate = useNavigate();
   const loginClicked = () => {

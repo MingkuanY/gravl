@@ -13,7 +13,7 @@ export const monthAbbreviations = [
   "Dec",
 ];
 
-export const formatDate = (dateString) => {
+export const formatDate = (dateString: string) => {
   const dateObj = new Date(dateString);
 
   const month = monthAbbreviations[dateObj.getMonth()];
@@ -23,7 +23,7 @@ export const formatDate = (dateString) => {
   return formattedDate;
 };
 
-export const formatDates = (date1, date2) => {
+export const formatDates = (date1: string, date2: string) => {
   const sameMonth = new Date(date1).getMonth() === new Date(date2).getMonth();
 
   const startDate = formatDate(date1);

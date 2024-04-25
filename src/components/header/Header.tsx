@@ -3,17 +3,17 @@ import styles from "../../styles/header.module.scss";
 import Icon from "../icons/Icon";
 import pfpMD from "../../assets/images/pfpMD.jpg";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../../services/AuthContext";
+import AuthContext, { AuthType } from "../../services/AuthContext";
 
 export default function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useContext(AuthContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext<AuthType>(AuthContext);
   const [notif, setNotif] = useState(2);
 
   const [userDropdown, setUserDropdown] = useState(false);
-  const dropdownRef = useRef();
+  const dropdownRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const handler = (e) => {
-      if (!dropdownRef.current?.contains(e.target)) {
+    const handler = (e: MouseEvent) => {
+      if (!dropdownRef.current?.contains(e.target as Node)) {
         setUserDropdown(false);
       }
     };

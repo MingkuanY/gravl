@@ -1,7 +1,19 @@
 import styles from "../../styles/tripcard.module.scss";
 import Icon from "../icons/Icon";
 
-export default function TripCard({ title, locations, thumbnail, completed }) {
+export type TripCardProps = {
+  title: string;
+  locations: string[];
+  thumbnail: string;
+  completed: boolean;
+};
+
+export default function TripCard({
+  title,
+  locations,
+  thumbnail,
+  completed,
+}: TripCardProps) {
   return (
     <button className={`${styles.container} ${!completed && styles.plan}`}>
       {completed ? (

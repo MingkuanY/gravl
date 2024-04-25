@@ -2,14 +2,18 @@ import styles from "../../styles/nationalparksmap.module.scss";
 import nationalparksData from "../../assets/mapdata/MyNationalParks.json";
 import { useEffect, useRef, useState } from "react";
 import { interpolateColors } from "../../utils/color";
-import { loadMapWithChildren } from "../../utils/map";
+import { loadMapWithChildren, MapProps } from "../../utils/map";
 
-export default function NationalParksMap({ updateCount, total, reload }) {
+export default function NationalParksMap({
+  updateCount,
+  total,
+  reload,
+}: MapProps) {
   const startColor = "#319fff";
   const endColor = "#89c7ff";
   const defaultColor = "#012241";
 
-  const mapRef = useRef(null);
+  const mapRef = useRef<SVGSVGElement>(null);
   const [data, setData] = useState(nationalparksData);
   const colors = interpolateColors(data.steps, startColor, endColor);
 
@@ -30,7 +34,11 @@ export default function NationalParksMap({ updateCount, total, reload }) {
 
   const resetMap = () => {
     updateCount && updateCount(0);
-    mapRef.current?.querySelectorAll(`.${styles.park} path`).forEach((park) => {
+    (
+      mapRef.current?.querySelectorAll(
+        `.${styles.park} path`
+      ) as NodeListOf<SVGPathElement>
+    ).forEach((park: SVGPathElement) => {
       park.style.fill = defaultColor;
     });
   };
