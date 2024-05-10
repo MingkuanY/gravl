@@ -2530,6 +2530,11 @@
       "id": "Montgomery__TX",
       "visitDate": "2024-04-08",
       "countyName": "Montgomery, TX"
+    },
+    {
+      "id": "Pickens__SC",
+      "visitDate": "2024-05-05",
+      "countyName": "Pickens, SC"
     }
   ]
 }
