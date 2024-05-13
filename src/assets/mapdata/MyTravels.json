@@ -2530,6 +2530,216 @@
       "id": "Montgomery__TX",
       "visitDate": "2024-04-08",
       "countyName": "Montgomery, TX"
+    },
+    {
+      "id": "Pickens__SC",
+      "visitDate": "2024-05-05",
+      "countyName": "Pickens, SC"
+    },
+    {
+      "id": "Cherokee__SC",
+      "visitDate": "2024-05-08",
+      "countyName": "Cherokee, SC"
+    },
+    {
+      "id": "Cleveland__NC",
+      "visitDate": "2024-05-08",
+      "countyName": "Cleveland, NC"
+    },
+    {
+      "id": "Gaston__NC",
+      "visitDate": "2024-05-08",
+      "countyName": "Gaston, NC"
+    },
+    {
+      "id": "Rockingham__NC",
+      "visitDate": "2024-05-08",
+      "countyName": "Rockingham, NC"
+    },
+    {
+      "id": "Caswell__NC",
+      "visitDate": "2024-05-08",
+      "countyName": "Caswell, NC"
+    },
+    {
+      "id": "Danville__VA",
+      "visitDate": "2024-05-08",
+      "countyName": "Danville, VA"
+    },
+    {
+      "id": "Pittsylvania__VA",
+      "visitDate": "2024-05-08",
+      "countyName": "Pittsylvania, VA"
+    },
+    {
+      "id": "Campbell__VA",
+      "visitDate": "2024-05-08",
+      "countyName": "Campbell, VA"
+    },
+    {
+      "id": "Lynchburg__VA",
+      "visitDate": "2024-05-08",
+      "countyName": "Lynchburg, VA"
+    },
+    {
+      "id": "Amherst__VA",
+      "visitDate": "2024-05-08",
+      "countyName": "Amherst, VA"
+    },
+    {
+      "id": "Nelson__VA",
+      "visitDate": "2024-05-08",
+      "countyName": "Nelson, VA"
+    },
+    {
+      "id": "Albemarle__VA",
+      "visitDate": "2024-05-08",
+      "countyName": "Albemarle, VA"
+    },
+    {
+      "id": "Charlottesville__VA",
+      "visitDate": "2024-05-08",
+      "countyName": "Charlottesville, VA"
+    },
+    {
+      "id": "Greene__VA",
+      "visitDate": "2024-05-08",
+      "countyName": "Greene, VA"
+    },
+    {
+      "id": "Madison__VA",
+      "visitDate": "2024-05-08",
+      "countyName": "Madison, VA"
+    },
+    {
+      "id": "Culpeper__VA",
+      "visitDate": "2024-05-08",
+      "countyName": "Culpeper, VA"
+    },
+    {
+      "id": "Fauquier__VA",
+      "visitDate": "2024-05-08",
+      "countyName": "Fauquier, VA"
+    },
+    {
+      "id": "Prince_William__VA",
+      "visitDate": "2024-05-08",
+      "countyName": "Prince William, VA"
+    },
+    {
+      "id": "Harford__MD",
+      "visitDate": "2024-05-09",
+      "countyName": "Harford, MD"
+    },
+    {
+      "id": "Cecil__MD",
+      "visitDate": "2024-05-09",
+      "countyName": "Cecil, MD"
+    },
+    {
+      "id": "New_Castle__DE",
+      "visitDate": "2024-05-09",
+      "countyName": "New Castle, DE"
+    },
+    {
+      "id": "Salem__NJ",
+      "visitDate": "2024-05-09",
+      "countyName": "Salem, NJ"
+    },
+    {
+      "id": "Gloucester__NJ",
+      "visitDate": "2024-05-09",
+      "countyName": "Gloucester, NJ"
+    },
+    {
+      "id": "Monmouth__NJ",
+      "visitDate": "2024-05-09",
+      "countyName": "Monmouth, NJ"
+    },
+    {
+      "id": "Middlesex__NJ",
+      "visitDate": "2024-05-09",
+      "countyName": "Middlesex, NJ"
+    },
+    {
+      "id": "Stafford__VA",
+      "visitDate": "2024-05-12",
+      "countyName": "Stafford, VA"
+    },
+    {
+      "id": "Fredericksburg__VA",
+      "visitDate": "2024-05-12",
+      "countyName": "Fredericksburg, VA"
+    },
+    {
+      "id": "Spotsylvania__VA",
+      "visitDate": "2024-05-12",
+      "countyName": "Spotsylvania, VA"
+    },
+    {
+      "id": "Caroline__VA",
+      "visitDate": "2024-05-12",
+      "countyName": "Caroline, VA"
+    },
+    {
+      "id": "Hanover__VA",
+      "visitDate": "2024-05-12",
+      "countyName": "Hanover, VA"
+    },
+    {
+      "id": "Henrico__VA",
+      "visitDate": "2024-05-12",
+      "countyName": "Henrico, VA"
+    },
+    {
+      "id": "Richmond__VA",
+      "visitDate": "2024-05-12",
+      "countyName": "Richmond, VA"
+    },
+    {
+      "id": "Chesterfield__VA",
+      "visitDate": "2024-05-12",
+      "countyName": "Chesterfield, VA"
+    },
+    {
+      "id": "Colonial_Heights__VA",
+      "visitDate": "2024-05-12",
+      "countyName": "Colonial Heights, VA"
+    },
+    {
+      "id": "Petersburg__VA",
+      "visitDate": "2024-05-12",
+      "countyName": "Petersburg, VA"
+    },
+    {
+      "id": "Dinwiddie__VA",
+      "visitDate": "2024-05-12",
+      "countyName": "Dinwiddie, VA"
+    },
+    {
+      "id": "Brunswick__VA",
+      "visitDate": "2024-05-12",
+      "countyName": "Brunswick, VA"
+    },
+    {
+      "id": "Mecklenburg__VA",
+      "visitDate": "2024-05-12",
+      "countyName": "Mecklenburg, VA"
+    },
+    {
+      "id": "Warren__NC",
+      "visitDate": "2024-05-12",
+      "countyName": "Warren, NC"
+    },
+    {
+      "id": "Vance__NC",
+      "visitDate": "2024-05-12",
+      "countyName": "Vance, NC"
+    },
+    {
+      "id": "Granville__NC",
+      "visitDate": "2024-05-12",
+      "countyName": "Granville, NC"
     }
   ]
 }
