@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "../../styles/header.module.scss";
 import Icon from "../icons/Icon";
-import pfpMD from "../../assets/images/pfpMD.jpg";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -40,7 +39,7 @@ export default function Header() {
           <>
             <div className={styles.pfpContainer} ref={dropdownRef}>
               <Image
-                src={pfpMD}
+                src="../../assets/images/pfpMD.jpg"
                 alt="PFP"
                 className={styles.pfp}
                 onClick={() => setUserDropdown(!userDropdown)}
