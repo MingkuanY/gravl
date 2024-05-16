@@ -14,10 +14,11 @@ export default function CountiesMap({ updateCount, total, reload }: MapProps) {
 
   const mapRef = useRef<SVGSVGElement>(null);
   const [data, setData] = useState(countiesData);
+  // edit to add color gradient for time spent in each county
   const colors = interpolateColors(
     data.steps,
     startColor,
-    endColor,
+    startColor,
     livedInColor
   );
 

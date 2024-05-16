@@ -1,0 +1,47 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+// Each user has a list of their maps (exactly four maps for now)
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String   @unique
+  homeBase  String?
+  bio       String?
+  createdAt DateTime @default(now()) @map(name: "created_at")
+
+  maps Map[]
+
+  @@map(name: "users")
+}
+
+// Each map will be linked to a user and their data for that map
+model Map {
+  id      Int    @id @default(autoincrement())
+  name    String
+  baseMap String // references hardcoded maps
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+
+  travelData TravelData[]
+}
+
+// Each traveldata will be linked to the map and indirectly to the user
+model TravelData {
+  id    Int      @id @default(autoincrement())
+  date  DateTime
+  label String
+
+  map   Map @relation(fields: [mapId], references: [id])
+  mapId Int
+}
