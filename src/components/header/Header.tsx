@@ -5,8 +5,11 @@ import styles from "../../styles/header.module.scss";
 import Icon from "../icons/Icon";
 import Link from "next/link";
 import Image from "next/image";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Header() {
+  const { data: session } = useSession();
+
   const [notif, setNotif] = useState(0);
 
   const [userDropdown, setUserDropdown] = useState(false);
@@ -24,8 +27,6 @@ export default function Header() {
     };
   });
 
-  const isLoggedIn = false;
-
   return (
     <div className={styles.headerContainer}>
       <Link href={"/dashboard"} className={styles.logoContainer}>
@@ -35,11 +36,11 @@ export default function Header() {
         <p className={styles.gravl}>Gravl</p>
       </Link>
       <div className={styles.headerRightContainer}>
-        {isLoggedIn ? (
+        {session ? (
           <>
             <div className={styles.pfpContainer} ref={dropdownRef}>
-              <Image
-                src="../../assets/images/pfpMD.jpg"
+              <img
+                src={session.user?.image as string}
                 alt="PFP"
                 className={styles.pfp}
                 onClick={() => setUserDropdown(!userDropdown)}
@@ -57,20 +58,21 @@ export default function Header() {
               >
                 <ul>
                   <li>Settings</li>
-                  <Link href={"/"}>
-                    <li>Log Out</li>
-                  </Link>
+                  <li onClick={() => signOut()}>Log Out</li>
                 </ul>
               </div>
             </div>
           </>
         ) : (
-          <Link href={"/dashboard"} className={styles.loginContainer}>
+          <button
+            onClick={() => signIn("google")}
+            className={styles.loginContainer}
+          >
             <div className={styles.login}>Login</div>
             <div className={styles.account}>
               <Icon type="account" fill="#319fff" />
             </div>
-          </Link>
+          </button>
         )}
       </div>
     </div>

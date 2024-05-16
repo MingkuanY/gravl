@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Josefin_Sans } from "next/font/google";
 import "../styles/globals.scss";
 import Header from "../components/header/Header.tsx";
+import SessionWrapper from "@/components/session/SessionWrapper.tsx";
 
 const josefinSans = Josefin_Sans({ subsets: ["latin"] });
 
@@ -16,11 +17,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={josefinSans.className}>
-        <Header />
-        {children}
-      </body>
-    </html>
+    <SessionWrapper>
+      <html lang="en">
+        <body className={josefinSans.className}>
+          <Header />
+          {children}
+        </body>
+      </html>
+    </SessionWrapper>
   );
 }

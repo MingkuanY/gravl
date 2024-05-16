@@ -12,11 +12,13 @@ datasource db {
 
 // Each user has a list of their maps (exactly four maps for now)
 model User {
-  id        Int      @id @default(autoincrement())
-  username  String   @unique
-  email     String   @unique
+  id        String   @id @default(cuid())
+  email     String?  @unique
+  name      String?
+  username  String?  @unique
   homeBase  String?
   bio       String?
+  pfp       String?
   createdAt DateTime @default(now()) @map(name: "created_at")
 
   maps Map[]
@@ -30,8 +32,8 @@ model Map {
   name    String
   baseMap String // references hardcoded maps
 
-  user   User @relation(fields: [userId], references: [id])
-  userId Int
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
 
   travelData TravelData[]
 }
