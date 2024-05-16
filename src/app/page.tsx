@@ -1,7 +1,7 @@
 // Welcome to Gravl
 
 import styles from "../styles/landing.module.scss";
-import CountiesMap from "../components/maps/CountiesMap";
+import CountiesMap from "../components/maps/CountiesMap.tsx";
 import Icon from "../components/icons/Icon";
 import Link from "next/link";
 

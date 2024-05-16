@@ -3,16 +3,16 @@
 import styles from "../../styles/countiesmap.module.scss";
 import countiesData from "../../assets/mapdata/MyTravels.json";
 import { useEffect, useRef, useState } from "react";
-import { interpolateColors } from "../../utils/color";
-import { loadMap } from "../../utils/map.ts";
+import { interpolateColors } from "../../utils/color.ts";
+import { MapProps, loadMap } from "../../utils/map.ts";
 
-export default function CountiesMap({ updateCount, total, reload }) {
+export default function CountiesMap({ updateCount, total, reload }: MapProps) {
   const livedInColor = "#ffff33";
   const startColor = "#319fff";
   const endColor = "#89c7ff";
   const defaultColor = "#012241"; // gray: #d1dbdd
 
-  const mapRef = useRef(null);
+  const mapRef = useRef<SVGSVGElement>(null);
   const [data, setData] = useState(countiesData);
   const colors = interpolateColors(
     data.steps,
@@ -32,7 +32,11 @@ export default function CountiesMap({ updateCount, total, reload }) {
 
   const resetMap = () => {
     updateCount && updateCount(0);
-    mapRef.current?.querySelectorAll("svg > path").forEach((county) => {
+    (
+      mapRef.current?.querySelectorAll(
+        "svg > path"
+      ) as NodeListOf<SVGPathElement>
+    ).forEach((county: SVGPathElement) => {
       county.style.fill = defaultColor;
     });
   };
@@ -43,7 +47,6 @@ export default function CountiesMap({ updateCount, total, reload }) {
       viewBox="0 0 1460 1000"
       xmlns="http://www.w3.org/2000/svg"
       id={styles.map}
-      version={1}
     >
       {/* COUNTIES */}
       <path
@@ -109,7 +112,6 @@ export default function CountiesMap({ updateCount, total, reload }) {
           strokeDasharray: "none",
           strokeDashoffset: 0,
           strokeOpacity: 1,
-          InkscapeStroke: "none",
           stopColor: "#000",
           stopOpacity: 1,
         }}
@@ -24517,7 +24519,6 @@ export default function CountiesMap({ updateCount, total, reload }) {
           strokeDasharray: "none",
           strokeDashoffset: 0,
           strokeOpacity: 1,
-          InkscapeStroke: "none",
           stopColor: "#000",
           stopOpacity: 1,
         }}
@@ -34219,7 +34220,6 @@ export default function CountiesMap({ updateCount, total, reload }) {
           strokeDasharray: "none",
           strokeDashoffset: 0,
           strokeOpacity: 1,
-          InkscapeStroke: "none",
           stopColor: "#000",
           stopOpacity: 1,
         }}
@@ -34240,7 +34240,6 @@ export default function CountiesMap({ updateCount, total, reload }) {
           strokeDasharray: "none",
           strokeDashoffset: 0,
           strokeOpacity: 1,
-          InkscapeStroke: "none",
           stopColor: "#000",
           stopOpacity: 1,
         }}

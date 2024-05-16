@@ -25,7 +25,7 @@ export default function Header() {
     };
   });
 
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   return (
     <div className={styles.headerContainer}>
