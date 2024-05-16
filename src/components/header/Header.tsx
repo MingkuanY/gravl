@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import styles from "../../styles/header.module.scss";
 import Icon from "../icons/Icon";
 import Link from "next/link";
-import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Header() {
@@ -29,12 +28,12 @@ export default function Header() {
 
   return (
     <div className={styles.headerContainer}>
-      <Link href={"/dashboard"} className={styles.logoContainer}>
+      <div className={styles.logoContainer}>
         <div className={styles.logo}>
           <Icon type="car" fill="#319fff" />
         </div>
         <p className={styles.gravl}>Gravl</p>
-      </Link>
+      </div>
       <div className={styles.headerRightContainer}>
         {session ? (
           <>
