@@ -43,6 +43,7 @@
         font-size: 2rem;
         font-weight: 400;
         margin-right: 1rem;
+        color: mixin.$dark;
       }
 
       .account {
@@ -54,25 +55,6 @@
     }
 
     /* if logged in */
-
-    .friendsContainer {
-      display: flex;
-      align-items: center;
-      margin-right: 3rem;
-
-      .friends {
-        width: 2rem;
-        cursor: pointer;
-      }
-
-      p {
-        margin-left: 0.6rem;
-        margin-top: 0.2rem;
-        font-size: 1.4rem;
-        color: mixin.$gravl-blue;
-        cursor: pointer;
-      }
-    }
 
     .pfpContainer {
       position: relative;
