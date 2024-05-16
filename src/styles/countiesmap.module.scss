@@ -1,0 +1,28 @@
+@use "./mixin" as mixin;
+
+#map {
+  width: 95%;
+
+  /* unvisited counties */
+  > path {
+    fill: mixin.$default-dark;
+    stroke: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+}
+
+/* interstates */
+
+#highways path {
+  stroke: mixin.$highways;
+  cursor: pointer;
+  display: none; // only hidden for landing page animation
+}
+
+/* state borders */
+
+#state_borders path {
+  stroke: #fff;
+  cursor: pointer;
+}

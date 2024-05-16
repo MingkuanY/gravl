@@ -1,0 +1,165 @@
+{
+  "steps": 12,
+  "states": [
+    {
+      "id": "CA",
+      "visitDate": "2004-07-30",
+      "stateName": "California"
+    },
+    {
+      "id": "NV",
+      "visitDate": "2005-02-04",
+      "stateName": "Nevada"
+    },
+    {
+      "id": "OR",
+      "visitDate": "2008-10-04",
+      "stateName": "Oregon"
+    },
+    {
+      "id": "FL",
+      "visitDate": "2013-06-18",
+      "stateName": "Florida"
+    },
+    {
+      "id": "NY",
+      "visitDate": "2015-04-10",
+      "stateName": "New York"
+    },
+    {
+      "id": "VA",
+      "visitDate": "2016-04-15",
+      "stateName": "Virginia"
+    },
+    {
+      "id": "DC",
+      "visitDate": "2016-04-16",
+      "stateName": "District of Columbia"
+    },
+    {
+      "id": "MD",
+      "visitDate": "2016-04-18",
+      "stateName": "Maryland"
+    },
+    {
+      "id": "HI",
+      "visitDate": "2018-02-20",
+      "stateName": "Hawaii"
+    },
+    {
+      "id": "MN",
+      "visitDate": "2018-07-14",
+      "stateName": "Minnesota"
+    },
+    {
+      "id": "AZ",
+      "visitDate": "2019-12-20",
+      "stateName": "Arizona"
+    },
+    {
+      "id": "UT",
+      "visitDate": "2019-12-20",
+      "stateName": "Utah"
+    },
+    {
+      "id": "WA",
+      "visitDate": "2020-08-06",
+      "stateName": "Washington"
+    },
+    {
+      "id": "ID",
+      "visitDate": "2021-06-10",
+      "stateName": "Idaho"
+    },
+    {
+      "id": "WY",
+      "visitDate": "2021-06-12",
+      "stateName": "Idaho"
+    },
+    {
+      "id": "MT",
+      "visitDate": "2021-06-14",
+      "stateName": "Idaho"
+    },
+    {
+      "id": "GA",
+      "visitDate": "2022-08-08",
+      "stateName": "Georgia"
+    },
+    {
+      "id": "SC",
+      "visitDate": "2022-02-23",
+      "stateName": "South Carolina"
+    },
+    {
+      "id": "NC",
+      "visitDate": "2022-02-24",
+      "stateName": "North Carolina"
+    },
+    {
+      "id": "NM",
+      "visitDate": "2022-08-01",
+      "stateName": "New Mexico"
+    },
+    {
+      "id": "TX",
+      "visitDate": "2022-08-02",
+      "stateName": "Texas"
+    },
+    {
+      "id": "OK",
+      "visitDate": "2022-08-03",
+      "stateName": "Oklahoma"
+    },
+    {
+      "id": "AR",
+      "visitDate": "2022-08-04",
+      "stateName": "Arkansas"
+    },
+    {
+      "id": "MO",
+      "visitDate": "2022-08-05",
+      "stateName": "Missouri"
+    },
+    {
+      "id": "TN",
+      "visitDate": "2022-08-07",
+      "stateName": "Tennessee"
+    },
+    {
+      "id": "MS",
+      "visitDate": "2022-08-08",
+      "stateName": "Mississippi"
+    },
+    {
+      "id": "AL",
+      "visitDate": "2022-08-09",
+      "stateName": "Alabama"
+    },
+    {
+      "id": "PA",
+      "visitDate": "2023-05-12",
+      "stateName": "Pennsylvania"
+    },
+    {
+      "id": "NJ",
+      "visitDate": "2023-05-12",
+      "stateName": "New Jersey"
+    },
+    {
+      "id": "MA",
+      "visitDate": "2023-09-15",
+      "stateName": "Massachusetts"
+    },
+    {
+      "id": "LA",
+      "visitDate": "2023-11-20",
+      "stateName": "Louisiana"
+    },
+    {
+      "id": "KS",
+      "visitDate": "2024-04-07",
+      "stateName": "Kansas"
+    }
+  ]
+}

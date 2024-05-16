@@ -1,0 +1,16 @@
+@use "./mixin" as mixin;
+
+#map {
+  width: 100%;
+  margin-top: -3rem;
+  margin-left: 4rem;
+
+  /* unvisited states */
+  > g > path {
+    fill: mixin.$default-dark;
+    stroke: #fff;
+    stroke-width: 0.15rem;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+}
