@@ -4,7 +4,7 @@ import styles from "../../styles/countiesmap.module.scss";
 import countiesData from "../../assets/mapdata/MyTravels.json";
 import { useEffect, useRef, useState } from "react";
 import { interpolateColors } from "../../utils/color";
-import { loadMap } from "../../utils/map";
+import { loadMap } from "../../utils/map.ts";
 
 export default function CountiesMap({ updateCount, total, reload }) {
   const livedInColor = "#ffff33";

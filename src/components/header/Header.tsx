@@ -1,19 +1,20 @@
-import { useContext, useEffect, useRef, useState } from "react";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import styles from "../../styles/header.module.scss";
 import Icon from "../icons/Icon";
 import pfpMD from "../../assets/images/pfpMD.jpg";
-import { useNavigate } from "react-router-dom";
-import AuthContext from "../../services/AuthContext";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useContext(AuthContext);
-  const [notif, setNotif] = useState(2);
+  const [notif, setNotif] = useState(0);
 
   const [userDropdown, setUserDropdown] = useState(false);
-  const dropdownRef = useRef();
+  const dropdownRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const handler = (e) => {
-      if (!dropdownRef.current?.contains(e.target)) {
+    const handler = (e: MouseEvent) => {
+      if (!dropdownRef.current?.contains(e.target as Node)) {
         setUserDropdown(false);
       }
     };
@@ -24,50 +25,31 @@ export default function Header() {
     };
   });
 
-  const navigate = useNavigate();
-  const loginClicked = () => {
-    if (!isLoggedIn) {
-      setIsLoggedIn(true);
-      navigate("/dashboard");
-    }
-  };
-  const logoutClicked = () => {
-    if (isLoggedIn) {
-      setIsLoggedIn(false);
-      navigate("/");
-    }
-  };
+  const isLoggedIn = true;
 
   return (
     <div className={styles.headerContainer}>
-      <div
-        className={styles.logoContainer}
-        onClick={() => isLoggedIn && navigate("/dashboard")}
-      >
+      <Link href={"/dashboard"} className={styles.logoContainer}>
         <div className={styles.logo}>
           <Icon type="car" fill="#319fff" />
         </div>
         <p className={styles.gravl}>Gravl</p>
-      </div>
+      </Link>
       <div className={styles.headerRightContainer}>
         {isLoggedIn ? (
           <>
-            <div className={styles.friendsContainer}>
-              <div className={styles.friends}>
-                <Icon type="friends" fill="#319fff" />
-              </div>
-              <p>Friends</p>
-            </div>
             <div className={styles.pfpContainer} ref={dropdownRef}>
-              <img
+              <Image
                 src={pfpMD}
                 alt="PFP"
                 className={styles.pfp}
                 onClick={() => setUserDropdown(!userDropdown)}
               />
-              <div className={styles.notifContainer}>
-                <p>{notif}</p>
-              </div>
+              {notif > 0 && (
+                <div className={styles.notifContainer}>
+                  <p>{notif}</p>
+                </div>
+              )}
 
               <div
                 className={`${styles.dropdown} ${
@@ -76,18 +58,20 @@ export default function Header() {
               >
                 <ul>
                   <li>Settings</li>
-                  <li onClick={() => logoutClicked()}>Log Out</li>
+                  <Link href={"/"}>
+                    <li>Log Out</li>
+                  </Link>
                 </ul>
               </div>
             </div>
           </>
         ) : (
-          <div className={styles.loginContainer} onClick={loginClicked}>
+          <Link href={"/dashboard"} className={styles.loginContainer}>
             <div className={styles.login}>Login</div>
             <div className={styles.account}>
               <Icon type="account" fill="#319fff" />
             </div>
-          </div>
+          </Link>
         )}
       </div>
     </div>

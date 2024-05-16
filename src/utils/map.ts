@@ -1,10 +1,18 @@
-export const loadMap = (data, type, pause, colors, updateCount) => {
-  let timeCounter = 0;
-  let timeouts = [];
-  let stepCounter = 0;
-  let previousYear = "";
+// get rid of any datatype for "data" and "place" when integrating with database
 
-  data[type].forEach((place, index) => {
+export const loadMap = (
+  data: any,
+  type: string,
+  pause: number,
+  colors: string[],
+  updateCount?: Function
+) => {
+  let timeCounter = 0;
+  let timeouts: NodeJS.Timeout[] = [];
+  let stepCounter = 0;
+  let previousYear = -1;
+
+  data[type].forEach((place: any) => {
     const year = new Date(place.visitDate).getFullYear();
     if (year !== previousYear) {
       stepCounter++;
@@ -34,13 +42,19 @@ export const loadMap = (data, type, pause, colors, updateCount) => {
   };
 };
 
-export const loadMapWithChildren = (data, type, pause, colors, updateCount) => {
+export const loadMapWithChildren = (
+  data: any,
+  type: string,
+  pause: number,
+  colors: string[],
+  updateCount?: Function
+) => {
   let timeCounter = 0;
-  let timeouts = [];
+  let timeouts: NodeJS.Timeout[] = [];
   let stepCounter = 0;
-  let previousYear = "";
+  let previousYear = -1;
 
-  data[type].forEach((place, index) => {
+  data[type].forEach((place: any) => {
     const year = new Date(place.visitDate).getFullYear();
     if (year !== previousYear) {
       stepCounter++;
@@ -59,7 +73,7 @@ export const loadMapWithChildren = (data, type, pause, colors, updateCount) => {
         childPaths.forEach((path) => {
           path.style.fill = color;
         });
-        updateCount();
+        updateCount && updateCount();
       }
     }, 800 + pause * timeCounter++);
     timeouts.push(timeoutId);
@@ -68,4 +82,10 @@ export const loadMapWithChildren = (data, type, pause, colors, updateCount) => {
   return () => {
     timeouts.forEach((timeoutId) => clearTimeout(timeoutId));
   };
+};
+
+export type MapProps = {
+  updateCount?: Function;
+  total?: number;
+  reload?: boolean;
 };
