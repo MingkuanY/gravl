@@ -1,12 +1,12 @@
 "use client";
 
-import styles from "../../styles/countiesmap.module.scss";
+import styles from "../../styles/counties.module.scss";
 import countiesData from "../../assets/mapdata/MyTravels.json";
 import { useEffect, useRef, useState } from "react";
 import { interpolateColors } from "../../utils/color.ts";
 import { MapProps, loadMap } from "../../utils/map.ts";
 
-export default function CountiesMap({ updateCount, total, reload }: MapProps) {
+export default function Counties({ updateCount, total, reload }: MapProps) {
   const livedInColor = "#ffff33";
   const startColor = "#319fff";
   const endColor = "#89c7ff";

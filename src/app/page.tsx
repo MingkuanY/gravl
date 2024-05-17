@@ -3,7 +3,7 @@
 "use client";
 
 import styles from "../styles/landing.module.scss";
-import CountiesMap from "../components/maps/CountiesMap.tsx";
+import Counties from "../components/maps/Counties.tsx";
 import Icon from "../components/icons/Icon";
 import { signIn, useSession } from "next-auth/react";
 import Dashboard from "./dashboard/page.tsx";
@@ -16,7 +16,7 @@ export default function Landing() {
       {!session ? (
         <div className={styles.mainContainer}>
           <div className={styles.map}>
-            <CountiesMap />
+            <Counties />
           </div>
           <p className={styles.motto}>Travel sets you free.</p>
           <button onClick={() => signIn("google")} className={styles.button}>
