@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { interpolateColors } from "../../utils/color";
 import { loadMap, MapProps } from "../../utils/map";
 
+export const totalCountries = 195;
+
 export default function Countries({ updateCount, total, reload }: MapProps) {
   const startColor = "#319fff";
   const endColor = "#89c7ff";

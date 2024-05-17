@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { interpolateColors } from "../../utils/color.ts";
 import { MapProps, loadMap } from "../../utils/map.ts";
 
+export const totalCounties = 3413;
+
 export default function Counties({ updateCount, total, reload }: MapProps) {
   const livedInColor = "#ffff33";
   const startColor = "#319fff";

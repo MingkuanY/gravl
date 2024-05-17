@@ -1,16 +1,15 @@
 // Welcome to Gravl
 
-"use client";
-
 import styles from "../styles/landing.module.scss";
 import Header from "@/components/header/Header.tsx";
 import Counties from "../components/maps/Counties.tsx";
-import Icon from "../components/icons/Icon";
-import { signIn, useSession } from "next-auth/react";
 import Dashboard from "./dashboard/page.tsx";
+import { getServerSession } from "next-auth";
+import { authOption } from "@/app/api/auth/[...nextauth]/route.ts";
+import SignUpButton from "@/components/landing/SignUpButton.tsx";
 
-export default function Landing() {
-  const { data: session } = useSession();
+export default async function Landing() {
+  const session = await getServerSession(authOption);
 
   return (
     <>
@@ -22,12 +21,7 @@ export default function Landing() {
               <Counties />
             </div>
             <p className={styles.motto}>Travel sets you free.</p>
-            <button onClick={() => signIn("google")} className={styles.button}>
-              <div className={styles.go}>
-                <Icon type="go" fill="#fff" />
-              </div>
-              <p>Sign Up</p>
-            </button>
+            <SignUpButton />
           </div>
         </>
       ) : (

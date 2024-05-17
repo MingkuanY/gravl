@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { interpolateColors } from "../../utils/color";
 import { loadMapWithChildren, MapProps } from "../../utils/map";
 
+export const totalParks = 63;
+
 export default function NationalParks({
   updateCount,
   total,
