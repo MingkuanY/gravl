@@ -56,7 +56,6 @@ export default function Header() {
                 }`}
               >
                 <ul>
-                  <li>Settings</li>
                   <li onClick={() => signOut()}>Log Out</li>
                 </ul>
               </div>

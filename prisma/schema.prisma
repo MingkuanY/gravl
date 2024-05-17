@@ -16,7 +16,7 @@ model User {
   email     String?  @unique
   name      String?
   username  String?  @unique
-  homeBase  String?
+  location  String?
   bio       String?
   pfp       String?
   createdAt DateTime @default(now()) @map(name: "created_at")

@@ -1,358 +1,169 @@
 @use "./mixin" as mixin;
 
-.container {
+.main {
+  height: calc(100vh - mixin.$header-height);
   display: flex;
-  padding-bottom: 5rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60rem;
+  margin: -4rem auto 0;
 
-  .timeline {
-    margin-left: 6rem;
-    position: relative;
-    height: calc(
-      100vh - #{mixin.$header-height} - 5rem
-    ); // subtract out header and the padding-bottom of the entire page container
+  /* user profile */
+
+  .profile {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    width: 100%;
 
-    /* vertical timeline stem */
-    &::before {
-      content: "";
-      position: absolute;
-      width: 0.5rem;
-      height: 100vh;
-      top: -#{mixin.$header-height};
-      right: 0;
-      background: mixin.$gravl-blue;
+    .pfpContainer {
+      position: relative;
+
+      img {
+        width: 12rem;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 50%;
+        cursor: pointer;
+        image-rendering: -webkit-optimize-contrast;
+      }
     }
 
-    .planTripBtn {
-      margin-bottom: 1rem;
+    .userInfo {
+      margin-left: 2.2rem;
       display: flex;
-      height: 3rem;
-      width: 26rem;
-      border-radius: 1.5rem;
+      flex-direction: column;
+      flex: auto;
 
-      .newTrip {
-        background-color: mixin.$gravl-blue;
-        border-radius: 1.5rem 0 0 1.5rem;
-        width: 4rem;
-        border-right: 0.2rem solid mixin.$white;
+      .usernameAndEdit {
         display: flex;
         align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: 0.3s;
 
-        &:hover {
-          background-color: mixin.$darker-blue;
-        }
-
-        .plus {
-          width: 2.5rem;
-        }
-      }
-
-      .tripDropdown {
-        background-color: mixin.$gravl-blue;
-        border-radius: 0 1.5rem 1.5rem 0;
-        flex: auto;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        transition: 0.3s;
-
-        &:hover {
-          background-color: mixin.$darker-blue;
-        }
-
-        .tripPlans {
-          flex: auto;
-          text-align: center;
-          font-size: 1.6rem;
-          color: mixin.$white;
+        .username {
+          color: mixin.$dark;
+          font-size: 2.6rem;
           font-weight: 400;
         }
 
-        div {
-          width: 4rem;
-
-          .dropdown {
-            margin-top: 0.5rem;
-            width: 2.5rem;
-          }
+        .edit {
+          margin-bottom: 0.8rem;
+          margin-left: 1rem;
+          width: 2rem;
+          cursor: pointer;
         }
+      }
+
+      .location {
+        margin-top: 0.3rem;
+        font-size: 1rem;
+        color: mixin.$dark;
+        font-weight: 400;
+      }
+
+      .bio {
+        margin-top: 0.5rem;
+        font-size: 1.4rem;
+        font-style: italic;
+        font-weight: 300;
+        color: mixin.$faded;
       }
     }
 
-    .trips {
-      margin-left: -13rem;
-      padding-right: 13rem;
-      padding-bottom: 3rem;
-      transform: translateX(13rem);
-      position: relative;
-      flex: auto;
-      overflow-y: auto;
-      scrollbar-width: none;
-      mask-image: linear-gradient(
-        to bottom,
-        transparent 0%,
-        black 1rem,
-        black calc(100% - 4rem),
-        transparent 100%
-      );
+    .userStats {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 12rem;
 
-      &::-webkit-scrollbar {
-        display: none;
-      }
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-      .tripCheckpoint {
-        position: relative;
-        padding: 0.7rem 0 0.7rem;
-        max-width: 30rem;
-        border-right: 0.5rem solid mixin.$gravl-blue;
-        padding-right: 4rem;
-
-        /* horizontal stem to timeline */
-        &::before {
-          content: "";
-          background: mixin.$gravl-blue;
-          opacity: 0.25;
-          width: 4rem;
-          height: 0.2rem;
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          right: 0;
-          z-index: -1;
+        .stat {
+          font-size: 2.6rem;
+          color: mixin.$gravl-blue;
+          font-weight: 400;
+          cursor: pointer;
         }
-
-        > div::before {
-          content: "";
-          background: mixin.$gravl-blue;
-          width: 1.5rem;
-          aspect-ratio: 1;
-          border-radius: 50%;
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          right: -1rem;
-        }
-
-        .year,
-        .dates {
-          position: absolute;
-          left: calc(100% + 2rem);
-          font-weight: 300;
-          font-style: italic;
+        .desc {
+          font-size: 1.2rem;
+          font-weight: 400;
           color: mixin.$dark;
-          white-space: nowrap;
-          width: fit-content;
-        }
-
-        .fade {
-          color: mixin.$fade;
-        }
-
-        .year {
-          top: 10%;
-          font-size: 2rem;
-        }
-
-        .dates {
-          top: 50%;
-          transform: translateY(-50%);
-          font-size: 1.4rem;
+          text-transform: uppercase;
         }
       }
     }
   }
 
-  .main {
+  /* map */
+
+  .mapContainer {
+    margin-bottom: -3rem;
+    width: 110%;
+    height: 45rem;
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
-    width: 60rem;
-    margin-left: 12%;
+  }
 
-    /* user profile */
+  /* circular progress stats */
 
-    .profile {
-      display: flex;
-      align-items: center;
-      width: 100%;
+  .stats {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 
-      .pfpContainer {
-        position: relative;
+    .progressContainer {
+      width: 12rem;
+      position: relative;
+      transition: 0.3s;
 
-        img {
-          width: 12rem;
-          aspect-ratio: 1;
-          object-fit: cover;
-          border-radius: 50%;
-          cursor: pointer;
-          image-rendering: -webkit-optimize-contrast;
-        }
-
-        .badgeContainer {
-          position: absolute;
-          bottom: 0.6rem;
-          right: 0.6rem;
-          width: 2.6rem;
-          aspect-ratio: 1;
-          background-color: mixin.$gravl-blue;
-          border-radius: 50%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          cursor: pointer;
-          transition: 0.3s;
-          border: 0.2rem solid mixin.$white;
-
-          &:hover {
-            transform: scale(1.1);
-          }
-
-          .badge {
-            width: 2.1rem;
-          }
-        }
-      }
-
-      .userInfo {
-        margin-left: 2.2rem;
+      .countContainer {
         display: flex;
-        flex-direction: column;
-        flex: auto;
+        align-items: end;
 
-        .usernameAndEdit {
-          display: flex;
-          align-items: center;
-
-          .username {
-            color: mixin.$dark;
-            font-size: 2.6rem;
-            font-weight: 400;
-          }
-
-          .edit {
-            margin-bottom: 0.8rem;
-            margin-left: 1rem;
-            width: 2rem;
-            cursor: pointer;
-          }
+        .count {
+          font-size: 3.5rem;
+          color: mixin.$dark;
+          margin: 0 -0.3rem 0.3rem 0;
+          font-weight: 400;
         }
-
-        .location {
-          margin-top: 0.3rem;
-          font-size: 1rem;
+        .totalCount {
+          font-size: 1.75rem;
           color: mixin.$dark;
           font-weight: 400;
         }
-
-        .bio {
-          margin-top: 0.4rem;
-          font-size: 1.4rem;
-          font-style: italic;
-          font-weight: 300;
-          color: mixin.$faded;
-        }
       }
 
-      .userStats {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 12rem;
-
-        div {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-
-          .stat {
-            font-size: 2.6rem;
-            color: mixin.$gravl-blue;
-            font-weight: 400;
-            cursor: pointer;
-          }
-          .desc {
-            font-size: 1.2rem;
-            font-weight: 400;
-            color: mixin.$dark;
-            text-transform: uppercase;
-          }
-        }
+      .type {
+        margin-top: 0.5rem;
+        font-size: 1.4rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+        max-height: 1.4rem;
       }
-    }
 
-    /* map */
-
-    .mapContainer {
-      margin-bottom: -3rem;
-      width: 110%;
-      height: 45rem;
-      display: flex;
-      justify-content: end;
-      align-items: center;
-    }
-
-    /* circular progress stats */
-
-    .stats {
-      display: flex;
-      width: 100%;
-      justify-content: space-between;
-
-      .progressContainer {
-        width: 12rem;
-        position: relative;
-        transition: 0.3s;
-
-        .countContainer {
-          display: flex;
-          align-items: end;
-
-          .count {
-            font-size: 3.5rem;
-            color: mixin.$dark;
-            margin: 0 -0.3rem 0.3rem 0;
-            font-weight: 400;
-          }
-          .totalCount {
-            font-size: 1.75rem;
-            color: mixin.$dark;
-            font-weight: 400;
-          }
-        }
-
-        .type {
-          margin-top: 0.5rem;
-          font-size: 1.4rem;
-          font-weight: 400;
-          text-transform: uppercase;
-          text-align: center;
-          max-height: 1.4rem;
-        }
-
-        .progressbarBackground {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          border-radius: 50%;
-          background-color: mixin.$white;
-          opacity: 0.5;
-          cursor: pointer;
-          transform: scale(1);
-        }
-
-        .selected {
-          opacity: 0;
-        }
+      .progressbarBackground {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: mixin.$white;
+        opacity: 0.5;
+        cursor: pointer;
+        transform: scale(1);
       }
+
       .selected {
-        transform: scale(1.25);
+        opacity: 0;
       }
+    }
+    .selected {
+      transform: scale(1.25);
     }
   }
 }

@@ -3,6 +3,7 @@
 "use client";
 
 import styles from "../styles/landing.module.scss";
+import Header from "@/components/header/Header.tsx";
 import Counties from "../components/maps/Counties.tsx";
 import Icon from "../components/icons/Icon";
 import { signIn, useSession } from "next-auth/react";
@@ -14,18 +15,21 @@ export default function Landing() {
   return (
     <>
       {!session ? (
-        <div className={styles.mainContainer}>
-          <div className={styles.map}>
-            <Counties />
-          </div>
-          <p className={styles.motto}>Travel sets you free.</p>
-          <button onClick={() => signIn("google")} className={styles.button}>
-            <div className={styles.go}>
-              <Icon type="go" fill="#fff" />
+        <>
+          <Header />
+          <div className={styles.mainContainer}>
+            <div className={styles.map}>
+              <Counties />
             </div>
-            <p>Sign Up</p>
-          </button>
-        </div>
+            <p className={styles.motto}>Travel sets you free.</p>
+            <button onClick={() => signIn("google")} className={styles.button}>
+              <div className={styles.go}>
+                <Icon type="go" fill="#fff" />
+              </div>
+              <p>Sign Up</p>
+            </button>
+          </div>
+        </>
       ) : (
         <Dashboard />
       )}
