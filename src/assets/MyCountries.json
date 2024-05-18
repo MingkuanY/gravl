@@ -1,0 +1,97 @@
+[
+  {
+    "place_id": "United_States",
+    "date": "2004-07-30",
+    "label": "United States of America"
+  },
+  {
+    "place_id": "China",
+    "date": "2004-09-20",
+    "label": "China"
+  },
+  {
+    "place_id": "Mexico",
+    "date": "2009-09-20",
+    "label": "Mexico"
+  },
+  {
+    "place_id": "Bahamas",
+    "date": "2014-12-20",
+    "label": "Bahamas"
+  },
+  {
+    "place_id": "Cambodia",
+    "date": "2017-10-04",
+    "label": "Cambodia"
+  },
+  {
+    "place_id": "Canada",
+    "date": "2018-06-20",
+    "label": "Canada"
+  },
+  {
+    "place_id": "United_Kingdom",
+    "date": "2018-12-26",
+    "label": "United Kingdom"
+  },
+  {
+    "place_id": "Spain",
+    "date": "2019-04-20",
+    "label": "Spain"
+  },
+  {
+    "place_id": "Sweden",
+    "date": "2019-06-30",
+    "label": "Sweden"
+  },
+  {
+    "place_id": "Finland",
+    "date": "2019-07-01",
+    "label": "Finland"
+  },
+  {
+    "place_id": "Russia",
+    "date": "2019-07-03",
+    "label": "Russia"
+  },
+  {
+    "place_id": "Czechia",
+    "date": "2022-06-27",
+    "label": "Czech Republic"
+  },
+  {
+    "place_id": "Poland",
+    "date": "2022-06-29",
+    "label": "Poland"
+  },
+  {
+    "place_id": "Slovakia",
+    "date": "2022-07-01",
+    "label": "Slovakia"
+  },
+  {
+    "place_id": "Hungary",
+    "date": "2022-07-01",
+    "label": "Hungary"
+  },
+  {
+    "place_id": "Germany",
+    "date": "2023-05-15",
+    "label": "Germany"
+  },
+  {
+    "place_id": "Austria",
+    "date": "2023-05-27",
+    "label": "Austria"
+  },
+  {
+    "place_id": "France",
+    "date": "2023-06-03",
+    "label": "France"
+  },
+  {
+    "place_id": "Switzerland",
+    "date": "2023-07-09",
+    "label": "Switzerland"
+  }
+]

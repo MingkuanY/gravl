@@ -1,4 +1,6 @@
 import prisma from "@/lib/prisma";
+import { Place } from "@prisma/client";
+import nationalparks from "../assets/MyNationalParks.json";
 
 export async function getPlaces(id: string | undefined) {
   const places = await prisma.place.findMany({
@@ -18,3 +20,35 @@ export async function filterPlacesByType(id: string, type: string) {
   });
   return filteredPlaces;
 }
+
+// convert and add places from MyTravels.json
+
+type PlaceInput = {
+  place_id: string;
+  date: string;
+  label: string;
+};
+
+type PlaceWithoutId = Omit<Place, "id">;
+
+export async function addPlacesToUser(
+  id: string,
+  type: string,
+  places: PlaceInput[]
+) {
+  const formattedPlaces: PlaceWithoutId[] = places.map((place) => ({
+    place_id: place.place_id,
+    date: new Date(place.date),
+    label: place.label,
+    map_type: type,
+    userId: id,
+  }));
+
+  const addedPlaces = await prisma.place.createMany({
+    data: formattedPlaces,
+  });
+
+  return addedPlaces;
+}
+
+// addPlacesToUser("clwb8928k000021imn2y9s6vi", "nationalparks", nationalparks);
