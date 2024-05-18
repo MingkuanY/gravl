@@ -1,30 +1,40 @@
 "use client";
 
 import styles from "../../styles/maploader.module.scss";
-import Counties from "@/components/maps/Counties";
-import States from "@/components/maps/States";
-import Countries from "@/components/maps/Countries";
-import NationalParks from "@/components/maps/NationalParks";
+import Counties, { totalCounties } from "@/components/maps/Counties";
+import States, { totalStates } from "@/components/maps/States";
+import Countries, { totalCountries } from "@/components/maps/Countries";
+import NationalParks, {
+  totalNationalparks,
+} from "@/components/maps/NationalParks";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "../../styles/circularprogressbar.scss";
 import { useState } from "react";
+import { Place } from "@prisma/client";
 
-export default function MapLoader() {
-  /* mock data */
-  const user = {
-    username: "funnyufo",
-    location: "Atlanta, Georgia",
-    bio: "Not all who wander are lost... but I am.",
-    pfp: "",
-    hasBadge: true,
-    maps: [
-      { name: "counties", count: 506, total: 3413 },
-      { name: "states", count: 31, total: 50 },
-      { name: "countries", count: 19, total: 195 },
-      { name: "national parks", count: 27, total: 63 },
-    ],
-    trips: [],
-  };
+interface MapLoaderProps {
+  counties: Place[];
+  states: Place[];
+  countries: Place[];
+  nationalparks: Place[];
+}
+
+export default function MapLoader({
+  counties,
+  states,
+  countries,
+  nationalparks,
+}: MapLoaderProps) {
+  // available maps
+  const maps = ["counties", "states", "countries", "national parks"];
+
+  // total counts of each map imported from the map components
+  const totalCounts = [
+    totalCounties,
+    totalStates,
+    totalCountries,
+    totalNationalparks,
+  ];
 
   const [currentMap, setCurrentMap] = useState(0); //defaults to counties map
   const [reload, setReload] = useState(false);
@@ -34,7 +44,14 @@ export default function MapLoader() {
   };
 
   const getStatsCount = () => {
-    return [0, 0, 0, 0];
+    // Don't count DC as a state
+    const actualStates = states.filter((state) => state.place_id !== "DC");
+    return [
+      counties.length,
+      actualStates.length,
+      countries.length,
+      nationalparks.length,
+    ];
   };
 
   const [count, setCount] = useState(getStatsCount());
@@ -65,32 +82,36 @@ export default function MapLoader() {
       case 0:
         return (
           <Counties
+            data={counties}
             updateCount={updateCount}
-            total={user.maps[index].count}
+            total={count[0]}
             reload={reload}
           />
         );
       case 1:
         return (
           <States
+            data={states}
             updateCount={updateCount}
-            total={user.maps[index].count}
+            total={count[1]}
             reload={reload}
           />
         );
       case 2:
         return (
           <Countries
+            data={countries}
             updateCount={updateCount}
-            total={user.maps[index].count}
+            total={count[2]}
             reload={reload}
           />
         );
       case 3:
         return (
           <NationalParks
+            data={nationalparks}
             updateCount={updateCount}
-            total={user.maps[index].count}
+            total={count[3]}
             reload={reload}
           />
         );
@@ -102,7 +123,7 @@ export default function MapLoader() {
       <div className={styles.mapContainer}>{renderMap(currentMap)}</div>
 
       <div className={styles.stats}>
-        {user.maps.map((map, index) => (
+        {maps.map((map, index) => (
           <div
             className={`${styles.progressContainer} ${
               currentMap === index && styles.selected
@@ -111,13 +132,13 @@ export default function MapLoader() {
           >
             <CircularProgressbarWithChildren
               value={count[index]}
-              maxValue={map.total}
+              maxValue={totalCounts[index]}
             >
               <div className={styles.countContainer}>
                 <p className={styles.count}>{count[index]}</p>
-                <p className={styles.totalCount}>/{map.total}</p>
+                <p className={styles.totalCount}>/{totalCounts[index]}</p>
               </div>
-              <p className={styles.type}>{map.name}</p>
+              <p className={styles.type}>{map}</p>
             </CircularProgressbarWithChildren>
             <div
               className={`${styles.progressbarBackground} ${

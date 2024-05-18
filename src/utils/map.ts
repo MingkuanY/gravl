@@ -1,8 +1,9 @@
 // get rid of any datatype for "data" and "place" when integrating with database
 
+import { Place } from "@prisma/client";
+
 export const loadMap = (
-  data: any,
-  type: string,
+  data: Place[],
   pause: number,
   colors: string[],
   updateCount?: Function
@@ -12,8 +13,8 @@ export const loadMap = (
   let stepCounter = 0;
   let previousYear = -1;
 
-  data[type].forEach((place: any) => {
-    const year = new Date(place.visitDate).getFullYear();
+  data.forEach((place: Place) => {
+    const year = new Date(place.date).getFullYear();
     if (year !== previousYear) {
       stepCounter++;
       previousYear = year;
@@ -26,12 +27,10 @@ export const loadMap = (
         : colors[stepCounter];
 
     const timeoutId = setTimeout(() => {
-      const element = document.getElementById(place.id);
+      const element = document.getElementById(place.place_id);
       if (element) {
         element.style.fill = color;
-        (type !== "states" || (type === "states" && place.id !== "DC")) &&
-          updateCount &&
-          updateCount(); // make sure DC doesn't get counted as a state
+        place.place_id !== "DC" && updateCount && updateCount(); // make sure DC doesn't get counted as a state
       }
     }, 800 + pause * timeCounter++);
     timeouts.push(timeoutId);
@@ -43,8 +42,7 @@ export const loadMap = (
 };
 
 export const loadMapWithChildren = (
-  data: any,
-  type: string,
+  data: Place[],
   pause: number,
   colors: string[],
   updateCount?: Function
@@ -54,8 +52,8 @@ export const loadMapWithChildren = (
   let stepCounter = 0;
   let previousYear = -1;
 
-  data[type].forEach((place: any) => {
-    const year = new Date(place.visitDate).getFullYear();
+  data.forEach((place: Place) => {
+    const year = new Date(place.date).getFullYear();
     if (year !== previousYear) {
       stepCounter++;
       previousYear = year;
@@ -67,7 +65,7 @@ export const loadMapWithChildren = (
         : colors[stepCounter];
 
     const timeoutId = setTimeout(() => {
-      const element = document.getElementById(place.id);
+      const element = document.getElementById(place.place_id);
       if (element) {
         const childPaths = element.querySelectorAll("path");
         childPaths.forEach((path) => {
@@ -85,6 +83,7 @@ export const loadMapWithChildren = (
 };
 
 export type MapProps = {
+  data: Place[];
   updateCount?: Function;
   total?: number;
   reload?: boolean;

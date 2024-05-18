@@ -21,30 +21,19 @@ model User {
   pfp       String?
   createdAt DateTime @default(now()) @map(name: "created_at")
 
-  maps Map[]
+  places Place[]
 
   @@map(name: "users")
 }
 
-// Each map will be linked to a user and their data for that map
-model Map {
-  id      Int    @id @default(autoincrement())
-  name    String
-  baseMap String // references hardcoded maps
-  total   Int
+// Each traveldata will be linked to the map and indirectly to the user
+model Place {
+  id       Int      @id @default(autoincrement())
+  date     DateTime @default(now())
+  place_id String
+  map_type String
+  label    String
 
   user   User   @relation(fields: [userId], references: [id])
   userId String
-
-  travelData TravelData[]
-}
-
-// Each traveldata will be linked to the map and indirectly to the user
-model TravelData {
-  id    Int      @id @default(autoincrement())
-  date  DateTime
-  label String
-
-  map   Map @relation(fields: [mapId], references: [id])
-  mapId Int
 }

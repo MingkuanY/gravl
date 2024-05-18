@@ -1,25 +1,28 @@
 "use client";
 
 import styles from "../../styles/countries.module.scss";
-import countriesData from "../../assets/mapdata/MyCountries.json";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { interpolateColors } from "../../utils/color";
 import { loadMap, MapProps } from "../../utils/map";
 
 export const totalCountries = 195;
 
-export default function Countries({ updateCount, total, reload }: MapProps) {
+export default function Countries({
+  data,
+  updateCount,
+  total,
+  reload,
+}: MapProps) {
   const startColor = "#319fff";
   const endColor = "#89c7ff";
   const defaultColor = "#012241";
 
   const mapRef = useRef<SVGSVGElement>(null);
-  const [data, setData] = useState(countriesData);
-  const colors = interpolateColors(data.steps, startColor, startColor);
+  const colors = interpolateColors(1, startColor, startColor);
 
   useEffect(() => {
     resetMap();
-    const clearTimeouts = loadMap(data, "countries", 250, colors, updateCount);
+    const clearTimeouts = loadMap(data, 250, colors, updateCount);
     return () => {
       clearTimeouts();
       updateCount && updateCount(total);

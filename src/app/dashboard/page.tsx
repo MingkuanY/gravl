@@ -5,11 +5,20 @@ import MapLoader from "@/components/dashboard/MapLoader";
 import { getUser } from "@/lib/getUser";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route.ts";
+import { filterPlacesByType } from "@/lib/getPlaces";
 
 export default async function Dashboard() {
   const session = await getServerSession(authOptions);
   const userId = session?.user.id;
+  if (!userId) {
+    throw new Error("No profile");
+  }
   const user = await getUser(userId);
+
+  const counties = await filterPlacesByType(userId, "counties");
+  const states = await filterPlacesByType(userId, "states");
+  const countries = await filterPlacesByType(userId, "countries");
+  const nationalparks = await filterPlacesByType(userId, "nationalparks");
 
   return (
     <>
@@ -42,7 +51,12 @@ export default async function Dashboard() {
           </div>
         </div>
 
-        <MapLoader />
+        <MapLoader
+          counties={counties}
+          states={states}
+          countries={countries}
+          nationalparks={nationalparks}
+        />
       </div>
     </>
   );

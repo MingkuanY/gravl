@@ -5,11 +5,17 @@ import Header from "@/components/header/Header.tsx";
 import Counties from "../components/maps/Counties.tsx";
 import Dashboard from "./dashboard/page.tsx";
 import { getServerSession } from "next-auth";
-import { authOption } from "@/app/api/auth/[...nextauth]/route.ts";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route.ts";
 import SignUpButton from "@/components/landing/SignUpButton.tsx";
+import { filterPlacesByType } from "@/lib/getPlaces.ts";
 
 export default async function Landing() {
-  const session = await getServerSession(authOption);
+  const session = await getServerSession(authOptions);
+
+  const welcome_to_gravl = await filterPlacesByType(
+    "welcome_to_gravl",
+    "counties"
+  );
 
   return (
     <>
@@ -18,7 +24,7 @@ export default async function Landing() {
           <Header />
           <div className={styles.mainContainer}>
             <div className={styles.map}>
-              <Counties />
+              <Counties data={welcome_to_gravl} />
             </div>
             <p className={styles.motto}>Travel sets you free.</p>
             <SignUpButton />

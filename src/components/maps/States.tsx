@@ -1,25 +1,23 @@
 "use client";
 
 import styles from "../../styles/states.module.scss";
-import statesData from "../../assets/mapdata/MyStates.json";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { interpolateColors } from "../../utils/color";
 import { loadMap, MapProps } from "../../utils/map";
 
 export const totalStates = 50; // plus DC
 
-export default function States({ updateCount, total, reload }: MapProps) {
+export default function States({ data, updateCount, total, reload }: MapProps) {
   const startColor = "#319fff";
   const endColor = "#89c7ff";
   const defaultColor = "#012241";
 
   const mapRef = useRef<SVGSVGElement>(null);
-  const [data, setData] = useState(statesData);
-  const colors = interpolateColors(data.steps, startColor, startColor);
+  const colors = interpolateColors(1, startColor, startColor);
 
   useEffect(() => {
     resetMap();
-    const clearTimeouts = loadMap(data, "states", 200, colors, updateCount);
+    const clearTimeouts = loadMap(data, 200, colors, updateCount);
     return () => {
       clearTimeouts();
       updateCount && updateCount(total);

@@ -1,32 +1,30 @@
 "use client";
 
 import styles from "../../styles/counties.module.scss";
-import countiesData from "../../assets/mapdata/MyTravels.json";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { interpolateColors } from "../../utils/color.ts";
 import { MapProps, loadMap } from "../../utils/map.ts";
 
 export const totalCounties = 3413;
 
-export default function Counties({ updateCount, total, reload }: MapProps) {
+export default function Counties({
+  data,
+  updateCount,
+  total,
+  reload,
+}: MapProps) {
   const livedInColor = "#ffff33";
   const startColor = "#319fff";
   const endColor = "#89c7ff";
   const defaultColor = "#012241"; // gray: #d1dbdd
 
   const mapRef = useRef<SVGSVGElement>(null);
-  const [data, setData] = useState(countiesData);
-  // edit to add color gradient for time spent in each county
-  const colors = interpolateColors(
-    data.steps,
-    startColor,
-    startColor,
-    livedInColor
-  );
+  // Edit to add color gradient for time spent in each county. Currently hardcoded
+  const colors = interpolateColors(1, startColor, startColor, livedInColor);
 
   useEffect(() => {
     resetMap();
-    const clearTimeouts = loadMap(data, "counties", 20, colors, updateCount);
+    const clearTimeouts = loadMap(data, 20, colors, updateCount);
     return () => {
       clearTimeouts();
       updateCount && updateCount(total);

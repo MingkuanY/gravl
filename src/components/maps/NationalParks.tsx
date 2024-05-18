@@ -1,14 +1,14 @@
 "use client";
 
 import styles from "../../styles/nationalparks.module.scss";
-import nationalparksData from "../../assets/mapdata/MyNationalParks.json";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { interpolateColors } from "../../utils/color";
 import { loadMapWithChildren, MapProps } from "../../utils/map";
 
-export const totalParks = 63;
+export const totalNationalparks = 63;
 
 export default function NationalParks({
+  data,
   updateCount,
   total,
   reload,
@@ -18,18 +18,11 @@ export default function NationalParks({
   const defaultColor = "#012241";
 
   const mapRef = useRef<SVGSVGElement>(null);
-  const [data, setData] = useState(nationalparksData);
-  const colors = interpolateColors(data.steps, startColor, startColor);
+  const colors = interpolateColors(1, startColor, startColor);
 
   useEffect(() => {
     resetMap();
-    const clearTimeouts = loadMapWithChildren(
-      data,
-      "parks",
-      200,
-      colors,
-      updateCount
-    );
+    const clearTimeouts = loadMapWithChildren(data, 200, colors, updateCount);
     return () => {
       clearTimeouts();
       updateCount && updateCount(total);
