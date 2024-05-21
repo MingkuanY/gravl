@@ -85,6 +85,10 @@
           color: mixin.$gravl-blue;
           font-weight: 400;
           cursor: pointer;
+
+          span {
+            font-size: 1.6rem;
+          }
         }
         .desc {
           font-size: 1.2rem;

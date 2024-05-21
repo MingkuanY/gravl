@@ -20,6 +20,23 @@ export default async function Dashboard() {
   const countries = await filterPlacesByType(userId, "countries");
   const nationalparks = await filterPlacesByType(userId, "nationalparks");
 
+  // hardcoded user stats
+  const miles = 13351;
+  const thisYear = 2290;
+
+  const renderStat = (stat: number) => {
+    if (stat > 999) {
+      const number = Math.round(stat / 100) / 10;
+      return (
+        <p className={styles.stat}>
+          {number}
+          <span>k</span>
+        </p>
+      );
+    }
+    return <p className={styles.stat}>{stat}</p>;
+  };
+
   return (
     <>
       <Header />
@@ -41,11 +58,11 @@ export default async function Dashboard() {
           </div>
           <div className={styles.userStats}>
             <div>
-              <p className={styles.stat}>11</p>
-              <p className={styles.desc}>Trips</p>
+              {renderStat(miles)}
+              <p className={styles.desc}>Miles</p>
             </div>
             <div>
-              <p className={styles.stat}>4</p>
+              {renderStat(thisYear)}
               <p className={styles.desc}>This Year</p>
             </div>
           </div>

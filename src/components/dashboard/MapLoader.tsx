@@ -121,7 +121,13 @@ export default function MapLoader({
 
   return (
     <div className={styles.container}>
-      <div className={styles.mapContainer}>{renderMap(currentMap)}</div>
+      <div
+        className={`${styles.mapContainer} ${
+          currentMap === 2 && styles.largeMapContainer
+        }`}
+      >
+        {renderMap(currentMap)}
+      </div>
 
       <div className={styles.stats}>
         {maps.map((map, index) => (
