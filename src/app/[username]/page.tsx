@@ -7,7 +7,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route.ts";
 import { filterPlacesByType } from "@/lib/getPlaces";
 
-export default async function Dashboard() {
+export default async function Dashboard({
+  params,
+}: {
+  params: { username: string };
+}) {
   const session = await getServerSession(authOptions);
   const userId = session?.user.id;
   if (!userId) {

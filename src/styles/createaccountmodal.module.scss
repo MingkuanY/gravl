@@ -1,0 +1,88 @@
+@use "./mixin" as mixin;
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(36, 41, 47, 0.3);
+  z-index: 101;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    border-radius: 2rem;
+    background-color: mixin.$white;
+    margin: auto;
+    padding: 4rem 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      font-size: 3rem;
+      font-weight: 400;
+      color: mixin.$dark;
+    }
+
+    .inputContainer {
+      margin-top: 2rem;
+      display: flex;
+      width: 50rem;
+
+      input {
+        color: mixin.$dark;
+        font-size: 2rem;
+        font-weight: 400;
+        padding: 1rem;
+        border: 0.15rem solid mixin.$gravl-blue;
+        border-radius: 1rem;
+        flex: auto;
+
+        &[type="file"] {
+          display: none;
+        }
+      }
+
+      button {
+        margin-left: 1rem;
+        background-color: mixin.$gravl-blue;
+        padding: 1rem 1.5rem;
+        border-radius: 1rem;
+        font-size: 2rem;
+        color: mixin.$white;
+        font-weight: 100;
+        cursor: pointer;
+      }
+
+      &.uploadPFPContainer {
+        flex-direction: column;
+        align-items: center;
+
+        .uploadPFP {
+          cursor: pointer;
+          background-color: #fafafa;
+          width: 13.3rem;
+          aspect-ratio: 1;
+          border-radius: 50%;
+          border: 0.15rem solid mixin.$gravl-blue;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .account {
+          width: 10rem;
+        }
+
+        button {
+          margin-left: 0;
+          margin-top: 2rem;
+        }
+      }
+    }
+  }
+}

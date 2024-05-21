@@ -2,7 +2,7 @@
 
 import { signIn } from "next-auth/react";
 import styles from "../../styles/signupbutton.module.scss";
-import Icon from "../icons/Icon";
+import Icon from "../icons/Icon.tsx";
 
 export default function SignUpButton() {
   return (

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import styles from "../../styles/header.module.scss";
-import Icon from "../icons/Icon";
+import Icon from "../icons/Icon.tsx";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 
