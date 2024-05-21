@@ -8,6 +8,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route.ts";
 import SignUpButton from "@/components/landing/SignUpButton.tsx";
 import { filterPlacesByType } from "@/lib/getPlaces.ts";
+import CreateAccountModal from "@/components/modals/CreateAccountModal.tsx";
 
 export default async function Landing() {
   const welcome_to_gravl = await filterPlacesByType(
@@ -17,6 +18,7 @@ export default async function Landing() {
 
   return (
     <>
+      <CreateAccountModal />
       <Header />
       <div className={styles.mainContainer}>
         <div className={styles.map}>
