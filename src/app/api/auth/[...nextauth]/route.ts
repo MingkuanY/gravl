@@ -23,6 +23,7 @@ export const authOptions: NextAuthOptions = {
         create: {
           email: profile.email,
           name: profile.name,
+          pfp: profile.image,
         },
         update: {
           name: profile.name,

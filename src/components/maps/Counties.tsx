@@ -12,6 +12,7 @@ export default function Counties({
   updateCount,
   total,
   reload,
+  pause,
 }: MapProps) {
   const livedInColor = "#ffff33";
   const startColor = "#319fff";
@@ -24,7 +25,7 @@ export default function Counties({
 
   useEffect(() => {
     resetMap();
-    const clearTimeouts = loadMap(data, 20, colors, updateCount);
+    const clearTimeouts = loadMap(data, pause, colors, updateCount);
     return () => {
       clearTimeouts();
       updateCount && updateCount(total);

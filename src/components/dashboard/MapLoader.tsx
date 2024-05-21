@@ -86,6 +86,7 @@ export default function MapLoader({
             updateCount={updateCount}
             total={count[0]}
             reload={reload}
+            pause={20}
           />
         );
       case 1:

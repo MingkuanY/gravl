@@ -4,7 +4,7 @@ import { Place } from "@prisma/client";
 
 export const loadMap = (
   data: Place[],
-  pause: number,
+  pause: number | undefined,
   colors: string[],
   updateCount?: Function
 ) => {
@@ -29,7 +29,7 @@ export const loadMap = (
         element.style.fill = color;
         place.place_id !== "DC" && updateCount && updateCount(); // make sure DC doesn't get counted as a state
       }
-    }, 800 + pause * timeCounter++);
+    }, 800 + pause! * timeCounter++);
     timeouts.push(timeoutId);
   });
 
@@ -81,4 +81,5 @@ export type MapProps = {
   updateCount?: Function;
   total?: number;
   reload?: boolean;
+  pause?: number;
 };

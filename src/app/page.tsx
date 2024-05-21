@@ -24,9 +24,9 @@ export default async function Landing() {
           <Header />
           <div className={styles.mainContainer}>
             <div className={styles.map}>
-              <Counties data={welcome_to_gravl} />
+              <Counties data={welcome_to_gravl} pause={5} />
             </div>
-            <p className={styles.motto}>Travel sets you free.</p>
+            <p className={styles.motto}>Track your travels.</p>
             <SignUpButton />
           </div>
         </>
