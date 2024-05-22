@@ -6,6 +6,7 @@ import { getUser } from "@/lib/getUser";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route.ts";
 import { filterPlacesByType } from "@/lib/getPlaces";
+import NotFound from "../not-found";
 
 export default async function Dashboard({
   params,
@@ -15,9 +16,13 @@ export default async function Dashboard({
   const session = await getServerSession(authOptions);
   const userId = session?.user.id;
   if (!userId) {
-    throw new Error("No profile");
+    return NotFound();
   }
   const user = await getUser(userId);
+  const username = user?.username;
+  if (username !== params.username) {
+    return NotFound();
+  }
 
   const counties = await filterPlacesByType(userId, "counties");
   const states = await filterPlacesByType(userId, "states");
