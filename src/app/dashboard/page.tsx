@@ -8,21 +8,13 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route.ts";
 import { filterPlacesByType } from "@/lib/getPlaces";
 import NotFound from "../not-found";
 
-export default async function Dashboard({
-  params,
-}: {
-  params: { username: string };
-}) {
+export default async function Dashboard() {
   const session = await getServerSession(authOptions);
   const userId = session?.user.id;
   if (!userId) {
     return NotFound();
   }
   const user = await getUser(userId);
-  const username = user?.username;
-  if (username !== params.username) {
-    return NotFound();
-  }
 
   const counties = await filterPlacesByType(userId, "counties");
   const states = await filterPlacesByType(userId, "states");

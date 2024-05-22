@@ -8,11 +8,9 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Header() {
   const { data: session } = useSession();
-
-  const [notif, setNotif] = useState(0);
-
   const [userDropdown, setUserDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (!dropdownRef.current?.contains(e.target as Node)) {
@@ -44,11 +42,6 @@ export default function Header() {
                 className={styles.pfp}
                 onClick={() => setUserDropdown(!userDropdown)}
               />
-              {notif > 0 && (
-                <div className={styles.notifContainer}>
-                  <p>{notif}</p>
-                </div>
-              )}
 
               <div
                 className={`${styles.dropdown} ${
@@ -56,14 +49,14 @@ export default function Header() {
                 }`}
               >
                 <ul>
-                  <li onClick={() => signOut()}>Log Out</li>
+                  <li onClick={() => signOut({ callbackUrl: "/" })}>Log Out</li>
                 </ul>
               </div>
             </div>
           </>
         ) : (
           <button
-            onClick={() => signIn("google")}
+            onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
             className={styles.loginContainer}
           >
             <div className={styles.login}>Login</div>

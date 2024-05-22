@@ -4,14 +4,10 @@ import { signIn } from "next-auth/react";
 import styles from "../../styles/signupbutton.module.scss";
 import Icon from "../icons/Icon.tsx";
 
-export default function SignUpButton({
-  username,
-}: {
-  username: string | null;
-}) {
+export default function SignUpButton() {
   return (
     <button
-      onClick={() => signIn("google", { callbackUrl: `/${username}` })}
+      onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
       className={styles.button}
     >
       <div className={styles.go}>
