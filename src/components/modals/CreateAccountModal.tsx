@@ -1,10 +1,11 @@
 "use client";
 
 import styles from "../../styles/createaccountmodal.module.scss";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Icon from "../icons/Icon.tsx";
 
 export default function CreateAccountModal() {
+  const [step, setStep] = useState(1);
   const [accountData, setAccountData] = useState({
     username: "",
     location: "",
@@ -12,56 +13,112 @@ export default function CreateAccountModal() {
     pfp: "",
   });
 
+  const wordLimit = 100;
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Enter") {
+      setStep((step) => Math.min(step + 1, 4));
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   const handleSubmit = () => {};
 
   return (
     <>
       <div className={styles.overlay}>
-        <div className={styles.container}>
-          <p>Get ready to explore the world.</p>
-          <div className={styles.inputContainer}>
-            <input
-              type="text"
-              placeholder="Username"
-              value={accountData.username}
-              onChange={(e) =>
-                setAccountData({ ...accountData, username: e.target.value })
-              }
-            />
-          </div>
-          <div className={styles.inputContainer}>
-            <input
-              type="text"
-              placeholder="Home Base"
-              value={accountData.location}
-              onChange={(e) =>
-                setAccountData({ ...accountData, location: e.target.value })
-              }
-            />
-          </div>
-          <div className={styles.inputContainer}>
-            <textarea
-              placeholder="Bio"
-              rows={2}
-              value={accountData.bio}
-              onChange={(e) =>
-                setAccountData({ ...accountData, bio: e.target.value })
-              }
-            />
-          </div>
-          <div
-            className={`${styles.inputContainer} ${styles.uploadPFPContainer}`}
-          >
-            <label className={styles.uploadPFP} htmlFor="pfp-upload">
-              <div className={styles.account}>
-                <Icon type="account" fill="#989898" />
+        {step === 1 && (
+          <div className={styles.container}>
+            <p>Username</p>
+            <div className={styles.inputContainer}>
+              <div className={styles.returnContainer}>
+                <p>Enter</p>
+                <div className={styles.return_arrow}>
+                  <Icon type="return_arrow" fill="#319fff" />
+                </div>
               </div>
-              <p>Upload Profile Pic</p>
-            </label>
-            <input type="file" id="pfp-upload" />
-            <button onClick={handleSubmit}>Start Tracking</button>
+              <input
+                type="text"
+                value={accountData.username}
+                required
+                onChange={(e) =>
+                  setAccountData({ ...accountData, username: e.target.value })
+                }
+              />
+            </div>
           </div>
-        </div>
+        )}
+        {step === 2 && (
+          <div className={styles.container}>
+            <div className={styles.headingContainer}>
+              <p>Home Base</p>
+              <div className={styles.pin}>
+                <Icon type="pin" fill="#319fff" />
+              </div>
+            </div>
+            <div className={styles.inputContainer}>
+              <div className={styles.returnContainer}>
+                <p>Enter</p>
+                <div className={styles.return_arrow}>
+                  <Icon type="return_arrow" fill="#319fff" />
+                </div>
+              </div>
+              <input
+                type="text"
+                value={accountData.location}
+                onChange={(e) =>
+                  setAccountData({ ...accountData, location: e.target.value })
+                }
+              />
+            </div>
+          </div>
+        )}
+        {step === 3 && (
+          <div className={styles.container}>
+            <p>Bio</p>
+            <div className={styles.inputContainer}>
+              <p className={styles.wordCount}>
+                {accountData.bio.length}/{wordLimit}
+              </p>
+              <div className={styles.returnContainer}>
+                <p>Enter</p>
+                <div className={styles.return_arrow}>
+                  <Icon type="return_arrow" fill="#319fff" />
+                </div>
+              </div>
+              <textarea
+                maxLength={100}
+                value={accountData.bio}
+                onChange={(e) =>
+                  setAccountData({ ...accountData, bio: e.target.value })
+                }
+              />
+            </div>
+          </div>
+        )}
+        {step === 4 && (
+          <div className={styles.container}>
+            <p>Upload Profile Pic</p>
+            <div
+              className={`${styles.inputContainer} ${styles.uploadPFPContainer}`}
+            >
+              <label className={styles.uploadPFP} htmlFor="pfp-upload">
+                <div className={styles.account}>
+                  <Icon type="account" fill="#319fff" />
+                </div>
+              </label>
+              <input type="file" id="pfp-upload" />
+              <button onClick={handleSubmit}>Start Tracking</button>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
