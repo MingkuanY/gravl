@@ -12,14 +12,16 @@ datasource db {
 
 // Each user has a list of their maps (exactly four maps for now)
 model User {
-  id        String   @id @default(cuid())
-  email     String?  @unique
-  name      String?
-  username  String?  @unique
-  location  String?
-  bio       String?
-  pfp       String?
-  createdAt DateTime @default(now()) @map(name: "created_at")
+  id            String    @id @default(cuid())
+  email         String?   @unique
+  emailVerified DateTime?
+  name          String?
+  username      String?   @unique
+  location      String?
+  bio           String?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @default(now()) @updatedAt
 
   places Place[]
 

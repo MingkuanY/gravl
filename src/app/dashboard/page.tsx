@@ -4,7 +4,7 @@ import EditProfileButton from "@/components/dashboard/EditProfileButton";
 import MapLoader from "@/components/dashboard/MapLoader";
 import { getUser } from "@/lib/getUser";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route.ts";
+import { authOptions } from "@/app/api/auth/[...nextauth].ts";
 import { filterPlacesByType } from "@/lib/getPlaces";
 import NotFound from "../not-found";
 
@@ -45,7 +45,7 @@ export default async function Dashboard() {
       <div className={styles.main}>
         <div className={styles.profile}>
           <div className={styles.pfpContainer}>
-            <img src={user!.pfp!} alt="PFP" />
+            <img src={user!.image!} alt="PFP" />
           </div>
           <div className={styles.userInfo}>
             <div className={styles.usernameAndEdit}>
