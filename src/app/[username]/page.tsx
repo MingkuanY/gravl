@@ -8,18 +8,30 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route.ts";
 import { filterPlacesByType } from "@/lib/getPlaces";
 import NotFound from "../not-found";
 
-export default async function Dashboard() {
+export default async function Dashboard({
+  params,
+}: {
+  params: { username: string };
+}) {
   const session = await getServerSession(authOptions);
-  const userId = session?.user.id;
-  if (!userId) {
+
+  if (!session) {
+    //user not logged in
     return NotFound();
   }
-  const user = await getUser(userId);
 
-  const counties = await filterPlacesByType(userId, "counties");
-  const states = await filterPlacesByType(userId, "states");
-  const countries = await filterPlacesByType(userId, "countries");
-  const nationalparks = await filterPlacesByType(userId, "nationalparks");
+  const userEmail = session.user.email;
+  const user = await getUser(userEmail);
+
+  if (!user || user.username !== params.username) {
+    //user not logged into the account they are trying to access
+    return NotFound();
+  }
+
+  const counties = await filterPlacesByType(user.id, "counties");
+  const states = await filterPlacesByType(user.id, "states");
+  const countries = await filterPlacesByType(user.id, "countries");
+  const nationalparks = await filterPlacesByType(user.id, "nationalparks");
 
   // hardcoded user stats
   const miles = 13351;

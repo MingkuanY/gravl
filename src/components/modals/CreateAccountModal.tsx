@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "../../styles/createaccountmodal.module.scss";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Icon from "../icons/Icon.tsx";
 
 export default function CreateAccountModal() {
@@ -29,7 +29,9 @@ export default function CreateAccountModal() {
     };
   }, []);
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    console.log(accountData);
+  };
 
   return (
     <>
@@ -105,16 +107,16 @@ export default function CreateAccountModal() {
         )}
         {step === 4 && (
           <div className={styles.container}>
-            <p>Upload Profile Pic</p>
+            <p>You're all set!</p>
             <div
               className={`${styles.inputContainer} ${styles.uploadPFPContainer}`}
             >
-              <label className={styles.uploadPFP} htmlFor="pfp-upload">
+              {/* <label className={styles.uploadPFP} htmlFor="pfp-upload">
                 <div className={styles.account}>
                   <Icon type="account" fill="#319fff" />
                 </div>
               </label>
-              <input type="file" id="pfp-upload" />
+              <input type="file" id="pfp-upload" /> */}
               <button onClick={handleSubmit}>Start Tracking</button>
             </div>
           </div>

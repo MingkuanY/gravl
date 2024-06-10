@@ -10,10 +10,10 @@ export default async function NotFound() {
   let path: string | null = "";
   const session = await getServerSession(authOptions);
   if (session) {
-    const userId = session?.user.id;
-    const user = await getUser(userId);
+    const userEmail = session.user.email;
+    const user = await getUser(userEmail);
     if (user) {
-      path = user?.username;
+      path = user.username;
     }
   }
 
@@ -26,7 +26,7 @@ export default async function NotFound() {
         </div>
         <h1>Oops, it looks like this page doesn't exist!</h1>
         <Link href={`/${path}`}>
-          <button>U-turn to Dashboard</button>
+          <button>U-turn</button>
         </Link>
       </div>
     </>

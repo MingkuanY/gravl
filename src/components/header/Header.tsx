@@ -49,7 +49,7 @@ export default function Header() {
                 }`}
               >
                 <ul>
-                  <li onClick={() => signOut()}>Log Out</li>
+                  <li onClick={() => signOut({ callbackUrl: "/" })}>Log Out</li>
                 </ul>
               </div>
             </div>
