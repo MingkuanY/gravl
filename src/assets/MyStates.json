@@ -158,5 +158,10 @@
     "place_id": "KS",
     "date": "2024-04-07",
     "label": "Kansas"
+  },
+  {
+    "place_id": "DE",
+    "date": "2024-05-09",
+    "label": "Delaware"
   }
 ]

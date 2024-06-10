@@ -6,10 +6,11 @@ import Icon from "../icons/Icon.tsx";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Header() {
-  const { data: session } = useSession();
+  const session = useSession();
+
+  // dropdown menu logic
   const [userDropdown, setUserDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (!dropdownRef.current?.contains(e.target as Node)) {
@@ -32,11 +33,11 @@ export default function Header() {
         <p className={styles.gravl}>Gravl</p>
       </div>
       <div className={styles.headerRightContainer}>
-        {session ? (
+        {session.status === "authenticated" && (
           <>
             <div className={styles.pfpContainer} ref={dropdownRef}>
               <img
-                src={session.user?.image as string}
+                src={session.data?.user.image as string}
                 alt="PFP"
                 className={styles.pfp}
                 onClick={() => setUserDropdown(!userDropdown)}
@@ -48,14 +49,16 @@ export default function Header() {
                 }`}
               >
                 <ul>
-                  <li onClick={() => signOut({ callbackUrl: "/" })}>Log Out</li>
+                  <li onClick={() => signOut()}>Log Out</li>
                 </ul>
               </div>
             </div>
           </>
-        ) : (
+        )}
+
+        {session.status === "unauthenticated" && (
           <button
-            onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
+            onClick={() => signIn("google")}
             className={styles.loginContainer}
           >
             <div className={styles.login}>Login</div>

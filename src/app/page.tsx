@@ -19,7 +19,7 @@ export default async function Landing() {
         <div className={styles.map}>
           <Counties data={welcome_to_gravl} pause={5} />
         </div>
-        <p className={styles.motto}>Track your travels.</p>
+        <p className={styles.motto}>Not all who wander are lost.</p>
         <SignUpButton />
       </div>
     </>

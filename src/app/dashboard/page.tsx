@@ -4,7 +4,7 @@ import EditProfileButton from "@/components/dashboard/EditProfileButton";
 import MapLoader from "@/components/dashboard/MapLoader";
 import { getUser } from "@/lib/getUser";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth].ts";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route.ts";
 import { filterPlacesByType } from "@/lib/getPlaces";
 import NotFound from "../not-found";
 

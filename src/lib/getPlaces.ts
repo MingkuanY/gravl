@@ -1,6 +1,7 @@
-import prisma from "@/lib/prisma";
-import { Place } from "@prisma/client";
-import welcome from "../assets/Welcome.json";
+import { Place, PrismaClient } from "@prisma/client";
+import counties from "../assets/MyTravels.json";
+
+const prisma = new PrismaClient();
 
 export async function getPlaces(id: string | undefined) {
   const places = await prisma.place.findMany({
@@ -51,4 +52,4 @@ export async function addPlacesToUser(
   return addedPlaces;
 }
 
-// addPlacesToUser("welcome_to_gravl", "counties", welcome);
+// addPlacesToUser("clwb8928k000021imn2y9s6vi", "counties", counties);

@@ -2738,5 +2738,80 @@
     "place_id": "Granville__NC",
     "date": "2024-05-12",
     "label": "Granville, NC"
+  },
+  {
+    "place_id": "Plumas__CA",
+    "date": "2024-05-29",
+    "label": "Plumas, CA"
+  },
+  {
+    "place_id": "Lassen__CA",
+    "date": "2024-05-29",
+    "label": "Lassen, CA"
+  },
+  {
+    "place_id": "Modoc__CA",
+    "date": "2024-05-29",
+    "label": "Modoc, CA"
+  },
+  {
+    "place_id": "Lake__OR",
+    "date": "2024-05-29",
+    "label": "Lake, OR"
+  },
+  {
+    "place_id": "Harney__OR",
+    "date": "2024-05-30",
+    "label": "Harney, OR"
+  },
+  {
+    "place_id": "Grant__OR",
+    "date": "2024-05-31",
+    "label": "Grant, OR"
+  },
+  {
+    "place_id": "Wheeler__OR",
+    "date": "2024-05-31",
+    "label": "Wheeler, OR"
+  },
+  {
+    "place_id": "Morrow__OR",
+    "date": "2024-05-31",
+    "label": "Morrow, OR"
+  },
+  {
+    "place_id": "Umatilla__OR",
+    "date": "2024-06-01",
+    "label": "Umatilla, OR"
+  },
+  {
+    "place_id": "Benton__WA",
+    "date": "2024-06-01",
+    "label": "Benton, WA"
+  },
+  {
+    "place_id": "Kittitas__WA",
+    "date": "2024-06-01",
+    "label": "Kittitas, WA"
+  },
+  {
+    "place_id": "Pacific__WA",
+    "date": "2024-06-03",
+    "label": "Pacific, WA"
+  },
+  {
+    "place_id": "Lincoln__OR",
+    "date": "2024-06-04",
+    "label": "Lincoln, OR"
+  },
+  {
+    "place_id": "Coos__OR",
+    "date": "2024-06-04",
+    "label": "Coos, OR"
+  },
+  {
+    "place_id": "Curry__OR",
+    "date": "2024-06-04",
+    "label": "Curry, OR"
   }
 ]
