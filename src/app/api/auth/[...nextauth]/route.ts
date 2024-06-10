@@ -1,6 +1,6 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { Account, PrismaClient, User } from "@prisma/client";
-import { NextAuthOptions, Profile } from "next-auth";
+import { PrismaClient } from "@prisma/client";
+import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -14,6 +14,21 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   adapter: PrismaAdapter(prisma),
+  callbacks: {
+    async signIn({ user }) {
+      const existingUser = await prisma.user.findUnique({
+        where: {
+          email: user.email!,
+        },
+      });
+
+      const isNewUser = !existingUser;
+      if (isNewUser) {
+        return "/?ob=true";
+      }
+      return `/${existingUser.username}`;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);

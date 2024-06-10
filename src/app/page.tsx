@@ -5,7 +5,7 @@ import Header from "@/components/header/Header.tsx";
 import Counties from "../components/maps/Counties.tsx";
 import SignUpButton from "@/components/landing/SignUpButton.tsx";
 import { filterPlacesByType } from "@/lib/getPlaces.ts";
-import CreateAccountModal from "@/components/modals/CreateAccountModal.tsx";
+import Onboarding from "@/components/modals/Onboarding.tsx";
 
 export default async function Landing({
   searchParams,
@@ -19,7 +19,7 @@ export default async function Landing({
 
   return (
     <>
-      {searchParams.ob && searchParams.ob === "true" && <CreateAccountModal />}
+      {searchParams.ob && searchParams.ob === "true" && <Onboarding />}
       <Header />
       <div className={styles.mainContainer}>
         <div className={styles.map}>

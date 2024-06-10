@@ -1,10 +1,10 @@
 "use client";
 
-import styles from "../../styles/createaccountmodal.module.scss";
+import styles from "../../styles/onboarding.module.scss";
 import { useEffect, useState } from "react";
 import Icon from "../icons/Icon.tsx";
 
-export default function CreateAccountModal() {
+export default function Onboarding() {
   const [step, setStep] = useState(1);
   const [accountData, setAccountData] = useState({
     username: "",
@@ -30,7 +30,7 @@ export default function CreateAccountModal() {
   }, []);
 
   const handleSubmit = () => {
-    console.log(accountData);
+    // update user in prisma
   };
 
   return (
