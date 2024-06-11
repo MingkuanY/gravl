@@ -3,8 +3,17 @@
 import styles from "../../styles/onboarding.module.scss";
 import { useEffect, useState } from "react";
 import Icon from "../icons/Icon.tsx";
+import { useRouter } from "next/navigation";
 
-export default function Onboarding() {
+export default function Onboarding({
+  email,
+  updateUser,
+}: {
+  email: string;
+  updateUser: Function;
+}) {
+  const router = useRouter();
+
   const [step, setStep] = useState(1);
   const [accountData, setAccountData] = useState({
     username: "",
@@ -30,7 +39,15 @@ export default function Onboarding() {
   }, []);
 
   const handleSubmit = () => {
-    // update user in prisma
+    //update user in prisma
+    updateUser(
+      email,
+      accountData.username,
+      accountData.location,
+      accountData.bio
+    );
+    //redirect to user dashboard
+    router.push(`/${accountData.username}`);
   };
 
   return (

@@ -6,12 +6,22 @@ import Counties from "../components/maps/Counties.tsx";
 import SignUpButton from "@/components/landing/SignUpButton.tsx";
 import { filterPlacesByType } from "@/lib/getPlaces.ts";
 import Onboarding from "@/components/modals/Onboarding.tsx";
+import { updateUser } from "@/lib/updateUser.ts";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route.ts";
 
 export default async function Landing({
   searchParams,
 }: {
   searchParams: { ob: string };
 }) {
+  let email = "";
+  const session = await getServerSession(authOptions);
+  if (session) {
+    email = session.user.email;
+  }
+
+  // welcome to gravl counties map
   const welcome_to_gravl = await filterPlacesByType(
     "welcome_to_gravl",
     "counties"
@@ -19,7 +29,9 @@ export default async function Landing({
 
   return (
     <>
-      {searchParams.ob && searchParams.ob === "true" && <Onboarding />}
+      {session && searchParams.ob && searchParams.ob === "true" && (
+        <Onboarding email={email} updateUser={updateUser} />
+      )}
       <Header />
       <div className={styles.mainContainer}>
         <div className={styles.map}>

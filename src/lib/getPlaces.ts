@@ -1,5 +1,8 @@
 import { Place, PrismaClient } from "@prisma/client";
 import counties from "../assets/MyTravels.json";
+import states from "../assets/MyStates.json";
+import countries from "../assets/MyCountries.json";
+import nationalparks from "../assets/MyNationalParks.json";
 
 const prisma = new PrismaClient();
 
@@ -52,4 +55,4 @@ export async function addPlacesToUser(
   return addedPlaces;
 }
 
-// addPlacesToUser("clwb8928k000021imn2y9s6vi", "counties", counties);
+// addPlacesToUser("clx8jlyqh000couavwktxpxr2", "nationalparks", nationalparks);

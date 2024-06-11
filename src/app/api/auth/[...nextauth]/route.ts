@@ -14,21 +14,6 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   adapter: PrismaAdapter(prisma),
-  callbacks: {
-    async signIn({ user }) {
-      const existingUser = await prisma.user.findUnique({
-        where: {
-          email: user.email!,
-        },
-      });
-
-      const isNewUser = !existingUser;
-      if (isNewUser) {
-        return "/?ob=true";
-      }
-      return `/${existingUser.username}`;
-    },
-  },
 };
 
 const handler = NextAuth(authOptions);

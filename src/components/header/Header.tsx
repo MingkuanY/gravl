@@ -58,7 +58,7 @@ export default function Header() {
 
         {session.status === "unauthenticated" && (
           <button
-            onClick={() => signIn("google")}
+            onClick={() => signIn("google", { callbackUrl: "/funnyufo" })}
             className={styles.loginContainer}
           >
             <div className={styles.login}>Login</div>
