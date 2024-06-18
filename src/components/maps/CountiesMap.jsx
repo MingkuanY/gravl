@@ -5,9 +5,9 @@ import { interpolateColors } from "../../utils/color";
 import { loadMap } from "../../utils/map";
 
 export default function CountiesMap({ updateCount, total, reload }) {
-  const livedInColor = "#ffff33";
+  const livedInColor = "#319fff";
   const startColor = "#319fff";
-  const endColor = "#89c7ff";
+  const endColor = "#319fff";
   const defaultColor = "#012241"; // gray: #d1dbdd
 
   const mapRef = useRef(null);
@@ -21,7 +21,7 @@ export default function CountiesMap({ updateCount, total, reload }) {
 
   useEffect(() => {
     resetMap();
-    const clearTimeouts = loadMap(data, "counties", 20, colors, updateCount);
+    const clearTimeouts = loadMap(data, "counties", 40, colors, updateCount);
     return () => {
       clearTimeouts();
       updateCount && updateCount(total);

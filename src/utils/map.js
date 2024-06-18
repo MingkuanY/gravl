@@ -12,10 +12,7 @@ export const loadMap = (data, type, pause, colors, updateCount) => {
     }
 
     // colors[0] will always hold a livedIn color even if none was passed into the color.js function
-    const color =
-      place.label && place.label === "Lived in"
-        ? colors[0]
-        : colors[stepCounter];
+    const color = colors[0];
 
     const timeoutId = setTimeout(() => {
       const element = document.getElementById(place.id);
