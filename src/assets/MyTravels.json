@@ -2813,5 +2813,275 @@
     "place_id": "Curry__OR",
     "date": "2024-06-04",
     "label": "Curry, OR"
+  },
+  {
+    "place_id": "Cochise__AZ",
+    "date": "2024-06-13",
+    "label": "Cochise, AZ"
+  },
+  {
+    "place_id": "Hidalgo__NM",
+    "date": "2024-06-13",
+    "label": "Hidalgo, NM"
+  },
+  {
+    "place_id": "Grant__NM",
+    "date": "2024-06-13",
+    "label": "Grant, NM"
+  },
+  {
+    "place_id": "Luna__NM",
+    "date": "2024-06-13",
+    "label": "Luna, NM"
+  },
+  {
+    "place_id": "Dona_Ana__NM",
+    "date": "2024-06-13",
+    "label": "Dona Ana, NM"
+  },
+  {
+    "place_id": "Otero__NM",
+    "date": "2024-06-13",
+    "label": "Otero, NM"
+  },
+  {
+    "place_id": "Chaves__NM",
+    "date": "2024-06-14",
+    "label": "Chaves, NM"
+  },
+  {
+    "place_id": "Eddy__NM",
+    "date": "2024-06-14",
+    "label": "Eddy, NM"
+  },
+  {
+    "place_id": "Lea__NM",
+    "date": "2024-06-14",
+    "label": "Lea, NM"
+  },
+  {
+    "place_id": "Andrews__TX",
+    "date": "2024-06-14",
+    "label": "Andrews, TX"
+  },
+  {
+    "place_id": "Martin__TX",
+    "date": "2024-06-14",
+    "label": "Martin, TX"
+  },
+  {
+    "place_id": "Howard__TX",
+    "date": "2024-06-14",
+    "label": "Howard, TX"
+  },
+  {
+    "place_id": "Glasscock__TX",
+    "date": "2024-06-14",
+    "label": "Glasscock, TX"
+  },
+  {
+    "place_id": "Sterling__TX",
+    "date": "2024-06-14",
+    "label": "Sterling, TX"
+  },
+  {
+    "place_id": "Coke__TX",
+    "date": "2024-06-14",
+    "label": "Coke, TX"
+  },
+  {
+    "place_id": "Tom_Green__TX",
+    "date": "2024-06-14",
+    "label": "Tom Green, TX"
+  },
+  {
+    "place_id": "Concho__TX",
+    "date": "2024-06-14",
+    "label": "Concho, TX"
+  },
+  {
+    "place_id": "McCulloch__TX",
+    "date": "2024-06-14",
+    "label": "McCulloch, TX"
+  },
+  {
+    "place_id": "Mason__TX",
+    "date": "2024-06-14",
+    "label": "Mason, TX"
+  },
+  {
+    "place_id": "San_Saba__TX",
+    "date": "2024-06-14",
+    "label": "San Saba, TX"
+  },
+  {
+    "place_id": "Llano__TX",
+    "date": "2024-06-14",
+    "label": "Llano, TX"
+  },
+  {
+    "place_id": "Burnet__TX",
+    "date": "2024-06-14",
+    "label": "Burnet, TX"
+  },
+  {
+    "place_id": "Blanco__TX",
+    "date": "2024-06-14",
+    "label": "Blanco, TX"
+  },
+  {
+    "place_id": "Travis__TX",
+    "date": "2024-06-14",
+    "label": "Travis, TX"
+  },
+  {
+    "place_id": "Bastrop__TX",
+    "date": "2024-06-14",
+    "label": "Bastrop, TX"
+  },
+  {
+    "place_id": "Fayette__TX",
+    "date": "2024-06-14",
+    "label": "Fayette, TX"
+  },
+  {
+    "place_id": "Colorado__TX",
+    "date": "2024-06-14",
+    "label": "Colorado, TX"
+  },
+  {
+    "place_id": "Austin__TX",
+    "date": "2024-06-14",
+    "label": "Austin, TX"
+  },
+  {
+    "place_id": "Galveston__TX",
+    "date": "2024-06-15",
+    "label": "Galveston, TX"
+  },
+  {
+    "place_id": "Chambers__TX",
+    "date": "2024-06-15",
+    "label": "Chambers, TX"
+  },
+  {
+    "place_id": "Jefferson__TX",
+    "date": "2024-06-15",
+    "label": "Jefferson, TX"
+  },
+  {
+    "place_id": "Orange__TX",
+    "date": "2024-06-15",
+    "label": "Orange, TX"
+  },
+  {
+    "place_id": "Calcasieu__LA",
+    "date": "2024-06-15",
+    "label": "Calcasieu, LA"
+  },
+  {
+    "place_id": "Jefferson_Davis__LA",
+    "date": "2024-06-15",
+    "label": "Jefferson Davis, LA"
+  },
+  {
+    "place_id": "Acadia__LA",
+    "date": "2024-06-15",
+    "label": "Acadia, LA"
+  },
+  {
+    "place_id": "Lafayette__LA",
+    "date": "2024-06-15",
+    "label": "Lafayette, LA"
+  },
+  {
+    "place_id": "St__Martin__LA",
+    "date": "2024-06-15",
+    "label": "St Martin, LA"
+  },
+  {
+    "place_id": "Iberville__LA",
+    "date": "2024-06-15",
+    "label": "Iberville, LA"
+  },
+  {
+    "place_id": "West_Baton_Rouge__LA",
+    "date": "2024-06-15",
+    "label": "West Baton Rouge, LA"
+  },
+  {
+    "place_id": "East_Baton_Rouge__LA",
+    "date": "2024-06-15",
+    "label": "East Baton Rouge, LA"
+  },
+  {
+    "place_id": "Ascension__LA",
+    "date": "2024-06-15",
+    "label": "Ascension, LA"
+  },
+  {
+    "place_id": "St__Bernard__LA",
+    "date": "2024-06-16",
+    "label": "St Bernard, LA"
+  },
+  {
+    "place_id": "Hancock__MS",
+    "date": "2024-06-16",
+    "label": "Hancock, MS"
+  },
+  {
+    "place_id": "Harrison__MS",
+    "date": "2024-06-16",
+    "label": "Harrison, MS"
+  },
+  {
+    "place_id": "Jackson__MS",
+    "date": "2024-06-16",
+    "label": "Jackson, MS"
+  },
+  {
+    "place_id": "Mobile__AL",
+    "date": "2024-06-16",
+    "label": "Mobile, AL"
+  },
+  {
+    "place_id": "Baldwin__AL",
+    "date": "2024-06-16",
+    "label": "Baldwin, AL"
+  },
+  {
+    "place_id": "Escambia__FL",
+    "date": "2024-06-16",
+    "label": "Escambia, FL"
+  },
+  {
+    "place_id": "Santa_Rosa__FL",
+    "date": "2024-06-16",
+    "label": "Santa Rosa, FL"
+  },
+  {
+    "place_id": "Okaloosa__FL",
+    "date": "2024-06-16",
+    "label": "Okaloosa, FL"
+  },
+  {
+    "place_id": "Walton__FL",
+    "date": "2024-06-17",
+    "label": "Walton, FL"
+  },
+  {
+    "place_id": "Covington__AL",
+    "date": "2024-06-17",
+    "label": "Covington, AL"
+  },
+  {
+    "place_id": "Coffee__AL",
+    "date": "2024-06-17",
+    "label": "Coffee, AL"
+  },
+  {
+    "place_id": "Pike__AL",
+    "date": "2024-06-17",
+    "label": "Pike, AL"
   }
 ]

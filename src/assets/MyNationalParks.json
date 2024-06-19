@@ -133,5 +133,10 @@
     "place_id": "hotSprings",
     "date": "2024-04-08",
     "label": "Hot Springs"
+  },
+  {
+    "place_id": "whiteSands",
+    "date": "2024-06-13",
+    "label": "White Sands"
   }
 ]
