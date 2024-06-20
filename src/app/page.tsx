@@ -9,6 +9,7 @@ import Onboarding from "@/components/modals/Onboarding.tsx";
 import { updateUser } from "@/lib/updateUser.ts";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route.ts";
+import { getUser } from "@/lib/getUser.ts";
 
 export default async function Landing({
   searchParams,
@@ -38,7 +39,7 @@ export default async function Landing({
           <Counties data={welcome_to_gravl} pause={5} />
         </div>
         <p className={styles.motto}>Not all who wander are lost.</p>
-        <SignUpButton />
+        <SignUpButton getUser={getUser} />
       </div>
     </>
   );
