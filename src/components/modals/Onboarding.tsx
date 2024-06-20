@@ -8,9 +8,11 @@ import { useRouter } from "next/navigation";
 export default function Onboarding({
   email,
   updateUser,
+  validateUsername,
 }: {
   email: string;
   updateUser: Function;
+  validateUsername: Function;
 }) {
   const router = useRouter();
 

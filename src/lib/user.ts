@@ -4,6 +4,18 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+export async function getUser(email: string | undefined) {
+  if (!email) {
+    return null;
+  }
+  const user = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+  return user;
+}
+
 export async function updateUser(
   email: string,
   username: string,
@@ -24,4 +36,10 @@ export async function updateUser(
     },
   });
   return user;
+}
+
+export async function validateUsername(input: string) {
+  return await prisma.user.findFirst({
+    where: { username: input },
+  });
 }

@@ -3,7 +3,7 @@ import Header from "../components/header/Header.tsx";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route.ts";
-import { getUser } from "@/lib/getUser.ts";
+import { getUser } from "@/lib/user.ts";
 
 export default async function NotFound() {
   // Redirect to new user landing page if not currently signed in. Else redirect to current user's home page.

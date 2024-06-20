@@ -1,13 +1,10 @@
-import { Place, PrismaClient } from "@prisma/client";
-import counties from "../assets/MyTravels.json";
-import states from "../assets/MyStates.json";
-import countries from "../assets/MyCountries.json";
-import nationalparks from "../assets/MyNationalParks.json";
+import { Visit, PrismaClient } from "@prisma/client";
+import trips from "../assets/MyTravels.json";
 
 const prisma = new PrismaClient();
 
-export async function getPlaces(id: string | undefined) {
-  const places = await prisma.place.findMany({
+export async function getVisitsByTrip(id: string | undefined) {
+  const visits = await prisma.visit.findMany({
     where: {
       userId: id,
     },
@@ -15,7 +12,7 @@ export async function getPlaces(id: string | undefined) {
   return places;
 }
 
-export async function filterPlacesByType(id: string, type: string) {
+export async function filterVisitsByType(id: string, type: string) {
   const filteredPlaces = await prisma.place.findMany({
     where: {
       userId: id,
@@ -27,32 +24,36 @@ export async function filterPlacesByType(id: string, type: string) {
 
 // convert and add places from MyTravels.json
 
-type PlaceInput = {
+type VisitInput = {
   place_id: string;
   date: string;
   label: string;
+  order: number;
 };
 
-type PlaceWithoutId = Omit<Place, "id">;
+type VisitWithoutId = Omit<Visit, "id">;
 
-export async function addPlacesToUser(
+export async function addTripToUser(
   id: string,
   type: string,
-  places: PlaceInput[]
+  visits: VisitInput[]
 ) {
-  const formattedPlaces: PlaceWithoutId[] = places.map((place) => ({
-    place_id: place.place_id,
-    date: new Date(place.date),
-    label: place.label,
+  const formattedVisits: VisitWithoutId[] = visits.map((visit) => ({
+    place_id: visit.place_id,
+    date: new Date(visit.date),
+    label: visit.label,
     map_type: type,
     userId: id,
+    order: visit.order,
   }));
 
-  const addedPlaces = await prisma.place.createMany({
-    data: formattedPlaces,
+  const addedVisits = await prisma.visit.createMany({
+    data: formattedVisits,
   });
 
-  return addedPlaces;
+  return addedVisits;
 }
 
-// addPlacesToUser("clx8jlyqh000couavwktxpxr2", "nationalparks", nationalparks);
+// mytrips.forEach(trip => {
+//   addTripToUser("clx8jlyqh000couavwktxpxr2", trip);
+// })

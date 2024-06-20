@@ -45,23 +45,22 @@ model Trip {
 
 // Each Visit has a many-to-one relationship with both Trip and Place and represents the instance of the User visiting a Place at a specific time
 model Visit {
-  id Int @id @default(autoincrement())
+  id    Int      @id @default(autoincrement())
+  date  DateTime @default(now())
+  order Int      @default(autoincrement())
 
   trip   Trip @relation(fields: [tripId], references: [id])
   tripId Int
 
-  place   Place @relation(fields: [placeId], references: [id])
-  placeId Int
-
-  date  DateTime @default(now())
-  order Int      @default(autoincrement())
+  place   Place  @relation(fields: [placeId], references: [place_id])
+  placeId String
 }
 
 // Each Place will have the info to be linked to the map and has a one-to-many relationship with Visit
 model Place {
   id Int @id @default(autoincrement())
 
-  place_id String
+  place_id String @unique
   map_type String
   label    String
 

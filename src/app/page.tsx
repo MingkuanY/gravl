@@ -6,10 +6,9 @@ import Counties from "../components/maps/Counties.tsx";
 import SignUpButton from "@/components/landing/SignUpButton.tsx";
 import { filterPlacesByType } from "@/lib/getPlaces.ts";
 import Onboarding from "@/components/modals/Onboarding.tsx";
-import { updateUser } from "@/lib/updateUser.ts";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route.ts";
-import { getUser } from "@/lib/getUser.ts";
+import { getUser, updateUser, validateUsername } from "@/lib/user.ts";
 
 export default async function Landing({
   searchParams,
@@ -31,7 +30,11 @@ export default async function Landing({
   return (
     <>
       {session && searchParams.ob && searchParams.ob === "true" && (
-        <Onboarding email={email} updateUser={updateUser} />
+        <Onboarding
+          email={email}
+          updateUser={updateUser}
+          validateUsername={validateUsername}
+        />
       )}
       <Header />
       <div className={styles.mainContainer}>
