@@ -7,16 +7,31 @@ export async function getPlacesByUserAndType(
   user_id: string | undefined,
   type: string
 ) {
-  const result = await prisma.$queryRaw`
-    SELECT place.place_id
-    FROM trip
-    JOIN visit ON trip.id=visit.tripId
-    JOIN place ON visit.place_id=place.id
-    WHERE trip.userId=${user_id} AND place.map_type=${type}`;
-  console.log("Result: ", result);
+  if (!user_id) {
+    return [];
+  }
+
+  const visits = await prisma.visit.findMany({
+    where: {
+      trip: {
+        userId: user_id,
+      },
+      place: {
+        map_type: type,
+      },
+    },
+    include: {
+      place: true,
+    },
+    orderBy: {
+      order: "asc",
+    },
+  });
+
+  return visits.map((visit) => visit.place);
 }
 
-// convert and add places from MyTravels.json
+// Convert and add places from MyTravels.json
 
 type VisitInput = {
   place_id: string;
@@ -25,7 +40,7 @@ type VisitInput = {
   order: number;
 };
 
-// type VisitWithoutId = Omit<Visit, "id">;
+type VisitWithoutId = Omit<Visit, "id">;
 
 // export async function addTripToUser(
 //   id: string,

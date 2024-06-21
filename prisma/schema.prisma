@@ -64,7 +64,7 @@ model Place {
   map_type String
   label    String
 
-  visit Visit[]
+  visits Visit[]
 }
 
 model Account {

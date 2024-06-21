@@ -14,11 +14,12 @@ export default function NationalParks({
   reload,
 }: MapProps) {
   const startColor = "#319fff";
-  const endColor = "#89c7ff";
+  const endColor = "#319fff";
+  const oldEndColor = "#89c7ff";
   const defaultColor = "#012241";
 
   const mapRef = useRef<SVGSVGElement>(null);
-  const colors = interpolateColors(1, startColor, startColor);
+  const colors = interpolateColors(1, startColor, endColor);
 
   useEffect(() => {
     resetMap();

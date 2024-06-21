@@ -4,7 +4,7 @@ import styles from "../styles/landing.module.scss";
 import Header from "@/components/header/Header.tsx";
 import Counties from "../components/maps/Counties.tsx";
 import SignUpButton from "@/components/landing/SignUpButton.tsx";
-// import { filterPlacesByType } from "@/lib/visit.ts";
+import { getPlacesByUserAndType } from "@/lib/visit.ts";
 import Onboarding from "@/components/modals/Onboarding.tsx";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route.ts";
@@ -22,7 +22,7 @@ export default async function Landing({
   }
 
   // welcome to gravl counties map
-  // const welcome_to_gravl = await filterPlacesByType(
+  // const welcome_to_gravl = await getPlacesByUserAndType(
   //   "welcome_to_gravl",
   //   "counties"
   // );

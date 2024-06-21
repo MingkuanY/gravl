@@ -14,14 +14,14 @@ export default function Counties({
   reload,
   pause,
 }: MapProps) {
-  const livedInColor = "#ffff33";
+  const livedInColor = "#319fff";
   const startColor = "#319fff";
-  const endColor = "#89c7ff";
+  const endColor = "#319fff";
   const defaultColor = "#012241"; // gray: #d1dbdd
 
   const mapRef = useRef<SVGSVGElement>(null);
   // Edit to add color gradient for time spent in each county. Currently hardcoded
-  const colors = interpolateColors(1, startColor, startColor, livedInColor);
+  const colors = interpolateColors(1, startColor, endColor, livedInColor);
 
   useEffect(() => {
     resetMap();

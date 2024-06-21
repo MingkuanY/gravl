@@ -14,11 +14,11 @@ export default function Countries({
   reload,
 }: MapProps) {
   const startColor = "#319fff";
-  const endColor = "#89c7ff";
+  const endColor = "#319fff";
   const defaultColor = "#012241";
 
   const mapRef = useRef<SVGSVGElement>(null);
-  const colors = interpolateColors(1, startColor, startColor);
+  const colors = interpolateColors(1, startColor, endColor);
 
   useEffect(() => {
     resetMap();

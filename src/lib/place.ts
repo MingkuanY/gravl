@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 function idToLabel(id: string) {
   id = id.split("St__").join("St. ");
+  id = id.split("__NP").join("");
   id = id.split("__").join(", ");
   id = id.split("_").join(" ");
   return id;
@@ -19,10 +20,10 @@ export async function addPlaces(type: string, places: string[]) {
     label: idToLabel(place_id),
   }));
 
-  const addedPlaces = await prisma.place.createMany({
+  const newPlaces = await prisma.place.createMany({
     data: formattedPlaces,
   });
-  return addedPlaces;
+  return newPlaces;
 }
 
 // addPlaces("counties", counties);

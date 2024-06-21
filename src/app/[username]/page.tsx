@@ -5,7 +5,7 @@ import MapLoader from "@/components/dashboard/MapLoader";
 import { getUser } from "@/lib/user.ts";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route.ts";
-import { filterPlacesByType } from "@/lib/place";
+import { getPlacesByUserAndType } from "@/lib/visit";
 import NotFound from "../not-found";
 
 export default async function Dashboard({
@@ -28,10 +28,10 @@ export default async function Dashboard({
     return NotFound();
   }
 
-  const counties = await filterPlacesByType(user.id, "counties");
-  const states = await filterPlacesByType(user.id, "states");
-  const countries = await filterPlacesByType(user.id, "countries");
-  const nationalparks = await filterPlacesByType(user.id, "nationalparks");
+  const counties = await getPlacesByUserAndType(user.id, "counties");
+  const states = await getPlacesByUserAndType(user.id, "states");
+  const countries = await getPlacesByUserAndType(user.id, "countries");
+  const nationalparks = await getPlacesByUserAndType(user.id, "nationalparks");
 
   // hardcoded user stats
   const miles = 13351;

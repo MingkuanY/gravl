@@ -1,5 +1,3 @@
-// get rid of any datatype for "data" and "place" when integrating with database
-
 import { Place } from "@prisma/client";
 
 export const loadMap = (
@@ -10,18 +8,9 @@ export const loadMap = (
 ) => {
   let timeCounter = 0;
   let timeouts: NodeJS.Timeout[] = [];
-  let stepCounter = 0;
-  let previousYear = -1;
 
   data.forEach((place: Place) => {
-    const year = new Date(place.date).getFullYear();
-    if (year !== previousYear) {
-      stepCounter++;
-      previousYear = year;
-    }
-
-    // colors[0] will always hold a livedIn color even if none was passed into the color.js function
-    const color = colors[1];
+    const color = colors[0];
 
     const timeoutId = setTimeout(() => {
       const element = document.getElementById(place.place_id);
@@ -46,17 +35,9 @@ export const loadMapWithChildren = (
 ) => {
   let timeCounter = 0;
   let timeouts: NodeJS.Timeout[] = [];
-  let stepCounter = 0;
-  let previousYear = -1;
 
   data.forEach((place: Place) => {
-    const year = new Date(place.date).getFullYear();
-    if (year !== previousYear) {
-      stepCounter++;
-      previousYear = year;
-    }
-
-    const color = colors[1];
+    const color = colors[0];
 
     const timeoutId = setTimeout(() => {
       const element = document.getElementById(place.place_id);
