@@ -1,5 +1,6 @@
-import { Visit, PrismaClient } from "@prisma/client";
+import { Visit, PrismaClient, Trip } from "@prisma/client";
 import trips from "../assets/MyTrips.json";
+import welcome from "../assets/Welcome.json";
 
 const prisma = new PrismaClient();
 
@@ -23,46 +24,51 @@ export async function getPlacesByUserAndType(
     include: {
       place: true,
     },
-    orderBy: {
-      order: "asc",
-    },
+    orderBy: [
+      {
+        date: "asc",
+      },
+      {
+        order: "asc",
+      },
+    ],
   });
 
   return visits.map((visit) => visit.place);
 }
 
-// Convert and add places from MyTravels.json
+// Convert and add places from MyTrips.json
 
 type VisitInput = {
   place_id: string;
   date: string;
-  label: string;
   order: number;
 };
 
-type VisitWithoutId = Omit<Visit, "id">;
+type TripInput = {
+  trip_name: string;
+  description: string;
+  visits: VisitInput[];
+};
 
-// export async function addTripToUser(
-//   id: string,
-//   type: string,
-//   visits: VisitInput[]
-// ) {
-//   const formattedVisits: VisitWithoutId[] = visits.map((visit) => ({
-//     place_id: visit.place_id,
-//     date: new Date(visit.date),
-//     label: visit.label,
-//     map_type: type,
-//     userId: id,
-//     order: visit.order,
-//   }));
+export async function addTripToUser(user_id: string, trip: TripInput) {
+  const newTrip = await prisma.trip.create({
+    data: {
+      name: trip.trip_name,
+      description: trip.description,
+      userId: user_id,
+      visits: {
+        create: trip.visits.map((visit) => ({
+          placeId: visit.place_id,
+          date: new Date(visit.date),
+          order: visit.order,
+        })),
+      },
+    },
+    include: {
+      visits: true,
+    },
+  });
 
-//   const addedVisits = await prisma.visit.createMany({
-//     data: formattedVisits,
-//   });
-
-//   return addedVisits;
-// }
-
-// mytrips.forEach(trip => {
-//   addTripToUser("clx8jlyqh000couavwktxpxr2", trip);
-// })
+  return newTrip;
+}
