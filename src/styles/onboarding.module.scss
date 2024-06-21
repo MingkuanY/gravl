@@ -21,6 +21,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
 
     .headingContainer {
       display: flex;
@@ -93,6 +94,10 @@
         &:focus {
           outline: none;
         }
+
+        &::placeholder {
+          color: mixin.$fade;
+        }
       }
 
       &.uploadPFPContainer {
@@ -131,6 +136,13 @@
           cursor: pointer;
         }
       }
+    }
+
+    .warning {
+      position: absolute;
+      font-size: 1.5rem;
+      color: mixin.$warning;
+      bottom: 1.25rem;
     }
   }
 }

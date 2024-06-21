@@ -8,7 +8,7 @@ import SignUpButton from "@/components/landing/SignUpButton.tsx";
 import Onboarding from "@/components/modals/Onboarding.tsx";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route.ts";
-import { updateUser, validateUsername } from "@/lib/user.ts";
+import { updateUser, uniqueUsername } from "@/lib/user.ts";
 
 export default async function Landing({
   searchParams,
@@ -33,7 +33,7 @@ export default async function Landing({
         <Onboarding
           email={email}
           updateUser={updateUser}
-          validateUsername={validateUsername}
+          uniqueUsername={uniqueUsername}
         />
       )}
       <Header />

@@ -8,11 +8,11 @@ import { useRouter } from "next/navigation";
 export default function Onboarding({
   email,
   updateUser,
-  validateUsername,
+  uniqueUsername,
 }: {
   email: string;
   updateUser: Function;
-  validateUsername: Function;
+  uniqueUsername: Function;
 }) {
   const router = useRouter();
 
@@ -26,19 +26,26 @@ export default function Onboarding({
 
   const wordLimit = 100;
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Enter") {
-      setStep((step) => Math.min(step + 1, 4));
-    }
-  };
+  const [validUsername, setValidUsername] = useState(true);
 
   useEffect(() => {
+    const handleKeyDown = async (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        if (step !== 1 || (await uniqueUsername(accountData.username))) {
+          setValidUsername(true);
+          setStep((step) => Math.min(step + 1, 4));
+        } else {
+          setValidUsername(false);
+        }
+      }
+    };
+
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [accountData, step]);
 
   const handleSubmit = () => {
     //update user in prisma
@@ -74,6 +81,9 @@ export default function Onboarding({
                 }
               />
             </div>
+            {!validUsername && (
+              <p className={styles.warning}>Sorry, this username is taken.</p>
+            )}
           </div>
         )}
         {step === 2 && (
@@ -94,6 +104,7 @@ export default function Onboarding({
               <input
                 type="text"
                 value={accountData.location}
+                placeholder="i.e. Atlanta, Georgia"
                 onChange={(e) =>
                   setAccountData({ ...accountData, location: e.target.value })
                 }

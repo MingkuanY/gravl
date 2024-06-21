@@ -4,6 +4,12 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+/**
+ * Gets the User with the given email in the database
+ *
+ * @param email to look up the User in the database
+ * @returns the User with that email
+ */
 export async function getUser(email: string | undefined) {
   if (!email) {
     return null;
@@ -16,6 +22,15 @@ export async function getUser(email: string | undefined) {
   return user;
 }
 
+/**
+ * Updates the User's object with new username, location, and bio.
+ *
+ * @param email to look up the User in the database
+ * @param username to replace the current username (if valid)
+ * @param location to replace the current location
+ * @param bio to replace the current bio
+ * @returns
+ */
 export async function updateUser(
   email: string,
   username: string,
@@ -38,8 +53,15 @@ export async function updateUser(
   return user;
 }
 
-export async function validateUsername(input: string) {
-  return await prisma.user.findFirst({
+/**
+ * Checks whether the given username is unique or not.
+ *
+ * @param input potential username from the user's onboarding
+ * @returns true if it's a unique username, false otherwise
+ */
+export async function uniqueUsername(input: string) {
+  const user = await prisma.user.findFirst({
     where: { username: input },
   });
+  return user === null;
 }
