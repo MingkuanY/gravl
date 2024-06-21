@@ -116,7 +116,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="haleakala"
+          id="Haleakala__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,322.3997,513.03239)"
         >
@@ -137,7 +137,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="hawaiiVolcanoes"
+          id="Hawaii_Volcanoes__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,341.35137,537.70525)"
         >
@@ -173,7 +173,7 @@ export default function NationalParks({
           className="state ak"
         />
         <g
-          id="kobukValley"
+          id="Kobuk_Valley__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,119.5113,452.70525)"
         >
@@ -216,7 +216,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="gatesOfTheArctic"
+          id="Gates_of_the_Arctic__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,140.15441,450.735)"
         >
@@ -237,7 +237,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="wrangellStElias"
+          id="Wrangell_St_Elias__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,172.38112,503.37811)"
         >
@@ -258,7 +258,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="glacierBay"
+          id="Glacier_Bay__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,197.80492,519.49335)"
         >
@@ -279,7 +279,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="kenaiFjords"
+          id="Kenai_Fjords__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,149.3589,518.79074)"
         >
@@ -300,7 +300,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="katmai"
+          id="Katmai__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,112.5113,523.36694)"
         >
@@ -321,7 +321,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="lakeClark"
+          id="Lake_Clark__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,124.71943,508.2517)"
         >
@@ -342,7 +342,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="denali"
+          id="Denali__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,136.85325,485.89857)"
         >
@@ -400,7 +400,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="everglades"
+          id="Everglades__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,736.54469,516.20337)"
         >
@@ -421,7 +421,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="biscayne"
+          id="Biscayne__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,760.27329,520.13646)"
         >
@@ -442,7 +442,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="dryTortugas"
+          id="Dry_Tortugas__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,714.99084,548.38928)"
         >
@@ -587,7 +587,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="acadia"
+          id="Acadia__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,849.39001,130.10938)"
         >
@@ -765,7 +765,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="shenandoah"
+          id="Shenandoah__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,738.44803,286.93573)"
         >
@@ -801,7 +801,7 @@ export default function NationalParks({
           className="state wv"
         />
         <g
-          id="newRiverGorge"
+          id="New_River_Gorge__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,708.09114,275.66809)"
         >
@@ -881,7 +881,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="cuyahogaValley"
+          id="Cuyahoga_Valley__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,679.3516,223.42347)"
         >
@@ -1165,7 +1165,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="gatewayArch"
+          id="Gateway_Arch__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,556.92016,289.61236)"
         >
@@ -1238,7 +1238,7 @@ export default function NationalParks({
           className="state sc"
         />
         <g
-          id="congaree"
+          id="Congaree__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,717.78634,369.62717)"
         >
@@ -1296,7 +1296,7 @@ export default function NationalParks({
           className="state ky"
         />
         <g
-          id="mammothCave"
+          id="Mammoth_Cave__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,626.39229,309.93573)"
         >
@@ -1522,7 +1522,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="voyageurs"
+          id="Voyageurs__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,506.5505,101.61688)"
         >
@@ -1617,7 +1617,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="bigBend"
+          id="Big_Bend__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,345.7306,460.42268)"
         >
@@ -1675,7 +1675,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="carlsbadCaverns"
+          id="Carlsbad_Caverns__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,326.89041,404.79074)"
         >
@@ -1696,7 +1696,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="whiteSands"
+          id="White_Sands__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,290.49272,397.616)"
         >
@@ -1828,7 +1828,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="glacier"
+          id="Glacier__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,237.67574,74.766189)"
         >
@@ -1864,7 +1864,7 @@ export default function NationalParks({
           className="state co"
         />
         <g
-          id="blackCanyonOfTheGunnison"
+          id="Black_Canyon_of_the_Gunnison__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,301.06515,275.85765)"
         >
@@ -1885,7 +1885,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="greatSandDunes"
+          id="Great_Sand_Dunes__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,326.15064,299.21454)"
         >
@@ -1906,7 +1906,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="rockyMountain"
+          id="Rocky_Mountain__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,328.59302,261.40786)"
         >
@@ -1927,7 +1927,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="mesaVerde"
+          id="Mesa_Verde__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,281.47037,303.65316)"
         >
@@ -1985,7 +1985,7 @@ export default function NationalParks({
           className="state ut"
         />
         <g
-          id="capitolReef"
+          id="Capitol_Reef__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,236.75316,273.61381)"
         >
@@ -2006,7 +2006,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="canyonlands"
+          id="Canyonlands__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,257.6246,276.05861)"
         >
@@ -2049,7 +2049,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="arches"
+          id="Arches__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,267.74634,268.71825)"
         >
@@ -2070,7 +2070,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="zion"
+          id="Zion__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,206.54433,293.62512)"
         >
@@ -2091,7 +2091,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="bryceCanyon"
+          id="Bryce_Canyon__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,223.14859,290.02497)"
         >
@@ -2149,7 +2149,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="grandCanyon"
+          id="Grand_Canyon__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,212.34474,327.61962)"
         >
@@ -2170,7 +2170,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="petrifiedForest"
+          id="Petrified_Forest__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,246.34817,352.42552)"
         >
@@ -2191,7 +2191,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="saguaro"
+          id="Saguaro__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,223.14309,393.23211)"
         >
@@ -2249,7 +2249,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="greatBasin"
+          id="Great_Basin__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,192.35777,263.4365)"
         >
@@ -2307,7 +2307,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="craterLake"
+          id="Crater_Lake__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,107.5409,163.22388)"
         >
@@ -2343,7 +2343,7 @@ export default function NationalParks({
           className="state wa"
         />
         <g
-          id="northCascades"
+          id="North_Cascades__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,143.95037,54.223874)"
         >
@@ -2364,7 +2364,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="mountRainier"
+          id="Mount_Rainier__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,129.1479,87.22799)"
         >
@@ -2385,7 +2385,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="olympic"
+          id="Olympic__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,111.34405,63.219758)"
         >
@@ -2443,7 +2443,7 @@ export default function NationalParks({
           className="state ca"
         />
         <g
-          id="deathValley"
+          id="Death_Valley__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,152.95105,313.42209)"
         >
@@ -2464,7 +2464,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="joshuaTree"
+          id="Joshua_Tree__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,152.95174,354.42552)"
         >
@@ -2485,7 +2485,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="channelIslands"
+          id="Channel_Islands__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,93.536096,334.22319)"
         >
@@ -2506,7 +2506,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="kingsCanyon"
+          id="Kings_Canyon__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,134.74254,300.81853)"
         >
@@ -2527,7 +2527,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="sequoia"
+          id="Sequoia__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,122.54639,305.62374)"
         >
@@ -2548,7 +2548,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="yosemite"
+          id="Yosemite__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,113.34131,273.21496)"
         >
@@ -2591,7 +2591,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="pinnacles"
+          id="Pinnacles__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,87.545015,294.4317)"
         >
@@ -2612,7 +2612,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="lassenVolcanic"
+          id="Lassen_Volcanic__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,105.1527,210.21839)"
         >
@@ -2633,7 +2633,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="redwood"
+          id="Redwood__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,65.14378,192.02017)"
         >
@@ -2691,7 +2691,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="greatSmokyMountains"
+          id="Great_Smoky_Mountains__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,674.60419,336.62717)"
         >
@@ -2727,7 +2727,7 @@ export default function NationalParks({
           className="state ar"
         />
         <g
-          id="hotSprings"
+          id="Hot_Springs__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,516.59302,373.06214)"
         >
@@ -2944,7 +2944,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="isleRoyale"
+          id="Isle_Royale__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,563.34268,105.81853)"
         >
@@ -3084,7 +3084,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="badlands"
+          id="Badlands__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,383.74941,190.02635)"
         >
@@ -3105,7 +3105,7 @@ export default function NationalParks({
           />
         </g>
         <g
-          id="windCave"
+          id="Wind_Cave__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,368.5457,185.22456)"
         >
@@ -3163,7 +3163,7 @@ export default function NationalParks({
           </tspan>
         </text>
         <g
-          id="theodoreRoosevelt"
+          id="Theodore_Roosevelt__NP"
           className={styles.park}
           transform="matrix(1.0179873,0,0,1.2197711,375.14858,129.62511)"
         >
@@ -3185,7 +3185,7 @@ export default function NationalParks({
         </g>
       </g>
       <g
-        id="yellowstone"
+        id="Yellowstone__NP"
         className={styles.park}
         transform="matrix(1.0179873,0,0,1.2197711,274.95037,158.42209)"
       >
@@ -3206,7 +3206,7 @@ export default function NationalParks({
         />
       </g>
       <g
-        id="grandTeton"
+        id="Grand_Teton__NP"
         className={styles.park}
         transform="matrix(1.0179873,0,0,1.2197711,263.14447,164.82539)"
       >
@@ -3227,7 +3227,7 @@ export default function NationalParks({
         />
       </g>
       <g
-        id="indianaDunes"
+        id="Indiana_Dunes__NP"
         className={styles.park}
         transform="matrix(1.0179873,0,0,1.2197711,601.14584,227.61962)"
       >
@@ -3248,7 +3248,7 @@ export default function NationalParks({
         />
       </g>
       <g
-        id="guadalupeMountains"
+        id="Guadalupe_Mountains__NP"
         className={styles.park}
         transform="matrix(1.0179873,0,0,1.2197711,314.61536,411.41903)"
       >

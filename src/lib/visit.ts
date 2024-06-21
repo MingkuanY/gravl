@@ -9,7 +9,7 @@ export async function getVisitsByTrip(id: string | undefined) {
       userId: id,
     },
   });
-  return places;
+  return visits;
 }
 
 export async function filterVisitsByType(id: string, type: string) {
