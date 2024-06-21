@@ -1,1 +1,29 @@
 @use "./mixin" as mixin;
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .wheel {
+    width: 16rem;
+    animation: drive 1.5s infinite linear;
+  }
+  @keyframes drive {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  p {
+    margin-top: 3rem;
+    font-size: 3rem;
+    color: mixin.$dark;
+    font-weight: 400;
+  }
+}
