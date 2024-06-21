@@ -4,7 +4,7 @@ import styles from "../styles/landing.module.scss";
 import Header from "@/components/header/Header.tsx";
 import Counties from "../components/maps/Counties.tsx";
 import SignUpButton from "@/components/landing/SignUpButton.tsx";
-import { filterPlacesByType } from "@/lib/getPlaces.ts";
+import { filterPlacesByType } from "@/lib/visit.ts";
 import Onboarding from "@/components/modals/Onboarding.tsx";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route.ts";

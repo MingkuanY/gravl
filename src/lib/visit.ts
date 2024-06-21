@@ -1,5 +1,5 @@
 import { Visit, PrismaClient } from "@prisma/client";
-import trips from "../assets/MyTravels.json";
+import trips from "../assets/MyTrips.json";
 
 const prisma = new PrismaClient();
 
