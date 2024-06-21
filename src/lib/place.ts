@@ -3,11 +3,26 @@ import counties from "../assets/Counties.json";
 
 const prisma = new PrismaClient();
 
-export async function addPlaces(id: string | undefined, type: string) {
-  const visits = await prisma.visit.findMany({
-    where: {
-      userId: id,
-    },
-  });
-  return visits;
+function idToLabel(id: string) {
+  id = id.split("St__").join("St. ");
+  id = id.split("__").join(", ");
+  id = id.split("_").join(" ");
+  return id;
 }
+
+type PlaceWithoutId = Omit<Place, "id">;
+
+export async function addPlaces(type: string, places: string[]) {
+  const formattedPlaces: PlaceWithoutId[] = places.map((place_id) => ({
+    place_id: place_id,
+    map_type: type,
+    label: idToLabel(place_id),
+  }));
+
+  const addedPlaces = await prisma.place.createMany({
+    data: formattedPlaces,
+  });
+  return addedPlaces;
+}
+
+// addPlaces("counties", counties);

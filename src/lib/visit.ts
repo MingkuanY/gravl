@@ -3,23 +3,17 @@ import trips from "../assets/MyTrips.json";
 
 const prisma = new PrismaClient();
 
-export async function getVisitsByTrip(id: string | undefined) {
-  const visits = await prisma.visit.findMany({
-    where: {
-      userId: id,
-    },
-  });
-  return visits;
-}
-
-export async function filterVisitsByType(id: string, type: string) {
-  const filteredPlaces = await prisma.place.findMany({
-    where: {
-      userId: id,
-      map_type: type,
-    },
-  });
-  return filteredPlaces;
+export async function getPlacesByUserAndType(
+  user_id: string | undefined,
+  type: string
+) {
+  const result = await prisma.$queryRaw`
+    SELECT place.place_id
+    FROM trip
+    JOIN visit ON trip.id=visit.tripId
+    JOIN place ON visit.place_id=place.id
+    WHERE trip.userId=${user_id} AND place.map_type=${type}`;
+  console.log("Result: ", result);
 }
 
 // convert and add places from MyTravels.json
@@ -31,28 +25,28 @@ type VisitInput = {
   order: number;
 };
 
-type VisitWithoutId = Omit<Visit, "id">;
+// type VisitWithoutId = Omit<Visit, "id">;
 
-export async function addTripToUser(
-  id: string,
-  type: string,
-  visits: VisitInput[]
-) {
-  const formattedVisits: VisitWithoutId[] = visits.map((visit) => ({
-    place_id: visit.place_id,
-    date: new Date(visit.date),
-    label: visit.label,
-    map_type: type,
-    userId: id,
-    order: visit.order,
-  }));
+// export async function addTripToUser(
+//   id: string,
+//   type: string,
+//   visits: VisitInput[]
+// ) {
+//   const formattedVisits: VisitWithoutId[] = visits.map((visit) => ({
+//     place_id: visit.place_id,
+//     date: new Date(visit.date),
+//     label: visit.label,
+//     map_type: type,
+//     userId: id,
+//     order: visit.order,
+//   }));
 
-  const addedVisits = await prisma.visit.createMany({
-    data: formattedVisits,
-  });
+//   const addedVisits = await prisma.visit.createMany({
+//     data: formattedVisits,
+//   });
 
-  return addedVisits;
-}
+//   return addedVisits;
+// }
 
 // mytrips.forEach(trip => {
 //   addTripToUser("clx8jlyqh000couavwktxpxr2", trip);

@@ -4,11 +4,11 @@ import styles from "../styles/landing.module.scss";
 import Header from "@/components/header/Header.tsx";
 import Counties from "../components/maps/Counties.tsx";
 import SignUpButton from "@/components/landing/SignUpButton.tsx";
-import { filterPlacesByType } from "@/lib/visit.ts";
+// import { filterPlacesByType } from "@/lib/visit.ts";
 import Onboarding from "@/components/modals/Onboarding.tsx";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route.ts";
-import { getUser, updateUser, validateUsername } from "@/lib/user.ts";
+import { updateUser, validateUsername } from "@/lib/user.ts";
 
 export default async function Landing({
   searchParams,
@@ -22,10 +22,10 @@ export default async function Landing({
   }
 
   // welcome to gravl counties map
-  const welcome_to_gravl = await filterPlacesByType(
-    "welcome_to_gravl",
-    "counties"
-  );
+  // const welcome_to_gravl = await filterPlacesByType(
+  //   "welcome_to_gravl",
+  //   "counties"
+  // );
 
   return (
     <>
@@ -39,10 +39,10 @@ export default async function Landing({
       <Header />
       <div className={styles.mainContainer}>
         <div className={styles.map}>
-          <Counties data={welcome_to_gravl} pause={5} />
+          {/* <Counties data={welcome_to_gravl} pause={5} /> */}
         </div>
         <p className={styles.motto}>Not all who wander are lost.</p>
-        <SignUpButton getUser={getUser} />
+        <SignUpButton />
       </div>
     </>
   );

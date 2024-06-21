@@ -2,10 +2,10 @@ import styles from "../../styles/dashboard.module.scss";
 import Header from "@/components/header/Header";
 import EditProfileButton from "@/components/dashboard/EditProfileButton";
 import MapLoader from "@/components/dashboard/MapLoader";
-import { getUser } from "@/lib/getUser";
+import { getUser } from "@/lib/user.ts";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route.ts";
-import { filterPlacesByType } from "@/lib/getPlaces";
+import { filterPlacesByType } from "@/lib/place";
 import NotFound from "../not-found";
 
 export default async function Dashboard({
