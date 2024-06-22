@@ -23,6 +23,31 @@ export async function getUser(email: string | undefined) {
 }
 
 /**
+ * Gets the User with the given email in the database, including their trips and visits
+ *
+ * @param email to look up the User in the database
+ * @returns the User with that email along with their trips and visits
+ */
+export async function getUserWithTripsAndVisits(email: string | undefined) {
+  if (!email) {
+    return null;
+  }
+  const user = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+    include: {
+      trips: {
+        include: {
+          visits: true,
+        },
+      },
+    },
+  });
+  return user;
+}
+
+/**
  * Updates the User's object with new username, location, and bio.
  *
  * @param email to look up the User in the database

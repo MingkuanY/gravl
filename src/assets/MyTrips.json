@@ -431,6 +431,11 @@
         "place_id": "Collier__FL",
         "date": "2014-12-20",
         "order": 16
+      },
+      {
+        "place_id": "Bahamas",
+        "date": "2014-12-23",
+        "order": 17
       }
     ]
   },
@@ -1408,7 +1413,7 @@
     "visits": [
       {
         "place_id": "GA",
-        "date": "2022-08-08",
+        "date": "2022-02-21",
         "order": 1
       },
       {

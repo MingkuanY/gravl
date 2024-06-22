@@ -2,11 +2,12 @@ import styles from "../../styles/dashboard.module.scss";
 import Header from "@/components/header/Header";
 import EditProfileButton from "@/components/dashboard/EditProfileButton";
 import MapLoader from "@/components/dashboard/MapLoader";
-import { getUser } from "@/lib/user.ts";
+import { getUser, getUserWithTripsAndVisits } from "@/lib/user.ts";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route.ts";
 import { getPlacesByUserAndType } from "@/lib/visit";
 import NotFound from "../not-found";
+import UserStats from "@/components/dashboard/UserStats";
 
 export default async function Dashboard({
   params,
@@ -22,8 +23,9 @@ export default async function Dashboard({
 
   const userEmail = session.user.email;
   const user = await getUser(userEmail);
+  const userWithTripsAndVisits = await getUserWithTripsAndVisits(userEmail);
 
-  if (!user || user.username !== params.username) {
+  if (!user || !userWithTripsAndVisits || user.username !== params.username) {
     //user not logged into the account they are trying to access
     return NotFound();
   }
@@ -32,23 +34,6 @@ export default async function Dashboard({
   const states = await getPlacesByUserAndType(user.id, "states");
   const countries = await getPlacesByUserAndType(user.id, "countries");
   const nationalparks = await getPlacesByUserAndType(user.id, "nationalparks");
-
-  // hardcoded user stats
-  const miles = 13351;
-  const thisYear = 2290;
-
-  const renderStat = (stat: number) => {
-    if (stat > 999) {
-      const number = Math.round(stat / 100) / 10;
-      return (
-        <p className={styles.stat}>
-          {number}
-          <span>k</span>
-        </p>
-      );
-    }
-    return <p className={styles.stat}>{stat}</p>;
-  };
 
   return (
     <>
@@ -69,16 +54,7 @@ export default async function Dashboard({
             <p className={styles.location}>{user!.location}</p>
             <p className={styles.bio}>{user!.bio}</p>
           </div>
-          <div className={styles.userStats}>
-            <div>
-              {renderStat(miles)}
-              <p className={styles.desc}>Miles</p>
-            </div>
-            <div>
-              {renderStat(thisYear)}
-              <p className={styles.desc}>This Year</p>
-            </div>
-          </div>
+          <UserStats trips={userWithTripsAndVisits.trips} />
         </div>
 
         <MapLoader
