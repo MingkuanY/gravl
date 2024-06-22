@@ -65,6 +65,24 @@ ul {
 
 input {
   border: none;
+  font-family: inherit;
+
+  &::placeholder {
+    font-family: inherit;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+textarea {
+  resize: none;
+  font-family: inherit;
+
+  &::placeholder {
+    font-family: inherit;
+  }
 
   &:focus {
     outline: none;

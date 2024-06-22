@@ -34,3 +34,7 @@ export function tripsThisYear(trips: Trip[]) {
 
   return tripCount;
 }
+
+// trips.forEach((trip) => {
+//   addTripToUser("clxo3r3600000t76epyeb8ksw", trip);
+// });

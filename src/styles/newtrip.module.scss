@@ -1,0 +1,132 @@
+@use "./mixin" as mixin;
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(36, 41, 47, 0.3);
+  z-index: 101;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    display: flex;
+    align-items: center;
+    background-color: mixin.$white;
+    border-radius: 2rem;
+
+    .leftSide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 2rem;
+
+      .pfp {
+        width: 12rem;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      p {
+        margin-top: 2rem;
+        color: mixin.$dark;
+        font-size: 2.75rem;
+        font-weight: 200;
+      }
+    }
+
+    .rightSide {
+      width: 50rem;
+      border-left: 0.1rem solid mixin.$light;
+      padding: 3rem 3.5rem;
+      padding-left: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .nameInput {
+        font-size: 3rem;
+        color: mixin.$dark;
+        font-weight: 400;
+        border-bottom: 0.2rem solid mixin.$gravl-blue;
+
+        &::placeholder {
+          color: mixin.$light;
+          font-size: 3rem;
+          font-weight: 400;
+          text-transform: uppercase;
+        }
+      }
+
+      .descInput {
+        margin-top: 1.5rem;
+        height: 9rem;
+        overflow: auto;
+        padding: 1.5rem 2rem;
+        border: 0.2rem solid mixin.$gravl-blue;
+        border-radius: 2rem;
+
+        color: mixin.$dark;
+        font-size: 2rem;
+        font-weight: 200;
+
+        &::placeholder {
+          color: mixin.$faded;
+          font-size: 2rem;
+          font-weight: 100;
+        }
+      }
+
+      .bottom {
+        margin-top: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .dateContainer {
+          display: flex;
+          align-items: center;
+
+          p {
+            color: mixin.$dark;
+            font-size: 2rem;
+            font-weight: 200;
+          }
+        }
+
+        button {
+          position: relative;
+          background-color: mixin.$gravl-blue;
+          padding: 1rem 1rem 1rem 2rem;
+          color: mixin.$white;
+          font-size: 2rem;
+          font-weight: 500;
+          text-transform: uppercase;
+          cursor: pointer;
+          margin-right: 2.2rem;
+          transition: transform 0.3s;
+
+          &::after {
+            content: "";
+            position: absolute;
+            border-bottom: 2.2rem solid transparent;
+            border-top: 2.2rem solid transparent;
+            border-left: 2.2rem solid mixin.$gravl-blue;
+            margin-right: -2.2rem;
+            right: 0;
+            top: 0;
+          }
+
+          &:hover {
+            transform: translateX(1rem);
+          }
+        }
+      }
+    }
+  }
+}

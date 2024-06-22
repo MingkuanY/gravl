@@ -4,8 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import styles from "../../styles/header.module.scss";
 import Icon from "../icons/Icon.tsx";
 import { signIn, signOut, useSession } from "next-auth/react";
+import LogTripButton from "./LogTripButton.tsx";
+import { User } from "@prisma/client";
 
-export default function Header() {
+export default function Header({
+  user,
+  setNewTripModal,
+}: {
+  user?: User;
+  setNewTripModal?: Function;
+}) {
   const session = useSession();
 
   // dropdown menu logic
@@ -35,9 +43,10 @@ export default function Header() {
       <div className={styles.headerRightContainer}>
         {session.status === "authenticated" && (
           <>
+            <LogTripButton />
             <div className={styles.pfpContainer} ref={dropdownRef}>
               <img
-                src={session.data?.user.image as string}
+                src={user?.image as string}
                 alt="PFP"
                 className={styles.pfp}
                 onClick={() => setUserDropdown(!userDropdown)}

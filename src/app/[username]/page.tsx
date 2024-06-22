@@ -8,11 +8,14 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route.ts";
 import { getPlacesByUserAndType } from "@/lib/visit";
 import NotFound from "../not-found";
 import UserStats from "@/components/dashboard/UserStats";
+import NewTrip from "@/components/modals/NewTrip";
 
 export default async function Dashboard({
   params,
+  searchParams,
 }: {
   params: { username: string };
+  searchParams: { log: string };
 }) {
   const session = await getServerSession(authOptions);
 
@@ -37,7 +40,8 @@ export default async function Dashboard({
 
   return (
     <>
-      <Header />
+      {searchParams.log === "trip" && <NewTrip user={user} />}
+      <Header user={user} />
 
       <div className={styles.main}>
         <div className={styles.profile}>

@@ -1,0 +1,30 @@
+@use "./mixin" as mixin;
+
+.button {
+  display: flex;
+  align-items: center;
+  background-color: mixin.$gravl-blue;
+  height: 3.5rem;
+  padding: 0 1rem;
+  border-radius: 1.75rem;
+  margin-right: 4rem;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+
+  .plus {
+    width: 2rem;
+    margin-right: 0.4rem;
+    margin-top: 0.1rem;
+  }
+
+  p {
+    color: mixin.$white;
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+}
