@@ -19,6 +19,8 @@ interface MapLoaderProps {
   nationalparks: Place[];
 }
 
+export const mapNames = ["counties", "states", "countries", "national parks"];
+
 export default function MapLoader({
   counties,
   states,
@@ -26,7 +28,6 @@ export default function MapLoader({
   nationalparks,
 }: MapLoaderProps) {
   // available maps
-  const maps = ["counties", "states", "countries", "national parks"];
 
   // total counts of each map imported from the map components
   const totalCounts = [
@@ -82,6 +83,7 @@ export default function MapLoader({
       case 0:
         return (
           <Counties
+            animate={true}
             data={counties}
             updateCount={updateCount}
             total={count[0]}
@@ -92,6 +94,7 @@ export default function MapLoader({
       case 1:
         return (
           <States
+            animate={true}
             data={states}
             updateCount={updateCount}
             total={count[1]}
@@ -101,6 +104,7 @@ export default function MapLoader({
       case 2:
         return (
           <Countries
+            animate={true}
             data={countries}
             updateCount={updateCount}
             total={count[2]}
@@ -110,6 +114,7 @@ export default function MapLoader({
       case 3:
         return (
           <NationalParks
+            animate={true}
             data={nationalparks}
             updateCount={updateCount}
             total={count[3]}
@@ -130,7 +135,7 @@ export default function MapLoader({
       </div>
 
       <div className={styles.stats}>
-        {maps.map((map, index) => (
+        {mapNames.map((map, index) => (
           <div
             className={`${styles.progressContainer} ${
               currentMap === index && styles.selected

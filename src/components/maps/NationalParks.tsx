@@ -12,6 +12,9 @@ export default function NationalParks({
   updateCount,
   total,
   reload,
+  animate,
+  visits,
+  setVisits,
 }: MapProps) {
   const startColor = "#319fff";
   const endColor = "#319fff";
@@ -21,25 +24,29 @@ export default function NationalParks({
   const mapRef = useRef<SVGSVGElement>(null);
   const colors = interpolateColors(1, startColor, endColor);
 
-  useEffect(() => {
-    resetMap();
-    const clearTimeouts = loadMapWithChildren(data, 200, colors, updateCount);
-    return () => {
-      clearTimeouts();
-      updateCount && updateCount(total);
-    };
-  }, [reload]);
+  if (animate && data) {
+    // we want to animate the data based on the other props
 
-  const resetMap = () => {
-    updateCount && updateCount(0);
-    (
-      mapRef.current?.querySelectorAll(
-        `.${styles.park} path`
-      ) as NodeListOf<SVGPathElement>
-    ).forEach((park: SVGPathElement) => {
-      park.style.fill = defaultColor;
-    });
-  };
+    useEffect(() => {
+      resetMap();
+      const clearTimeouts = loadMapWithChildren(data, 200, colors, updateCount);
+      return () => {
+        clearTimeouts();
+        updateCount && updateCount(total);
+      };
+    }, [reload]);
+
+    const resetMap = () => {
+      updateCount && updateCount(0);
+      (
+        mapRef.current?.querySelectorAll(
+          `.${styles.park} path`
+        ) as NodeListOf<SVGPathElement>
+      ).forEach((park: SVGPathElement) => {
+        park.style.fill = defaultColor;
+      });
+    };
+  }
 
   return (
     <svg ref={mapRef} id={styles.map} viewBox="0 0 1000 700">

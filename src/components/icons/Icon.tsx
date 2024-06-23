@@ -350,5 +350,32 @@ export default function Icon({ type, fill }: { type: string; fill: string }) {
           <rect x="13" y="16" width="4" height="2" rx="0.5" fill={fill} />
         </svg>
       );
+    case "map":
+      return (
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M28 4.46875L26.5938 5.09375L19.9688 7.9375L12.3438 5.0625L11.9688 4.9375L11.5938 5.09375L4.59375 8.09375L4 8.34375V9V26V27.5312L5.40625 26.9062L12.0312 24.0625L19.6562 26.9375L20.0312 27.0625L20.4062 26.9062L27.4062 23.9062L28 23.6562V23V6V4.46875ZM13 7.4375L19 9.6875V24.5625L13 22.3125V7.4375ZM11 7.5V22.3438L6 24.5V9.65625L11 7.5ZM26 7.5V22.3438L21 24.5V9.65625L26 7.5Z"
+            fill={fill}
+          />
+        </svg>
+      );
+    case "back_arrow":
+      return (
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M15 18L9 12L15 6" stroke={fill} stroke-width="2" />
+        </svg>
+      );
   }
 }

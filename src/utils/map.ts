@@ -1,3 +1,4 @@
+import { VisitInput } from "@/lib/visit";
 import { Place } from "@prisma/client";
 
 export const loadMap = (
@@ -58,9 +59,12 @@ export const loadMapWithChildren = (
 };
 
 export type MapProps = {
-  data: Place[];
+  data?: Place[];
   updateCount?: Function;
   total?: number;
   reload?: boolean;
   pause?: number;
+  animate: boolean;
+  visits?: VisitInput[];
+  setVisits?: Function;
 };

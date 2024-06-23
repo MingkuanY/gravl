@@ -1,0 +1,11 @@
+@use "./mixin" as mixin;
+
+.datePickerContainer {
+  margin-left: 1rem;
+
+  .dateInput {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: mixin.$gravl-blue;
+  }
+}

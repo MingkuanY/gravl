@@ -1,0 +1,226 @@
+@use "./mixin" as mixin;
+
+.container {
+  height: 65rem;
+  padding: 5rem 0;
+  display: flex;
+  align-items: center;
+  background-color: mixin.$white;
+  border-radius: 4rem;
+
+  .leftSide {
+    margin-right: 1rem;
+    padding-left: 4rem;
+    width: 80rem;
+    overflow-x: hidden;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .titleContainer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .name,
+      .dayCount {
+        color: mixin.$dark;
+        font-size: 3rem;
+        font-weight: 200;
+      }
+    }
+
+    /* map */
+
+    .mapContainer {
+      margin-top: 4rem;
+      margin-left: -4rem;
+      width: 80rem;
+      height: 45rem;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      &.largeMapContainer {
+        width: 80rem;
+      }
+    }
+
+    .mapPickerContainer {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+
+      .currentMapName {
+        margin-right: 1rem;
+        color: mixin.$gravl-blue;
+        font-size: 1.4rem;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+
+      .popupButton {
+        width: 4rem;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 0.2rem solid mixin.$light-blue;
+        background-color: mixin.$very-light-blue;
+        transition: 0.3s;
+        cursor: pointer;
+
+        .mapIcon {
+          width: 2.6rem;
+          margin: auto;
+          margin-top: 0.2rem;
+        }
+      }
+
+      .popupContainer {
+        position: absolute;
+        bottom: calc(100% + 1rem);
+        right: 0;
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: mixin.$very-light;
+        border-radius: 1rem;
+        border: 0.2rem solid mixin.$light-blue;
+        cursor: pointer;
+
+        .mapNames {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: mixin.$dark;
+          font-size: 1.4rem;
+          font-weight: 400;
+          text-transform: uppercase;
+          padding: 1rem 2rem;
+          text-wrap: nowrap;
+          cursor: pointer;
+          width: 100%;
+          transition: 0.3s;
+
+          &:hover,
+          &.selected {
+            color: mixin.$gravl-blue;
+          }
+        }
+      }
+    }
+  }
+
+  .rightSide {
+    height: 100%;
+    width: 24rem;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-left: 0.2rem solid mixin.$light;
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+
+      .heading {
+        color: mixin.$dark;
+        font-size: 2rem;
+        font-weight: 400;
+      }
+
+      .dateChanger {
+        margin-top: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        .backDate,
+        .forwardDate {
+          cursor: pointer;
+          width: 3rem;
+          aspect-ratio: 1;
+          border-radius: 50%;
+          margin: auto;
+        }
+
+        .backDate {
+          background-color: mixin.$light-blue;
+
+          .back_arrow {
+            width: 2rem;
+            margin: auto;
+            margin-top: 0.2rem;
+          }
+        }
+
+        .currentDate {
+          width: 11rem;
+          height: 3rem;
+          border-radius: 1rem;
+          border: 0.2rem solid mixin.$light-blue;
+          background-color: mixin.$very-light-blue;
+          color: mixin.$gravl-blue;
+          font-size: 1.6rem;
+          font-weight: 400;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .forwardDate {
+          background-color: mixin.$gravl-blue;
+
+          .forward_arrow {
+            width: 2rem;
+            margin: auto;
+            transform: rotate(180deg);
+            margin-bottom: 0.2rem;
+          }
+        }
+      }
+    }
+
+    .visitedList {
+      padding: 3rem 0;
+      flex: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: scroll;
+
+      .placeholderForList {
+        color: mixin.$faded;
+        font-size: 1.3rem;
+        font-weight: 200;
+      }
+
+      .visitedPlace {
+        margin-bottom: 2rem;
+        color: mixin.$gravl-blue;
+        font-size: 1.6rem;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+    }
+
+    .finish {
+      width: 15rem;
+      height: 4rem;
+      border-radius: 2rem;
+      background-color: mixin.$gravl-blue;
+      text-align: center;
+      color: mixin.$white;
+      font-size: 2rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+  }
+}

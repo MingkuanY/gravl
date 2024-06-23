@@ -39,13 +39,13 @@ export async function getPlacesByUserAndType(
 
 // Convert and add places from MyTrips.json
 
-type VisitInput = {
+export type VisitInput = {
   place_id: string;
   date: string;
   order: number;
 };
 
-type TripInput = {
+export type TripInput = {
   trip_name: string;
   description: string;
   visits: VisitInput[];

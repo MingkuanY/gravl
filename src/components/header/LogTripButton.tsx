@@ -10,7 +10,7 @@ export default function LogTripButton() {
 
   return (
     <button
-      onClick={() => router.push(`${pathname}?log=trip`)}
+      onClick={() => router.push(`${pathname}?log=tripInfo`)}
       className={styles.button}
     >
       <div className={styles.plus}>

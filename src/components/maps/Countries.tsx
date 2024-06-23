@@ -12,6 +12,9 @@ export default function Countries({
   updateCount,
   total,
   reload,
+  animate,
+  visits,
+  setVisits,
 }: MapProps) {
   const startColor = "#319fff";
   const endColor = "#319fff";
@@ -20,25 +23,29 @@ export default function Countries({
   const mapRef = useRef<SVGSVGElement>(null);
   const colors = interpolateColors(1, startColor, endColor);
 
-  useEffect(() => {
-    resetMap();
-    const clearTimeouts = loadMap(data, 250, colors, updateCount);
-    return () => {
-      clearTimeouts();
-      updateCount && updateCount(total);
-    };
-  }, [reload]);
+  if (animate && data) {
+    // we want to animate the data based on the other props
 
-  const resetMap = () => {
-    updateCount && updateCount(0);
-    (
-      mapRef.current?.querySelectorAll(
-        "svg > g > path"
-      ) as NodeListOf<SVGPathElement>
-    ).forEach((country: SVGPathElement) => {
-      country.style.fill = defaultColor;
-    });
-  };
+    useEffect(() => {
+      resetMap();
+      const clearTimeouts = loadMap(data, 250, colors, updateCount);
+      return () => {
+        clearTimeouts();
+        updateCount && updateCount(total);
+      };
+    }, [reload]);
+
+    const resetMap = () => {
+      updateCount && updateCount(0);
+      (
+        mapRef.current?.querySelectorAll(
+          "svg > g > path"
+        ) as NodeListOf<SVGPathElement>
+      ).forEach((country: SVGPathElement) => {
+        country.style.fill = defaultColor;
+      });
+    };
+  }
 
   return (
     <svg

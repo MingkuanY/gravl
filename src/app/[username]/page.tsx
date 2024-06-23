@@ -40,34 +40,36 @@ export default async function Dashboard({
 
   return (
     <>
-      {searchParams.log === "trip" && <NewTrip user={user} />}
+      {searchParams.log && <NewTrip user={user} searchParams={searchParams} />}
       <Header user={user} />
 
-      <div className={styles.main}>
-        <div className={styles.profile}>
-          <div className={styles.pfpContainer}>
-            <img src={user!.image!} alt="PFP" />
-          </div>
-          <div className={styles.userInfo}>
-            <div className={styles.usernameAndEdit}>
-              <p className={styles.username}>{user!.username}</p>
-              <div className={styles.edit}>
-                <EditProfileButton />
-              </div>
+      {!searchParams.log && (
+        <div className={styles.main}>
+          <div className={styles.profile}>
+            <div className={styles.pfpContainer}>
+              <img src={user!.image!} alt="PFP" />
             </div>
-            <p className={styles.location}>{user!.location}</p>
-            <p className={styles.bio}>{user!.bio}</p>
+            <div className={styles.userInfo}>
+              <div className={styles.usernameAndEdit}>
+                <p className={styles.username}>{user!.username}</p>
+                <div className={styles.edit}>
+                  <EditProfileButton />
+                </div>
+              </div>
+              <p className={styles.location}>{user!.location}</p>
+              <p className={styles.bio}>{user!.bio}</p>
+            </div>
+            <UserStats trips={userWithTripsAndVisits.trips} />
           </div>
-          <UserStats trips={userWithTripsAndVisits.trips} />
-        </div>
 
-        <MapLoader
-          counties={counties}
-          states={states}
-          countries={countries}
-          nationalparks={nationalparks}
-        />
-      </div>
+          <MapLoader
+            counties={counties}
+            states={states}
+            countries={countries}
+            nationalparks={nationalparks}
+          />
+        </div>
+      )}
     </>
   );
 }

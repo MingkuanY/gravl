@@ -13,6 +13,9 @@ export default function Counties({
   total,
   reload,
   pause,
+  animate,
+  visits,
+  setVisits,
 }: MapProps) {
   const livedInColor = "#319fff";
   const startColor = "#319fff";
@@ -23,25 +26,29 @@ export default function Counties({
   // Edit to add color gradient for time spent in each county. Currently hardcoded
   const colors = interpolateColors(1, startColor, endColor, livedInColor);
 
-  useEffect(() => {
-    resetMap();
-    const clearTimeouts = loadMap(data, pause, colors, updateCount);
-    return () => {
-      clearTimeouts();
-      updateCount && updateCount(total);
-    };
-  }, [reload]);
+  if (animate && data) {
+    // we want to animate the data based on the other props
 
-  const resetMap = () => {
-    updateCount && updateCount(0);
-    (
-      mapRef.current?.querySelectorAll(
-        "svg > path"
-      ) as NodeListOf<SVGPathElement>
-    ).forEach((county: SVGPathElement) => {
-      county.style.fill = defaultColor;
-    });
-  };
+    useEffect(() => {
+      resetMap();
+      const clearTimeouts = loadMap(data, pause, colors, updateCount);
+      return () => {
+        clearTimeouts();
+        updateCount && updateCount(total);
+      };
+    }, [reload]);
+
+    const resetMap = () => {
+      updateCount && updateCount(0);
+      (
+        mapRef.current?.querySelectorAll(
+          "svg > path"
+        ) as NodeListOf<SVGPathElement>
+      ).forEach((county: SVGPathElement) => {
+        county.style.fill = defaultColor;
+      });
+    };
+  }
 
   return (
     <svg
