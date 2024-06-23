@@ -7,13 +7,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import LogTripButton from "./LogTripButton.tsx";
 import { User } from "@prisma/client";
 
-export default function Header({
-  user,
-  setNewTripModal,
-}: {
-  user?: User;
-  setNewTripModal?: Function;
-}) {
+export default function Header({ user }: { user?: User }) {
   const session = useSession();
 
   // dropdown menu logic

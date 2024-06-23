@@ -3,7 +3,7 @@
 import styles from "../../styles/nationalparks.module.scss";
 import { useEffect, useRef } from "react";
 import { interpolateColors } from "../../utils/color";
-import { loadMapWithChildren, MapProps } from "../../utils/map";
+import { handleMapClick, loadMapWithChildren, MapProps } from "../../utils/map";
 
 export const totalNationalparks = 63;
 
@@ -49,7 +49,12 @@ export default function NationalParks({
   }
 
   return (
-    <svg ref={mapRef} id={styles.map} viewBox="0 0 1000 700">
+    <svg
+      ref={mapRef}
+      id={styles.map}
+      viewBox="0 0 1000 700"
+      onClick={handleMapClick}
+    >
       <g id="ID_" className={styles.state}>
         <path
           id="ID"

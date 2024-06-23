@@ -3,7 +3,7 @@
 import styles from "../../styles/states.module.scss";
 import { useEffect, useRef } from "react";
 import { interpolateColors } from "../../utils/color";
-import { loadMap, MapProps } from "../../utils/map";
+import { handleMapClick, loadMap, MapProps } from "../../utils/map";
 
 export const totalStates = 50; // plus DC
 
@@ -54,6 +54,7 @@ export default function States({
       id={styles.map}
       viewBox="0 0 1000 700"
       version="1.1"
+      onClick={handleMapClick}
     >
       <g id="ID_group">
         <path

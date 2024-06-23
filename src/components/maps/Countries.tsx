@@ -3,7 +3,7 @@
 import styles from "../../styles/countries.module.scss";
 import { useEffect, useRef } from "react";
 import { interpolateColors } from "../../utils/color";
-import { loadMap, MapProps } from "../../utils/map";
+import { handleMapClick, loadMap, MapProps } from "../../utils/map";
 
 export const totalCountries = 195;
 
@@ -56,6 +56,7 @@ export default function Countries({
       strokeLinejoin="round"
       version="1.2"
       ref={mapRef}
+      onClick={handleMapClick}
     >
       <g id="g4311" fillOpacity={1}>
         <path

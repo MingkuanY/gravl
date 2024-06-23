@@ -9,6 +9,7 @@ import { getPlacesByUserAndType } from "@/lib/visit";
 import NotFound from "../not-found";
 import UserStats from "@/components/dashboard/UserStats";
 import NewTrip from "@/components/modals/NewTrip";
+import { getPlaceByID } from "@/lib/place";
 
 export default async function Dashboard({
   params,
@@ -40,7 +41,13 @@ export default async function Dashboard({
 
   return (
     <>
-      {searchParams.log && <NewTrip user={user} searchParams={searchParams} />}
+      {searchParams.log && (
+        <NewTrip
+          user={user}
+          searchParams={searchParams}
+          getPlace={getPlaceByID}
+        />
+      )}
       <Header user={user} />
 
       {!searchParams.log && (

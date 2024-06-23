@@ -3,7 +3,7 @@
 import styles from "../../styles/counties.module.scss";
 import { useEffect, useRef } from "react";
 import { interpolateColors } from "../../utils/color.ts";
-import { MapProps, loadMap } from "../../utils/map.ts";
+import { MapProps, handleMapClick, loadMap } from "../../utils/map.ts";
 
 export const totalCounties = 3413;
 
@@ -14,8 +14,8 @@ export default function Counties({
   reload,
   pause,
   animate,
-  visits,
   setVisits,
+  onPlaceClick,
 }: MapProps) {
   const livedInColor = "#319fff";
   const startColor = "#319fff";
@@ -56,6 +56,7 @@ export default function Counties({
       viewBox="0 0 1460 1000"
       xmlns="http://www.w3.org/2000/svg"
       id={styles.map}
+      onClick={handleMapClick}
     >
       {/* COUNTIES */}
       <path

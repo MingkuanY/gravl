@@ -9,15 +9,18 @@ import { VisitInput } from "@/lib/visit";
 import { mapNames } from "../dashboard/MapLoader";
 import Icon from "../icons/Icon";
 import { addDays, formatMDYShortDate } from "@/utils/date";
+import { getPlaceByID } from "@/lib/place";
 
 export default function ManualFillCard({
   tripData,
   visits,
   setVisitsData,
+  getPlace,
 }: {
   tripData: BasicTripInfo;
   visits: VisitInput[];
   setVisitsData: Function;
+  getPlace: Function;
 }) {
   const [dayCount, setDayCount] = useState(1);
   const getCurrentDate = () => {
@@ -55,29 +58,13 @@ export default function ManualFillCard({
   const renderMap = (index: number) => {
     switch (index) {
       case 0:
-        return (
-          <Counties animate={false} visits={visits} setVisits={setVisitsData} />
-        );
+        return <Counties animate={false} setVisits={setVisitsData} />;
       case 1:
-        return (
-          <States animate={false} visits={visits} setVisits={setVisitsData} />
-        );
+        return <States animate={false} setVisits={setVisitsData} />;
       case 2:
-        return (
-          <Countries
-            animate={false}
-            visits={visits}
-            setVisits={setVisitsData}
-          />
-        );
+        return <Countries animate={false} setVisits={setVisitsData} />;
       case 3:
-        return (
-          <NationalParks
-            animate={false}
-            visits={visits}
-            setVisits={setVisitsData}
-          />
-        );
+        return <NationalParks animate={false} setVisits={setVisitsData} />;
     }
   };
 

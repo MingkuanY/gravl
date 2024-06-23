@@ -1,3 +1,5 @@
+"use server";
+
 import { Place, PrismaClient } from "@prisma/client";
 import counties from "../assets/Counties.json";
 
@@ -27,3 +29,12 @@ export async function addPlaces(type: string, places: string[]) {
 }
 
 // addPlaces("counties", counties);
+
+export async function getPlaceByID(id: string) {
+  const place = await prisma.place.findUnique({
+    where: {
+      place_id: id,
+    },
+  });
+  return place;
+}

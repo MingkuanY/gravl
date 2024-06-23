@@ -1,3 +1,4 @@
+import { getPlaceByID } from "@/lib/place";
 import { VisitInput } from "@/lib/visit";
 import { Place } from "@prisma/client";
 
@@ -58,6 +59,21 @@ export const loadMapWithChildren = (
   };
 };
 
+export const handleMapClick = async (
+  event: React.MouseEvent<SVGSVGElement, MouseEvent>
+) => {
+  const color = "#319fff";
+  const defaultDark = "#012241";
+  const target = event.target as SVGPathElement;
+  const placeID = target.id;
+  const place = await getPlaceByID(placeID);
+  if (place) {
+    const element = document.getElementById(placeID);
+    console.log("Visited ", placeID);
+    element!.style.fill = color;
+  }
+};
+
 export type MapProps = {
   data?: Place[];
   updateCount?: Function;
@@ -65,6 +81,6 @@ export type MapProps = {
   reload?: boolean;
   pause?: number;
   animate: boolean;
-  visits?: VisitInput[];
   setVisits?: Function;
+  onPlaceClick?: Function;
 };

@@ -374,7 +374,7 @@ export default function Icon({ type, fill }: { type: string; fill: string }) {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="M15 18L9 12L15 6" stroke={fill} stroke-width="2" />
+          <path d="M15 18L9 12L15 6" stroke={fill} strokeWidth="2" />
         </svg>
       );
   }
