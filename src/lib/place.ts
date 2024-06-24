@@ -41,11 +41,17 @@ export async function addPlaces(type: string, places: string[]) {
 //   return place;
 // }
 
-export async function loadPlaceIDs() {
+export async function loadPlaces() {
   const places = await prisma.place.findMany({
     select: {
       place_id: true,
+      label: true,
     },
   });
-  return new Set(places.map((place) => place.place_id));
+  return places;
 }
+
+export type PlaceInput = {
+  place_id: string;
+  label: string;
+};

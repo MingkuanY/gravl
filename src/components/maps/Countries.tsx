@@ -13,7 +13,7 @@ export default function Countries({
   total,
   reload,
   animate,
-  places,
+  placeIDs,
   visits,
   setVisits,
   currentDate,
@@ -58,7 +58,7 @@ export default function Countries({
       strokeLinejoin="round"
       version="1.2"
       ref={mapRef}
-      onClick={handleMapClick(places!, visits!, setVisits!, currentDate!)}
+      onClick={handleMapClick(placeIDs!, visits!, setVisits!, currentDate!)}
     >
       <g id="g4311" fillOpacity={1}>
         <path

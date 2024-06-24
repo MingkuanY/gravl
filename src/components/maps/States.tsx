@@ -13,7 +13,7 @@ export default function States({
   total,
   reload,
   animate,
-  places,
+  placeIDs,
   visits,
   setVisits,
   currentDate,
@@ -56,7 +56,7 @@ export default function States({
       id={styles.map}
       viewBox="0 0 1000 700"
       version="1.1"
-      onClick={handleMapClick(places!, visits!, setVisits!, currentDate!)}
+      onClick={handleMapClick(placeIDs!, visits!, setVisits!, currentDate!)}
     >
       <g id="ID_group">
         <path

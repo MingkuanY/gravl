@@ -103,7 +103,7 @@ export type MapProps = {
   reload?: boolean;
   pause?: number;
   animate: boolean;
-  places?: Set<string>;
+  placeIDs?: Set<string>;
   visits: VisitInput[];
   setVisits: Function;
   currentDate: string;

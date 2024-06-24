@@ -137,7 +137,7 @@
       }
 
       .dateChanger {
-        margin-top: 0.5rem;
+        margin: 0.5rem 0 2rem;
         display: flex;
         justify-content: space-between;
         width: 100%;
@@ -189,7 +189,7 @@
     }
 
     .visitedList {
-      padding: 3rem 0;
+      padding: 1rem 0;
       flex: auto;
       display: flex;
       flex-direction: column;
@@ -212,8 +212,9 @@
     }
 
     .finish {
+      margin-top: 2rem;
       width: 15rem;
-      height: 4rem;
+      min-height: 4rem;
       border-radius: 2rem;
       background-color: mixin.$gravl-blue;
       text-align: center;

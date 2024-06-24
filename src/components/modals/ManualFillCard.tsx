@@ -11,6 +11,7 @@ import { VisitInput } from "@/lib/visit";
 import { mapNames } from "../dashboard/MapLoader";
 import Icon from "../icons/Icon";
 import { addDays, formatMDYShortDate } from "@/utils/date";
+import { PlaceInput } from "@/lib/place";
 
 export default function ManualFillCard({
   tripData,
@@ -21,8 +22,13 @@ export default function ManualFillCard({
   tripData: BasicTripInfo;
   visits: VisitInput[];
   setVisitsData: Function;
-  places: Set<string>;
+  places: PlaceInput[];
 }) {
+  const placeIDs = new Set(places.map((place) => place.place_id));
+  const placesMap = new Map(
+    places.map((place) => [place.place_id, place.label])
+  );
+
   const [dayCount, setDayCount] = useState(1);
   const getCurrentDate = () => {
     return addDays(tripData.start_date, dayCount - 1);
@@ -61,7 +67,7 @@ export default function ManualFillCard({
         return (
           <Counties
             animate={false}
-            places={places}
+            placeIDs={placeIDs}
             visits={visits}
             setVisits={setVisitsData}
             currentDate={getCurrentDate()}
@@ -71,7 +77,7 @@ export default function ManualFillCard({
         return (
           <States
             animate={false}
-            places={places}
+            placeIDs={placeIDs}
             visits={visits}
             setVisits={setVisitsData}
             currentDate={getCurrentDate()}
@@ -81,7 +87,7 @@ export default function ManualFillCard({
         return (
           <Countries
             animate={false}
-            places={places}
+            placeIDs={placeIDs}
             visits={visits}
             setVisits={setVisitsData}
             currentDate={getCurrentDate()}
@@ -91,7 +97,7 @@ export default function ManualFillCard({
         return (
           <NationalParks
             animate={false}
-            places={places}
+            placeIDs={placeIDs}
             visits={visits}
             setVisits={setVisitsData}
             currentDate={getCurrentDate()}
@@ -139,6 +145,7 @@ export default function ManualFillCard({
                   onClick={() => {
                     if (index !== currentMap) {
                       setCurrentMap(index);
+                      setMapPopup(false);
                     }
                   }}
                 >
@@ -183,7 +190,7 @@ export default function ManualFillCard({
           {visitsOnCurrentDate().length > 0 ? (
             visitsOnCurrentDate().map((visit, index) => (
               <p className={styles.visitedPlace} key={index}>
-                {visit.place_id}
+                {placesMap.get(visit.place_id)}
               </p>
             ))
           ) : (

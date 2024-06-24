@@ -13,7 +13,7 @@ export default function NationalParks({
   total,
   reload,
   animate,
-  places,
+  placeIDs,
   visits,
   setVisits,
   currentDate,
@@ -55,7 +55,7 @@ export default function NationalParks({
       ref={mapRef}
       id={styles.map}
       viewBox="0 0 1000 700"
-      onClick={handleMapClick(places!, visits!, setVisits!, currentDate!)}
+      onClick={handleMapClick(placeIDs!, visits!, setVisits!, currentDate!)}
     >
       <g id="ID_" className={styles.state}>
         <path

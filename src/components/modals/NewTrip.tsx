@@ -5,6 +5,7 @@ import { useState } from "react";
 import { User } from "@prisma/client";
 import BasicTripInfoCard from "./BasicTripInfoCard";
 import ManualFillCard from "./ManualFillCard";
+import { PlaceInput } from "@/lib/place";
 
 export default function NewTrip({
   user,
@@ -12,7 +13,7 @@ export default function NewTrip({
   searchParams,
 }: {
   user: User;
-  places: Set<string>;
+  places: PlaceInput[];
   searchParams: { log: string };
 }) {
   const [tripData, setTripData] = useState({
