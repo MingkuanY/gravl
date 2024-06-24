@@ -10,7 +10,12 @@
     align-items: center;
     justify-content: center;
     width: 60rem;
-    margin: -4rem auto 0 12%;
+    margin: -4rem auto 0;
+    transition: transform 0.3s ease;
+
+    &.shifted {
+      transform: translateX(5rem);
+    }
 
     /* user profile */
 

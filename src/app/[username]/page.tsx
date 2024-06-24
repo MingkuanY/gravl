@@ -18,7 +18,7 @@ export default async function Dashboard({
   searchParams,
 }: {
   params: { username: string };
-  searchParams: { log: string };
+  searchParams: { log: string; timeline: string };
 }) {
   const session = await getServerSession(authOptions);
 
@@ -54,7 +54,11 @@ export default async function Dashboard({
       {!searchParams.log && (
         <div className={styles.container}>
           <Timeline trips={trips} />
-          <div className={styles.main}>
+          <div
+            className={`${styles.main} ${
+              searchParams.timeline === "open" ? styles.shifted : ""
+            }`}
+          >
             <div className={styles.profile}>
               <div className={styles.pfpContainer}>
                 <img src={user!.image!} alt="PFP" />

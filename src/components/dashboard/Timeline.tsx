@@ -5,13 +5,19 @@ import LogTripButton from "./LogTripButton";
 import TripCard from "./TripCard";
 import { formatDates } from "@/utils/date";
 import { TripWithVisits, getTripDates } from "@/lib/trip";
-import { Trip, Visit } from "@prisma/client";
+import { useSearchParams } from "next/navigation";
 
 export default function Timeline({ trips }: { trips: TripWithVisits[] }) {
-  // Assume trips is already sorted by start date
+  // Assume trips is already sorted in recent-first order by start date
+
+  const searchParams = useSearchParams();
 
   return (
-    <div className={styles.timeline}>
+    <div
+      className={`${styles.timeline} ${
+        searchParams.get("timeline") === "open" ? styles.open : ""
+      }`}
+    >
       <LogTripButton />
       <div className={styles.pastTrips}>
         {trips.map((trip, index) => {

@@ -2,12 +2,19 @@
 
 .timeline {
   margin-left: 6rem;
-  position: relative;
+  position: absolute;
+  top: mixin.$header-height;
+  left: -50rem;
   height: calc(
     100vh - #{mixin.$header-height} - 5rem
   ); // subtract out header and the padding-bottom of the entire page container
   display: flex;
   flex-direction: column;
+  transition: left 0.5s ease;
+
+  &.open {
+    left: 0;
+  }
 
   /* vertical timeline stem */
   &::before {
