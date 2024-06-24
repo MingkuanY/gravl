@@ -1,0 +1,101 @@
+@use "./mixin" as mixin;
+
+.timeline {
+  margin-left: 6rem;
+  position: relative;
+  height: calc(
+    100vh - #{mixin.$header-height} - 5rem
+  ); // subtract out header and the padding-bottom of the entire page container
+  display: flex;
+  flex-direction: column;
+
+  /* vertical timeline stem */
+  &::before {
+    content: "";
+    position: absolute;
+    width: 0.5rem;
+    height: 100vh;
+    top: -#{mixin.$header-height};
+    right: 0;
+    background: mixin.$gravl-blue;
+  }
+
+  .pastTrips {
+    margin-top: 1rem;
+    margin-left: -15rem;
+    padding-right: 15rem;
+    padding-bottom: 3rem;
+    transform: translateX(15rem);
+    position: relative;
+    flex: auto;
+    overflow-y: auto;
+    scrollbar-width: none;
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 1rem,
+      black calc(100% - 4rem),
+      transparent 100%
+    );
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tripCheckpoint {
+      position: relative;
+      padding: 0.7rem 0 0.7rem;
+      max-width: 30rem;
+      border-right: 0.5rem solid mixin.$gravl-blue;
+      padding-right: 4rem;
+
+      /* horizontal stem to timeline */
+      &::before {
+        content: "";
+        background: mixin.$gravl-blue;
+        opacity: 0.25;
+        width: 4rem;
+        height: 0.2rem;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0;
+        z-index: -1;
+      }
+
+      > div::before {
+        content: "";
+        background: mixin.$gravl-blue;
+        width: 1.5rem;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: -1rem;
+      }
+
+      .year,
+      .dates {
+        position: absolute;
+        left: calc(100% + 2rem);
+        font-weight: 300;
+        font-style: italic;
+        color: mixin.$dark;
+        white-space: nowrap;
+        width: fit-content;
+      }
+
+      .year {
+        top: 10%;
+        font-size: 2rem;
+      }
+
+      .dates {
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.4rem;
+      }
+    }
+  }
+}

@@ -17,9 +17,9 @@ export default function NewTrip({
   searchParams: { log: string };
 }) {
   const [tripData, setTripData] = useState({
-    trip_name: "A Floridian Thanksgiving",
-    description: "Twas fun.",
-    start_date: "2024-06-16",
+    trip_name: "",
+    description: "",
+    start_date: "",
   });
 
   const [visitsData, setVisitsData] = useState([]);

@@ -10,6 +10,8 @@ import NotFound from "../not-found";
 import UserStats from "@/components/dashboard/UserStats";
 import NewTrip from "@/components/modals/NewTrip";
 import { loadPlaces } from "@/lib/place";
+import Timeline from "@/components/dashboard/Timeline";
+import { loadTripsRecentFirst } from "@/lib/trip";
 
 export default async function Dashboard({
   params,
@@ -40,6 +42,7 @@ export default async function Dashboard({
   const nationalparks = await getPlacesByUserAndType(user.id, "nationalparks");
 
   let places = await loadPlaces();
+  let trips = await loadTripsRecentFirst(user.id);
 
   return (
     <>
@@ -49,30 +52,33 @@ export default async function Dashboard({
       <Header user={user} />
 
       {!searchParams.log && (
-        <div className={styles.main}>
-          <div className={styles.profile}>
-            <div className={styles.pfpContainer}>
-              <img src={user!.image!} alt="PFP" />
-            </div>
-            <div className={styles.userInfo}>
-              <div className={styles.usernameAndEdit}>
-                <p className={styles.username}>{user!.username}</p>
-                <div className={styles.edit}>
-                  <EditProfileButton />
-                </div>
+        <div className={styles.container}>
+          <Timeline trips={trips} />
+          <div className={styles.main}>
+            <div className={styles.profile}>
+              <div className={styles.pfpContainer}>
+                <img src={user!.image!} alt="PFP" />
               </div>
-              <p className={styles.location}>{user!.location}</p>
-              <p className={styles.bio}>{user!.bio}</p>
+              <div className={styles.userInfo}>
+                <div className={styles.usernameAndEdit}>
+                  <p className={styles.username}>{user!.username}</p>
+                  <div className={styles.edit}>
+                    <EditProfileButton />
+                  </div>
+                </div>
+                <p className={styles.location}>{user!.location}</p>
+                <p className={styles.bio}>{user!.bio}</p>
+              </div>
+              <UserStats trips={userWithTripsAndVisits.trips} />
             </div>
-            <UserStats trips={userWithTripsAndVisits.trips} />
-          </div>
 
-          <MapLoader
-            counties={counties}
-            states={states}
-            countries={countries}
-            nationalparks={nationalparks}
-          />
+            <MapLoader
+              counties={counties}
+              states={states}
+              countries={countries}
+              nationalparks={nationalparks}
+            />
+          </div>
         </div>
       )}
     </>

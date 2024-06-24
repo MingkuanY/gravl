@@ -195,6 +195,17 @@
       flex-direction: column;
       align-items: center;
       overflow-y: scroll;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 1.5rem,
+        black calc(100% - 4rem),
+        transparent 100%
+      );
 
       .placeholderForList {
         color: mixin.$faded;
@@ -207,7 +218,6 @@
         color: mixin.$gravl-blue;
         font-size: 1.6rem;
         font-weight: 400;
-        text-transform: uppercase;
       }
     }
 
@@ -223,6 +233,16 @@
       font-weight: 500;
       text-transform: uppercase;
       cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: mixin.$darker-blue;
+      }
+
+      &.unselectable {
+        background-color: mixin.$light-blue;
+        cursor: default;
+      }
     }
   }
 }

@@ -28,6 +28,12 @@ export const shortMonthAbbreviations = [
   "Dec",
 ];
 
+/**
+ * Formats date from YYYY-MM-DD to long abbreviation format.
+ *
+ * @param dateString date in YYYY-MM-DD format
+ * @returns date in "June 21" (aka long abbreviation) format for timeline
+ */
 export const formatDate = (dateString: string) => {
   const dateObj = new Date(dateString);
 
@@ -38,21 +44,39 @@ export const formatDate = (dateString: string) => {
   return formattedDate;
 };
 
+/**
+ * Returns duration given the start date and end date, where it abstracts away month if same month, and adds year if different year.
+ *
+ * @param date1 in YYYY-MM-DD format
+ * @param date2 in YYYY-MM-DD format
+ * @returns duration in "May 29 - June 4" format
+ */
 export const formatDates = (date1: string, date2: string) => {
-  const sameMonth = new Date(date1).getMonth() === new Date(date2).getMonth();
+  const sameYear =
+    new Date(date1).getFullYear() === new Date(date2).getFullYear();
+  const sameMonth =
+    new Date(date1).getMonth() === new Date(date2).getMonth() && sameYear;
 
   const startDate = formatDate(date1);
   const endDate = formatDate(date2);
 
-  const day2 = new Date(date2).getDate() + 1;
+  if (startDate === endDate) {
+    return startDate;
+  }
 
-  return `${startDate} - ${sameMonth ? day2 : endDate}`;
+  const day2 = new Date(date2).getDate() + 1;
+  const year2 = new Date(date2).getFullYear();
+
+  return `${startDate} - ${sameMonth ? day2 : endDate}${
+    !sameYear ? ", " + year2 : ""
+  }`;
 };
 
 /**
- * Formats a date into "Jun 21, 2024" format
+ * Formats a date into "Jun 21, 2024" format.
+ *
  * @param dateString a date in YYYY-MM-DD format
- * @returns string in "Jun 21, 2024" format
+ * @returns string in "Jun 21, 2024" (aka short abbreviation) format
  */
 export const formatMDYShortDate = (dateString: string) => {
   const dateObj = new Date(dateString);

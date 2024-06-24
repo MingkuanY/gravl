@@ -17,30 +17,23 @@
     transform: translateX(0.5rem);
   }
 
-  .thumbnail {
-    width: 4.8rem;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    object-fit: cover;
-    transform: translateZ(0);
-    image-rendering: -webkit-optimize-contrast;
-  }
-
-  .check {
-    width: 3rem;
-    aspect-ratio: 1;
-    margin: 0.9rem;
-  }
-
   .right {
-    margin-left: 1rem;
+    margin: 0 1rem;
     flex: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    mask-image: linear-gradient(
+      to right,
+      black 0%,
+      black 19rem,
+      transparent 23rem
+    );
 
     .title {
       font-size: 1.8rem;
+      overflow: hidden;
+      white-space: nowrap;
       color: mixin.$dark;
       font-weight: 400;
     }
@@ -50,15 +43,6 @@
       color: mixin.$faded;
       font-size: 1rem;
       font-weight: 400;
-    }
-  }
-
-  &.plan {
-    background-color: mixin.$very-light-blue;
-
-    .title,
-    .locations {
-      color: mixin.$gravl-blue;
     }
   }
 }

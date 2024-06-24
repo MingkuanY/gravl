@@ -106,6 +106,10 @@ export default function ManualFillCard({
     }
   };
 
+  const handleFinish = () => {
+    // Check that the user has at least one visit selected and navigate the user to the next step
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.leftSide}>
@@ -200,7 +204,14 @@ export default function ManualFillCard({
           )}
         </div>
 
-        <button className={styles.finish}>Finish</button>
+        <button
+          className={`${styles.finish} ${
+            !visits.length && styles.unselectable
+          }`}
+          onClick={handleFinish}
+        >
+          Finish
+        </button>
       </div>
     </div>
   );

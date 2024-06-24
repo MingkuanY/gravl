@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import styles from "../../styles/header.module.scss";
 import Icon from "../icons/Icon.tsx";
 import { signIn, signOut, useSession } from "next-auth/react";
-import LogTripButton from "./LogTripButton.tsx";
 import { User } from "@prisma/client";
 
 export default function Header({ user }: { user?: User }) {
@@ -37,7 +36,6 @@ export default function Header({ user }: { user?: User }) {
       <div className={styles.headerRightContainer}>
         {session.status === "authenticated" && (
           <>
-            <LogTripButton />
             <div className={styles.pfpContainer} ref={dropdownRef}>
               <img
                 src={user?.image as string}

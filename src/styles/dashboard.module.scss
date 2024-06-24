@@ -1,71 +1,75 @@
 @use "./mixin" as mixin;
 
-.main {
-  height: calc(100vh - mixin.$header-height);
+.container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 60rem;
-  margin: -4rem auto 0;
 
-  /* user profile */
-
-  .profile {
+  .main {
+    height: calc(100vh - mixin.$header-height);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    width: 100%;
+    justify-content: center;
+    width: 60rem;
+    margin: -4rem auto 0 12%;
 
-    .pfpContainer {
-      position: relative;
+    /* user profile */
 
-      img {
-        width: 12rem;
-        aspect-ratio: 1;
-        object-fit: cover;
-        border-radius: 50%;
-        cursor: pointer;
-        image-rendering: -webkit-optimize-contrast;
-      }
-    }
-
-    .userInfo {
-      margin-left: 2.2rem;
+    .profile {
       display: flex;
-      flex-direction: column;
-      flex: auto;
+      align-items: center;
+      width: 100%;
 
-      .usernameAndEdit {
+      .pfpContainer {
+        position: relative;
+
+        img {
+          width: 12rem;
+          aspect-ratio: 1;
+          object-fit: cover;
+          border-radius: 50%;
+          cursor: pointer;
+          image-rendering: -webkit-optimize-contrast;
+        }
+      }
+
+      .userInfo {
+        margin-left: 2.2rem;
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        flex: auto;
 
-        .username {
+        .usernameAndEdit {
+          display: flex;
+          align-items: center;
+
+          .username {
+            color: mixin.$dark;
+            font-size: 2.6rem;
+            font-weight: 400;
+          }
+
+          .edit {
+            margin-bottom: 0.8rem;
+            margin-left: 1rem;
+            width: 2rem;
+            cursor: pointer;
+          }
+        }
+
+        .location {
+          margin-top: 0.3rem;
+          font-size: 1rem;
           color: mixin.$dark;
-          font-size: 2.6rem;
           font-weight: 400;
         }
 
-        .edit {
-          margin-bottom: 0.8rem;
-          margin-left: 1rem;
-          width: 2rem;
-          cursor: pointer;
+        .bio {
+          margin-top: 0.5rem;
+          font-size: 1.4rem;
+          font-style: italic;
+          font-weight: 300;
+          color: mixin.$faded;
         }
-      }
-
-      .location {
-        margin-top: 0.3rem;
-        font-size: 1rem;
-        color: mixin.$dark;
-        font-weight: 400;
-      }
-
-      .bio {
-        margin-top: 0.5rem;
-        font-size: 1.4rem;
-        font-style: italic;
-        font-weight: 300;
-        color: mixin.$faded;
       }
     }
   }

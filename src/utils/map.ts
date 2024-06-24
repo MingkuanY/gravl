@@ -70,7 +70,7 @@ export const handleMapClick = (
     const target = event.target as SVGPathElement;
     const placeID = target.id;
 
-    if (placeIDs.has(placeID)) {
+    if (placeIDs && placeIDs.has(placeID)) {
       const element = document.getElementById(placeID);
       const visitExists = visits.some(
         (visit) => visit.place_id === placeID && visit.date == currentDate
