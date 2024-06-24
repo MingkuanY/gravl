@@ -13,8 +13,10 @@ export default function NationalParks({
   total,
   reload,
   animate,
+  places,
   visits,
   setVisits,
+  currentDate,
 }: MapProps) {
   const startColor = "#319fff";
   const endColor = "#319fff";
@@ -53,7 +55,7 @@ export default function NationalParks({
       ref={mapRef}
       id={styles.map}
       viewBox="0 0 1000 700"
-      onClick={handleMapClick}
+      onClick={handleMapClick(places!, visits!, setVisits!, currentDate!)}
     >
       <g id="ID_" className={styles.state}>
         <path

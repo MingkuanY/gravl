@@ -30,11 +30,22 @@ export async function addPlaces(type: string, places: string[]) {
 
 // addPlaces("counties", counties);
 
-export async function getPlaceByID(id: string) {
-  const place = await prisma.place.findUnique({
-    where: {
-      place_id: id,
+// export async function getPlaceByID(id: string) {
+//   console.log("Start at ", new Date());
+//   const place = await prisma.place.findUnique({
+//     where: {
+//       place_id: id,
+//     },
+//   });
+//   console.log("End at ", new Date());
+//   return place;
+// }
+
+export async function loadPlaceIDs() {
+  const places = await prisma.place.findMany({
+    select: {
+      place_id: true,
     },
   });
-  return place;
+  return new Set(places.map((place) => place.place_id));
 }

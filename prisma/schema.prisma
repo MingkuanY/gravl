@@ -65,6 +65,8 @@ model Place {
   label    String
 
   visits Visit[]
+
+  @@index([place_id])
 }
 
 model Account {

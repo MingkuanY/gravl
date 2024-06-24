@@ -13,8 +13,10 @@ export default function Countries({
   total,
   reload,
   animate,
+  places,
   visits,
   setVisits,
+  currentDate,
 }: MapProps) {
   const startColor = "#319fff";
   const endColor = "#319fff";
@@ -56,7 +58,7 @@ export default function Countries({
       strokeLinejoin="round"
       version="1.2"
       ref={mapRef}
-      onClick={handleMapClick}
+      onClick={handleMapClick(places!, visits!, setVisits!, currentDate!)}
     >
       <g id="g4311" fillOpacity={1}>
         <path

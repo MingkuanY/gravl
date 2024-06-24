@@ -8,12 +8,12 @@ import ManualFillCard from "./ManualFillCard";
 
 export default function NewTrip({
   user,
+  places,
   searchParams,
-  getPlace,
 }: {
   user: User;
+  places: Set<string>;
   searchParams: { log: string };
-  getPlace: Function;
 }) {
   const [tripData, setTripData] = useState({
     trip_name: "A Floridian Thanksgiving",
@@ -38,7 +38,7 @@ export default function NewTrip({
             tripData={tripData}
             visits={visitsData}
             setVisitsData={setVisitsData}
-            getPlace={getPlace}
+            places={places}
           />
         )}
       </div>

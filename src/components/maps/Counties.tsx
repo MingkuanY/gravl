@@ -14,8 +14,10 @@ export default function Counties({
   reload,
   pause,
   animate,
+  places,
+  visits,
   setVisits,
-  onPlaceClick,
+  currentDate,
 }: MapProps) {
   const livedInColor = "#319fff";
   const startColor = "#319fff";
@@ -56,7 +58,7 @@ export default function Counties({
       viewBox="0 0 1460 1000"
       xmlns="http://www.w3.org/2000/svg"
       id={styles.map}
-      onClick={handleMapClick}
+      onClick={handleMapClick(places!, visits!, setVisits!, currentDate!)}
     >
       {/* COUNTIES */}
       <path

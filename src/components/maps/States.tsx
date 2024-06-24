@@ -13,8 +13,10 @@ export default function States({
   total,
   reload,
   animate,
+  places,
   visits,
   setVisits,
+  currentDate,
 }: MapProps) {
   const startColor = "#319fff";
   const endColor = "#319fff";
@@ -54,7 +56,7 @@ export default function States({
       id={styles.map}
       viewBox="0 0 1000 700"
       version="1.1"
-      onClick={handleMapClick}
+      onClick={handleMapClick(places!, visits!, setVisits!, currentDate!)}
     >
       <g id="ID_group">
         <path

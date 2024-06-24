@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import styles from "../../styles/manualfillcard.module.scss";
 import Counties from "../maps/Counties";
@@ -9,26 +11,24 @@ import { VisitInput } from "@/lib/visit";
 import { mapNames } from "../dashboard/MapLoader";
 import Icon from "../icons/Icon";
 import { addDays, formatMDYShortDate } from "@/utils/date";
-import { getPlaceByID } from "@/lib/place";
 
 export default function ManualFillCard({
   tripData,
   visits,
   setVisitsData,
-  getPlace,
+  places,
 }: {
   tripData: BasicTripInfo;
   visits: VisitInput[];
   setVisitsData: Function;
-  getPlace: Function;
+  places: Set<string>;
 }) {
   const [dayCount, setDayCount] = useState(1);
   const getCurrentDate = () => {
     return addDays(tripData.start_date, dayCount - 1);
   };
-  const visitsOnCurrentDate = visits.filter(
-    (visit) => visit.date === getCurrentDate()
-  );
+  const visitsOnCurrentDate = () =>
+    visits.filter((visit) => visit.date === getCurrentDate());
 
   const [mapPopup, setMapPopup] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
@@ -58,13 +58,45 @@ export default function ManualFillCard({
   const renderMap = (index: number) => {
     switch (index) {
       case 0:
-        return <Counties animate={false} setVisits={setVisitsData} />;
+        return (
+          <Counties
+            animate={false}
+            places={places}
+            visits={visits}
+            setVisits={setVisitsData}
+            currentDate={getCurrentDate()}
+          />
+        );
       case 1:
-        return <States animate={false} setVisits={setVisitsData} />;
+        return (
+          <States
+            animate={false}
+            places={places}
+            visits={visits}
+            setVisits={setVisitsData}
+            currentDate={getCurrentDate()}
+          />
+        );
       case 2:
-        return <Countries animate={false} setVisits={setVisitsData} />;
+        return (
+          <Countries
+            animate={false}
+            places={places}
+            visits={visits}
+            setVisits={setVisitsData}
+            currentDate={getCurrentDate()}
+          />
+        );
       case 3:
-        return <NationalParks animate={false} setVisits={setVisitsData} />;
+        return (
+          <NationalParks
+            animate={false}
+            places={places}
+            visits={visits}
+            setVisits={setVisitsData}
+            currentDate={getCurrentDate()}
+          />
+        );
     }
   };
 
@@ -148,8 +180,8 @@ export default function ManualFillCard({
         </div>
 
         <div className={styles.visitedList}>
-          {visitsOnCurrentDate.length > 0 ? (
-            visitsOnCurrentDate.map((visit, index) => (
+          {visitsOnCurrentDate().length > 0 ? (
+            visitsOnCurrentDate().map((visit, index) => (
               <p className={styles.visitedPlace} key={index}>
                 {visit.place_id}
               </p>
