@@ -7,11 +7,11 @@ import Countries from "../maps/Countries";
 import NationalParks from "../maps/NationalParks";
 import States from "../maps/States";
 import { BasicTripInfo } from "./BasicTripInfoCard";
-import { VisitInput } from "@/lib/visit";
+import { VisitInput } from "@/utils/types";
 import { mapNames } from "../dashboard/MapLoader";
 import Icon from "../icons/Icon";
 import { addDays, formatMDYShortDate } from "@/utils/date";
-import { PlaceInput } from "@/lib/place";
+import { PlaceInput } from "@/utils/types";
 
 export default function ManualFillCard({
   tripData,

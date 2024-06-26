@@ -5,7 +5,7 @@ import { useState } from "react";
 import { User } from "@prisma/client";
 import BasicTripInfoCard from "./BasicTripInfoCard";
 import ManualFillCard from "./ManualFillCard";
-import { PlaceInput } from "@/lib/place";
+import { PlaceInput } from "@/utils/types";
 
 export default function NewTrip({
   user,

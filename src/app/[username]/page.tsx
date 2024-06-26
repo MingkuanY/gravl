@@ -2,16 +2,16 @@ import styles from "../../styles/dashboard.module.scss";
 import Header from "@/components/header/Header";
 import EditProfileButton from "@/components/dashboard/EditProfileButton";
 import MapLoader from "@/components/dashboard/MapLoader";
-import { getUser, getUserWithTripsAndVisits } from "@/lib/user.ts";
+import { getUser, getUserWithTripsAndVisits } from "@/actions/actions";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route.ts";
-import { getPlacesByUserAndType } from "@/lib/visit";
+import { getPlacesByUserAndType } from "@/actions/actions";
 import NotFound from "../not-found";
 import UserStats from "@/components/dashboard/UserStats";
 import NewTrip from "@/components/modals/NewTrip";
-import { loadPlaces } from "@/lib/place";
+import { loadPlaces } from "@/actions/actions";
 import Timeline from "@/components/dashboard/Timeline";
-import { loadTripsRecentFirst } from "@/lib/trip";
+import { loadTripsRecentFirst } from "@/actions/actions";
 
 export default async function Dashboard({
   params,

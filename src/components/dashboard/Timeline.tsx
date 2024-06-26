@@ -3,8 +3,8 @@
 import styles from "../../styles/timeline.module.scss";
 import LogTripButton from "./LogTripButton";
 import TripCard from "./TripCard";
-import { formatDates } from "@/utils/date";
-import { TripWithVisits, getTripDates } from "@/lib/trip";
+import { formatDates, getTripDates } from "@/utils/date";
+import { TripWithVisits } from "@/utils/types";
 import { useSearchParams } from "next/navigation";
 
 export default function Timeline({ trips }: { trips: TripWithVisits[] }) {

@@ -96,18 +96,19 @@
         font-weight: 500;
         text-transform: uppercase;
         cursor: pointer;
-        margin-right: 2.2rem;
+        margin-right: 2rem;
         transition: transform 0.3s;
 
         &::after {
           content: "";
           position: absolute;
-          border-bottom: 2.2rem solid transparent;
-          border-top: 2.2rem solid transparent;
-          border-left: 2.2rem solid mixin.$gravl-blue;
-          margin-right: -2.2rem;
-          right: 0;
-          top: 0;
+          top: 50%;
+          right: -2rem;
+          transform: translateY(-50%);
+          width: 0;
+          border-left: 2rem solid mixin.$gravl-blue;
+          border-top: 2rem solid transparent;
+          border-bottom: 2rem solid transparent;
         }
 
         &:hover {

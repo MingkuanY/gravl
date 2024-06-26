@@ -1,7 +1,7 @@
 // An temporary route to handle whether the User goes to onboarding after they sign in with Google.
 
 import { redirect } from "next/navigation";
-import { getUser } from "@/lib/user";
+import { getUser } from "@/actions/actions";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 

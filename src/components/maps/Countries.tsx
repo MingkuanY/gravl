@@ -3,7 +3,7 @@
 import styles from "../../styles/countries.module.scss";
 import { useEffect, useRef } from "react";
 import { interpolateColors } from "../../utils/color";
-import { handleMapClick, loadMap, MapProps } from "../../utils/map";
+import { handleMapClick, loadMap, MapProps, refreshMap } from "../../utils/map";
 
 export const totalCountries = 195;
 
@@ -47,6 +47,10 @@ export default function Countries({
         country.style.fill = defaultColor;
       });
     };
+  } else {
+    useEffect(() => {
+      refreshMap(visits!, currentDate!, colors[0], colors[0]);
+    }, [visits, currentDate]);
   }
 
   return (

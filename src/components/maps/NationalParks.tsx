@@ -3,7 +3,12 @@
 import styles from "../../styles/nationalparks.module.scss";
 import { useEffect, useRef } from "react";
 import { interpolateColors } from "../../utils/color";
-import { handleMapClick, loadMapWithChildren, MapProps } from "../../utils/map";
+import {
+  handleMapClick,
+  loadMapWithChildren,
+  MapProps,
+  refreshMap,
+} from "../../utils/map";
 
 export const totalNationalparks = 63;
 
@@ -48,6 +53,10 @@ export default function NationalParks({
         park.style.fill = defaultColor;
       });
     };
+  } else {
+    useEffect(() => {
+      refreshMap(visits!, currentDate!, colors[0], colors[0]);
+    }, [visits, currentDate]);
   }
 
   return (

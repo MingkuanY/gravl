@@ -1,4 +1,4 @@
-import { VisitInput } from "@/lib/visit";
+import { VisitInput } from "@/utils/types";
 import { Place } from "@prisma/client";
 
 export const loadMap = (
@@ -108,3 +108,19 @@ export type MapProps = {
   setVisits?: Function;
   currentDate?: string;
 };
+
+export function refreshMap(
+  visits: VisitInput[],
+  currentDate: string,
+  todayColor: string,
+  otherColor: string
+) {
+  visits.forEach((visit) => {
+    if (visit.date === currentDate) {
+      const element = document.getElementById(visit.place_id);
+      if (element) {
+        element.style.fill = todayColor;
+      }
+    }
+  });
+}

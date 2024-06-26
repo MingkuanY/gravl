@@ -1,3 +1,5 @@
+import { TripWithIdAndVisits } from "./types";
+
 export const monthAbbreviations = [
   "Jan",
   "Feb",
@@ -101,3 +103,33 @@ export const addDays = (input: string, days: number) => {
   date.setDate(date.getDate() + days);
   return date.toISOString().split("T")[0];
 };
+
+export function getTripDates(trip: TripWithIdAndVisits) {
+  const dates = trip.visits.map((visit) => new Date(visit.date));
+  const startDate = new Date(Math.min(...dates.map((date) => date.getTime())))
+    .toISOString()
+    .split("T")[0];
+  const endDate = new Date(Math.max(...dates.map((date) => date.getTime())))
+    .toISOString()
+    .split("T")[0];
+  return { startDate, endDate };
+}
+
+export function tripsThisYear(trips: TripWithIdAndVisits[]) {
+  const currentYear = new Date().getFullYear();
+  let tripCount = 0;
+
+  trips.forEach((trip) => {
+    const { startDate, endDate } = getTripDates(trip);
+    if (
+      new Date(startDate).getFullYear() === currentYear ||
+      new Date(endDate).getFullYear() === currentYear ||
+      (new Date(startDate).getFullYear() < currentYear &&
+        new Date(endDate).getFullYear() > currentYear)
+    ) {
+      tripCount++;
+    }
+  });
+
+  return tripCount;
+}

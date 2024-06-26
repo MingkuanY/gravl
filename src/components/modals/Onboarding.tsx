@@ -4,16 +4,9 @@ import styles from "../../styles/onboarding.module.scss";
 import { useEffect, useState } from "react";
 import Icon from "../icons/Icon.tsx";
 import { useRouter } from "next/navigation";
+import { uniqueUsername, updateUser } from "@/actions/actions.ts";
 
-export default function Onboarding({
-  email,
-  updateUser,
-  uniqueUsername,
-}: {
-  email: string;
-  updateUser: Function;
-  uniqueUsername: Function;
-}) {
+export default function Onboarding({ email }: { email: string }) {
   const router = useRouter();
 
   const [step, setStep] = useState(1);

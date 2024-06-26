@@ -1,6 +1,6 @@
 "use client";
 
-import { tripsThisYear } from "@/lib/trip";
+import { tripsThisYear } from "@/utils/date";
 import styles from "../../styles/userstats.module.scss";
 import { Visit } from "@prisma/client";
 import { useEffect, useState } from "react";
