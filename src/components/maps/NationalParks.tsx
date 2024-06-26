@@ -57,9 +57,8 @@ export default function NationalParks({
       viewBox="0 0 1000 700"
       onClick={handleMapClick(placeIDs!, visits!, setVisits!, currentDate!)}
     >
-      <g id="ID_" className={styles.state}>
+      <g className={styles.state}>
         <path
-          id="ID"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -94,9 +93,8 @@ export default function NationalParks({
           </tspan>
         </text>
       </g>
-      <g id="HI_" className={styles.state}>
+      <g className={styles.state}>
         <path
-          id="HI"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -173,9 +171,8 @@ export default function NationalParks({
           />
         </g>
       </g>
-      <g id="AK_" className={styles.state}>
+      <g className={styles.state}>
         <path
-          id="AK"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -378,9 +375,8 @@ export default function NationalParks({
           />
         </g>
       </g>
-      <g id="FL_" className={styles.state}>
+      <g className={styles.state}>
         <path
-          id="FL"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -480,7 +476,6 @@ export default function NationalParks({
       </g>
       <g id="NH_" className={styles.state}>
         <path
-          id="NH"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -519,7 +514,6 @@ export default function NationalParks({
       </g>
       <g id="VT_" className={styles.state}>
         <path
-          id="VT"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -565,7 +559,6 @@ export default function NationalParks({
       </g>
       <g id="ME_" className={styles.state}>
         <path
-          id="ME"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -625,7 +618,6 @@ export default function NationalParks({
       </g>
       <g id="RI_" className={styles.state}>
         <path
-          id="RI"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -671,7 +663,6 @@ export default function NationalParks({
       </g>
       <g id="NY_" className={styles.state}>
         <path
-          id="NY"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -708,7 +699,6 @@ export default function NationalParks({
       </g>
       <g id="PA_" className={styles.state}>
         <path
-          id="PA"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -745,7 +735,6 @@ export default function NationalParks({
       </g>
       <g id="VA_" className={styles.state}>
         <path
-          id="VA"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -803,7 +792,6 @@ export default function NationalParks({
       </g>
       <g id="WV_" className={styles.state}>
         <path
-          id="WV"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -861,7 +849,6 @@ export default function NationalParks({
       </g>
       <g id="OH_" className={styles.state}>
         <path
-          id="OH"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -919,7 +906,6 @@ export default function NationalParks({
       </g>
       <g id="IN_" className={styles.state}>
         <path
-          id="IN"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -956,7 +942,6 @@ export default function NationalParks({
       </g>
       <g id="IL_" className={styles.state}>
         <path
-          id="IL"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -993,7 +978,6 @@ export default function NationalParks({
       </g>
       <g id="CT_" className={styles.state}>
         <path
-          id="CT"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1032,7 +1016,6 @@ export default function NationalParks({
       </g>
       <g id="WI_" className={styles.state}>
         <path
-          id="WI"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1069,7 +1052,6 @@ export default function NationalParks({
       </g>
       <g id="NC_" className={styles.state}>
         <path
-          id="NC"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1106,7 +1088,6 @@ export default function NationalParks({
       </g>
       <g id="MA_" className={styles.state}>
         <path
-          id="MA"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1145,7 +1126,6 @@ export default function NationalParks({
       </g>
       <g id="MO_" className={styles.state}>
         <path
-          id="MO"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1203,7 +1183,6 @@ export default function NationalParks({
       </g>
       <g id="GA_" className={styles.state}>
         <path
-          id="GA"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1240,7 +1219,6 @@ export default function NationalParks({
       </g>
       <g id="SC_" className={styles.state}>
         <path
-          id="SC"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1298,7 +1276,6 @@ export default function NationalParks({
       </g>
       <g id="KY_" className={styles.state}>
         <path
-          id="KY"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1356,7 +1333,6 @@ export default function NationalParks({
       </g>
       <g id="AL_" className={styles.state}>
         <path
-          id="AL"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1391,7 +1367,6 @@ export default function NationalParks({
       </g>
       <g id="LA_" className={styles.state}>
         <path
-          id="LA"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1428,7 +1403,6 @@ export default function NationalParks({
       </g>
       <g id="MS_" className={styles.state}>
         <path
-          id="MS"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1465,7 +1439,6 @@ export default function NationalParks({
       </g>
       <g id="IA_" className={styles.state}>
         <path
-          id="IA"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1502,7 +1475,6 @@ export default function NationalParks({
       </g>
       <g id="MN_" className={styles.state}>
         <path
-          id="MN"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1560,7 +1532,6 @@ export default function NationalParks({
       </g>
       <g id="OK_" className={styles.state}>
         <path
-          id="OK"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1597,7 +1568,6 @@ export default function NationalParks({
       </g>
       <g id="TX_" className={styles.state}>
         <path
-          id="TX"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1655,7 +1625,6 @@ export default function NationalParks({
       </g>
       <g id="NM_" className={styles.state}>
         <path
-          id="NM"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1734,7 +1703,6 @@ export default function NationalParks({
       </g>
       <g id="KS_" className={styles.state}>
         <path
-          id="KS"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1771,7 +1739,6 @@ export default function NationalParks({
       </g>
       <g id="WY_" className={styles.state}>
         <path
-          id="WY"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1808,7 +1775,6 @@ export default function NationalParks({
       </g>
       <g id="MT_" className={styles.state}>
         <path
-          id="MT"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1866,7 +1832,6 @@ export default function NationalParks({
       </g>
       <g id="CO_" className={styles.state}>
         <path
-          id="CO"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -1987,7 +1952,6 @@ export default function NationalParks({
       </g>
       <g id="UT_" className={styles.state}>
         <path
-          id="UT"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -2129,7 +2093,6 @@ export default function NationalParks({
       </g>
       <g id="AZ_" className={styles.state}>
         <path
-          id="AZ"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -2229,7 +2192,6 @@ export default function NationalParks({
       </g>
       <g id="NV_" className={styles.state}>
         <path
-          id="NV"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -2287,7 +2249,6 @@ export default function NationalParks({
       </g>
       <g id="OR_" className={styles.state}>
         <path
-          id="OR"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -2345,7 +2306,6 @@ export default function NationalParks({
       </g>
       <g id="WA_" className={styles.state}>
         <path
-          id="WA"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -2445,7 +2405,6 @@ export default function NationalParks({
       </g>
       <g id="CA_" className={styles.state}>
         <path
-          id="CA"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -2671,7 +2630,6 @@ export default function NationalParks({
       </g>
       <g id="TN_" className={styles.state}>
         <path
-          id="TN"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -2729,7 +2687,6 @@ export default function NationalParks({
       </g>
       <g id="AR_" className={styles.state}>
         <path
-          id="AR"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -2787,7 +2744,6 @@ export default function NationalParks({
       </g>
       <g id="MD_" className={styles.state}>
         <path
-          id="MD"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -2833,7 +2789,6 @@ export default function NationalParks({
       </g>
       <g id="DE_" className={styles.state}>
         <path
-          id="DE"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -2879,7 +2834,6 @@ export default function NationalParks({
       </g>
       <g id="NJ_" className={styles.state}>
         <path
-          id="NJ"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -2925,7 +2879,6 @@ export default function NationalParks({
       </g>
       <g id="MI_" className={styles.state}>
         <path
-          id="MI"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -3013,7 +2966,6 @@ export default function NationalParks({
           </tspan>
         </text>
         <path
-          id="DC"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -3027,7 +2979,6 @@ export default function NationalParks({
       </g>
       <g id="NE_" className={styles.state}>
         <path
-          id="NE"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -3064,7 +3015,6 @@ export default function NationalParks({
       </g>
       <g id="SD_" className={styles.state}>
         <path
-          id="SD"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"
@@ -3143,7 +3093,6 @@ export default function NationalParks({
       </g>
       <g id="ND_" className={styles.state}>
         <path
-          id="ND"
           fill="#d1dbdd"
           fillOpacity={1}
           stroke="#000"

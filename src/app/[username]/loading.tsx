@@ -1,5 +1,5 @@
 import styles from "../../styles/loading.module.scss";
-import Icon from "../icons/Icon";
+import Icon from "../../components/icons/Icon";
 
 export default function Loading() {
   return (

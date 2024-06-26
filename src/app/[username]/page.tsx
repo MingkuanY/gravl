@@ -29,20 +29,29 @@ export default async function Dashboard({
 
   const userEmail = session.user.email;
   const user = await getUser(userEmail);
-  const userWithTripsAndVisits = await getUserWithTripsAndVisits(userEmail);
 
-  if (!user || !userWithTripsAndVisits || user.username !== params.username) {
+  if (!user || user.username !== params.username) {
     //user not logged into the account they are trying to access
     return NotFound();
   }
 
-  const counties = await getPlacesByUserAndType(user.id, "counties");
-  const states = await getPlacesByUserAndType(user.id, "states");
-  const countries = await getPlacesByUserAndType(user.id, "countries");
-  const nationalparks = await getPlacesByUserAndType(user.id, "nationalparks");
-
-  let places = await loadPlaces();
-  let trips = await loadTripsRecentFirst(user.id);
+  const [
+    userWithTripsAndVisits,
+    counties,
+    states,
+    countries,
+    nationalparks,
+    places,
+    trips,
+  ] = await Promise.all([
+    getUserWithTripsAndVisits(userEmail),
+    getPlacesByUserAndType(user.id, "counties"),
+    getPlacesByUserAndType(user.id, "states"),
+    getPlacesByUserAndType(user.id, "countries"),
+    getPlacesByUserAndType(user.id, "nationalparks"),
+    loadPlaces(),
+    loadTripsRecentFirst(user.id),
+  ]);
 
   return (
     <>
@@ -73,7 +82,7 @@ export default async function Dashboard({
                 <p className={styles.location}>{user!.location}</p>
                 <p className={styles.bio}>{user!.bio}</p>
               </div>
-              <UserStats trips={userWithTripsAndVisits.trips} />
+              <UserStats trips={userWithTripsAndVisits!.trips} />
             </div>
 
             <MapLoader

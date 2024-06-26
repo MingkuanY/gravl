@@ -104,7 +104,7 @@ export type MapProps = {
   pause?: number;
   animate: boolean;
   placeIDs?: Set<string>;
-  visits: VisitInput[];
-  setVisits: Function;
-  currentDate: string;
+  visits?: VisitInput[];
+  setVisits?: Function;
+  currentDate?: string;
 };

@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 import { getUser } from "@/lib/user";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import Loading from "@/components/pages/Loading";
 
 export default async function Redirect() {
   const session = await getServerSession(authOptions);
@@ -17,6 +16,4 @@ export default async function Redirect() {
   }
   // Redirect them to their dashboard
   redirect(`/${user.username}`);
-
-  return <Loading />;
 }
