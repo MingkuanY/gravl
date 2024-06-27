@@ -2,118 +2,89 @@
 
 .container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 50rem;
+  padding: 3rem 3.5rem;
   background-color: mixin.$white;
   border-radius: 2rem;
 
-  .leftSide {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 2rem;
+  .nameInput {
+    font-size: 3rem;
+    color: mixin.$dark;
+    font-weight: 400;
+    border-bottom: 0.2rem solid mixin.$gravl-blue;
 
-    .pfp {
-      width: 12rem;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    p {
-      margin-top: 2rem;
-      color: mixin.$dark;
-      font-size: 2.75rem;
-      font-weight: 200;
+    &::placeholder {
+      color: mixin.$light;
+      font-size: 3rem;
+      font-weight: 400;
+      text-transform: uppercase;
     }
   }
 
-  .rightSide {
-    width: 50rem;
-    border-left: 0.1rem solid mixin.$light;
-    padding: 3rem 3.5rem;
-    padding-left: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  .descInput {
+    margin-top: 1.5rem;
+    height: 9rem;
+    overflow: auto;
+    padding: 1.5rem 2rem;
+    border: 0.2rem solid mixin.$gravl-blue;
+    border-radius: 2rem;
 
-    .nameInput {
-      font-size: 3rem;
-      color: mixin.$dark;
-      font-weight: 400;
-      border-bottom: 0.2rem solid mixin.$gravl-blue;
+    color: mixin.$dark;
+    font-size: 2rem;
+    font-weight: 200;
 
-      &::placeholder {
-        color: mixin.$light;
-        font-size: 3rem;
-        font-weight: 400;
-        text-transform: uppercase;
-      }
-    }
-
-    .descInput {
-      margin-top: 1.5rem;
-      height: 9rem;
-      overflow: auto;
-      padding: 1.5rem 2rem;
-      border: 0.2rem solid mixin.$gravl-blue;
-      border-radius: 2rem;
-
-      color: mixin.$dark;
+    &::placeholder {
+      color: mixin.$faded;
       font-size: 2rem;
-      font-weight: 200;
-
-      &::placeholder {
-        color: mixin.$faded;
-        font-size: 2rem;
-        font-weight: 100;
-      }
+      font-weight: 100;
     }
+  }
 
-    .bottom {
-      margin-top: 1.5rem;
+  .bottom {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .dateContainer {
       display: flex;
       align-items: center;
-      justify-content: space-between;
 
-      .dateContainer {
-        display: flex;
-        align-items: center;
+      p {
+        color: mixin.$dark;
+        font-size: 2rem;
+        font-weight: 200;
+      }
+    }
 
-        p {
-          color: mixin.$dark;
-          font-size: 2rem;
-          font-weight: 200;
-        }
+    button {
+      position: relative;
+      background-color: mixin.$gravl-blue;
+      padding: 1rem 1rem 1rem 2rem;
+      color: mixin.$white;
+      font-size: 2rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-right: 2rem;
+      transition: transform 0.3s;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: -2rem;
+        transform: translateY(-50%);
+        width: 0;
+        border-left: 2rem solid mixin.$gravl-blue;
+        border-top: 2rem solid transparent;
+        border-bottom: 2rem solid transparent;
       }
 
-      button {
-        position: relative;
-        background-color: mixin.$gravl-blue;
-        padding: 1rem 1rem 1rem 2rem;
-        color: mixin.$white;
-        font-size: 2rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        cursor: pointer;
-        margin-right: 2rem;
-        transition: transform 0.3s;
-
-        &::after {
-          content: "";
-          position: absolute;
-          top: 50%;
-          right: -2rem;
-          transform: translateY(-50%);
-          width: 0;
-          border-left: 2rem solid mixin.$gravl-blue;
-          border-top: 2rem solid transparent;
-          border-bottom: 2rem solid transparent;
-        }
-
-        &:hover {
-          transform: translateX(1rem);
-        }
+      &:hover {
+        transform: translateX(1rem);
       }
     }
   }

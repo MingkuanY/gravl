@@ -18,11 +18,13 @@ export default function ManualFillCard({
   visits,
   setVisitsData,
   places,
+  setCurrentPage,
 }: {
   tripData: BasicTripInfo;
   visits: VisitInput[];
   setVisitsData: Function;
   places: PlaceInput[];
+  setCurrentPage: Function;
 }) {
   const placeIDs = new Set(places.map((place) => place.place_id));
   const placesMap = new Map(

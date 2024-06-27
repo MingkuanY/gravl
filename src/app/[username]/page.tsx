@@ -1,24 +1,17 @@
-import styles from "../../styles/dashboard.module.scss";
 import Header from "@/components/header/Header";
-import EditProfileButton from "@/components/dashboard/EditProfileButton";
-import MapLoader from "@/components/dashboard/MapLoader";
 import { getUser, getUserWithTripsAndVisits } from "@/actions/actions";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route.ts";
 import { getPlacesByUserAndType } from "@/actions/actions";
 import NotFound from "../not-found";
-import UserStats from "@/components/dashboard/UserStats";
-import NewTrip from "@/components/modals/NewTrip";
 import { loadPlaces } from "@/actions/actions";
-import Timeline from "@/components/dashboard/Timeline";
 import { loadTripsRecentFirst } from "@/actions/actions";
+import Dashboard from "@/components/dashboard/Dashboard";
 
-export default async function Dashboard({
+export default async function Profile({
   params,
-  searchParams,
 }: {
   params: { username: string };
-  searchParams: { log: string; timeline: string };
 }) {
   const session = await getServerSession(authOptions);
 
@@ -41,7 +34,6 @@ export default async function Dashboard({
     states,
     countries,
     nationalparks,
-    places,
     trips,
   ] = await Promise.all([
     getUserWithTripsAndVisits(userEmail),
@@ -49,51 +41,20 @@ export default async function Dashboard({
     getPlacesByUserAndType(user.id, "states"),
     getPlacesByUserAndType(user.id, "countries"),
     getPlacesByUserAndType(user.id, "nationalparks"),
-    loadPlaces(),
     loadTripsRecentFirst(user.id),
   ]);
 
+  const maps = { counties, states, countries, nationalparks };
+
   return (
     <>
-      {searchParams.log && (
-        <NewTrip user={user} searchParams={searchParams} places={places} />
-      )}
       <Header user={user} />
-
-      {!searchParams.log && (
-        <div className={styles.container}>
-          <Timeline trips={trips} />
-          <div
-            className={`${styles.main} ${
-              searchParams.timeline === "open" ? styles.shifted : ""
-            }`}
-          >
-            <div className={styles.profile}>
-              <div className={styles.pfpContainer}>
-                <img src={user!.image!} alt="PFP" />
-              </div>
-              <div className={styles.userInfo}>
-                <div className={styles.usernameAndEdit}>
-                  <p className={styles.username}>{user!.username}</p>
-                  <div className={styles.edit}>
-                    <EditProfileButton />
-                  </div>
-                </div>
-                <p className={styles.location}>{user!.location}</p>
-                <p className={styles.bio}>{user!.bio}</p>
-              </div>
-              <UserStats trips={userWithTripsAndVisits!.trips} />
-            </div>
-
-            <MapLoader
-              counties={counties}
-              states={states}
-              countries={countries}
-              nationalparks={nationalparks}
-            />
-          </div>
-        </div>
-      )}
+      <Dashboard
+        user={user}
+        trips={trips}
+        userWithTripsAndVisits={userWithTripsAndVisits}
+        maps={maps}
+      />
     </>
   );
 }

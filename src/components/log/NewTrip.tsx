@@ -3,19 +3,18 @@
 import styles from "../../styles/newtrip.module.scss";
 import { useState } from "react";
 import { User } from "@prisma/client";
-import BasicTripInfoCard from "./BasicTripInfoCard";
-import ManualFillCard from "./ManualFillCard";
+import BasicTripInfoCard from "@/components/log/BasicTripInfoCard";
+import ManualFillCard from "@/components/log/ManualFillCard";
 import { PlaceInput } from "@/utils/types";
 
 export default function NewTrip({
   user,
   places,
-  searchParams,
 }: {
   user: User;
   places: PlaceInput[];
-  searchParams: { log: string };
 }) {
+  const [currentPage, setCurrentPage] = useState(0);
   const [tripData, setTripData] = useState({
     trip_name: "",
     description: "",
@@ -27,19 +26,21 @@ export default function NewTrip({
   return (
     <>
       <div className={styles.overlay}>
-        {searchParams.log === "tripInfo" && (
+        {currentPage === 0 && (
           <BasicTripInfoCard
             user={user}
             tripData={tripData}
             setTripData={setTripData}
+            setCurrentPage={setCurrentPage}
           />
         )}
-        {searchParams.log === "tripMap" && (
+        {currentPage === 1 && (
           <ManualFillCard
             tripData={tripData}
             visits={visitsData}
             setVisitsData={setVisitsData}
             places={places}
+            setCurrentPage={setCurrentPage}
           />
         )}
       </div>

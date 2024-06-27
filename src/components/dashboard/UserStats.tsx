@@ -2,18 +2,16 @@
 
 import { tripsThisYear } from "@/utils/date";
 import styles from "../../styles/userstats.module.scss";
-import { Visit } from "@prisma/client";
 import { useEffect, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { TripWithVisits } from "@/utils/types";
 
-type Trip = {
-  id: number;
-  name: string;
-  description: string;
-  visits: Visit[];
-};
-
-export default function UserStats({ trips }: { trips: Trip[] }) {
+export default function UserStats({
+  trips,
+  setIsOpen,
+}: {
+  trips: TripWithVisits[];
+  setIsOpen: Function;
+}) {
   const [tripCount, setTripCount] = useState(0);
   const [tripsThisYearCount, setTripsThisYearCount] = useState(0);
 
@@ -22,20 +20,8 @@ export default function UserStats({ trips }: { trips: Trip[] }) {
     setTripsThisYearCount(tripsThisYear(trips));
   }, [trips]);
 
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
   const handleClick = () => {
-    const currentSearchParams = new URLSearchParams(searchParams);
-    const isTimelineOpen = currentSearchParams.get("timeline") === "open";
-
-    if (isTimelineOpen) {
-      currentSearchParams.delete("timeline");
-    } else {
-      currentSearchParams.set("timeline", "open");
-    }
-
-    router.push(`${pathname}?${currentSearchParams.toString()}`);
+    setIsOpen((isOpen: boolean) => !isOpen);
   };
 
   return (

@@ -1,23 +1,20 @@
-"use client";
-
 import styles from "../../styles/timeline.module.scss";
 import LogTripButton from "./LogTripButton";
 import TripCard from "./TripCard";
 import { formatDates, getTripDates } from "@/utils/date";
 import { TripWithVisits } from "@/utils/types";
-import { useSearchParams } from "next/navigation";
 
-export default function Timeline({ trips }: { trips: TripWithVisits[] }) {
+export default function Timeline({
+  trips,
+  isOpen,
+}: {
+  trips: TripWithVisits[];
+  isOpen: boolean;
+}) {
   // Assume trips is already sorted in recent-first order by start date
 
-  const searchParams = useSearchParams();
-
   return (
-    <div
-      className={`${styles.timeline} ${
-        searchParams.get("timeline") === "open" ? styles.open : ""
-      }`}
-    >
+    <div className={`${styles.timeline} ${isOpen ? styles.open : ""}`}>
       <LogTripButton />
       <div className={styles.pastTrips}>
         {trips.map((trip, index) => {
