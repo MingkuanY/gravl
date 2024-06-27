@@ -1,6 +1,7 @@
 @use "./mixin" as mixin;
 
 .timeline {
+  z-index: 1000;
   margin-left: 6rem;
   position: absolute;
   top: mixin.$header-height;
@@ -12,10 +13,6 @@
   flex-direction: column;
   transition: left 0.5s ease;
 
-  &.open {
-    left: 0;
-  }
-
   /* vertical timeline stem */
   &::before {
     content: "";
@@ -25,6 +22,61 @@
     top: -#{mixin.$header-height};
     right: 0;
     background: mixin.$gravl-blue;
+  }
+
+  .openBtn {
+    display: flex;
+    align-items: center;
+    z-index: 1001;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -29rem;
+    height: 3.5rem;
+    aspect-ratio: 1;
+    border-radius: 2rem;
+    background-color: mixin.$gravl-blue;
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: mixin.$darker-blue;
+    }
+
+    .trips {
+      font-size: 1.5rem;
+      color: mixin.$white;
+      font-weight: 400;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+      margin-left: 1rem;
+    }
+
+    .back_arrow {
+      height: 2.5rem;
+      aspect-ratio: 1;
+      transform: rotate(180deg);
+      margin-right: 0.5rem;
+    }
+
+    &.flip {
+      .trips {
+        display: none;
+      }
+
+      .back_arrow {
+        transform: rotate(0);
+        margin: auto;
+      }
+    }
+  }
+
+  &.open {
+    left: 0;
+
+    .openBtn {
+      right: -15rem;
+    }
   }
 
   .pastTrips {

@@ -34,6 +34,7 @@ export default async function Profile({
     states,
     countries,
     nationalparks,
+    places,
     trips,
   ] = await Promise.all([
     getUserWithTripsAndVisits(userEmail),
@@ -41,6 +42,7 @@ export default async function Profile({
     getPlacesByUserAndType(user.id, "states"),
     getPlacesByUserAndType(user.id, "countries"),
     getPlacesByUserAndType(user.id, "nationalparks"),
+    loadPlaces(),
     loadTripsRecentFirst(user.id),
   ]);
 
@@ -54,6 +56,7 @@ export default async function Profile({
         trips={trips}
         userWithTripsAndVisits={userWithTripsAndVisits}
         maps={maps}
+        places={places}
       />
     </>
   );

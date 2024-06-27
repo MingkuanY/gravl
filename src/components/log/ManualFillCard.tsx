@@ -12,19 +12,23 @@ import { mapNames } from "../dashboard/MapLoader";
 import Icon from "../icons/Icon";
 import { addDays, formatMDYShortDate } from "@/utils/date";
 import { PlaceInput } from "@/utils/types";
+import { User } from "@prisma/client";
+import CloseBtn from "./CloseBtn";
 
 export default function ManualFillCard({
+  user,
   tripData,
   visits,
   setVisitsData,
   places,
-  setCurrentPage,
+  setLogTrip,
 }: {
+  user: User;
   tripData: BasicTripInfo;
   visits: VisitInput[];
   setVisitsData: Function;
   places: PlaceInput[];
-  setCurrentPage: Function;
+  setLogTrip: Function;
 }) {
   const placeIDs = new Set(places.map((place) => place.place_id));
   const placesMap = new Map(
@@ -110,10 +114,18 @@ export default function ManualFillCard({
 
   const handleFinish = () => {
     // Check that the user has at least one visit selected and navigate the user to the next step
+    setLogTrip(-1);
   };
 
   return (
     <div className={styles.container}>
+      <button className={styles.backBtn} onClick={() => setLogTrip(0)}>
+        <div className={styles.back_arrow}>
+          <Icon type="back_arrow" fill="#fff" />
+        </div>
+        <p className={styles.back}>Back</p>
+      </button>
+      <CloseBtn setLogTrip={setLogTrip} />
       <div className={styles.leftSide}>
         <div className={styles.titleContainer}>
           <p className={styles.name}>{tripData.trip_name}</p>

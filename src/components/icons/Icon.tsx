@@ -326,7 +326,7 @@ export default function Icon({ type, fill }: { type: string; fill: string }) {
             height="15"
             rx="2"
             stroke={fill}
-            stroke-width="2"
+            strokeWidth="2"
           />
           <path
             d="M3 10C3 8.11438 3 7.17157 3.58579 6.58579C4.17157 6 5.11438 6 7 6H17C18.8856 6 19.8284 6 20.4142 6.58579C21 7.17157 21 8.11438 21 10V10H3V10Z"
@@ -335,14 +335,14 @@ export default function Icon({ type, fill }: { type: string; fill: string }) {
           <path
             d="M7 3L7 6"
             stroke={fill}
-            stroke-width="2"
-            stroke-linecap="round"
+            strokeWidth="2"
+            strokeLinecap="round"
           />
           <path
             d="M17 3L17 6"
             stroke={fill}
-            stroke-width="2"
-            stroke-linecap="round"
+            strokeWidth="2"
+            strokeLinecap="round"
           />
           <rect x="7" y="12" width="4" height="2" rx="0.5" fill={fill} />
           <rect x="7" y="16" width="4" height="2" rx="0.5" fill={fill} />
@@ -375,6 +375,29 @@ export default function Icon({ type, fill }: { type: string; fill: string }) {
           xmlns="http://www.w3.org/2000/svg"
         >
           <path d="M15 18L9 12L15 6" stroke={fill} strokeWidth="2" />
+        </svg>
+      );
+    case "close":
+      return (
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 36 36"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M27 9L9 27"
+            stroke={fill}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M9 9L27 27"
+            stroke={fill}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       );
   }

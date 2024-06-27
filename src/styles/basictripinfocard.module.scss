@@ -1,6 +1,7 @@
 @use "./mixin" as mixin;
 
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,6 +12,7 @@
 
   .nameInput {
     font-size: 3rem;
+    line-height: 3.5rem;
     color: mixin.$dark;
     font-weight: 400;
     border-bottom: 0.2rem solid mixin.$gravl-blue;
@@ -87,5 +89,13 @@
         transform: translateX(1rem);
       }
     }
+  }
+
+  .error {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 3.5rem;
+    font-size: 1.3rem;
+    color: mixin.$warning;
   }
 }

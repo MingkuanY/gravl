@@ -1,8 +1,10 @@
 "use client";
 
-import { User } from "@prisma/client";
 import styles from "../../styles/basictripinfocard.module.scss";
 import DatePicker from "./DatePicker";
+import { useState } from "react";
+import CloseBtn from "./CloseBtn";
+import { VisitInput } from "@/utils/types";
 
 export type BasicTripInfo = {
   trip_name: string;
@@ -11,24 +13,43 @@ export type BasicTripInfo = {
 };
 
 export default function BasicTripInfoCard({
-  user,
+  visits,
+  setVisitsData,
   tripData,
   setTripData,
-  setCurrentPage,
+  setLogTrip,
 }: {
-  user: User;
+  visits: VisitInput[];
+  setVisitsData: Function;
   tripData: BasicTripInfo;
   setTripData: Function;
-  setCurrentPage: Function;
+  setLogTrip: Function;
 }) {
+  const [error, setError] = useState("");
+
   const handleNext = () => {
-    if (tripData.trip_name && tripData.start_date) {
-      setCurrentPage(1);
+    if (!tripData.trip_name && !tripData.start_date) {
+      setError("Please name and date your trip.");
+    } else if (!tripData.trip_name) {
+      setError("Please name your trip.");
+    } else if (!tripData.start_date) {
+      setError("Please add a start date.");
+    } else {
+      setLogTrip(1);
+      setError("");
     }
+  };
+
+  const handleDateChange = (date: string) => {
+    setVisitsData(
+      visits.filter((visit) => new Date(visit.date) > new Date(date))
+    );
+    setTripData({ ...tripData, start_date: date });
   };
 
   return (
     <div className={styles.container}>
+      <CloseBtn setLogTrip={setLogTrip} />
       <input
         className={styles.nameInput}
         type="text"
@@ -51,14 +72,11 @@ export default function BasicTripInfoCard({
       <div className={styles.bottom}>
         <div className={styles.dateContainer}>
           <p>Started on</p>
-          <DatePicker
-            setDate={(date: string) =>
-              setTripData({ ...tripData, start_date: date })
-            }
-          />
+          <DatePicker date={tripData.start_date} setDate={handleDateChange} />
         </div>
         <button onClick={handleNext}>Map It Out</button>
       </div>
+      <p className={styles.error}>{error}</p>
     </div>
   );
 }

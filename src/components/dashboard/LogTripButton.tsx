@@ -1,18 +1,15 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
 import styles from "../../styles/logtripbutton.module.scss";
 import Icon from "../icons/Icon";
 
-export default function LogTripButton() {
-  const router = useRouter();
-  const pathname = usePathname();
-
+export default function LogTripButton({
+  setLogTrip,
+}: {
+  setLogTrip: Function;
+}) {
   return (
-    <button
-      onClick={() => router.push(`${pathname}/log`)}
-      className={styles.button}
-    >
+    <button onClick={() => setLogTrip(0)} className={styles.button}>
       <div className={styles.plus}>
         <Icon type="plus" fill="#FFF" />
       </div>
