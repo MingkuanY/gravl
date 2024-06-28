@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useOptimistic,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
 import styles from "../../styles/manualfillcard.module.scss";
 import Counties from "../maps/Counties";
 import Countries from "../maps/Countries";
@@ -14,6 +20,7 @@ import { addDays, formatMDYShortDate } from "@/utils/date";
 import { PlaceInput } from "@/utils/types";
 import { User } from "@prisma/client";
 import CloseBtn from "./CloseBtn";
+import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 
 export default function ManualFillCard({
   user,
@@ -41,6 +48,8 @@ export default function ManualFillCard({
   };
   const visitsOnCurrentDate = () =>
     visits.filter((visit) => visit.date === getCurrentDate());
+
+  // Determines which map to display
 
   const [mapPopup, setMapPopup] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
@@ -112,8 +121,67 @@ export default function ManualFillCard({
     }
   };
 
+  // Handles the drag and drop to reorder visits
+
+  const reorderVisits = (visit1: string, visit2: string) => {
+    if (visit1 === visit2) {
+      return visits;
+    }
+    const dragIndex = visits.findIndex((visit) => visit.place_id === visit1);
+    const dropIndex = visits.findIndex((visit) => visit.place_id === visit2);
+
+    const draggedVisit = visits[dragIndex];
+    draggedVisit.order = dropIndex;
+
+    if (dragIndex < dropIndex) {
+      for (let i = dragIndex; i < dropIndex; i++) {
+        visits[i] = visits[i + 1];
+        visits[i].order--;
+      }
+    } else {
+      for (let i = dragIndex; i > dropIndex; i--) {
+        visits[i] = visits[i - 1];
+        visits[i].order++;
+      }
+    }
+    visits[dropIndex] = draggedVisit;
+
+    return visits;
+  };
+
+  const [optimisticState, swapOptimistic] = useOptimistic(
+    visitsOnCurrentDate(),
+    (state, { sourceVisitId, destinationVisitId }) => {
+      const sourceIndex = state.findIndex(
+        (visit) => visit.place_id === sourceVisitId
+      );
+      const destinationIndex = state.findIndex(
+        (visit) => visit.place_id === destinationVisitId
+      );
+      const newState = [...state];
+      newState[sourceIndex] = state[destinationIndex];
+      newState[destinationIndex] = state[sourceIndex];
+      return newState;
+    }
+  );
+
+  const [, startTransition] = useTransition();
+
+  const onDragEnd = (result: any) => {
+    const sourceVisitId = result.draggableId;
+    const destinationVisitId = visits[result.destination.index].place_id;
+    startTransition(() => {
+      swapOptimistic({ sourceVisitId, destinationVisitId });
+    });
+
+    // reorder list
+    setVisitsData(reorderVisits(sourceVisitId, destinationVisitId));
+  };
+
+  /**
+   * Checks that the user has at least one visit selected, updates the db with the new trip, and navigates the user back to dashboard.
+   */
   const handleFinish = () => {
-    // Check that the user has at least one visit selected and navigate the user to the next step
     setLogTrip(-1);
   };
 
@@ -204,19 +272,46 @@ export default function ManualFillCard({
           </div>
         </div>
 
-        <div className={styles.visitedList}>
-          {visitsOnCurrentDate().length > 0 ? (
-            visitsOnCurrentDate().map((visit, index) => (
-              <p className={styles.visitedPlace} key={index}>
-                {placesMap.get(visit.place_id)}
-              </p>
-            ))
-          ) : (
-            <p className={styles.placeholderForList}>
-              Select a place on the map.
-            </p>
-          )}
-        </div>
+        {visitsOnCurrentDate().length > 0 ? (
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId={"visits"}>
+              {(droppableProvided) => (
+                <div
+                  className={styles.visitedList}
+                  ref={droppableProvided.innerRef}
+                  {...droppableProvided.droppableProps}
+                >
+                  {optimisticState.map((visit, index) => {
+                    return (
+                      <Draggable
+                        key={visit.place_id}
+                        draggableId={visit.place_id}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <p
+                            className={styles.visitedPlace}
+                            key={index}
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            {placesMap.get(visit.place_id)}
+                          </p>
+                        )}
+                      </Draggable>
+                    );
+                  })}
+                  {droppableProvided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        ) : (
+          <p className={styles.placeholderForList}>
+            Select a place on the map.
+          </p>
+        )}
 
         <button
           className={`${styles.finish} ${
