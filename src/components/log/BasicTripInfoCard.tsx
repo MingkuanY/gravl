@@ -42,7 +42,7 @@ export default function BasicTripInfoCard({
 
   const handleDateChange = (date: string) => {
     setVisitsData(
-      visits.filter((visit) => new Date(visit.date) > new Date(date))
+      visits.filter((visit) => new Date(visit.date) >= new Date(date))
     );
     setTripData({ ...tripData, start_date: date });
   };

@@ -10,8 +10,9 @@
   border-radius: 2rem;
 
   .backBtn {
+    z-index: 10;
     position: absolute;
-    top: 1rem;
+    bottom: 5rem;
     left: 3.5rem;
     display: flex;
     align-items: center;
@@ -193,7 +194,7 @@
         }
 
         .currentDate {
-          width: 11rem;
+          width: 12rem;
           height: 3rem;
           border-radius: 1rem;
           border: 0.2rem solid mixin.$light-blue;

@@ -2,7 +2,7 @@
 
 import styles from "../../styles/nationalparks.module.scss";
 import { useEffect, useRef } from "react";
-import { interpolateColors } from "../../utils/color";
+import { interpolateColors, otherColor, todayColor } from "../../utils/color";
 import {
   handleMapClick,
   loadMapWithChildren,
@@ -55,8 +55,8 @@ export default function NationalParks({
     };
   } else {
     useEffect(() => {
-      refreshMap(visits!, currentDate!, colors[0], colors[0]);
-    }, [visits, currentDate]);
+      refreshMap(visits!, currentDate!, todayColor, otherColor);
+    }, [currentDate]);
   }
 
   return (

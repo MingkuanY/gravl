@@ -116,11 +116,9 @@ export function refreshMap(
   otherColor: string
 ) {
   visits.forEach((visit) => {
-    if (visit.date === currentDate) {
-      const element = document.getElementById(visit.place_id);
-      if (element) {
-        element.style.fill = todayColor;
-      }
+    const element = document.getElementById(visit.place_id);
+    if (element) {
+      element.style.fill = visit.date === currentDate ? todayColor : otherColor;
     }
   });
 }

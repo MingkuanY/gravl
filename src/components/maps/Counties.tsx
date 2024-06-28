@@ -2,7 +2,7 @@
 
 import styles from "../../styles/counties.module.scss";
 import { useEffect, useRef } from "react";
-import { interpolateColors } from "../../utils/color.ts";
+import { interpolateColors, otherColor, todayColor } from "../../utils/color.ts";
 import {
   MapProps,
   handleMapClick,
@@ -57,8 +57,8 @@ export default function Counties({
     };
   } else {
     useEffect(() => {
-      refreshMap(visits!, currentDate!, colors[0], colors[0]);
-    }, [visits, currentDate]);
+      refreshMap(visits!, currentDate!, todayColor, otherColor);
+    }, [currentDate]);
   }
 
   return (
