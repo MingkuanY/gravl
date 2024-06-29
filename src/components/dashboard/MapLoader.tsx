@@ -49,6 +49,13 @@ export default function MapLoader({
       nationalparks: [],
     };
 
+    const uniqueVisits: { [key: string]: Set<string> } = {
+      counties: new Set(),
+      states: new Set(),
+      countries: new Set(),
+      nationalparks: new Set(),
+    };
+
     trips.map((trip) => {
       trip.visits.forEach((visit) => {
         const v = {
@@ -60,28 +67,33 @@ export default function MapLoader({
         switch (placesMap.get(v.place_id)) {
           case "counties":
             newSortedVisits.counties.push(v);
+            uniqueVisits.counties.add(v.place_id);
             break;
           case "states":
             newSortedVisits.states.push(v);
+            uniqueVisits.states.add(v.place_id);
             break;
           case "countries":
             newSortedVisits.countries.push(v);
+            uniqueVisits.countries.add(v.place_id);
             break;
           case "nationalparks":
             newSortedVisits.nationalparks.push(v);
+            uniqueVisits.nationalparks.add(v.place_id);
             break;
         }
       });
     });
 
-    const actualStates = newSortedVisits.states.filter(
-      (state) => state.place_id !== "DC"
+    const actualStates = Array.from(uniqueVisits.states).filter(
+      (state) => state !== "DC"
     );
+
     const counts = [
-      newSortedVisits.counties.length,
+      uniqueVisits.counties.size,
       actualStates.length,
-      newSortedVisits.countries.length,
-      newSortedVisits.nationalparks.length,
+      uniqueVisits.countries.size,
+      uniqueVisits.nationalparks.size,
     ];
     setCount(counts);
 

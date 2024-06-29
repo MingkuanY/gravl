@@ -11,15 +11,17 @@ export const loadMap = (
 ) => {
   let timeCounter = 0;
   let timeouts: NodeJS.Timeout[] = [];
+  const uniqueVisits = new Set<string>();
+  data.forEach((visit) => uniqueVisits.add(visit.place_id));
 
-  data.forEach((visit: VisitInput) => {
+  uniqueVisits.forEach((place_id: string) => {
     const color = colors[0];
 
     const timeoutId = setTimeout(() => {
-      const element = document.getElementById(visit.place_id);
+      const element = document.getElementById(place_id);
       if (element) {
         element.style.fill = color;
-        visit.place_id !== "DC" && updateCount && updateCount(); // make sure DC doesn't get counted as a state
+        place_id !== "DC" && updateCount && updateCount(); // make sure DC doesn't get counted as a state
       }
     }, 800 + pause! * timeCounter++);
     timeouts.push(timeoutId);
