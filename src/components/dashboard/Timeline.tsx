@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styles from "../../styles/timeline.module.scss";
 import Icon from "../icons/Icon";
 import LogTripButton from "./LogTripButton";
@@ -10,13 +11,29 @@ export default function Timeline({
   isOpen,
   setIsOpen,
   setLogTrip,
+  currTrip,
+  setCurrTrip,
 }: {
   trips: TripWithVisits[];
   isOpen: boolean;
   setIsOpen: Function;
   setLogTrip: Function;
+  currTrip: number;
+  setCurrTrip: Function;
 }) {
-  // Assume trips is already sorted in recent-first order by start date
+  const handleClickOutside = (event: MouseEvent) => {
+    const target = event.target as Element;
+    if (!target.closest(".tripCard")) {
+      setCurrTrip(-1);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  });
 
   return (
     <div className={`${styles.timeline} ${isOpen ? styles.open : ""}`}>
@@ -43,7 +60,16 @@ export default function Timeline({
           return (
             <div className={styles.tripCheckpoint} key={index}>
               <div>
-                <TripCard name={trip.name} desc={trip.description} />
+                <div className="tripCard">
+                  <TripCard
+                    name={trip.name}
+                    desc={trip.description}
+                    selected={currTrip === trip.id}
+                    isClicked={() =>
+                      setCurrTrip(currTrip !== trip.id ? trip.id : -1)
+                    }
+                  />
+                </div>
                 {showYear && <p className={styles.year}>{tripYear}</p>}
                 <p className={styles.dates}>
                   {formatDates(tripDates.startDate, tripDates.endDate)}

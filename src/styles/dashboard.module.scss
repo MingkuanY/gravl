@@ -14,7 +14,7 @@
     transition: transform 0.3s ease;
 
     &.shifted {
-      margin-left: 35%;
+      transform: translateX(10rem);
     }
 
     /* user profile */

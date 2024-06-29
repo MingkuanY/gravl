@@ -211,27 +211,3 @@ export async function addTripToUser(user_id: string, trip: TripInput) {
 
   return newTrip;
 }
-
-/**
- * Loads all Trips of the given User in reverse chronological order starting with most recent by start date.
- *
- * @param userID the user ID
- * @returns list of Trips starting with most recent
- */
-export async function loadTripsRecentFirst(userID: string) {
-  const trips: TripWithVisits[] = await prisma.trip.findMany({
-    where: { userId: userID },
-    include: { visits: true },
-  });
-
-  const tripsWithDates: TripWithDates[] = trips.map((trip) => ({
-    ...trip,
-    ...getTripDates(trip),
-  }));
-
-  tripsWithDates.sort((a, b) => {
-    return b.startDate!.localeCompare(a.startDate!);
-  });
-
-  return tripsWithDates;
-}

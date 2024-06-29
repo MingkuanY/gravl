@@ -13,7 +13,8 @@
   padding: 0.6rem;
   transition: 0.3s;
 
-  &:hover {
+  &:hover,
+  &.selected {
     transform: translateX(0.5rem);
   }
 
@@ -36,6 +37,7 @@
       white-space: nowrap;
       color: mixin.$dark;
       font-weight: 400;
+      transition: 0.3s;
     }
 
     .locations {
@@ -43,6 +45,16 @@
       color: mixin.$faded;
       font-size: 1rem;
       font-weight: 400;
+      transition: 0.3s;
+    }
+  }
+
+  &.selected {
+    background-color: mixin.$gravl-blue;
+
+    .title,
+    .locations {
+      color: mixin.$white;
     }
   }
 }

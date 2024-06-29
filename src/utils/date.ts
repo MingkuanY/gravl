@@ -1,4 +1,4 @@
-import { TripWithIdAndVisits } from "./types";
+import { TripWithIdAndVisits, TripWithVisits } from "./types";
 
 export const monthAbbreviations = [
   "Jan",
@@ -133,3 +133,13 @@ export function tripsThisYear(trips: TripWithIdAndVisits[]) {
 
   return tripCount;
 }
+
+export const sortTrips = (trips: TripWithVisits[]) => {
+  const tripsWithStartDate = trips.map((trip) => ({
+    ...trip,
+    startDate: getTripDates(trip).startDate,
+  }));
+
+  tripsWithStartDate.sort((a, b) => b.startDate!.localeCompare(a.startDate!));
+  return tripsWithStartDate;
+};

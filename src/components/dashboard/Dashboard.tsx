@@ -9,6 +9,7 @@ import { useState } from "react";
 import { User } from "@prisma/client";
 import { PlaceInput, TripWithVisits } from "@/utils/types";
 import NewTrip from "../log/NewTrip";
+import { sortTrips } from "@/utils/date";
 
 export default function Dashboard({
   user,
@@ -25,9 +26,16 @@ export default function Dashboard({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [logTrip, setLogTrip] = useState(-1);
-  const [displayTrip, setDisplayTrip] = useState(-1);
+  const [currTrip, setCurrTrip] = useState(-1);
 
-  const setTrip = (tripID: number) => {};
+  const setTrip = (tripID: number) => {
+    setIsOpen(true);
+    setCurrTrip(tripID);
+  };
+
+  if (currTrip !== -1) {
+    console.log("current trip: ", currTrip);
+  }
 
   return (
     <>
@@ -42,10 +50,12 @@ export default function Dashboard({
       {logTrip === -1 && (
         <div className={styles.container}>
           <Timeline
-            trips={trips}
+            trips={sortTrips(trips)}
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             setLogTrip={setLogTrip}
+            currTrip={currTrip}
+            setCurrTrip={setCurrTrip}
           />
           <div className={`${styles.main} ${isOpen ? styles.shifted : ""}`}>
             <div className={styles.profile}>
