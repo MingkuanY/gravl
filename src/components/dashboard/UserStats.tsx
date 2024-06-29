@@ -8,9 +8,11 @@ import { TripWithVisits } from "@/utils/types";
 export default function UserStats({
   trips,
   setIsOpen,
+  setCurrTrip,
 }: {
   trips: TripWithVisits[];
   setIsOpen: Function;
+  setCurrTrip: Function;
 }) {
   const [tripCount, setTripCount] = useState(0);
   const [tripsThisYearCount, setTripsThisYearCount] = useState(0);
@@ -22,6 +24,7 @@ export default function UserStats({
 
   const handleClick = () => {
     setIsOpen((isOpen: boolean) => !isOpen);
+    setCurrTrip(-1);
   };
 
   return (

@@ -5,7 +5,7 @@ import EditProfileButton from "@/components/dashboard/EditProfileButton";
 import MapLoader from "@/components/dashboard/MapLoader";
 import UserStats from "@/components/dashboard/UserStats";
 import Timeline from "@/components/dashboard/Timeline";
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { PlaceInput, TripWithVisits } from "@/utils/types";
 import NewTrip from "../log/NewTrip";
 import { sortTrips } from "@/utils/date";
@@ -20,17 +20,26 @@ export default function Dashboard({
   places: PlaceInput[];
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [logTrip, setLogTrip] = useState(-1);
-  const [currTrip, setCurrTrip] = useState(-1);
+  const [logTrip, setLogTrip] = useState(-1); // Page of logging a trip
+  const [currTrip, setCurrTrip] = useState(-1); // Current trip displayed
+  const [tripsForMaps, setTripsForMaps] = useState<TripWithVisits[]>([]);
 
   const setTrip = (tripID: number) => {
     setIsOpen(true);
     setCurrTrip(tripID);
   };
 
-  if (currTrip !== -1) {
-    console.log("current trip: ", currTrip);
-  }
+  useEffect(() => {
+    const sortedTripsChronological = sortTrips(trips, true);
+    if (currTrip === -1) {
+      setTripsForMaps(sortedTripsChronological);
+    } else {
+      const currentTrip = trips.find((trip) => trip.id === currTrip);
+      setTripsForMaps(currentTrip ? [currentTrip] : []);
+    }
+  }, [currTrip, trips]);
+
+  const sortedTrips = useMemo(() => sortTrips(trips), [trips]);
 
   return (
     <>
@@ -45,7 +54,7 @@ export default function Dashboard({
       {logTrip === -1 && (
         <div className={styles.container}>
           <Timeline
-            trips={sortTrips(trips)}
+            trips={sortedTrips}
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             setLogTrip={setLogTrip}
@@ -67,10 +76,14 @@ export default function Dashboard({
                 <p className={styles.location}>{user!.location}</p>
                 <p className={styles.bio}>{user!.bio}</p>
               </div>
-              <UserStats trips={user!.trips} setIsOpen={setIsOpen} />
+              <UserStats
+                trips={user!.trips}
+                setIsOpen={setIsOpen}
+                setCurrTrip={setCurrTrip}
+              />
             </div>
 
-            <MapLoader trips={sortTrips(trips, true)} places={places} />
+            <MapLoader trips={tripsForMaps} places={places} />
           </div>
         </div>
       )}

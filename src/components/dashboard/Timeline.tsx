@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import styles from "../../styles/timeline.module.scss";
 import Icon from "../icons/Icon";
 import LogTripButton from "./LogTripButton";
@@ -21,25 +20,18 @@ export default function Timeline({
   currTrip: number;
   setCurrTrip: Function;
 }) {
-  const handleClickOutside = (event: MouseEvent) => {
-    const target = event.target as Element;
-    if (!target.closest(".tripCard")) {
-      setCurrTrip(-1);
-    }
+  const handleClick = (tripID: number) => {
+    setCurrTrip(currTrip !== tripID ? tripID : -1);
   };
-
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside, true);
-    return () => {
-      document.removeEventListener("click", handleClickOutside, true);
-    };
-  });
 
   return (
     <div className={`${styles.timeline} ${isOpen ? styles.open : ""}`}>
       <button
         className={`${styles.openBtn} ${isOpen && styles.flip}`}
-        onClick={() => setIsOpen((isOpen: boolean) => !isOpen)}
+        onClick={() => {
+          setIsOpen((isOpen: boolean) => !isOpen);
+          setCurrTrip(-1);
+        }}
       >
         <p className={styles.trips}>Trips</p>
         <div className={styles.back_arrow}>
@@ -65,9 +57,7 @@ export default function Timeline({
                     name={trip.name}
                     desc={trip.description}
                     selected={currTrip === trip.id}
-                    isClicked={() =>
-                      setCurrTrip(currTrip !== trip.id ? trip.id : -1)
-                    }
+                    isClicked={() => handleClick(trip.id)}
                   />
                 </div>
                 {showYear && <p className={styles.year}>{tripYear}</p>}
