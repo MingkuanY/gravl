@@ -4,7 +4,7 @@ import { Place } from "@prisma/client";
 import { otherColor } from "./color";
 
 export const loadMap = (
-  data: Place[],
+  data: VisitInput[],
   pause: number | undefined,
   colors: string[],
   updateCount?: Function
@@ -12,14 +12,14 @@ export const loadMap = (
   let timeCounter = 0;
   let timeouts: NodeJS.Timeout[] = [];
 
-  data.forEach((place: Place) => {
+  data.forEach((visit: VisitInput) => {
     const color = colors[0];
 
     const timeoutId = setTimeout(() => {
-      const element = document.getElementById(place.place_id);
+      const element = document.getElementById(visit.place_id);
       if (element) {
         element.style.fill = color;
-        place.place_id !== "DC" && updateCount && updateCount(); // make sure DC doesn't get counted as a state
+        visit.place_id !== "DC" && updateCount && updateCount(); // make sure DC doesn't get counted as a state
       }
     }, 800 + pause! * timeCounter++);
     timeouts.push(timeoutId);
@@ -99,19 +99,6 @@ export const handleMapClick = (
       }
     }
   };
-};
-
-export type MapProps = {
-  data?: Place[];
-  updateCount?: Function;
-  total?: number;
-  reload?: boolean;
-  pause?: number;
-  animate: boolean;
-  placeIDs?: Set<string>;
-  visits?: VisitInput[];
-  setVisits?: Function;
-  currentDate?: string;
 };
 
 /**

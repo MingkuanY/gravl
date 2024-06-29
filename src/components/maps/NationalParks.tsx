@@ -6,9 +6,9 @@ import { interpolateColors, otherColor, todayColor } from "../../utils/color";
 import {
   handleMapClick,
   loadMapWithChildren,
-  MapProps,
   refreshMap,
 } from "../../utils/map";
+import { MapProps } from "@/utils/types.ts";
 
 export const totalNationalparks = 63;
 
@@ -41,7 +41,7 @@ export default function NationalParks({
         clearTimeouts();
         updateCount && updateCount(total);
       };
-    }, [reload]);
+    }, [reload, data]);
 
     const resetMap = () => {
       updateCount && updateCount(0);

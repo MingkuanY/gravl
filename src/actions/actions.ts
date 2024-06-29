@@ -52,6 +52,7 @@ export async function loadPlaces() {
     select: {
       place_id: true,
       label: true,
+      map_type: true,
     },
   });
   return places;

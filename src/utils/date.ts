@@ -134,12 +134,18 @@ export function tripsThisYear(trips: TripWithIdAndVisits[]) {
   return tripCount;
 }
 
-export const sortTrips = (trips: TripWithVisits[]) => {
+export const sortTrips = (trips: TripWithVisits[], chronological?: boolean) => {
   const tripsWithStartDate = trips.map((trip) => ({
     ...trip,
     startDate: getTripDates(trip).startDate,
   }));
 
-  tripsWithStartDate.sort((a, b) => b.startDate!.localeCompare(a.startDate!));
+  tripsWithStartDate.sort((a, b) => {
+    if (chronological) {
+      return a.startDate!.localeCompare(b.startDate!);
+    } else {
+      return b.startDate!.localeCompare(a.startDate!);
+    }
+  });
   return tripsWithStartDate;
 };

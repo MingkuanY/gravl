@@ -2,13 +2,13 @@
 
 import styles from "../../styles/counties.module.scss";
 import { useEffect, useRef } from "react";
-import { interpolateColors, otherColor, todayColor } from "../../utils/color.ts";
 import {
-  MapProps,
-  handleMapClick,
-  loadMap,
-  refreshMap,
-} from "../../utils/map.ts";
+  interpolateColors,
+  otherColor,
+  todayColor,
+} from "../../utils/color.ts";
+import { handleMapClick, loadMap, refreshMap } from "../../utils/map.ts";
+import { MapProps } from "@/utils/types.ts";
 
 export const totalCounties = 3413;
 
@@ -43,7 +43,7 @@ export default function Counties({
         clearTimeouts();
         updateCount && updateCount(total);
       };
-    }, [reload]);
+    }, [reload, data]);
 
     const resetMap = () => {
       updateCount && updateCount(0);

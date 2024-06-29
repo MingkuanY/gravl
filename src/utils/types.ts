@@ -5,6 +5,7 @@ import { Place, Trip, Visit } from "@prisma/client";
 export type PlaceInput = {
   place_id: string;
   label: string;
+  map_type: string;
 };
 
 export type PlaceWithoutId = Omit<Place, "id">;
@@ -37,4 +38,19 @@ export type VisitInput = {
   place_id: string;
   date: string;
   order: number;
+};
+
+// Map
+
+export type MapProps = {
+  data?: VisitInput[];
+  updateCount?: Function;
+  total?: number;
+  reload?: boolean;
+  pause?: number;
+  animate: boolean;
+  placeIDs?: Set<string>;
+  visits?: VisitInput[];
+  setVisits?: Function;
+  currentDate?: string;
 };

@@ -6,22 +6,17 @@ import MapLoader from "@/components/dashboard/MapLoader";
 import UserStats from "@/components/dashboard/UserStats";
 import Timeline from "@/components/dashboard/Timeline";
 import { useState } from "react";
-import { User } from "@prisma/client";
 import { PlaceInput, TripWithVisits } from "@/utils/types";
 import NewTrip from "../log/NewTrip";
 import { sortTrips } from "@/utils/date";
 
 export default function Dashboard({
-  user,
   trips,
-  userWithTripsAndVisits,
-  maps,
+  user,
   places,
 }: {
-  user: User;
   trips: TripWithVisits[];
-  userWithTripsAndVisits: any;
-  maps: any;
+  user: any;
   places: PlaceInput[];
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -72,18 +67,10 @@ export default function Dashboard({
                 <p className={styles.location}>{user!.location}</p>
                 <p className={styles.bio}>{user!.bio}</p>
               </div>
-              <UserStats
-                trips={userWithTripsAndVisits!.trips}
-                setIsOpen={setIsOpen}
-              />
+              <UserStats trips={user!.trips} setIsOpen={setIsOpen} />
             </div>
 
-            <MapLoader
-              counties={maps.counties}
-              states={maps.states}
-              countries={maps.countries}
-              nationalparks={maps.nationalparks}
-            />
+            <MapLoader trips={sortTrips(trips, true)} places={places} />
           </div>
         </div>
       )}

@@ -9,25 +9,88 @@ import NationalParks, {
 } from "@/components/maps/NationalParks";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "../../styles/circularprogressbar.scss";
-import { useState } from "react";
-import { Place } from "@prisma/client";
-
-interface MapLoaderProps {
-  counties: Place[];
-  states: Place[];
-  countries: Place[];
-  nationalparks: Place[];
-}
+import { useEffect, useState } from "react";
+import { PlaceInput, TripWithVisits, VisitInput } from "@/utils/types";
 
 export const mapNames = ["counties", "states", "countries", "national parks"];
 
 export default function MapLoader({
-  counties,
-  states,
-  countries,
-  nationalparks,
-}: MapLoaderProps) {
-  // available maps
+  trips,
+  places,
+}: {
+  trips: TripWithVisits[];
+  places: PlaceInput[];
+}) {
+  const [count, setCount] = useState([0, 0, 0, 0]);
+
+  const placesMap = new Map(
+    places.map((place) => [place.place_id, place.map_type])
+  );
+
+  type SortedVisits = {
+    counties: VisitInput[];
+    states: VisitInput[];
+    countries: VisitInput[];
+    nationalparks: VisitInput[];
+  };
+
+  const [sortedVisits, setSortedVisits] = useState<SortedVisits>({
+    counties: [],
+    states: [],
+    countries: [],
+    nationalparks: [],
+  });
+
+  const sortVisitsByType = (trips: TripWithVisits[]) => {
+    const newSortedVisits: SortedVisits = {
+      counties: [],
+      states: [],
+      countries: [],
+      nationalparks: [],
+    };
+
+    trips.map((trip) => {
+      trip.visits.forEach((visit) => {
+        const v = {
+          place_id: visit.placeId,
+          date: visit.date.toISOString().split("T")[0],
+          order: visit.order,
+        };
+
+        switch (placesMap.get(v.place_id)) {
+          case "counties":
+            newSortedVisits.counties.push(v);
+            break;
+          case "states":
+            newSortedVisits.states.push(v);
+            break;
+          case "countries":
+            newSortedVisits.countries.push(v);
+            break;
+          case "nationalparks":
+            newSortedVisits.nationalparks.push(v);
+            break;
+        }
+      });
+    });
+
+    const actualStates = newSortedVisits.states.filter(
+      (state) => state.place_id !== "DC"
+    );
+    const counts = [
+      newSortedVisits.counties.length,
+      actualStates.length,
+      newSortedVisits.countries.length,
+      newSortedVisits.nationalparks.length,
+    ];
+    setCount(counts);
+
+    setSortedVisits(newSortedVisits);
+  };
+
+  useEffect(() => {
+    sortVisitsByType(trips);
+  }, [trips]);
 
   // total counts of each map imported from the map components
   const totalCounts = [
@@ -43,19 +106,6 @@ export default function MapLoader({
     setCurrentMap(btn);
     setReload((reload) => !reload);
   };
-
-  const getStatsCount = () => {
-    // Don't count DC as a state
-    const actualStates = states.filter((state) => state.place_id !== "DC");
-    return [
-      counties.length,
-      actualStates.length,
-      countries.length,
-      nationalparks.length,
-    ];
-  };
-
-  const [count, setCount] = useState(getStatsCount());
 
   /**
    * If a parameter (reset) is passed in, then set count to reset. Else, increment count by one.
@@ -84,7 +134,7 @@ export default function MapLoader({
         return (
           <Counties
             animate={true}
-            data={counties}
+            data={sortedVisits.counties}
             updateCount={updateCount}
             total={count[0]}
             reload={reload}
@@ -95,7 +145,7 @@ export default function MapLoader({
         return (
           <States
             animate={true}
-            data={states}
+            data={sortedVisits.states}
             updateCount={updateCount}
             total={count[1]}
             reload={reload}
@@ -105,7 +155,7 @@ export default function MapLoader({
         return (
           <Countries
             animate={true}
-            data={countries}
+            data={sortedVisits.countries}
             updateCount={updateCount}
             total={count[2]}
             reload={reload}
@@ -115,7 +165,7 @@ export default function MapLoader({
         return (
           <NationalParks
             animate={true}
-            data={nationalparks}
+            data={sortedVisits.nationalparks}
             updateCount={updateCount}
             total={count[3]}
             reload={reload}

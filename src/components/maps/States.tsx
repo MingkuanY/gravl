@@ -3,7 +3,8 @@
 import styles from "../../styles/states.module.scss";
 import { useEffect, useRef } from "react";
 import { interpolateColors, otherColor, todayColor } from "../../utils/color";
-import { handleMapClick, loadMap, MapProps, refreshMap } from "../../utils/map";
+import { handleMapClick, loadMap, refreshMap } from "../../utils/map";
+import { MapProps } from "@/utils/types.ts";
 
 export const totalStates = 50; // plus DC
 
@@ -35,7 +36,7 @@ export default function States({
         clearTimeouts();
         updateCount && updateCount(total);
       };
-    }, [reload]);
+    }, [reload, data]);
 
     const resetMap = () => {
       updateCount && updateCount(0);

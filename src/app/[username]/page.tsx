@@ -1,8 +1,7 @@
 import Header from "@/components/header/Header";
-import { getUser, getUserWithTripsAndVisits } from "@/actions/actions";
+import { getUserWithTripsAndVisits } from "@/actions/actions";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route.ts";
-import { getPlacesByUserAndType } from "@/actions/actions";
 import NotFound from "../not-found";
 import { loadPlaces } from "@/actions/actions";
 import Dashboard from "@/components/dashboard/Dashboard";
@@ -20,41 +19,20 @@ export default async function Profile({
   }
 
   const userEmail = session.user.email;
-  const user = await getUser(userEmail);
+  const [user, places] = await Promise.all([
+    getUserWithTripsAndVisits(userEmail),
+    loadPlaces(),
+  ]);
 
   if (!user || user.username !== params.username) {
     //user not logged into the account they are trying to access
     return NotFound();
   }
 
-  const [
-    userWithTripsAndVisits,
-    counties,
-    states,
-    countries,
-    nationalparks,
-    places,
-  ] = await Promise.all([
-    getUserWithTripsAndVisits(userEmail),
-    getPlacesByUserAndType(user.id, "counties"),
-    getPlacesByUserAndType(user.id, "states"),
-    getPlacesByUserAndType(user.id, "countries"),
-    getPlacesByUserAndType(user.id, "nationalparks"),
-    loadPlaces(),
-  ]);
-
-  const maps = { counties, states, countries, nationalparks };
-
   return (
     <>
       <Header user={user} />
-      <Dashboard
-        user={user}
-        trips={userWithTripsAndVisits!.trips}
-        userWithTripsAndVisits={userWithTripsAndVisits}
-        maps={maps}
-        places={places}
-      />
+      <Dashboard trips={user!.trips} user={user} places={places} />
     </>
   );
 }
