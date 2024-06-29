@@ -207,9 +207,6 @@ export async function addTripToUser(user_id: string, trip: TripInput) {
         })),
       },
     },
-    include: {
-      visits: true,
-    },
   });
 
   return newTrip;

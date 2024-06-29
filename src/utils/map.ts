@@ -1,5 +1,7 @@
+import { sortVisits } from "@/components/log/ManualFillCard";
 import { VisitInput } from "@/utils/types";
 import { Place } from "@prisma/client";
+import { otherColor } from "./color";
 
 export const loadMap = (
   data: Place[],
@@ -77,11 +79,14 @@ export const handleMapClick = (
       );
       if (visitExists) {
         // Remove the visit if it exists
-        element!.style.fill = defaultColor;
         const updatedVisits = visits.filter(
           (visit) => !(visit.place_id === placeID && visit.date === currentDate)
         );
         setVisits(updatedVisits);
+        const stillExists = updatedVisits.findIndex(
+          (v) => v.place_id === placeID
+        );
+        element!.style.fill = stillExists === -1 ? defaultColor : otherColor;
       } else {
         // Add the visit if it does not exist
         element!.style.fill = fillColor;
@@ -90,7 +95,7 @@ export const handleMapClick = (
           date: currentDate,
           order: visits.filter((visit) => visit.date === currentDate).length,
         };
-        setVisits([...visits, newVisit]);
+        setVisits(sortVisits([...visits, newVisit]));
       }
     }
   };
@@ -109,16 +114,31 @@ export type MapProps = {
   currentDate?: string;
 };
 
+/**
+ * Colors the places on the map visited on the current date with todayColor and colors places visited on other days with otherColor only if the place is not already visited on the current date.
+ *
+ * @param visits the visits for this trip
+ * @param currentDate the current date the user is on
+ * @param todayColor the color to fill places visited on the current date with
+ * @param otherColor the color to fill places visited on other dates with (if not already colored for today)
+ */
 export function refreshMap(
   visits: VisitInput[],
   currentDate: string,
   todayColor: string,
   otherColor: string
 ) {
+  const todayPlaces = new Set<string>();
+
   visits.forEach((visit) => {
     const element = document.getElementById(visit.place_id);
     if (element) {
-      element.style.fill = visit.date === currentDate ? todayColor : otherColor;
+      if (visit.date === currentDate) {
+        element.style.fill = todayColor;
+        todayPlaces.add(visit.place_id);
+      } else if (!todayPlaces.has(visit.place_id)) {
+        element.style.fill = otherColor;
+      }
     }
   });
 }

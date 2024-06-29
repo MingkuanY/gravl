@@ -25,6 +25,9 @@ export default function Dashboard({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [logTrip, setLogTrip] = useState(-1);
+  const [displayTrip, setDisplayTrip] = useState(-1);
+
+  const setTrip = (tripID: number) => {};
 
   return (
     <>

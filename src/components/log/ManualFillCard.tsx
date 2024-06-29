@@ -21,6 +21,17 @@ import { PlaceInput } from "@/utils/types";
 import { User } from "@prisma/client";
 import CloseBtn from "./CloseBtn";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
+import { addTripToUser } from "@/actions/actions";
+
+export const sortVisits = (list: VisitInput[]) => {
+  list.sort((a, b) => {
+    if (a.date === b.date) {
+      return a.order - b.order;
+    }
+    return new Date(a.date).getTime() - new Date(b.date).getTime();
+  });
+  return list;
+};
 
 export default function ManualFillCard({
   user,
@@ -42,12 +53,12 @@ export default function ManualFillCard({
     places.map((place) => [place.place_id, place.label])
   );
 
+  // Tracks which day the user is logging
+
   const [dayCount, setDayCount] = useState(1);
   const getCurrentDate = () => {
     return addDays(tripData.start_date, dayCount - 1);
   };
-  const visitsOnCurrentDate = () =>
-    visits.filter((visit) => visit.date === getCurrentDate());
 
   // Determines which map to display
 
@@ -121,14 +132,24 @@ export default function ManualFillCard({
     }
   };
 
+  // Change dates
+
+  const changeDate = (direction: number) => {
+    setDayCount((dayCount) => Math.max(1, dayCount + direction));
+  };
+
   // Handles the drag and drop to reorder visits
 
   const reorderVisits = (visit1: string, visit2: string) => {
     if (visit1 === visit2) {
       return visits;
     }
-    const dragIndex = visits.findIndex((visit) => visit.place_id === visit1);
-    const dropIndex = visits.findIndex((visit) => visit.place_id === visit2);
+    const dragIndex = visits.findIndex(
+      (visit) => visit.place_id === visit1 && visit.date === getCurrentDate()
+    );
+    const dropIndex = visits.findIndex(
+      (visit) => visit.place_id === visit2 && visit.date === getCurrentDate()
+    );
 
     const draggedVisit = visits[dragIndex];
     draggedVisit.order = dropIndex;
@@ -150,7 +171,7 @@ export default function ManualFillCard({
   };
 
   const [optimisticState, swapOptimistic] = useOptimistic(
-    visitsOnCurrentDate(),
+    visits,
     (state, { sourceVisitId, destinationVisitId }) => {
       const sourceIndex = state.findIndex(
         (visit) => visit.place_id === sourceVisitId
@@ -169,20 +190,30 @@ export default function ManualFillCard({
 
   const onDragEnd = (result: any) => {
     const sourceVisitId = result.draggableId;
-    const destinationVisitId = visits[result.destination.index].place_id;
-    startTransition(() => {
-      swapOptimistic({ sourceVisitId, destinationVisitId });
-    });
+    if (result.destination) {
+      const destinationVisitId = visits[result.destination.index].place_id;
+      startTransition(() => {
+        swapOptimistic({ sourceVisitId, destinationVisitId });
+      });
 
-    // reorder list
-    setVisitsData(reorderVisits(sourceVisitId, destinationVisitId));
+      // reorder list
+      setVisitsData(reorderVisits(sourceVisitId, destinationVisitId));
+    }
   };
 
   /**
    * Checks that the user has at least one visit selected, updates the db with the new trip, and navigates the user back to dashboard.
    */
-  const handleFinish = () => {
+  const handleFinish = async () => {
+    // maybe use useOptimistic after returning to dashboard to show the recently added trip's animation while updating db
     setLogTrip(-1);
+    const newTrip = {
+      trip_name: tripData.trip_name,
+      description: tripData.description,
+      visits: visits,
+    };
+
+    const addedTrip = await addTripToUser(user.id, newTrip);
   };
 
   return (
@@ -249,10 +280,10 @@ export default function ManualFillCard({
 
           <div className={styles.dateChanger}>
             <button
-              className={styles.backDate}
-              onClick={() => {
-                setDayCount((dayCount) => Math.max(1, dayCount - 1));
-              }}
+              className={`${styles.backDate} ${
+                dayCount === 1 && styles.disabled
+              }`}
+              onClick={() => changeDate(-1)}
             >
               <div className={styles.back_arrow}>
                 <Icon type="back_arrow" fill="#fff" />
@@ -263,7 +294,7 @@ export default function ManualFillCard({
             </p>
             <button
               className={styles.forwardDate}
-              onClick={() => setDayCount((dayCount) => dayCount + 1)}
+              onClick={() => changeDate(1)}
             >
               <div className={styles.forward_arrow}>
                 <Icon type="back_arrow" fill="#fff" />
@@ -272,26 +303,36 @@ export default function ManualFillCard({
           </div>
         </div>
 
-        {visitsOnCurrentDate().length > 0 ? (
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId={"visits"}>
-              {(droppableProvided) => (
-                <div
-                  className={styles.visitedList}
-                  ref={droppableProvided.innerRef}
-                  {...droppableProvided.droppableProps}
-                >
-                  {optimisticState.map((visit, index) => {
+        <p className={styles.instruction}>
+          {visits.filter((visit) => visit.date === getCurrentDate()).length > 0
+            ? "Drag to reorder."
+            : "Select a place on the map."}
+        </p>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId={"visits"}>
+            {(droppableProvided) => (
+              <div
+                className={styles.visitedList}
+                ref={droppableProvided.innerRef}
+                {...droppableProvided.droppableProps}
+              >
+                {optimisticState
+                  .filter((visit) => visit.date === getCurrentDate())
+                  .map((visit) => {
+                    const originalIndex = optimisticState.findIndex(
+                      (v) =>
+                        v.place_id === visit.place_id && v.date === visit.date
+                    );
                     return (
                       <Draggable
                         key={visit.place_id}
                         draggableId={visit.place_id}
-                        index={index}
+                        index={originalIndex}
                       >
                         {(provided) => (
                           <p
                             className={styles.visitedPlace}
-                            key={index}
+                            key={visit.place_id}
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
@@ -302,16 +343,11 @@ export default function ManualFillCard({
                       </Draggable>
                     );
                   })}
-                  {droppableProvided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-        ) : (
-          <p className={styles.placeholderForList}>
-            Select a place on the map.
-          </p>
-        )}
+                {droppableProvided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
 
         <button
           className={`${styles.finish} ${

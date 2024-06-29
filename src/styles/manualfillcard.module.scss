@@ -181,10 +181,14 @@
           aspect-ratio: 1;
           border-radius: 50%;
           margin: auto;
+          background-color: mixin.$gravl-blue;
+          transition: 0.1s;
         }
 
         .backDate {
-          background-color: mixin.$light-blue;
+          &.disabled {
+            background-color: mixin.$light-blue;
+          }
 
           .back_arrow {
             width: 2rem;
@@ -208,8 +212,6 @@
         }
 
         .forwardDate {
-          background-color: mixin.$gravl-blue;
-
           .forward_arrow {
             width: 2rem;
             margin: auto;
@@ -218,6 +220,13 @@
           }
         }
       }
+    }
+
+    .instruction {
+      color: mixin.$faded;
+      font-size: 1.3rem;
+      font-weight: 200;
+      margin-bottom: 1rem;
     }
 
     .visitedList {
@@ -238,12 +247,6 @@
         black calc(100% - 4rem),
         transparent 100%
       );
-
-      .placeholderForList {
-        color: mixin.$faded;
-        font-size: 1.3rem;
-        font-weight: 200;
-      }
 
       .visitedPlace {
         margin-bottom: 2rem;
