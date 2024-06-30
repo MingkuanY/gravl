@@ -37,7 +37,7 @@ model Trip {
   name        String
   description String
 
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
   visits Visit[]
@@ -49,7 +49,7 @@ model Visit {
   date  DateTime @default(now())
   order Int      @default(autoincrement())
 
-  trip   Trip @relation(fields: [tripId], references: [id])
+  trip   Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
   tripId Int
 
   place   Place  @relation(fields: [placeId], references: [place_id])

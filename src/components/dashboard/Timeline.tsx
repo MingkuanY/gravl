@@ -1,3 +1,4 @@
+import { deleteTrip } from "@/actions/actions";
 import styles from "../../styles/timeline.module.scss";
 import Icon from "../icons/Icon";
 import LogTripButton from "./LogTripButton";
@@ -6,16 +7,14 @@ import { formatDates, getTripDates } from "@/utils/date";
 import { TripWithVisits } from "@/utils/types";
 
 export default function Timeline({
+  user,
   trips,
-  isOpen,
-  setIsOpen,
   setLogTrip,
   currTrip,
   setCurrTrip,
 }: {
+  user: any;
   trips: TripWithVisits[];
-  isOpen: boolean;
-  setIsOpen: Function;
   setLogTrip: Function;
   currTrip: number;
   setCurrTrip: Function;
@@ -24,20 +23,13 @@ export default function Timeline({
     setCurrTrip(currTrip !== tripID ? tripID : -1);
   };
 
+  const handleDelete = async (tripID: number) => {
+    setCurrTrip(-1);
+    await deleteTrip(tripID);
+  };
+
   return (
-    <div className={`${styles.timeline} ${isOpen ? styles.open : ""}`}>
-      <button
-        className={`${styles.openBtn} ${isOpen && styles.flip}`}
-        onClick={() => {
-          setIsOpen((isOpen: boolean) => !isOpen);
-          setCurrTrip(-1);
-        }}
-      >
-        <p className={styles.trips}>Trips</p>
-        <div className={styles.back_arrow}>
-          <Icon type="back_arrow" fill="#fff" />
-        </div>
-      </button>
+    <div className={`${styles.timeline} ${!trips.length && styles.empty}`}>
       <LogTripButton setLogTrip={setLogTrip} />
       <div className={styles.pastTrips}>
         {trips.map((trip, index) => {
@@ -51,20 +43,28 @@ export default function Timeline({
 
           return (
             <div className={styles.tripCheckpoint} key={index}>
-              <div>
-                <div className="tripCard">
-                  <TripCard
-                    name={trip.name}
-                    desc={trip.description}
-                    selected={currTrip === trip.id}
-                    isClicked={() => handleClick(trip.id)}
-                  />
-                </div>
+              <div className={styles.dot}>
+                <TripCard
+                  name={trip.name}
+                  desc={trip.description}
+                  selected={currTrip === trip.id}
+                  isClicked={() => handleClick(trip.id)}
+                />
                 {showYear && <p className={styles.year}>{tripYear}</p>}
                 <p className={styles.dates}>
                   {formatDates(tripDates.startDate, tripDates.endDate)}
                 </p>
               </div>
+              {currTrip === trip.id && (
+                <button
+                  className={styles.trashContainer}
+                  onClick={() => handleDelete(trip.id)}
+                >
+                  <div className={styles.trash}>
+                    <Icon type="trash" fill="#319fff" />
+                  </div>
+                </button>
+              )}
             </div>
           );
         })}

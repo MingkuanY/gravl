@@ -1,14 +1,7 @@
 "use server";
 
-import { Place, PrismaClient } from "@prisma/client";
-import counties from "../assets/Counties.json";
-import {
-  PlaceWithoutId,
-  TripInput,
-  TripWithDates,
-  TripWithVisits,
-} from "@/utils/types";
-import { getTripDates } from "@/utils/date";
+import { PrismaClient } from "@prisma/client";
+import { PlaceWithoutId, TripInput } from "@/utils/types";
 
 const prisma = new PrismaClient();
 
@@ -211,4 +204,18 @@ export async function addTripToUser(user_id: string, trip: TripInput) {
   });
 
   return newTrip;
+}
+
+/**
+ * Delete the given trip, which will correspondingly delete all associated visits.
+ *
+ * @param trip_id the trip to delete
+ * @returns the deleted trip
+ */
+export async function deleteTrip(trip_id: number) {
+  const deletedTrip = await prisma.trip.delete({
+    where: { id: trip_id },
+  });
+
+  return deletedTrip;
 }

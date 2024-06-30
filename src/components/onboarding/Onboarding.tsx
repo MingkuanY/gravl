@@ -140,7 +140,7 @@ export default function Onboarding({ email }: { email: string }) {
                 </div>
               </label>
               <input type="file" id="pfp-upload" /> */}
-              <button onClick={handleSubmit}>Start Tracking</button>
+              <button onClick={handleSubmit}>Start</button>
             </div>
           </div>
         )}

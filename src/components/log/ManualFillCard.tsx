@@ -40,6 +40,7 @@ export default function ManualFillCard({
   setVisitsData,
   places,
   setLogTrip,
+  setTrip,
 }: {
   user: User;
   tripData: BasicTripInfo;
@@ -47,6 +48,7 @@ export default function ManualFillCard({
   setVisitsData: Function;
   places: PlaceInput[];
   setLogTrip: Function;
+  setTrip: Function;
 }) {
   const placesMap = new Map(
     places.map((place) => [place.place_id, place.label])
@@ -213,6 +215,7 @@ export default function ManualFillCard({
     };
 
     const addedTrip = await addTripToUser(user.id, newTrip);
+    setTrip(addedTrip.id);
   };
 
   return (
@@ -305,7 +308,7 @@ export default function ManualFillCard({
         <p className={styles.instruction}>
           {visits.filter((visit) => visit.date === getCurrentDate()).length > 0
             ? "Drag to reorder."
-            : "Select a place on the map."}
+            : "Click on a place on the map."}
         </p>
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId={"visits"}>
@@ -317,7 +320,7 @@ export default function ManualFillCard({
               >
                 {optimisticState
                   .filter((visit) => visit.date === getCurrentDate())
-                  .map((visit) => {
+                  .map((visit, index) => {
                     const originalIndex = optimisticState.findIndex(
                       (v) =>
                         v.place_id === visit.place_id && v.date === visit.date
@@ -336,7 +339,7 @@ export default function ManualFillCard({
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                           >
-                            {placesMap.get(visit.place_id)}
+                            {index + 1 + ". " + placesMap.get(visit.place_id)}
                           </p>
                         )}
                       </Draggable>

@@ -2,10 +2,9 @@
 
 .timeline {
   z-index: 1000;
-  margin-left: 6rem;
   position: absolute;
   top: mixin.$header-height;
-  left: -50rem;
+  left: 6rem;
   height: calc(
     100vh - #{mixin.$header-height} - 5rem
   ); // subtract out header and the padding-bottom of the entire page container
@@ -23,67 +22,19 @@
     right: 0;
     background: mixin.$gravl-blue;
   }
-
-  .openBtn {
-    display: flex;
-    align-items: center;
-    z-index: 1001;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: -29rem;
-    height: 3.5rem;
-    aspect-ratio: 1;
-    border-radius: 2rem;
-    background-color: mixin.$gravl-blue;
-    transition: 0.3s;
-    cursor: pointer;
-
-    &:hover {
-      background-color: mixin.$darker-blue;
-    }
-
-    .trips {
-      font-size: 1.5rem;
-      color: mixin.$white;
-      font-weight: 400;
-      text-transform: uppercase;
-      margin-top: 0.5rem;
-      margin-left: 1rem;
-    }
-
-    .back_arrow {
-      height: 2.5rem;
-      aspect-ratio: 1;
-      transform: rotate(180deg);
-      margin-right: 0.5rem;
-    }
-
-    &.flip {
-      .trips {
-        display: none;
-      }
-
-      .back_arrow {
-        transform: rotate(0);
-        margin: auto;
-      }
-    }
-  }
-
-  &.open {
-    left: 0;
-
-    .openBtn {
-      right: -15rem;
+  &.empty {
+    /* vertical timeline stem */
+    &::before {
+      right: -4rem;
     }
   }
 
   .pastTrips {
     margin-top: 1rem;
-    margin-left: -15rem;
+    margin-left: -20rem;
     padding-right: 15rem;
     padding-bottom: 3rem;
+    padding-left: 5rem;
     transform: translateX(15rem);
     position: relative;
     flex: auto;
@@ -107,6 +58,7 @@
       max-width: 30rem;
       border-right: 0.5rem solid mixin.$gravl-blue;
       padding-right: 4rem;
+      overflow: visible;
 
       /* horizontal stem to timeline */
       &::before {
@@ -122,7 +74,8 @@
         z-index: -1;
       }
 
-      > div::before {
+      /* dot on timeline */
+      .dot::before {
         content: "";
         background: mixin.$gravl-blue;
         width: 1.5rem;
@@ -132,6 +85,26 @@
         top: 50%;
         transform: translateY(-50%);
         right: -1rem;
+      }
+
+      .trashContainer {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: -3.5rem;
+        white-space: nowrap;
+        border-radius: 50%;
+        padding: 0.5rem;
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+          background-color: mixin.$very-light-blue;
+        }
+
+        .trash {
+          height: 2rem;
+        }
       }
 
       .year,

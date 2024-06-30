@@ -19,13 +19,11 @@ export default function Dashboard({
   user: any;
   places: PlaceInput[];
 }) {
-  const [isOpen, setIsOpen] = useState(false);
   const [logTrip, setLogTrip] = useState(-1); // Page of logging a trip
   const [currTrip, setCurrTrip] = useState(-1); // Current trip displayed
   const [tripsForMaps, setTripsForMaps] = useState<TripWithVisits[]>([]);
 
   const setTrip = (tripID: number) => {
-    setIsOpen(true);
     setCurrTrip(tripID);
   };
 
@@ -49,19 +47,19 @@ export default function Dashboard({
           places={places}
           logTrip={logTrip}
           setLogTrip={setLogTrip}
+          setTrip={setTrip}
         />
       )}
       {logTrip === -1 && (
         <div className={styles.container}>
           <Timeline
+            user={user}
             trips={sortedTrips}
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
             setLogTrip={setLogTrip}
             currTrip={currTrip}
             setCurrTrip={setCurrTrip}
           />
-          <div className={`${styles.main} ${isOpen ? styles.shifted : ""}`}>
+          <div className={styles.main}>
             <div className={styles.profile}>
               <div className={styles.pfpContainer}>
                 <img src={user!.image!} alt="PFP" />
@@ -76,11 +74,7 @@ export default function Dashboard({
                 <p className={styles.location}>{user!.location}</p>
                 <p className={styles.bio}>{user!.bio}</p>
               </div>
-              <UserStats
-                trips={user!.trips}
-                setIsOpen={setIsOpen}
-                setCurrTrip={setCurrTrip}
-              />
+              <UserStats trips={user!.trips} />
             </div>
 
             <MapLoader trips={tripsForMaps} places={places} />

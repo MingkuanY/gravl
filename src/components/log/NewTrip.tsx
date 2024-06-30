@@ -12,11 +12,13 @@ export default function NewTrip({
   places,
   logTrip,
   setLogTrip,
+  setTrip,
 }: {
   user: User;
   places: PlaceInput[];
   logTrip: number;
   setLogTrip: Function;
+  setTrip: Function;
 }) {
   const [tripData, setTripData] = useState({
     trip_name: "",
@@ -46,6 +48,7 @@ export default function NewTrip({
             setVisitsData={setVisitsData}
             places={places}
             setLogTrip={setLogTrip}
+            setTrip={setTrip}
           />
         )}
       </div>

@@ -5,15 +5,7 @@ import styles from "../../styles/userstats.module.scss";
 import { useEffect, useState } from "react";
 import { TripWithVisits } from "@/utils/types";
 
-export default function UserStats({
-  trips,
-  setIsOpen,
-  setCurrTrip,
-}: {
-  trips: TripWithVisits[];
-  setIsOpen: Function;
-  setCurrTrip: Function;
-}) {
+export default function UserStats({ trips }: { trips: TripWithVisits[] }) {
   const [tripCount, setTripCount] = useState(0);
   const [tripsThisYearCount, setTripsThisYearCount] = useState(0);
 
@@ -22,23 +14,14 @@ export default function UserStats({
     setTripsThisYearCount(tripsThisYear(trips));
   }, [trips]);
 
-  const handleClick = () => {
-    setIsOpen((isOpen: boolean) => !isOpen);
-    setCurrTrip(-1);
-  };
-
   return (
     <div className={styles.userStats}>
       <div>
-        <p className={styles.stat} onClick={handleClick}>
-          {tripCount}
-        </p>
+        <p className={styles.stat}>{tripCount}</p>
         <p className={styles.desc}>Trips</p>
       </div>
       <div>
-        <p className={styles.stat} onClick={handleClick}>
-          {tripsThisYearCount}
-        </p>
+        <p className={styles.stat}>{tripsThisYearCount}</p>
         <p className={styles.desc}>This Year</p>
       </div>
     </div>
