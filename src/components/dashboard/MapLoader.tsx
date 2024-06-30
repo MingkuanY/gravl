@@ -151,6 +151,7 @@ export default function MapLoader({
             total={count[0]}
             reload={reload}
             pause={20}
+            places={places}
           />
         );
       case 1:
@@ -161,6 +162,7 @@ export default function MapLoader({
             updateCount={updateCount}
             total={count[1]}
             reload={reload}
+            places={places}
           />
         );
       case 2:
@@ -171,6 +173,7 @@ export default function MapLoader({
             updateCount={updateCount}
             total={count[2]}
             reload={reload}
+            places={places}
           />
         );
       case 3:
@@ -181,6 +184,7 @@ export default function MapLoader({
             updateCount={updateCount}
             total={count[3]}
             reload={reload}
+            places={places}
           />
         );
     }

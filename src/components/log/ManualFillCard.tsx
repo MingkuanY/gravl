@@ -48,7 +48,6 @@ export default function ManualFillCard({
   places: PlaceInput[];
   setLogTrip: Function;
 }) {
-  const placeIDs = new Set(places.map((place) => place.place_id));
   const placesMap = new Map(
     places.map((place) => [place.place_id, place.label])
   );
@@ -93,7 +92,7 @@ export default function ManualFillCard({
         return (
           <Counties
             animate={false}
-            placeIDs={placeIDs}
+            places={places}
             visits={visits}
             setVisits={setVisitsData}
             currentDate={getCurrentDate()}
@@ -103,7 +102,7 @@ export default function ManualFillCard({
         return (
           <States
             animate={false}
-            placeIDs={placeIDs}
+            places={places}
             visits={visits}
             setVisits={setVisitsData}
             currentDate={getCurrentDate()}
@@ -113,7 +112,7 @@ export default function ManualFillCard({
         return (
           <Countries
             animate={false}
-            placeIDs={placeIDs}
+            places={places}
             visits={visits}
             setVisits={setVisitsData}
             currentDate={getCurrentDate()}
@@ -123,7 +122,7 @@ export default function ManualFillCard({
         return (
           <NationalParks
             animate={false}
-            placeIDs={placeIDs}
+            places={places}
             visits={visits}
             setVisits={setVisitsData}
             currentDate={getCurrentDate()}
