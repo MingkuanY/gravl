@@ -32,7 +32,7 @@ export default async function Profile({
   return (
     <>
       <Header user={user} />
-      <Dashboard trips={user!.trips} user={user} places={places} />
+      <Dashboard initialTrips={user!.trips} user={user} places={places} />
     </>
   );
 }

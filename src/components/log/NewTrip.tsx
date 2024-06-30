@@ -10,15 +10,17 @@ import { PlaceInput } from "@/utils/types";
 export default function NewTrip({
   user,
   places,
-  logTrip,
-  setLogTrip,
-  setTrip,
+  logTripPage,
+  setLogTripPage,
+  updateWithNewTrip,
+  updateTrips,
 }: {
   user: User;
   places: PlaceInput[];
-  logTrip: number;
-  setLogTrip: Function;
-  setTrip: Function;
+  logTripPage: number;
+  setLogTripPage: Function;
+  updateWithNewTrip: Function;
+  updateTrips: Function;
 }) {
   const [tripData, setTripData] = useState({
     trip_name: "",
@@ -31,24 +33,25 @@ export default function NewTrip({
   return (
     <>
       <div className={styles.overlay}>
-        {logTrip === 0 && (
+        {logTripPage === 0 && (
           <BasicTripInfoCard
             visits={visitsData}
             setVisitsData={setVisitsData}
             tripData={tripData}
             setTripData={setTripData}
-            setLogTrip={setLogTrip}
+            setLogTripPage={setLogTripPage}
           />
         )}
-        {logTrip === 1 && (
+        {logTripPage === 1 && (
           <ManualFillCard
             user={user}
             tripData={tripData}
             visits={visitsData}
             setVisitsData={setVisitsData}
             places={places}
-            setLogTrip={setLogTrip}
-            setTrip={setTrip}
+            setLogTripPage={setLogTripPage}
+            updateWithNewTrip={updateWithNewTrip}
+            updateTrips={updateTrips}
           />
         )}
       </div>

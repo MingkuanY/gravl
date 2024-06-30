@@ -5,59 +5,70 @@ import EditProfileButton from "@/components/dashboard/EditProfileButton";
 import MapLoader from "@/components/dashboard/MapLoader";
 import UserStats from "@/components/dashboard/UserStats";
 import Timeline from "@/components/dashboard/Timeline";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useOptimistic, useRef, useState } from "react";
 import { PlaceInput, TripWithVisits } from "@/utils/types";
 import NewTrip from "../log/NewTrip";
 import { sortTrips } from "@/utils/date";
 
 export default function Dashboard({
-  trips,
+  initialTrips,
   user,
   places,
 }: {
-  trips: TripWithVisits[];
+  initialTrips: TripWithVisits[];
   user: any;
   places: PlaceInput[];
 }) {
-  const [logTrip, setLogTrip] = useState(-1); // Page of logging a trip
+  const [trips, setTrips] = useState(initialTrips);
+  const updateTrips = (newTrip: TripWithVisits) => {
+    setTrips([...trips, newTrip]);
+  };
+  const [optimisticTrips, setOptimisticTrips] = useOptimistic(trips);
+
+  const [logTripPage, setLogTripPage] = useState(-1); // Page of logging a trip
   const [currTrip, setCurrTrip] = useState(-1); // Current trip displayed
   const [tripsForMaps, setTripsForMaps] = useState<TripWithVisits[]>([]);
 
-  const setTrip = (tripID: number) => {
-    setCurrTrip(tripID);
+  const updateWithNewTrip = (newTrip: TripWithVisits) => {
+    setOptimisticTrips([...trips, newTrip]);
+    setCurrTrip(newTrip.id);
   };
 
   useEffect(() => {
-    const sortedTripsChronological = sortTrips(trips, true);
+    const sortedTripsChronological = sortTrips(optimisticTrips, true);
     if (currTrip === -1) {
       setTripsForMaps(sortedTripsChronological);
     } else {
-      const currentTrip = trips.find((trip) => trip.id === currTrip);
+      const currentTrip = optimisticTrips.find((trip) => trip.id === currTrip);
       setTripsForMaps(currentTrip ? [currentTrip] : []);
     }
-  }, [currTrip, trips]);
+  }, [currTrip, optimisticTrips]);
 
-  const sortedTrips = useMemo(() => sortTrips(trips), [trips]);
+  const sortedTrips = useMemo(
+    () => sortTrips(optimisticTrips),
+    [optimisticTrips]
+  );
 
   return (
     <>
-      {logTrip !== -1 && (
+      {logTripPage !== -1 && (
         <NewTrip
           user={user}
           places={places}
-          logTrip={logTrip}
-          setLogTrip={setLogTrip}
-          setTrip={setTrip}
+          logTripPage={logTripPage}
+          setLogTripPage={setLogTripPage}
+          updateWithNewTrip={updateWithNewTrip}
+          updateTrips={updateTrips}
         />
       )}
-      {logTrip === -1 && (
+      {logTripPage === -1 && (
         <div className={styles.container}>
           <Timeline
-            user={user}
-            trips={sortedTrips}
-            setLogTrip={setLogTrip}
+            initialTrips={sortedTrips}
+            setLogTripPage={setLogTripPage}
             currTrip={currTrip}
             setCurrTrip={setCurrTrip}
+            setOptimisticTrips={setOptimisticTrips}
           />
           <div className={styles.main}>
             <div className={styles.profile}>

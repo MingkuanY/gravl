@@ -17,13 +17,13 @@ export default function BasicTripInfoCard({
   setVisitsData,
   tripData,
   setTripData,
-  setLogTrip,
+  setLogTripPage,
 }: {
   visits: VisitInput[];
   setVisitsData: Function;
   tripData: BasicTripInfo;
   setTripData: Function;
-  setLogTrip: Function;
+  setLogTripPage: Function;
 }) {
   const [error, setError] = useState("");
 
@@ -35,7 +35,7 @@ export default function BasicTripInfoCard({
     } else if (!tripData.start_date) {
       setError("Please add a start date.");
     } else {
-      setLogTrip(1);
+      setLogTripPage(1);
       setError("");
     }
   };
@@ -49,7 +49,7 @@ export default function BasicTripInfoCard({
 
   return (
     <div className={styles.container}>
-      <CloseBtn setLogTrip={setLogTrip} />
+      <CloseBtn setLogTripPage={setLogTripPage} />
       <input
         className={styles.nameInput}
         type="text"

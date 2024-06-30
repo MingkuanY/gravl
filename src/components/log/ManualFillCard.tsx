@@ -23,6 +23,12 @@ import CloseBtn from "./CloseBtn";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { addTripToUser } from "@/actions/actions";
 
+/**
+ * Sort visit chronologically by date and order if same date.
+ *
+ * @param list the visits to be sorted
+ * @returns sorted visits
+ */
 export const sortVisits = (list: VisitInput[]) => {
   list.sort((a, b) => {
     if (a.date === b.date) {
@@ -39,16 +45,18 @@ export default function ManualFillCard({
   visits,
   setVisitsData,
   places,
-  setLogTrip,
-  setTrip,
+  setLogTripPage,
+  updateWithNewTrip,
+  updateTrips,
 }: {
   user: User;
   tripData: BasicTripInfo;
   visits: VisitInput[];
   setVisitsData: Function;
   places: PlaceInput[];
-  setLogTrip: Function;
-  setTrip: Function;
+  setLogTripPage: Function;
+  updateWithNewTrip: Function;
+  updateTrips: Function;
 }) {
   const placesMap = new Map(
     places.map((place) => [place.place_id, place.label])
@@ -205,28 +213,29 @@ export default function ManualFillCard({
   /**
    * Checks that the user has at least one visit selected, updates the db with the new trip, and navigates the user back to dashboard.
    */
-  const handleFinish = async () => {
-    // maybe use useOptimistic after returning to dashboard to show the recently added trip's animation while updating db
-    setLogTrip(-1);
-    const newTrip = {
-      trip_name: tripData.trip_name,
-      description: tripData.description,
-      visits: visits,
-    };
-
-    const addedTrip = await addTripToUser(user.id, newTrip);
-    setTrip(addedTrip.id);
+  const handleAdd = async () => {
+    if (visits) {
+      setLogTripPage(-1);
+      const newTrip = {
+        trip_name: tripData.trip_name,
+        description: tripData.description,
+        visits: visits,
+      };
+      updateWithNewTrip(newTrip);
+      await addTripToUser(user.id, newTrip);
+      updateTrips(newTrip);
+    }
   };
 
   return (
     <div className={styles.container}>
-      <button className={styles.backBtn} onClick={() => setLogTrip(0)}>
+      <button className={styles.backBtn} onClick={() => setLogTripPage(0)}>
         <div className={styles.back_arrow}>
           <Icon type="back_arrow" fill="#fff" />
         </div>
         <p className={styles.back}>Back</p>
       </button>
-      <CloseBtn setLogTrip={setLogTrip} />
+      <CloseBtn setLogTripPage={setLogTripPage} />
       <div className={styles.leftSide}>
         <div className={styles.titleContainer}>
           <p className={styles.name}>{tripData.trip_name}</p>
@@ -355,7 +364,7 @@ export default function ManualFillCard({
           className={`${styles.finish} ${
             !visits.length && styles.unselectable
           }`}
-          onClick={handleFinish}
+          onClick={handleAdd}
         >
           Finish
         </button>
