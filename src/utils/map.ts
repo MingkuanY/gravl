@@ -1,8 +1,26 @@
 import { sortVisits } from "@/components/log/ManualFillCard";
 import { VisitInput } from "@/utils/types";
-import { Place } from "@prisma/client";
 import { otherColor } from "./color";
 
+/*
+HOW NATIONAL PARKS AND OTHER CUSTOM INKSCAPE MAPS WORK:
+
+When clicking on it:
+User will click on the path elements within each group, so check if the parent of the clicked element is a g tag and, if so, get the id from the parent/g-tag.
+
+When coloring it in:
+Selecting the document element with the given id will select the g-tag, so loop over its child elements and color those in.
+*/
+
+/**
+ * Animates the visits in order on the map and updates the progress bar counter.
+ *
+ * @param data the list of visits to animate
+ * @param pause the amount of time to pause between visits when animating
+ * @param colors the list of colors to color the places on the map with
+ * @param updateCount a function to update or reset the progress bar
+ * @returns the timeouts to cancel them upon component offload
+ */
 export const loadMap = (
   data: VisitInput[],
   pause: number | undefined,
@@ -20,10 +38,17 @@ export const loadMap = (
     const timeoutId = setTimeout(() => {
       const element = document.getElementById(place_id);
       if (element) {
-        element.style.fill = color;
+        const childPaths = element.querySelectorAll("path");
+        if (childPaths.length) {
+          childPaths.forEach((path) => {
+            path.style.fill = color;
+          });
+        } else {
+          element.style.fill = color;
+        }
         place_id !== "DC" && updateCount && updateCount(); // make sure DC doesn't get counted as a state
       }
-    }, 800 + pause! * timeCounter++);
+    }, 500 + pause! * timeCounter++);
     timeouts.push(timeoutId);
   });
 
@@ -32,36 +57,15 @@ export const loadMap = (
   };
 };
 
-export const loadMapWithChildren = (
-  data: Place[],
-  pause: number,
-  colors: string[],
-  updateCount?: Function
-) => {
-  let timeCounter = 0;
-  let timeouts: NodeJS.Timeout[] = [];
-
-  data.forEach((place: Place) => {
-    const color = colors[0];
-
-    const timeoutId = setTimeout(() => {
-      const element = document.getElementById(place.place_id);
-      if (element) {
-        const childPaths = element.querySelectorAll("path");
-        childPaths.forEach((path) => {
-          path.style.fill = color;
-        });
-        updateCount && updateCount();
-      }
-    }, 800 + pause * timeCounter++);
-    timeouts.push(timeoutId);
-  });
-
-  return () => {
-    timeouts.forEach((timeoutId) => clearTimeout(timeoutId));
-  };
-};
-
+/**
+ * Called when the user clicks on the map when it's in edit mode and updates the visited list accordingly.
+ *
+ * @param placeIDs all the possible places
+ * @param visits the user's visits for this trip
+ * @param setVisits sets the user's visits for this trip
+ * @param currentDate the date the user is currently editing, used to filter out which visits are today
+ * @returns a function called when the user clicks on the map
+ */
 export const handleMapClick = (
   placeIDs: Set<string>,
   visits: VisitInput[],
@@ -72,13 +76,24 @@ export const handleMapClick = (
     const fillColor = "#319fff";
     const defaultColor = "#012241";
     const target = event.target as SVGPathElement;
-    const placeID = target.id;
+    let placeID = "";
+
+    if (
+      target.tagName === "path" &&
+      target.parentElement &&
+      target.parentElement.tagName === "g"
+    ) {
+      placeID = target.parentElement.id; // Get the id from the parent g tag
+    } else {
+      placeID = target.id; // Get the id from the current path tag
+    }
 
     if (placeIDs && placeIDs.has(placeID)) {
       const element = document.getElementById(placeID);
       const visitExists = visits.some(
         (visit) => visit.place_id === placeID && visit.date == currentDate
       );
+      const childPaths = element?.querySelectorAll("path");
       if (visitExists) {
         // Remove the visit if it exists
         const updatedVisits = visits.filter(
@@ -88,10 +103,30 @@ export const handleMapClick = (
         const stillExists = updatedVisits.findIndex(
           (v) => v.place_id === placeID
         );
-        element!.style.fill = stillExists === -1 ? defaultColor : otherColor;
+
+        const color = stillExists === -1 ? defaultColor : otherColor;
+
+        if (childPaths?.length) {
+          childPaths.forEach(() => {
+            childPaths.forEach((path) => {
+              path.style.fill = color;
+            });
+          });
+        } else {
+          element!.style.fill = color;
+        }
       } else {
         // Add the visit if it does not exist
-        element!.style.fill = fillColor;
+        if (childPaths?.length) {
+          childPaths.forEach(() => {
+            childPaths.forEach((path) => {
+              path.style.fill = fillColor;
+            });
+          });
+        } else {
+          element!.style.fill = fillColor;
+        }
+
         const newVisit = {
           place_id: placeID,
           date: currentDate,
@@ -122,11 +157,24 @@ export function refreshMap(
   visits.forEach((visit) => {
     const element = document.getElementById(visit.place_id);
     if (element) {
+      const childPaths = element.querySelectorAll("path");
       if (visit.date === currentDate) {
-        element.style.fill = todayColor;
+        if (childPaths.length) {
+          childPaths.forEach((path) => {
+            path.style.fill = todayColor;
+          });
+        } else {
+          element.style.fill = todayColor;
+        }
         todayPlaces.add(visit.place_id);
       } else if (!todayPlaces.has(visit.place_id)) {
-        element.style.fill = otherColor;
+        if (childPaths.length) {
+          childPaths.forEach((path) => {
+            path.style.fill = otherColor;
+          });
+        } else {
+          element.style.fill = otherColor;
+        }
       }
     }
   });

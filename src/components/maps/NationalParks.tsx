@@ -3,11 +3,7 @@
 import styles from "../../styles/nationalparks.module.scss";
 import { useEffect, useRef } from "react";
 import { interpolateColors, otherColor, todayColor } from "../../utils/color";
-import {
-  handleMapClick,
-  loadMapWithChildren,
-  refreshMap,
-} from "../../utils/map";
+import { handleMapClick, loadMap, refreshMap } from "../../utils/map";
 import { MapProps } from "@/utils/types.ts";
 
 export const totalNationalparks = 63;
@@ -36,7 +32,7 @@ export default function NationalParks({
 
     useEffect(() => {
       resetMap();
-      const clearTimeouts = loadMapWithChildren(data, 200, colors, updateCount);
+      const clearTimeouts = loadMap(data, 200, colors, updateCount);
       return () => {
         clearTimeouts();
         updateCount && updateCount(total);
