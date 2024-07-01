@@ -5,15 +5,24 @@ import { useEffect, useState } from "react";
 import Icon from "../icons/Icon.tsx";
 import { useRouter } from "next/navigation";
 import { uniqueUsername, updateUser } from "@/actions/actions.ts";
+import CloseBtn from "../log/CloseBtn.tsx";
 
-export default function Onboarding({ email }: { email: string }) {
+export default function Onboarding({
+  email,
+  user,
+  setClose,
+}: {
+  email: string;
+  user?: any;
+  setClose?: Function;
+}) {
   const router = useRouter();
 
   const [step, setStep] = useState(1);
   const [accountData, setAccountData] = useState({
-    username: "",
-    location: "",
-    bio: "",
+    username: user ? user.username : "",
+    location: user ? user.location : "",
+    bio: user ? user.bio : "",
     pfp: "",
   });
 
@@ -24,11 +33,16 @@ export default function Onboarding({ email }: { email: string }) {
   useEffect(() => {
     const handleKeyDown = async (e: KeyboardEvent) => {
       if (e.key === "Enter") {
-        if (step !== 1 || (await uniqueUsername(accountData.username))) {
+        if (
+          step === 1 &&
+          user &&
+          user.username !== accountData.username &&
+          !(await uniqueUsername(accountData.username))
+        ) {
+          setValidUsername(false);
+        } else {
           setValidUsername(true);
           setStep((step) => Math.min(step + 1, 4));
-        } else {
-          setValidUsername(false);
         }
       }
     };
@@ -41,15 +55,28 @@ export default function Onboarding({ email }: { email: string }) {
   }, [accountData, step]);
 
   const handleSubmit = () => {
-    //update user in prisma
-    updateUser(
-      email,
-      accountData.username,
-      accountData.location,
-      accountData.bio
-    );
+    if (
+      user &&
+      user.username === accountData.username &&
+      user.location === accountData.location &&
+      user.bio === accountData.bio
+    ) {
+    } else {
+      //update user in prisma
+      updateUser(
+        email,
+        accountData.username,
+        accountData.location,
+        accountData.bio
+      );
+    }
+
     //redirect to user dashboard
-    router.push(`/${accountData.username}`);
+    if (setClose) {
+      setClose();
+    } else {
+      router.push(`/${accountData.username}`);
+    }
   };
 
   return (
@@ -77,6 +104,7 @@ export default function Onboarding({ email }: { email: string }) {
             {!validUsername && (
               <p className={styles.warning}>Sorry, this username is taken.</p>
             )}
+            {setClose && <CloseBtn setClose={setClose} />}
           </div>
         )}
         {step === 2 && (
@@ -103,6 +131,7 @@ export default function Onboarding({ email }: { email: string }) {
                 }
               />
             </div>
+            {setClose && <CloseBtn setClose={setClose} />}
           </div>
         )}
         {step === 3 && (
@@ -126,6 +155,7 @@ export default function Onboarding({ email }: { email: string }) {
                 }
               />
             </div>
+            {setClose && <CloseBtn setClose={setClose} />}
           </div>
         )}
         {step === 4 && (

@@ -55,6 +55,14 @@
         max-height: 1.4rem;
       }
 
+      .unselected {
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translateX(-50%) scale(1.4);
+        z-index: -100;
+      }
+
       .progressbarBackground {
         position: absolute;
         top: 0;
@@ -64,12 +72,12 @@
         border-radius: 50%;
         background-color: mixin.$white;
         opacity: 0.5;
-        cursor: pointer;
         transform: scale(1);
-      }
 
-      .selected {
-        opacity: 0;
+        &.selected {
+          opacity: 0;
+          cursor: pointer;
+        }
       }
     }
     .selected {

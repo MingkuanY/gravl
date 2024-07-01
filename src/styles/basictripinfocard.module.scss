@@ -103,13 +103,4 @@
     font-size: 1.3rem;
     color: mixin.$warning;
   }
-
-  .close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 3rem;
-    aspect-ratio: 1;
-    cursor: pointer;
-  }
 }

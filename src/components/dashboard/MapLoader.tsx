@@ -2,15 +2,14 @@
 
 import styles from "../../styles/maploader.module.scss";
 import Counties, { totalCounties } from "@/components/maps/Counties";
-import States, { totalStates } from "@/components/maps/States";
-import Countries, { totalCountries } from "@/components/maps/Countries";
-import NationalParks, {
-  totalNationalparks,
-} from "@/components/maps/NationalParks";
+import { totalStates } from "@/components/maps/States";
+import { totalCountries } from "@/components/maps/Countries";
+import { totalNationalparks } from "@/components/maps/NationalParks";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "../../styles/circularprogressbar.scss";
 import { useEffect, useState } from "react";
 import { PlaceInput, TripWithVisits, VisitInput } from "@/utils/types";
+import Icon from "../icons/Icon";
 
 export const mapNames = ["counties", "states", "countries", "national parks"];
 
@@ -23,38 +22,11 @@ export default function MapLoader({
 }) {
   const [count, setCount] = useState([0, 0, 0, 0]);
 
-  const placesMap = new Map(
-    places.map((place) => [place.place_id, place.map_type])
-  );
-
-  type SortedVisits = {
-    counties: VisitInput[];
-    states: VisitInput[];
-    countries: VisitInput[];
-    nationalparks: VisitInput[];
-  };
-
-  const [sortedVisits, setSortedVisits] = useState<SortedVisits>({
-    counties: [],
-    states: [],
-    countries: [],
-    nationalparks: [],
-  });
+  const [sortedVisits, setSortedVisits] = useState<VisitInput[]>([]);
 
   const sortVisitsByType = (trips: TripWithVisits[]) => {
-    const newSortedVisits: SortedVisits = {
-      counties: [],
-      states: [],
-      countries: [],
-      nationalparks: [],
-    };
-
-    const uniqueVisits: { [key: string]: Set<string> } = {
-      counties: new Set(),
-      states: new Set(),
-      countries: new Set(),
-      nationalparks: new Set(),
-    };
+    const newSortedVisits: VisitInput[] = [];
+    const uniqueVisits = new Set();
 
     trips.map((trip) => {
       trip.visits.forEach((visit) => {
@@ -64,37 +36,12 @@ export default function MapLoader({
           order: visit.order,
         };
 
-        switch (placesMap.get(v.place_id)) {
-          case "counties":
-            newSortedVisits.counties.push(v);
-            uniqueVisits.counties.add(v.place_id);
-            break;
-          case "states":
-            newSortedVisits.states.push(v);
-            uniqueVisits.states.add(v.place_id);
-            break;
-          case "countries":
-            newSortedVisits.countries.push(v);
-            uniqueVisits.countries.add(v.place_id);
-            break;
-          case "nationalparks":
-            newSortedVisits.nationalparks.push(v);
-            uniqueVisits.nationalparks.add(v.place_id);
-            break;
-        }
+        newSortedVisits.push(v);
+        uniqueVisits.add(v.place_id);
       });
     });
 
-    const actualStates = Array.from(uniqueVisits.states).filter(
-      (state) => state !== "DC"
-    );
-
-    const counts = [
-      uniqueVisits.counties.size,
-      actualStates.length,
-      uniqueVisits.countries.size,
-      uniqueVisits.nationalparks.size,
-    ];
+    const counts = [uniqueVisits.size, 0, 0, 0];
     setCount(counts);
 
     setSortedVisits(newSortedVisits);
@@ -112,11 +59,12 @@ export default function MapLoader({
     totalNationalparks,
   ];
 
-  const [currentMap, setCurrentMap] = useState(0); //defaults to counties map
+  const currentMap = 0; //defaults to counties map
   const [reload, setReload] = useState(false);
   const statClicked = (btn: number) => {
-    setCurrentMap(btn);
-    setReload((reload) => !reload);
+    if (btn === 0) {
+      setReload((reload) => !reload);
+    }
   };
 
   /**
@@ -135,69 +83,18 @@ export default function MapLoader({
     });
   };
 
-  /**
-   * Renders the correct map based on the types index
-   * @param {number} index the index in the types array that indicates which map should be rendered
-   * @returns the map component to be rendered
-   */
-  const renderMap = (index: number) => {
-    switch (index) {
-      case 0:
-        return (
-          <Counties
-            animate={true}
-            data={sortedVisits.counties}
-            updateCount={updateCount}
-            total={count[0]}
-            reload={reload}
-            pause={20}
-            places={places}
-          />
-        );
-      case 1:
-        return (
-          <States
-            animate={true}
-            data={sortedVisits.states}
-            updateCount={updateCount}
-            total={count[1]}
-            reload={reload}
-            places={places}
-          />
-        );
-      case 2:
-        return (
-          <Countries
-            animate={true}
-            data={sortedVisits.countries}
-            updateCount={updateCount}
-            total={count[2]}
-            reload={reload}
-            places={places}
-          />
-        );
-      case 3:
-        return (
-          <NationalParks
-            animate={true}
-            data={sortedVisits.nationalparks}
-            updateCount={updateCount}
-            total={count[3]}
-            reload={reload}
-            places={places}
-          />
-        );
-    }
-  };
-
   return (
     <div className={styles.container}>
-      <div
-        className={`${styles.mapContainer} ${
-          currentMap === 2 && styles.largeMapContainer
-        }`}
-      >
-        {renderMap(currentMap)}
+      <div className={styles.mapContainer}>
+        <Counties
+          animate={true}
+          data={sortedVisits}
+          updateCount={updateCount}
+          total={count[0]}
+          reload={reload}
+          pause={20}
+          places={places}
+        />
       </div>
 
       <div className={styles.stats}>
@@ -208,15 +105,24 @@ export default function MapLoader({
             }`}
             key={index}
           >
+            {currentMap !== index && (
+              <div className={`${styles.unselected} ${styles.hovered}`}>
+                <Icon type="lock" fill="#7dc2ff" />
+              </div>
+            )}
             <CircularProgressbarWithChildren
               value={count[index]}
               maxValue={totalCounts[index]}
             >
-              <div className={styles.countContainer}>
-                <p className={styles.count}>{count[index]}</p>
-                <p className={styles.totalCount}>/{totalCounts[index]}</p>
-              </div>
-              <p className={styles.type}>{map}</p>
+              {currentMap === index && (
+                <>
+                  <div className={styles.countContainer}>
+                    <p className={styles.count}>{count[index]}</p>
+                    <p className={styles.totalCount}>/{totalCounts[index]}</p>
+                  </div>
+                  <p className={styles.type}>{map}</p>
+                </>
+              )}
             </CircularProgressbarWithChildren>
             <div
               className={`${styles.progressbarBackground} ${

@@ -1,14 +1,15 @@
 "use client";
 
-import Link from "next/link";
 import Icon from "../icons/Icon";
 
-export default function EditProfileButton() {
+export default function EditProfileButton({
+  setEditProfile,
+}: {
+  setEditProfile: Function;
+}) {
   return (
-    <Link href="/?ob=true">
-      <div>
-        <Icon type="edit" fill="#757575" />
-      </div>
-    </Link>
+    <div onClick={() => setEditProfile(true)}>
+      <Icon type="edit" fill="#757575" />
+    </div>
   );
 }

@@ -5,10 +5,11 @@ import EditProfileButton from "@/components/dashboard/EditProfileButton";
 import MapLoader from "@/components/dashboard/MapLoader";
 import UserStats from "@/components/dashboard/UserStats";
 import Timeline from "@/components/dashboard/Timeline";
-import { useEffect, useMemo, useOptimistic, useRef, useState } from "react";
+import { useEffect, useMemo, useOptimistic, useState } from "react";
 import { PlaceInput, TripWithVisits } from "@/utils/types";
 import NewTrip from "../log/NewTrip";
 import { sortTrips } from "@/utils/date";
+import Onboarding from "../onboarding/Onboarding";
 
 export default function Dashboard({
   initialTrips,
@@ -19,6 +20,8 @@ export default function Dashboard({
   user: any;
   places: PlaceInput[];
 }) {
+  const [editProfile, setEditProfile] = useState(false);
+
   const [trips, setTrips] = useState(initialTrips);
   const updateTrips = (newTrip: TripWithVisits) => {
     setTrips([...trips, newTrip]);
@@ -51,6 +54,13 @@ export default function Dashboard({
 
   return (
     <>
+      {editProfile && (
+        <Onboarding
+          email={user.email!}
+          user={user!}
+          setClose={() => setEditProfile(false)}
+        />
+      )}
       {logTripPage !== -1 && (
         <NewTrip
           user={user}
@@ -79,7 +89,7 @@ export default function Dashboard({
                 <div className={styles.usernameAndEdit}>
                   <p className={styles.username}>{user!.username}</p>
                   <div className={styles.edit}>
-                    <EditProfileButton />
+                    <EditProfileButton setEditProfile={setEditProfile} />
                   </div>
                 </div>
                 <p className={styles.location}>{user!.location}</p>

@@ -4,7 +4,7 @@ import styles from "../../styles/basictripinfocard.module.scss";
 import DatePicker from "./DatePicker";
 import { useState } from "react";
 import { VisitInput } from "@/utils/types";
-import Icon from "../icons/Icon";
+import CloseBtn from "./CloseBtn";
 
 export type BasicTripInfo = {
   trip_name: string;
@@ -56,9 +56,7 @@ export default function BasicTripInfoCard({
 
   return (
     <div className={styles.container}>
-      <button className={styles.close} onClick={() => setLogTripPage(-1)}>
-        <Icon type="close" fill="#cfcfcf" />
-      </button>
+      <CloseBtn setClose={() => setLogTripPage(-1)} />
       <input
         className={styles.nameInput}
         type="text"
