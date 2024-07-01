@@ -51,27 +51,27 @@ export default function Timeline({
           return (
             <div className={styles.tripCheckpoint} key={index}>
               <div className={styles.dot}>
-                <TripCard
-                  name={trip.name}
-                  desc={trip.description}
-                  selected={currTrip === trip.id}
-                  isClicked={() => handleClick(trip.id)}
-                />
+                <div className={styles.tripCardContainer}>
+                  <TripCard
+                    name={trip.name}
+                    desc={trip.description}
+                    selected={currTrip === trip.id}
+                    isClicked={() => handleClick(trip.id)}
+                  />
+                  <button
+                    className={styles.trashContainer}
+                    onClick={() => startTransition(() => handleDelete(trip.id))}
+                  >
+                    <div className={styles.trash}>
+                      <Icon type="trash" fill="#319fff" />
+                    </div>
+                  </button>
+                </div>
                 {showYear && <p className={styles.year}>{tripYear}</p>}
                 <p className={styles.dates}>
                   {formatDates(tripDates.startDate, tripDates.endDate)}
                 </p>
               </div>
-              {currTrip === trip.id && (
-                <button
-                  className={styles.trashContainer}
-                  onClick={() => startTransition(() => handleDelete(trip.id))}
-                >
-                  <div className={styles.trash}>
-                    <Icon type="trash" fill="#319fff" />
-                  </div>
-                </button>
-              )}
             </div>
           );
         })}

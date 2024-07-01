@@ -26,6 +26,7 @@ export default function NewTrip({
     trip_name: "",
     description: "",
     start_date: "",
+    end_date: "",
   });
 
   const [visitsData, setVisitsData] = useState([]);

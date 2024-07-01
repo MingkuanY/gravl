@@ -3,13 +3,14 @@
 import styles from "../../styles/basictripinfocard.module.scss";
 import DatePicker from "./DatePicker";
 import { useState } from "react";
-import CloseBtn from "./CloseBtn";
 import { VisitInput } from "@/utils/types";
+import Icon from "../icons/Icon";
 
 export type BasicTripInfo = {
   trip_name: string;
   description: string;
   start_date: string;
+  end_date: string;
 };
 
 export default function BasicTripInfoCard({
@@ -32,24 +33,32 @@ export default function BasicTripInfoCard({
       setError("Please name and date your trip.");
     } else if (!tripData.trip_name) {
       setError("Please name your trip.");
-    } else if (!tripData.start_date) {
-      setError("Please add a start date.");
+    } else if (!tripData.start_date || !tripData.end_date) {
+      setError("Please add start and end dates.");
+    } else if (new Date(tripData.start_date) > new Date(tripData.end_date)) {
+      setError("Trying to go back in time, huh?");
     } else {
       setLogTripPage(1);
       setError("");
     }
   };
 
-  const handleDateChange = (date: string) => {
+  const handleStartDateChange = (date: string) => {
     setVisitsData(
       visits.filter((visit) => new Date(visit.date) >= new Date(date))
     );
     setTripData({ ...tripData, start_date: date });
   };
 
+  const handleEndDateChange = (date: string) => {
+    setTripData({ ...tripData, end_date: date });
+  };
+
   return (
     <div className={styles.container}>
-      <CloseBtn setLogTripPage={setLogTripPage} />
+      <button className={styles.close} onClick={() => setLogTripPage(-1)}>
+        <Icon type="close" fill="#cfcfcf" />
+      </button>
       <input
         className={styles.nameInput}
         type="text"
@@ -71,8 +80,20 @@ export default function BasicTripInfoCard({
       />
       <div className={styles.bottom}>
         <div className={styles.dateContainer}>
-          <p>Started on</p>
-          <DatePicker date={tripData.start_date} setDate={handleDateChange} />
+          <div className={styles.chooseDate}>
+            <p>From</p>
+            <DatePicker
+              date={tripData.start_date}
+              setDate={handleStartDateChange}
+            />
+          </div>
+          <div className={styles.chooseDate}>
+            <p>To</p>
+            <DatePicker
+              date={tripData.end_date}
+              setDate={handleEndDateChange}
+            />
+          </div>
         </div>
         <button onClick={handleNext}>Map It Out</button>
       </div>

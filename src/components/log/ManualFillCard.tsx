@@ -9,17 +9,12 @@ import {
 } from "react";
 import styles from "../../styles/manualfillcard.module.scss";
 import Counties from "../maps/Counties";
-import Countries from "../maps/Countries";
-import NationalParks from "../maps/NationalParks";
-import States from "../maps/States";
 import { BasicTripInfo } from "./BasicTripInfoCard";
 import { VisitInput } from "@/utils/types";
-import { mapNames } from "../dashboard/MapLoader";
 import Icon from "../icons/Icon";
-import { addDays, formatMDYShortDate } from "@/utils/date";
+import { addDays, dayOfWeek, formatMDYDate } from "@/utils/date";
 import { PlaceInput } from "@/utils/types";
 import { User } from "@prisma/client";
-import CloseBtn from "./CloseBtn";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { addTripToUser } from "@/actions/actions";
 
@@ -67,78 +62,6 @@ export default function ManualFillCard({
   const [dayCount, setDayCount] = useState(1);
   const getCurrentDate = () => {
     return addDays(tripData.start_date, dayCount - 1);
-  };
-
-  // Determines which map to display
-
-  const [mapPopup, setMapPopup] = useState(false);
-  const popupRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (
-        !popupRef.current?.contains(e.target as Node) &&
-        !buttonRef.current?.contains(e.target as Node)
-      ) {
-        setMapPopup(false);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-
-    return () => {
-      document.removeEventListener("mousedown", handler);
-    };
-  });
-
-  const [currentMap, setCurrentMap] = useState(0);
-  /**
-   * Renders the correct map based on the types index
-   * @param {number} index the index in the types array that indicates which map should be rendered
-   * @returns the map component to be rendered
-   */
-  const renderMap = (index: number) => {
-    switch (index) {
-      case 0:
-        return (
-          <Counties
-            animate={false}
-            places={places}
-            visits={visits}
-            setVisits={setVisitsData}
-            currentDate={getCurrentDate()}
-          />
-        );
-      case 1:
-        return (
-          <States
-            animate={false}
-            places={places}
-            visits={visits}
-            setVisits={setVisitsData}
-            currentDate={getCurrentDate()}
-          />
-        );
-      case 2:
-        return (
-          <Countries
-            animate={false}
-            places={places}
-            visits={visits}
-            setVisits={setVisitsData}
-            currentDate={getCurrentDate()}
-          />
-        );
-      case 3:
-        return (
-          <NationalParks
-            animate={false}
-            places={places}
-            visits={visits}
-            setVisits={setVisitsData}
-            currentDate={getCurrentDate()}
-          />
-        );
-    }
   };
 
   // Change dates
@@ -210,6 +133,27 @@ export default function ManualFillCard({
     }
   };
 
+  const clearToday = () => {
+    const newVisits = visits.filter((visit) => visit.date !== getCurrentDate());
+    setVisitsData(newVisits);
+  };
+
+  const handleBack = () => {
+    if (tripData.start_date === getCurrentDate()) {
+      setLogTripPage(0);
+    } else {
+      changeDate(-1);
+    }
+  };
+
+  const handleNext = () => {
+    if (tripData.end_date === getCurrentDate()) {
+      // Add trip
+    } else {
+      changeDate(1);
+    }
+  };
+
   /**
    * Checks that the user has at least one visit selected, updates the db with the new trip, and navigates the user back to dashboard.
    */
@@ -228,147 +172,114 @@ export default function ManualFillCard({
   };
 
   return (
-    <div className={styles.container}>
-      <button className={styles.backBtn} onClick={() => setLogTripPage(0)}>
-        <div className={styles.back_arrow}>
-          <Icon type="back_arrow" fill="#fff" />
-        </div>
-        <p className={styles.back}>Back</p>
-      </button>
-      <CloseBtn setLogTripPage={setLogTripPage} />
-      <div className={styles.leftSide}>
-        <div className={styles.titleContainer}>
-          <p className={styles.name}>{tripData.trip_name}</p>
-          <p className={styles.dayCount}>Day {dayCount}</p>
-        </div>
+    <div className={styles.everything}>
+      <div className={styles.main}>
+        <div className={styles.leftSide}>
+          <div className={styles.titleContainer}>
+            <p className={styles.name}>{tripData.trip_name}</p>
+            <p className={styles.dayCount}>Day {dayCount}</p>
+          </div>
 
-        <div
-          className={`${styles.mapContainer} ${
-            currentMap === 2 && styles.largeMapContainer
-          }`}
-        >
-          {renderMap(currentMap)}
-        </div>
+          <div className={styles.mapContainer}>
+            <Counties
+              animate={false}
+              places={places}
+              visits={visits}
+              setVisits={setVisitsData}
+              currentDate={getCurrentDate()}
+            />
+          </div>
 
-        <div className={styles.mapPickerContainer}>
-          <p className={styles.currentMapName}>{mapNames[currentMap]}</p>
-          <button
-            className={styles.popupButton}
-            onClick={() => setMapPopup((mapPopup) => !mapPopup)}
-            ref={buttonRef}
-          >
-            <div className={styles.mapIcon}>
-              <Icon type="map" fill="#319fff" />
-            </div>
-          </button>
-
-          {mapPopup && (
-            <div className={styles.popupContainer} ref={popupRef}>
-              {mapNames.map((map, index) => (
-                <button
-                  className={`${styles.mapNames} ${
-                    index === currentMap && styles.selected
-                  }`}
-                  key={index}
-                  onClick={() => {
-                    if (index !== currentMap) {
-                      setCurrentMap(index);
-                      setMapPopup(false);
-                    }
-                  }}
-                >
-                  {map}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div className={styles.rightSide}>
-        <div className={styles.header}>
-          <p className={styles.heading}>Visited on</p>
+          <p className={styles.tip}>
+            {!visits.length && "click a county to get started"}
+          </p>
 
           <div className={styles.dateChanger}>
-            <button
-              className={`${styles.backDate} ${
-                dayCount === 1 && styles.disabled
-              }`}
-              onClick={() => changeDate(-1)}
-            >
-              <div className={styles.back_arrow}>
-                <Icon type="back_arrow" fill="#fff" />
-              </div>
+            <button className={styles.backBtn} onClick={handleBack}>
+              Back
             </button>
-            <p className={styles.currentDate}>
-              {formatMDYShortDate(getCurrentDate())}
-            </p>
-            <button
-              className={styles.forwardDate}
-              onClick={() => changeDate(1)}
-            >
-              <div className={styles.forward_arrow}>
-                <Icon type="back_arrow" fill="#fff" />
-              </div>
+            <div className={styles.currentDateContainer}>
+              <p className={styles.first}>
+                {dayOfWeek[new Date(getCurrentDate()).getDay()]}
+              </p>
+              <p>{formatMDYDate(getCurrentDate(), true)}</p>
+            </div>
+            <button className={styles.forwardBtn} onClick={handleNext}>
+              {tripData.end_date === getCurrentDate() ? "Finish" : "Next"}
             </button>
           </div>
         </div>
 
-        <p className={styles.instruction}>
-          {visits.filter((visit) => visit.date === getCurrentDate()).length > 0
-            ? "Drag to reorder."
-            : "Click on a place on the map."}
-        </p>
-        <DragDropContext onDragEnd={onDragEnd}>
-          <Droppable droppableId={"visits"}>
-            {(droppableProvided) => (
-              <div
-                className={styles.visitedList}
-                ref={droppableProvided.innerRef}
-                {...droppableProvided.droppableProps}
-              >
-                {optimisticState
-                  .filter((visit) => visit.date === getCurrentDate())
-                  .map((visit, index) => {
-                    const originalIndex = optimisticState.findIndex(
-                      (v) =>
-                        v.place_id === visit.place_id && v.date === visit.date
-                    );
-                    return (
-                      <Draggable
-                        key={visit.place_id}
-                        draggableId={visit.place_id}
-                        index={originalIndex}
-                      >
-                        {(provided) => (
-                          <p
-                            className={styles.visitedPlace}
-                            key={visit.place_id}
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                          >
-                            {index + 1 + ". " + placesMap.get(visit.place_id)}
-                          </p>
-                        )}
-                      </Draggable>
-                    );
-                  })}
-                {droppableProvided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+        <div className={styles.rightSide}>
+          <div className={styles.header}>
+            <p className={styles.text}>
+              On {dayOfWeek[new Date(getCurrentDate()).getDay()]}
+            </p>
+            <p className={styles.date}>{formatMDYDate(getCurrentDate())}</p>
+            <p className={styles.text}>you visited...</p>
+          </div>
 
-        <button
-          className={`${styles.finish} ${
-            !visits.length && styles.unselectable
-          }`}
-          onClick={handleAdd}
-        >
-          Finish
-        </button>
+          <p className={styles.instruction}>
+            {visits.filter((visit) => visit.date === getCurrentDate()).length >
+            0
+              ? "Drag to reorder."
+              : "Click on a place on the map."}
+          </p>
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId={"visits"}>
+              {(droppableProvided) => (
+                <div
+                  className={styles.visitedList}
+                  ref={droppableProvided.innerRef}
+                  {...droppableProvided.droppableProps}
+                >
+                  {optimisticState
+                    .filter((visit) => visit.date === getCurrentDate())
+                    .map((visit, index) => {
+                      const originalIndex = optimisticState.findIndex(
+                        (v) =>
+                          v.place_id === visit.place_id && v.date === visit.date
+                      );
+                      return (
+                        <Draggable
+                          key={visit.place_id}
+                          draggableId={visit.place_id}
+                          index={originalIndex}
+                        >
+                          {(provided) => (
+                            <p
+                              className={styles.visitedPlace}
+                              key={visit.place_id}
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              {index + 1 + ". " + placesMap.get(visit.place_id)}
+                            </p>
+                          )}
+                        </Draggable>
+                      );
+                    })}
+                  {droppableProvided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+
+          <button className={styles.clearBtn} onClick={clearToday}>
+            Clear Day
+          </button>
+        </div>
       </div>
+
+      <button
+        className={styles.closeContainer}
+        onClick={() => setLogTripPage(-1)}
+      >
+        <div className={styles.close}>
+          <Icon type="close" fill="#cfcfcf" />
+        </div>
+      </button>
     </div>
   );
 }

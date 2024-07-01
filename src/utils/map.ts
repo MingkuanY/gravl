@@ -1,5 +1,5 @@
 import { sortVisits } from "@/components/log/ManualFillCard";
-import { VisitInput } from "@/utils/types";
+import { PlaceInput, VisitInput } from "@/utils/types";
 import { otherColor } from "./color";
 
 /*
@@ -148,33 +148,40 @@ export const handleMapClick = (
  */
 export function refreshMap(
   visits: VisitInput[],
+  places: PlaceInput[],
   currentDate: string,
   todayColor: string,
-  otherColor: string
+  otherColor: string,
+  defaultColor: string
 ) {
   const todayPlaces = new Set<string>();
 
-  visits.forEach((visit) => {
-    const element = document.getElementById(visit.place_id);
+  places.forEach((place) => {
+    const element = document.getElementById(place.place_id);
     if (element) {
-      const childPaths = element.querySelectorAll("path");
-      if (visit.date === currentDate) {
-        if (childPaths.length) {
-          childPaths.forEach((path) => {
-            path.style.fill = todayColor;
-          });
-        } else {
-          element.style.fill = todayColor;
+      const visit = visits.find((v) => v.place_id === place.place_id);
+      if (visit) {
+        const childPaths = element.querySelectorAll("path");
+        if (visit.date === currentDate) {
+          if (childPaths.length) {
+            childPaths.forEach((path) => {
+              path.style.fill = todayColor;
+            });
+          } else {
+            element.style.fill = todayColor;
+          }
+          todayPlaces.add(visit.place_id);
+        } else if (!todayPlaces.has(visit.place_id)) {
+          if (childPaths.length) {
+            childPaths.forEach((path) => {
+              path.style.fill = otherColor;
+            });
+          } else {
+            element.style.fill = otherColor;
+          }
         }
-        todayPlaces.add(visit.place_id);
-      } else if (!todayPlaces.has(visit.place_id)) {
-        if (childPaths.length) {
-          childPaths.forEach((path) => {
-            path.style.fill = otherColor;
-          });
-        } else {
-          element.style.fill = otherColor;
-        }
+      } else {
+        element.style.fill = defaultColor;
       }
     }
   });

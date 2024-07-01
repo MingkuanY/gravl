@@ -13,7 +13,7 @@ export default function LogTripButton({
       <div className={styles.plus}>
         <Icon type="plus" fill="#FFF" />
       </div>
-      <p>Record Trip</p>
+      <p>Log Trip</p>
     </button>
   );
 }

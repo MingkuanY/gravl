@@ -24,7 +24,7 @@ export default function NationalParks({
   const oldEndColor = "#89c7ff";
   const defaultColor = "#012241";
 
-  const mapRef = useRef<SVGSVGElement>(null);
+  const mapRef = useRef<SVGdocument>(null);
   const colors = interpolateColors(1, startColor, endColor);
 
   if (animate && data) {
@@ -89,14 +89,11 @@ export default function NationalParks({
       }
     };
 
-    const svgElement = mapRef.current;
-    if (svgElement) {
-      svgElement.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mousemove", handleMouseMove);
 
-      return () => {
-        svgElement.removeEventListener("mousemove", handleMouseMove);
-      };
-    }
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
 
   const placeIDs = new Set(places?.map((place) => place.place_id));

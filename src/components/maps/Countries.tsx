@@ -82,14 +82,11 @@ export default function Countries({
       }
     };
 
-    const svgElement = mapRef.current;
-    if (svgElement) {
-      svgElement.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mousemove", handleMouseMove);
 
-      return () => {
-        svgElement.removeEventListener("mousemove", handleMouseMove);
-      };
-    }
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
 
   const placeIDs = new Set(places?.map((place) => place.place_id));

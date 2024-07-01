@@ -31,7 +31,7 @@
     overflow: auto;
     padding: 1.5rem 2rem;
     border: 0.2rem solid mixin.$gravl-blue;
-    border-radius: 2rem;
+    border-radius: 1rem;
 
     color: mixin.$dark;
     font-size: 2rem;
@@ -52,12 +52,17 @@
 
     .dateContainer {
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      justify-content: space-between;
 
-      p {
-        color: mixin.$dark;
-        font-size: 2rem;
-        font-weight: 200;
+      .chooseDate {
+        margin: 0.5rem 0;
+        display: flex;
+        p {
+          color: mixin.$dark;
+          font-size: 2rem;
+          font-weight: 200;
+        }
       }
     }
 
@@ -97,5 +102,14 @@
     left: 3.5rem;
     font-size: 1.3rem;
     color: mixin.$warning;
+  }
+
+  .close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 3rem;
+    aspect-ratio: 1;
+    cursor: pointer;
   }
 }

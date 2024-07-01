@@ -57,8 +57,15 @@ export default function Counties({
     };
   } else {
     useEffect(() => {
-      refreshMap(visits!, currentDate!, todayColor, otherColor);
-    }, [currentDate]);
+      refreshMap(
+        visits!,
+        places,
+        currentDate!,
+        todayColor,
+        otherColor,
+        defaultColor,
+      );
+    }, [currentDate, visits]);
   }
 
   // Hover label effect
@@ -89,14 +96,11 @@ export default function Counties({
       }
     };
 
-    const svgElement = mapRef.current;
-    if (svgElement) {
-      svgElement.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mousemove", handleMouseMove);
 
-      return () => {
-        svgElement.removeEventListener("mousemove", handleMouseMove);
-      };
-    }
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
 
   const placeIDs = new Set(places?.map((place) => place.place_id));

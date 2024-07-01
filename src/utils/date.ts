@@ -30,6 +30,31 @@ export const shortMonthAbbreviations = [
   "Dec",
 ];
 
+export const fullMonthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+export const dayOfWeek = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
+
 /**
  * Formats date from YYYY-MM-DD to long abbreviation format.
  *
@@ -80,11 +105,13 @@ export const formatDates = (date1: string, date2: string) => {
  * @param dateString a date in YYYY-MM-DD format
  * @returns string in "Jun 21, 2024" (aka short abbreviation) format
  */
-export const formatMDYShortDate = (dateString: string) => {
+export const formatMDYDate = (dateString: string, fullMonth?: boolean) => {
   const dateObj = new Date(dateString);
 
   const year = dateObj.getFullYear();
-  const month = shortMonthAbbreviations[dateObj.getMonth()];
+  const month = fullMonth
+    ? fullMonthNames[dateObj.getMonth()]
+    : shortMonthAbbreviations[dateObj.getMonth()];
   const day = dateObj.getDate() + 1;
 
   const formattedDate = `${month} ${day}, ${year}`;
