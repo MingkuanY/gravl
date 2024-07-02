@@ -24,7 +24,7 @@ export default function NationalParks({
   const oldEndColor = "#89c7ff";
   const defaultColor = "#012241";
 
-  const mapRef = useRef<SVGdocument>(null);
+  const mapRef = useRef<SVGSVGElement>(null);
   const colors = interpolateColors(1, startColor, endColor);
 
   if (animate && data) {
@@ -51,7 +51,14 @@ export default function NationalParks({
     };
   } else {
     useEffect(() => {
-      refreshMap(visits!, currentDate!, todayColor, otherColor);
+      refreshMap(
+        visits!,
+        places!,
+        currentDate!,
+        todayColor,
+        otherColor,
+        defaultColor
+      );
     }, [currentDate]);
   }
 

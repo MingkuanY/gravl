@@ -7,7 +7,7 @@ import SignUpButton from "@/components/landing/SignUpButton.tsx";
 import { loadPlaces } from "@/actions/actions.ts";
 import Onboarding from "@/components/onboarding/Onboarding.tsx";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route.ts";
+import { authOptions } from "./api/auth/[...nextauth]/auth.ts";
 import welcome from "../assets/Welcome.json";
 
 export default async function Landing({

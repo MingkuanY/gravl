@@ -1,7 +1,7 @@
 import Header from "@/components/header/Header";
 import { getUserWithTripsAndVisits } from "@/actions/actions";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route.ts";
+import { authOptions } from "@/app/api/auth/[...nextauth]/auth.ts";
 import NotFound from "../not-found";
 import { loadPlaces } from "@/actions/actions";
 import Dashboard from "@/components/dashboard/Dashboard";
@@ -22,6 +22,8 @@ export default async function Profile({
   const [user, places] = await Promise.all([
     getUserWithTripsAndVisits(userEmail),
     loadPlaces(),
+    // Promise.resolve({}),
+    // Promise.resolve([]),
   ]);
 
   if (!user || user.username !== params.username) {

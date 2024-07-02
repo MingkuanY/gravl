@@ -2,7 +2,7 @@ import styles from "../styles/nopage.module.scss";
 import Header from "../components/header/Header.tsx";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route.ts";
+import { authOptions } from "./api/auth/[...nextauth]/auth.ts";
 import { getUser } from "@/actions/actions.ts";
 
 export default async function NotFound() {

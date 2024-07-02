@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { getUser } from "@/actions/actions";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../api/auth/[...nextauth]/auth";
 
 export default async function Redirect() {
   const session = await getServerSession(authOptions);

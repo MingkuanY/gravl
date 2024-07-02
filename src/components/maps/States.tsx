@@ -50,7 +50,14 @@ export default function States({
     };
   } else {
     useEffect(() => {
-      refreshMap(visits!, currentDate!, todayColor, otherColor);
+      refreshMap(
+        visits!,
+        places!,
+        currentDate!,
+        todayColor,
+        otherColor,
+        defaultColor!
+      );
     }, [currentDate]);
   }
 

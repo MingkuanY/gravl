@@ -32,6 +32,7 @@ export default function Header({ user }: { user?: User }) {
           <Icon type="car" fill="#319fff" />
         </div>
         <p className={styles.gravl}>Gravl</p>
+        <p className={styles.testing}>Alpha</p>
       </div>
       <div className={styles.headerRightContainer}>
         {session.status === "authenticated" && (

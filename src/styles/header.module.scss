@@ -23,7 +23,19 @@
       color: mixin.$dark;
       text-decoration: none;
     }
+    .testing {
+      margin-left: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: mixin.$gravl-blue;
+      text-transform: uppercase;
+      padding: 0.3rem;
+      padding-top: 0.4rem;
+      border-radius: 2rem;
+      border: 0.2rem solid mixin.$gravl-blue;
+    }
   }
+
   .headerRightContainer {
     flex: auto;
     display: flex;

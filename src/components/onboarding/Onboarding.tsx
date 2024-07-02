@@ -6,6 +6,7 @@ import Icon from "../icons/Icon.tsx";
 import { useRouter } from "next/navigation";
 import { uniqueUsername, updateUser } from "@/actions/actions.ts";
 import CloseBtn from "../log/CloseBtn.tsx";
+import classnames from "classnames";
 
 export default function Onboarding({
   email,
@@ -160,9 +161,12 @@ export default function Onboarding({
         )}
         {step === 4 && (
           <div className={styles.container}>
-            <p>You're all set!</p>
+            <p>You&apos;re all set!</p>
             <div
-              className={`${styles.inputContainer} ${styles.uploadPFPContainer}`}
+              className={classnames(
+                styles.inputContainer,
+                styles.uploadPFPContainer
+              )}
             >
               {/* <label className={styles.uploadPFP} htmlFor="pfp-upload">
                 <div className={styles.account}>
