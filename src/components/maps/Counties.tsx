@@ -7,7 +7,12 @@ import {
   otherColor,
   todayColor,
 } from "../../utils/color.ts";
-import { handleMapClick, loadMap, refreshMap } from "../../utils/map.ts";
+import {
+  addDesignationToLabel,
+  handleMapClick,
+  loadMap,
+  refreshMap,
+} from "../../utils/map.ts";
 import { MapProps, PlaceInput } from "@/utils/types.ts";
 
 export const totalCounties = 3413;
@@ -63,7 +68,7 @@ export default function Counties({
         currentDate!,
         todayColor,
         otherColor,
-        defaultColor,
+        defaultColor
       );
     }, [currentDate, visits]);
   }
@@ -85,7 +90,10 @@ export default function Counties({
       const target = event.target as SVGPathElement;
       const placeID = target.id;
       if (target.tagName === "path" && placeIDs.has(placeID)) {
-        const placeLabel = placesMap.get(placeID);
+        const placeLabel = addDesignationToLabel(
+          placesMap.get(placeID)!,
+          "County"
+        );
         setHoverInfo({
           x: event.clientX,
           y: event.clientY,
@@ -116,6 +124,12 @@ export default function Counties({
           }}
         >
           {hoverInfo.label}
+        </div>
+      )}
+      {animate && (
+        <div className={styles.visitedOnContainer}>
+          <p className={styles.visitedOn}>Visited on</p>
+          <p className={styles.date}></p>
         </div>
       )}
       <svg

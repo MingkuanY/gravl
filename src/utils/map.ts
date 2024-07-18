@@ -186,3 +186,15 @@ export function refreshMap(
     }
   });
 }
+
+/**
+ * Add the given designation before the comma in the label.
+ *
+ * @param label the label to be modified
+ * @param designation the designation to add (i.e. County, State, etc)
+ * @returns label with the given designation added, i.e. "Polk County, WI"
+ */
+export const addDesignationToLabel = (label: string, designation: string) => {
+  const parts = label.split(", ");
+  return `${parts[0]} ${designation}, ${parts[1]}`;
+};

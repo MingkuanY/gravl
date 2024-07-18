@@ -17,6 +17,7 @@ import { PlaceInput } from "@/utils/types";
 import { User } from "@prisma/client";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { addTripToUser } from "@/actions/actions";
+import { addDesignationToLabel } from "@/utils/map";
 
 /**
  * Sort visit chronologically by date and order if same date.
@@ -254,7 +255,13 @@ export default function ManualFillCard({
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                             >
-                              {index + 1 + ". " + placesMap.get(visit.place_id)}
+                              {index +
+                                1 +
+                                ". " +
+                                addDesignationToLabel(
+                                  placesMap.get(visit.place_id)!,
+                                  "County"
+                                )}
                             </p>
                           )}
                         </Draggable>

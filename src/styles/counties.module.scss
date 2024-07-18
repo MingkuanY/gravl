@@ -12,6 +12,23 @@
   border: 0.2rem solid mixin.$gravl-blue;
 }
 
+.visitedOnContainer {
+  position: absolute;
+  left: 80%;
+  top: 50%;
+  transform: translate(0, -50%);
+
+  .visitedOn {
+    font-size: 1.5rem;
+    color: mixin.$dark;
+  }
+
+  .date {
+    font-size: 2rem;
+    color: mixin.$dark;
+  }
+}
+
 #map {
   width: 95%;
 
