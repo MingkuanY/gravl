@@ -1,0 +1,224 @@
+/* [project]/src/styles/manualfillcard.module.scss.module.css [app-client] (css) */
+.manualfillcard-module-scss-module__ufMcca__everything {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main {
+  display: flex;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide, .manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__rightSide {
+  border-radius: 2rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 3rem 2.5rem;
+  background-color: #fff;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide {
+  margin-right: 2.5rem;
+  width: 80rem;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide .manualfillcard-module-scss-module__ufMcca__titleContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide .manualfillcard-module-scss-module__ufMcca__titleContainer .manualfillcard-module-scss-module__ufMcca__name, .manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide .manualfillcard-module-scss-module__ufMcca__titleContainer .manualfillcard-module-scss-module__ufMcca__dayCount {
+  color: #24292f;
+  font-size: 3rem;
+  line-height: 3.5rem;
+  font-weight: 200;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide .manualfillcard-module-scss-module__ufMcca__titleContainer .manualfillcard-module-scss-module__ufMcca__name {
+  font-style: italic;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide .manualfillcard-module-scss-module__ufMcca__mapContainer {
+  margin-top: 4rem;
+  margin-left: -4rem;
+  width: 80rem;
+  height: 45rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide .manualfillcard-module-scss-module__ufMcca__mapContainer.manualfillcard-module-scss-module__ufMcca__largeMapContainer {
+  width: 80rem;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide .manualfillcard-module-scss-module__ufMcca__tip {
+  height: 1rem;
+  margin-bottom: 2rem;
+  color: #757575;
+  font-weight: 300;
+  font-size: 1.6rem;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide .manualfillcard-module-scss-module__ufMcca__dateChanger {
+  display: flex;
+  width: 100%;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide .manualfillcard-module-scss-module__ufMcca__dateChanger .manualfillcard-module-scss-module__ufMcca__backBtn, .manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide .manualfillcard-module-scss-module__ufMcca__dateChanger .manualfillcard-module-scss-module__ufMcca__forwardBtn {
+  cursor: pointer;
+  width: 11rem;
+  height: 4rem;
+  border-radius: 2rem;
+  background-color: #319fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: .2rem;
+  transition: all .3s;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide .manualfillcard-module-scss-module__ufMcca__dateChanger .manualfillcard-module-scss-module__ufMcca__backBtn:hover, .manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide .manualfillcard-module-scss-module__ufMcca__dateChanger .manualfillcard-module-scss-module__ufMcca__forwardBtn:hover {
+  background-color: #1391ff;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide .manualfillcard-module-scss-module__ufMcca__dateChanger .manualfillcard-module-scss-module__ufMcca__backBtn {
+  margin-right: 2.5rem;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide .manualfillcard-module-scss-module__ufMcca__dateChanger .manualfillcard-module-scss-module__ufMcca__forwardBtn {
+  margin-left: 2.5rem;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide .manualfillcard-module-scss-module__ufMcca__dateChanger .manualfillcard-module-scss-module__ufMcca__currentDateContainer {
+  display: flex;
+  justify-content: center;
+  flex: auto;
+  height: 4rem;
+  border-radius: 2rem;
+  border: .2rem solid #bee1ff;
+  background-color: #eaf5ff;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide .manualfillcard-module-scss-module__ufMcca__dateChanger .manualfillcard-module-scss-module__ufMcca__currentDateContainer p {
+  color: #319fff;
+  font-size: 2.5rem;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__leftSide .manualfillcard-module-scss-module__ufMcca__dateChanger .manualfillcard-module-scss-module__ufMcca__currentDateContainer p.manualfillcard-module-scss-module__ufMcca__first {
+  margin-right: 2rem;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__rightSide {
+  width: 26rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__rightSide .manualfillcard-module-scss-module__ufMcca__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 300;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__rightSide .manualfillcard-module-scss-module__ufMcca__header .manualfillcard-module-scss-module__ufMcca__text {
+  color: #24292f;
+  font-size: 2rem;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__rightSide .manualfillcard-module-scss-module__ufMcca__header .manualfillcard-module-scss-module__ufMcca__date {
+  color: #24292f;
+  font-size: 2.75rem;
+  margin: .5rem 0;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__rightSide .manualfillcard-module-scss-module__ufMcca__instruction {
+  margin-top: 3rem;
+  color: #757575;
+  font-size: 1.3rem;
+  font-weight: 200;
+  margin-bottom: 1rem;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__rightSide .manualfillcard-module-scss-module__ufMcca__visitedList {
+  max-height: 38rem;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__rightSide .manualfillcard-module-scss-module__ufMcca__visitedList::-webkit-scrollbar {
+  display: none;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__rightSide .manualfillcard-module-scss-module__ufMcca__visitedList .manualfillcard-module-scss-module__ufMcca__visitedPlace {
+  margin-bottom: 2rem;
+  color: #319fff;
+  font-size: 1.6rem;
+  font-weight: 400;
+  text-align: center;
+  cursor: pointer;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__rightSide .manualfillcard-module-scss-module__ufMcca__clearBtn {
+  margin-top: auto;
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #cfcfcf;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all .3s;
+  color: #fff;
+  padding-top: .2rem;
+  font-size: 2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__main .manualfillcard-module-scss-module__ufMcca__rightSide .manualfillcard-module-scss-module__ufMcca__clearBtn:hover {
+  background-color: #ababab;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__closeContainer {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10rem;
+  height: 4rem;
+  border-radius: 2rem;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__closeContainer .manualfillcard-module-scss-module__ufMcca__close {
+  width: 3rem;
+  aspect-ratio: 1;
+}
+
+.manualfillcard-module-scss-module__ufMcca__everything .manualfillcard-module-scss-module__ufMcca__closeContainer:hover {
+  transform: scale(1.05);
+}
+
+/*# sourceMappingURL=src_styles_manualfillcard_module_scss_module_b52d8e.css.map*/

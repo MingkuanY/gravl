@@ -1,0 +1,31 @@
+/* [project]/src/styles/countries.module.scss.module.css [app-client] (css) */
+.countries-module-scss-module__7X9UTW__hoverLabel {
+  position: fixed;
+  background: #fff;
+  padding: .5rem;
+  z-index: 1000;
+  color: #24292f;
+  font-size: 1rem;
+  font-weight: 400;
+  border-radius: 1rem;
+  border: .2rem solid #319fff;
+}
+
+#countries-module-scss-module__7X9UTW__map {
+  width: 100%;
+  margin-top: 3rem;
+  margin-bottom: 7rem;
+}
+
+#countries-module-scss-module__7X9UTW__map > g > path {
+  fill: #012241;
+  stroke: #fff;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+#countries-module-scss-module__7X9UTW__map text {
+  display: none;
+}
+
+/*# sourceMappingURL=src_styles_countries_module_scss_module_b52d8e.css.map*/

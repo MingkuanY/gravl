@@ -1,0 +1,41 @@
+/* [project]/src/styles/nationalparks.module.scss.module.css [app-client] (css) */
+.nationalparks-module-scss-module__MYvgUa__hoverLabel {
+  position: fixed;
+  background: #fff;
+  padding: .5rem;
+  z-index: 1000;
+  color: #24292f;
+  font-size: 1rem;
+  font-weight: 400;
+  border-radius: 1rem;
+  border: .2rem solid #319fff;
+}
+
+#nationalparks-module-scss-module__MYvgUa__map {
+  width: 100%;
+  margin-top: -2rem;
+  margin-left: 4rem;
+}
+
+#nationalparks-module-scss-module__MYvgUa__map .nationalparks-module-scss-module__MYvgUa__park > path {
+  fill: #012241;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+#nationalparks-module-scss-module__MYvgUa__map [id*="_line"] {
+  display: none;
+}
+
+#nationalparks-module-scss-module__MYvgUa__map .nationalparks-module-scss-module__MYvgUa__state > path {
+  fill: #d1dbdd;
+  stroke: #fff;
+  stroke-width: .15rem;
+  cursor: pointer;
+}
+
+#nationalparks-module-scss-module__MYvgUa__map text {
+  display: none;
+}
+
+/*# sourceMappingURL=src_styles_nationalparks_module_scss_module_b52d8e.css.map*/

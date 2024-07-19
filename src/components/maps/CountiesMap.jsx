@@ -21,7 +21,7 @@ export default function CountiesMap({ updateCount, total, reload }) {
 
   useEffect(() => {
     resetMap();
-    const clearTimeouts = loadMap(data, "counties", 40, colors, updateCount);
+    const clearTimeouts = loadMap(data, "counties", 20, colors, updateCount);
     return () => {
       clearTimeouts();
       updateCount && updateCount(total);

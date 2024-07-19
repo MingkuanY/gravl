@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["[project]/src/styles/nationalparks.module.scss.module.css"],"sourcesContent":[".hoverLabel{position:fixed;background:#fff;padding:.5rem;z-index:1000;color:#24292f;font-size:1rem;font-weight:400;border-radius:1rem;border:.2rem solid #319fff}#map{width:100%;margin-top:-2rem;margin-left:4rem}#map .park>path{fill:#012241;cursor:pointer;transition:.3s}#map [id*=_line]{display:none}#map .state>path{fill:#d1dbdd;stroke:#fff;stroke-width:.15rem;cursor:pointer}#map text{display:none}"],"names":[],"mappings":"AAAA;;;;;;;;;;;;AAAiK;;;;;;AAAkD;;;;;;AAA2D;;;;AAA8B;;;;;;;AAA6E"}},
+    {"offset": {"line": 39, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

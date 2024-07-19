@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["[project]/src/styles/counties.module.scss.module.css"],"sourcesContent":[".hoverLabel{position:fixed;background:#fff;padding:.5rem;z-index:1000;color:#24292f;font-size:1rem;font-weight:400;border-radius:1rem;border:.2rem solid #319fff}.visitedOnContainer{position:absolute;left:80%;top:50%;transform:translate(0, -50%)}.visitedOnContainer .visitedOn{font-size:1.5rem;color:#24292f}.visitedOnContainer .date{font-size:2rem;color:#24292f}#map{width:95%}#map>path{fill:#012241;stroke:#fff;cursor:pointer;transition:.2s}#highways path{stroke:#06218e;cursor:pointer;display:none}#state_borders path{stroke:#fff;cursor:pointer}"],"names":[],"mappings":"AAAA;;;;;;;;;;;;AAAiK;;;;;;;AAAoF;;;;;AAA8D;;;;;AAAuD;;;;AAAe;;;;;;;AAAiE;;;;;;AAA0D"}},
+    {"offset": {"line": 51, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

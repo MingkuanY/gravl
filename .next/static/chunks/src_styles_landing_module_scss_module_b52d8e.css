@@ -1,0 +1,24 @@
+/* [project]/src/styles/landing.module.scss.module.css [app-client] (css) */
+.landing-module-scss-module__Y_1oAW__mainContainer {
+  height: calc(100vh - 9rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-module-scss-module__Y_1oAW__mainContainer .landing-module-scss-module__Y_1oAW__map {
+  margin-top: -4rem;
+  width: 90rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-module-scss-module__Y_1oAW__mainContainer .landing-module-scss-module__Y_1oAW__motto {
+  margin-top: -4rem;
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+/*# sourceMappingURL=src_styles_landing_module_scss_module_b52d8e.css.map*/

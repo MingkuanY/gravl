@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["[project]/src/styles/signupbutton.module.scss.module.css"],"sourcesContent":[".button{margin-top:2rem;display:flex;align-items:center;justify-content:center;padding:0 2.5rem 0 1.5rem;height:4.5rem;text-align:center;z-index:1;border-radius:2.25rem;font-weight:bold;color:#fff;cursor:pointer;background:#319fff;transition:transform .3s}.button:hover{transform:scale(1.1)}.button .go{width:4rem}.button p{text-transform:uppercase;font-size:2rem;font-weight:500;margin-top:.3rem}"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;;;;;AAAgQ;;;;AAAmC;;;;AAAuB"}},
+    {"offset": {"line": 32, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

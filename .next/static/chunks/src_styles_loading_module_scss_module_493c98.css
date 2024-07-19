@@ -1,0 +1,33 @@
+/* [project]/src/styles/loading.module.scss.module.css [app-client] (css) */
+.loading-module-scss-module__AKFlIq__container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-module-scss-module__AKFlIq__container .loading-module-scss-module__AKFlIq__wheel {
+  width: 16rem;
+  animation: 1.5s linear infinite loading-module-scss-module__AKFlIq__drive;
+}
+
+@keyframes loading-module-scss-module__AKFlIq__drive {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-module-scss-module__AKFlIq__container p {
+  margin-top: 3rem;
+  font-size: 3rem;
+  color: #319fff;
+  font-weight: 400;
+}
+
+
+/*# sourceMappingURL=src_styles_loading_module_scss_module_493c98.css.map*/

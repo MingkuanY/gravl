@@ -1,0 +1,92 @@
+/* [project]/src/styles/globals.scss.css [app-client] (css) */
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@media (width <= 2000px), (height <= 1100px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media (width <= 1480px), (height <= 950px) {
+  html {
+    font-size: 11px;
+  }
+}
+
+@media (width <= 1380px), (height <= 900px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+@media (width <= 1124px), (height <= 800px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+@media (width <= 868px), (height <= 700px) {
+  html {
+    font-size: 6px;
+  }
+}
+
+@media (width <= 740px) {
+  html {
+    font-size: 5px;
+  }
+}
+
+@media (width <= 575px) {
+  html {
+    font-size: 4px;
+  }
+}
+
+button {
+  border: none;
+  background: none;
+  padding: 0;
+  text-align: start;
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+input {
+  border: none;
+  font-family: inherit;
+}
+
+input::placeholder {
+  font-family: inherit;
+}
+
+input:focus {
+  outline: none;
+}
+
+textarea {
+  resize: none;
+  font-family: inherit;
+}
+
+textarea::placeholder {
+  font-family: inherit;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+/*# sourceMappingURL=src_styles_globals_scss_b52d8e.css.map*/

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["[project]/src/styles/userstats.module.scss.module.css"],"sourcesContent":[".userStats{display:flex;align-items:center;justify-content:space-between;width:12rem}.userStats div{display:flex;flex-direction:column;align-items:center}.userStats div .stat{font-size:2.6rem;color:#319fff;font-weight:400}.userStats div .stat span{font-size:1.6rem}.userStats div .desc{font-size:1.2rem;font-weight:400;color:#24292f;text-transform:uppercase;letter-spacing:-0.02rem}"],"names":[],"mappings":"AAAA;;;;;;;AAAqF;;;;;;AAAqE;;;;;;AAAoE;;;;AAA2C"}},
+    {"offset": {"line": 31, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

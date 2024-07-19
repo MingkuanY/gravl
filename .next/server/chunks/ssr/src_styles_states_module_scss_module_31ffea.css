@@ -1,0 +1,28 @@
+/* [project]/src/styles/states.module.scss.module.css [app-ssr] (css) */
+.states-module-scss-module__R99yjG__hoverLabel {
+  position: fixed;
+  background: #fff;
+  padding: .5rem;
+  z-index: 1000;
+  color: #24292f;
+  font-size: 1rem;
+  font-weight: 400;
+  border-radius: 1rem;
+  border: .2rem solid #319fff;
+}
+
+#states-module-scss-module__R99yjG__map {
+  width: 100%;
+  margin-top: -3rem;
+  margin-left: 4rem;
+}
+
+#states-module-scss-module__R99yjG__map > g > path {
+  fill: #012241;
+  stroke: #fff;
+  stroke-width: .15rem;
+  cursor: pointer;
+  transition: all .5s;
+}
+
+/*# sourceMappingURL=src_styles_states_module_scss_module_31ffea.css.map*/

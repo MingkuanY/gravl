@@ -1,0 +1,53 @@
+/* [project]/src/styles/counties.module.scss.module.css [app-ssr] (css) */
+.counties-module-scss-module__6_yV8q__hoverLabel {
+  position: fixed;
+  background: #fff;
+  padding: .5rem;
+  z-index: 1000;
+  color: #24292f;
+  font-size: 1rem;
+  font-weight: 400;
+  border-radius: 1rem;
+  border: .2rem solid #319fff;
+}
+
+.counties-module-scss-module__6_yV8q__visitedOnContainer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.counties-module-scss-module__6_yV8q__visitedOnContainer .counties-module-scss-module__6_yV8q__visitedOn {
+  font-size: 1.5rem;
+  color: #24292f;
+}
+
+.counties-module-scss-module__6_yV8q__visitedOnContainer .counties-module-scss-module__6_yV8q__date {
+  font-size: 2rem;
+  color: #24292f;
+}
+
+#counties-module-scss-module__6_yV8q__map {
+  width: 95%;
+}
+
+#counties-module-scss-module__6_yV8q__map > path {
+  fill: #012241;
+  stroke: #fff;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+#counties-module-scss-module__6_yV8q__highways path {
+  stroke: #06218e;
+  cursor: pointer;
+  display: none;
+}
+
+#counties-module-scss-module__6_yV8q__state_borders path {
+  stroke: #fff;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=src_styles_counties_module_scss_module_31ffea.css.map*/

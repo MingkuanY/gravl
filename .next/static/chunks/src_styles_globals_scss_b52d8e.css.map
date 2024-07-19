@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["[project]/src/styles/globals.scss.css"],"sourcesContent":["@import\"https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap\";*{margin:0;box-sizing:border-box}@media(max-width: 2000px),(max-height: 1100px){html{font-size:12px}}@media(max-width: 1480px),(max-height: 950px){html{font-size:11px}}@media(max-width: 1380px),(max-height: 900px){html{font-size:10px}}@media(max-width: 1124px),(max-height: 800px){html{font-size:8px}}@media(max-width: 868px),(max-height: 700px){html{font-size:6px}}@media(max-width: 740px){html{font-size:5px}}@media(max-width: 575px){html{font-size:4px}}button{border:none;background:none;padding:0;text-align:start;font-family:inherit}a{text-decoration:none}ul{list-style-type:none;padding:0}input{border:none;font-family:inherit}input::placeholder{font-family:inherit}input:focus{outline:none}textarea{resize:none;font-family:inherit}textarea::placeholder{font-family:inherit}textarea:focus{outline:none}"],"names":[],"mappings":"AAA4G;;;;;AAAiC;EAA+C;;;;;AAAqB;EAA8C;;;;;AAAqB;EAA8C;;;;;AAAqB;EAA8C;;;;;AAAoB;EAA6C;;;;;AAAoB;EAAyB;;;;;AAAoB;EAAyB;;;;;AAAoB;;;;;;;;AAAkF;;;;AAAuB;;;;;AAAkC;;;;;AAAsC;;;;AAAuC;;;;AAAyB;;;;;AAAyC;;;;AAA0C"}},
+    {"offset": {"line": 90, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

@@ -1,0 +1,31 @@
+/* [project]/src/styles/circularprogressbar.scss.css [app-ssr] (css) */
+.CircularProgressbar {
+  width: 100%;
+  vertical-align: middle;
+  border-radius: 50%;
+}
+
+.CircularProgressbar .CircularProgressbar-path {
+  stroke: #319fff;
+  stroke-width: .3rem;
+  stroke-linecap: round;
+  box-shadow: 0 0 1.5rem #319fff;
+  transition: stroke-dashoffset .5s;
+}
+
+.CircularProgressbar .CircularProgressbar-trail {
+  stroke: #319fff;
+  stroke-opacity: .2;
+  stroke-width: .2rem;
+  stroke-linecap: round;
+}
+
+.CircularProgressbar .CircularProgressbar-text {
+  display: none;
+  fill: #24292f;
+  font-size: 20px;
+  dominant-baseline: middle;
+  text-anchor: middle;
+}
+
+/*# sourceMappingURL=src_styles_circularprogressbar_scss_31ffea.css.map*/

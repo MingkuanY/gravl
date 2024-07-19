@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["[project]/src/styles/tripcard.module.scss.module.css"],"sourcesContent":[".container{display:flex;align-items:center;width:26rem;height:6rem;border-radius:3rem;background-color:#fbfbfb;overflow:hidden;cursor:pointer;box-shadow:0 .3rem .3rem 0 rgba(36,41,47,.25);padding:.6rem;transition:.3s}.container:hover,.container.selected{transform:translateX(0.5rem)}.container .right{margin:0 1rem;flex:auto;display:flex;flex-direction:column;justify-content:center;mask-image:linear-gradient(to right, black 0%, black 19rem, transparent 23rem)}.container .right .title{font-size:1.8rem;line-height:2rem;overflow:hidden;white-space:nowrap;color:#24292f;font-weight:400;transition:.3s}.container .right .locations{margin-top:.2rem;color:#757575;font-size:1rem;font-weight:400;transition:.3s}.container.selected{background-color:#319fff}.container.selected .title,.container.selected .locations{color:#fff}"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;;AAAyN;;;;AAAkE;;;;;;;;;AAAmL;;;;;;;;;;AAA2I;;;;;;;;AAA0G;;;;AAA6C"}},
+    {"offset": {"line": 53, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

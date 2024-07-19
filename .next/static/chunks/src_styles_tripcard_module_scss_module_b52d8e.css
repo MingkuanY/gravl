@@ -1,0 +1,55 @@
+/* [project]/src/styles/tripcard.module.scss.module.css [app-client] (css) */
+.tripcard-module-scss-module__fnAryG__container {
+  display: flex;
+  align-items: center;
+  width: 26rem;
+  height: 6rem;
+  border-radius: 3rem;
+  background-color: #fbfbfb;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 .3rem .3rem #24292f40;
+  padding: .6rem;
+  transition: all .3s;
+}
+
+.tripcard-module-scss-module__fnAryG__container:hover, .tripcard-module-scss-module__fnAryG__container.tripcard-module-scss-module__fnAryG__selected {
+  transform: translateX(.5rem);
+}
+
+.tripcard-module-scss-module__fnAryG__container .tripcard-module-scss-module__fnAryG__right {
+  margin: 0 1rem;
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  mask-image: linear-gradient(to right, #000 0% 19rem, #0000 23rem);
+}
+
+.tripcard-module-scss-module__fnAryG__container .tripcard-module-scss-module__fnAryG__right .tripcard-module-scss-module__fnAryG__title {
+  font-size: 1.8rem;
+  line-height: 2rem;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #24292f;
+  font-weight: 400;
+  transition: all .3s;
+}
+
+.tripcard-module-scss-module__fnAryG__container .tripcard-module-scss-module__fnAryG__right .tripcard-module-scss-module__fnAryG__locations {
+  margin-top: .2rem;
+  color: #757575;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: all .3s;
+}
+
+.tripcard-module-scss-module__fnAryG__container.tripcard-module-scss-module__fnAryG__selected {
+  background-color: #319fff;
+}
+
+.tripcard-module-scss-module__fnAryG__container.tripcard-module-scss-module__fnAryG__selected .tripcard-module-scss-module__fnAryG__title, .tripcard-module-scss-module__fnAryG__container.tripcard-module-scss-module__fnAryG__selected .tripcard-module-scss-module__fnAryG__locations {
+  color: #fff;
+}
+
+/*# sourceMappingURL=src_styles_tripcard_module_scss_module_b52d8e.css.map*/

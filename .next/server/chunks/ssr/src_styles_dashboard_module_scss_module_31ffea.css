@@ -1,0 +1,76 @@
+/* [project]/src/styles/dashboard.module.scss.module.css [app-ssr] (css) */
+.dashboard-module-scss-module__BBjD5W__container {
+  display: flex;
+}
+
+.dashboard-module-scss-module__BBjD5W__container .dashboard-module-scss-module__BBjD5W__main {
+  height: calc(100vh - 9rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60rem;
+  margin-top: -4rem;
+  margin-left: 37.5%;
+  transition: transform .3s;
+}
+
+.dashboard-module-scss-module__BBjD5W__container .dashboard-module-scss-module__BBjD5W__main .dashboard-module-scss-module__BBjD5W__profile {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.dashboard-module-scss-module__BBjD5W__container .dashboard-module-scss-module__BBjD5W__main .dashboard-module-scss-module__BBjD5W__profile .dashboard-module-scss-module__BBjD5W__pfpContainer {
+  position: relative;
+}
+
+.dashboard-module-scss-module__BBjD5W__container .dashboard-module-scss-module__BBjD5W__main .dashboard-module-scss-module__BBjD5W__profile .dashboard-module-scss-module__BBjD5W__pfpContainer img {
+  width: 12rem;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.dashboard-module-scss-module__BBjD5W__container .dashboard-module-scss-module__BBjD5W__main .dashboard-module-scss-module__BBjD5W__profile .dashboard-module-scss-module__BBjD5W__userInfo {
+  margin-left: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+}
+
+.dashboard-module-scss-module__BBjD5W__container .dashboard-module-scss-module__BBjD5W__main .dashboard-module-scss-module__BBjD5W__profile .dashboard-module-scss-module__BBjD5W__userInfo .dashboard-module-scss-module__BBjD5W__usernameAndEdit {
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-module-scss-module__BBjD5W__container .dashboard-module-scss-module__BBjD5W__main .dashboard-module-scss-module__BBjD5W__profile .dashboard-module-scss-module__BBjD5W__userInfo .dashboard-module-scss-module__BBjD5W__usernameAndEdit .dashboard-module-scss-module__BBjD5W__username {
+  color: #24292f;
+  font-size: 2.6rem;
+  font-weight: 400;
+}
+
+.dashboard-module-scss-module__BBjD5W__container .dashboard-module-scss-module__BBjD5W__main .dashboard-module-scss-module__BBjD5W__profile .dashboard-module-scss-module__BBjD5W__userInfo .dashboard-module-scss-module__BBjD5W__usernameAndEdit .dashboard-module-scss-module__BBjD5W__edit {
+  margin-bottom: .8rem;
+  margin-left: 1rem;
+  width: 2rem;
+  cursor: pointer;
+}
+
+.dashboard-module-scss-module__BBjD5W__container .dashboard-module-scss-module__BBjD5W__main .dashboard-module-scss-module__BBjD5W__profile .dashboard-module-scss-module__BBjD5W__userInfo .dashboard-module-scss-module__BBjD5W__location {
+  margin-top: .3rem;
+  font-size: 1rem;
+  color: #24292f;
+  font-weight: 400;
+}
+
+.dashboard-module-scss-module__BBjD5W__container .dashboard-module-scss-module__BBjD5W__main .dashboard-module-scss-module__BBjD5W__profile .dashboard-module-scss-module__BBjD5W__userInfo .dashboard-module-scss-module__BBjD5W__bio {
+  margin-top: .5rem;
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: 300;
+  color: #757575;
+}
+
+/*# sourceMappingURL=src_styles_dashboard_module_scss_module_31ffea.css.map*/

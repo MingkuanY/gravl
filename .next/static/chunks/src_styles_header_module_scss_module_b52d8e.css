@@ -1,0 +1,150 @@
+/* [project]/src/styles/header.module.scss.module.css [app-client] (css) */
+.header-module-scss-module__4lyeFq__headerContainer {
+  height: 9rem;
+  width: 100vw;
+  padding: 0 7rem;
+  display: flex;
+  align-items: center;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__logoContainer {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__logoContainer .header-module-scss-module__4lyeFq__logo {
+  width: 3.5rem;
+  height: 4rem;
+  margin-right: .5rem;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__logoContainer .header-module-scss-module__4lyeFq__gravl {
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: #24292f;
+  text-decoration: none;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__logoContainer .header-module-scss-module__4lyeFq__testing {
+  margin-left: .5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #319fff;
+  text-transform: uppercase;
+  padding: .3rem;
+  padding-top: .4rem;
+  border-radius: 2rem;
+  border: .2rem solid #319fff;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__headerRightContainer {
+  flex: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__headerRightContainer .header-module-scss-module__4lyeFq__loginContainer {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__headerRightContainer .header-module-scss-module__4lyeFq__loginContainer .header-module-scss-module__4lyeFq__login {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-right: 1rem;
+  color: #24292f;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__headerRightContainer .header-module-scss-module__4lyeFq__loginContainer .header-module-scss-module__4lyeFq__account {
+  width: 2.7rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__headerRightContainer .header-module-scss-module__4lyeFq__pfpContainer {
+  position: relative;
+  cursor: pointer;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__headerRightContainer .header-module-scss-module__4lyeFq__pfpContainer .header-module-scss-module__4lyeFq__pfp {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__headerRightContainer .header-module-scss-module__4lyeFq__pfpContainer .header-module-scss-module__4lyeFq__notifContainer {
+  position: absolute;
+  top: -.1rem;
+  right: -.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  aspect-ratio: 1;
+  background-color: #319fff;
+  border-radius: 50%;
+  color: #fff;
+  border: .2rem solid #fff;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__headerRightContainer .header-module-scss-module__4lyeFq__pfpContainer .header-module-scss-module__4lyeFq__dropdown {
+  position: absolute;
+  top: 5rem;
+  right: 0;
+  background-color: #fbfbfb;
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  width: 10rem;
+  box-shadow: .2rem .3rem .3rem #24292f40;
+  z-index: 100;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__headerRightContainer .header-module-scss-module__4lyeFq__pfpContainer .header-module-scss-module__4lyeFq__dropdown:before {
+  content: "";
+  position: absolute;
+  top: -.5rem;
+  right: 1.25rem;
+  height: 1rem;
+  aspect-ratio: 1;
+  background-color: #fbfbfb;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__headerRightContainer .header-module-scss-module__4lyeFq__pfpContainer .header-module-scss-module__4lyeFq__dropdown.header-module-scss-module__4lyeFq__active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: all .3s;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__headerRightContainer .header-module-scss-module__4lyeFq__pfpContainer .header-module-scss-module__4lyeFq__dropdown.header-module-scss-module__4lyeFq__inactive {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-1rem);
+  transition: all .3s;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__headerRightContainer .header-module-scss-module__4lyeFq__pfpContainer .header-module-scss-module__4lyeFq__dropdown ul li {
+  padding: .5rem 0;
+  color: #757575;
+  font-size: 1.5rem;
+  font-weight: 300;
+  transition: all .3s;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__headerRightContainer .header-module-scss-module__4lyeFq__pfpContainer .header-module-scss-module__4lyeFq__dropdown ul li:last-child {
+  color: #24292f;
+  font-weight: 400;
+}
+
+.header-module-scss-module__4lyeFq__headerContainer .header-module-scss-module__4lyeFq__headerRightContainer .header-module-scss-module__4lyeFq__pfpContainer .header-module-scss-module__4lyeFq__dropdown ul li:hover {
+  color: #24292f;
+}
+
+/*# sourceMappingURL=src_styles_header_module_scss_module_b52d8e.css.map*/

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 5, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/src/components/session/SessionWrapper.tsx"],"sourcesContent":["\"use client\";\n\nimport { SessionProvider } from \"next-auth/react\";\n\nimport React from \"react\";\n\nconst SessionWrapper = ({ children }: { children: React.ReactNode }) => {\n  return <SessionProvider>{children}</SessionProvider>;\n};\n\nexport default SessionWrapper;\n"],"names":[],"mappings":";;;;;;AAAA;;;AAMA,MAAM,iBAAiB,CAAC,EAAE,QAAQ,EAAiC;IACjE,qBAAO,wPAAC,8IAAA,CAAA,kBAAe;kBAAE;;;;;;AAC3B;uCAEe"}},
+    {"offset": {"line": 24, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

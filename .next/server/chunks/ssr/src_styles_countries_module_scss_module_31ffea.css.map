@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["[project]/src/styles/countries.module.scss.module.css"],"sourcesContent":[".hoverLabel{position:fixed;background:#fff;padding:.5rem;z-index:1000;color:#24292f;font-size:1rem;font-weight:400;border-radius:1rem;border:.2rem solid #319fff}#map{width:100%;margin-top:3rem;margin-bottom:7rem}#map>g>path{fill:#012241;stroke:#fff;cursor:pointer;transition:.3s}#map text{display:none}"],"names":[],"mappings":"AAAA;;;;;;;;;;;;AAAiK;;;;;;AAAmD;;;;;;;AAAmE"}},
+    {"offset": {"line": 29, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

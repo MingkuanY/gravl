@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["[project]/src/styles/loading.module.scss.module.css"],"sourcesContent":[".container{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}.container .wheel{width:16rem;animation:drive 1.5s infinite linear}@keyframes drive{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}.container p{margin-top:3rem;font-size:3rem;color:#319fff;font-weight:400}"],"names":[],"mappings":"AAAA;;;;;;;;AAAqG;;;;;AAAmE;;;;;;;;;;AAA0E"}},
+    {"offset": {"line": 30, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

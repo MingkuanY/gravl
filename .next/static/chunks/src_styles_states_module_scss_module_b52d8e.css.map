@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["[project]/src/styles/states.module.scss.module.css"],"sourcesContent":[".hoverLabel{position:fixed;background:#fff;padding:.5rem;z-index:1000;color:#24292f;font-size:1rem;font-weight:400;border-radius:1rem;border:.2rem solid #319fff}#map{width:100%;margin-top:-3rem;margin-left:4rem}#map>g>path{fill:#012241;stroke:#fff;stroke-width:.15rem;cursor:pointer;transition:.5s}"],"names":[],"mappings":"AAAA;;;;;;;;;;;;AAAiK;;;;;;AAAkD"}},
+    {"offset": {"line": 26, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

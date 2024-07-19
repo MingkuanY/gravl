@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["[project]/src/styles/newtrip.module.scss.module.css"],"sourcesContent":[".overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background-color:rgba(36,41,47,.3);z-index:101;display:flex;justify-content:center;align-items:center}"],"names":[],"mappings":"AAAA"}},
+    {"offset": {"line": 13, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

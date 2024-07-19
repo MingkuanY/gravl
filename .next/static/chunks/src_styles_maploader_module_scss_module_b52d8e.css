@@ -1,0 +1,86 @@
+/* [project]/src/styles/maploader.module.scss.module.css [app-client] (css) */
+.maploader-module-scss-module__5IAhcW__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.maploader-module-scss-module__5IAhcW__container .maploader-module-scss-module__5IAhcW__mapContainer {
+  margin-bottom: -3rem;
+  width: 110%;
+  height: 45rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.maploader-module-scss-module__5IAhcW__container .maploader-module-scss-module__5IAhcW__stats {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.maploader-module-scss-module__5IAhcW__container .maploader-module-scss-module__5IAhcW__stats .maploader-module-scss-module__5IAhcW__progressContainer {
+  width: 12rem;
+  position: relative;
+  transition: all .3s;
+}
+
+.maploader-module-scss-module__5IAhcW__container .maploader-module-scss-module__5IAhcW__stats .maploader-module-scss-module__5IAhcW__progressContainer .maploader-module-scss-module__5IAhcW__countContainer {
+  display: flex;
+  align-items: flex-end;
+}
+
+.maploader-module-scss-module__5IAhcW__container .maploader-module-scss-module__5IAhcW__stats .maploader-module-scss-module__5IAhcW__progressContainer .maploader-module-scss-module__5IAhcW__countContainer .maploader-module-scss-module__5IAhcW__count {
+  font-size: 3.5rem;
+  color: #24292f;
+  margin: 0 -.3rem .3rem 0;
+  font-weight: 400;
+}
+
+.maploader-module-scss-module__5IAhcW__container .maploader-module-scss-module__5IAhcW__stats .maploader-module-scss-module__5IAhcW__progressContainer .maploader-module-scss-module__5IAhcW__countContainer .maploader-module-scss-module__5IAhcW__totalCount {
+  font-size: 1.75rem;
+  color: #24292f;
+  font-weight: 400;
+}
+
+.maploader-module-scss-module__5IAhcW__container .maploader-module-scss-module__5IAhcW__stats .maploader-module-scss-module__5IAhcW__progressContainer .maploader-module-scss-module__5IAhcW__type {
+  margin-top: .5rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  text-align: center;
+  max-height: 1.4rem;
+}
+
+.maploader-module-scss-module__5IAhcW__container .maploader-module-scss-module__5IAhcW__stats .maploader-module-scss-module__5IAhcW__progressContainer .maploader-module-scss-module__5IAhcW__unselected {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%)scale(1);
+  z-index: -100;
+}
+
+.maploader-module-scss-module__5IAhcW__container .maploader-module-scss-module__5IAhcW__stats .maploader-module-scss-module__5IAhcW__progressContainer .maploader-module-scss-module__5IAhcW__progressbarBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: .5;
+  transform: scale(1);
+}
+
+.maploader-module-scss-module__5IAhcW__container .maploader-module-scss-module__5IAhcW__stats .maploader-module-scss-module__5IAhcW__progressContainer .maploader-module-scss-module__5IAhcW__progressbarBackground.maploader-module-scss-module__5IAhcW__selected {
+  opacity: 0;
+  cursor: pointer;
+}
+
+.maploader-module-scss-module__5IAhcW__container .maploader-module-scss-module__5IAhcW__stats .maploader-module-scss-module__5IAhcW__selected {
+  transform: scale(1.25);
+}
+
+/*# sourceMappingURL=src_styles_maploader_module_scss_module_b52d8e.css.map*/

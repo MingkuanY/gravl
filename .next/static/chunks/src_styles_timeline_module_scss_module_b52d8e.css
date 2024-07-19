@@ -1,0 +1,131 @@
+/* [project]/src/styles/timeline.module.scss.module.css [app-client] (css) */
+.timeline-module-scss-module__9z2DGW__timeline {
+  z-index: 100;
+  position: absolute;
+  top: 9rem;
+  left: 6rem;
+  height: calc(100vh - 14rem);
+  display: flex;
+  flex-direction: column;
+  transition: left .5s;
+}
+
+.timeline-module-scss-module__9z2DGW__timeline:before {
+  content: "";
+  position: absolute;
+  width: .5rem;
+  height: 100vh;
+  top: -9rem;
+  right: 0;
+  background: #319fff;
+}
+
+.timeline-module-scss-module__9z2DGW__timeline.timeline-module-scss-module__9z2DGW__empty:before {
+  right: -4rem;
+}
+
+.timeline-module-scss-module__9z2DGW__timeline .timeline-module-scss-module__9z2DGW__pastTrips {
+  margin-top: 1rem;
+  margin-left: -20rem;
+  padding-right: 15rem;
+  padding-bottom: 3rem;
+  padding-left: 5rem;
+  transform: translateX(15rem);
+  position: relative;
+  flex: auto;
+  overflow-y: auto;
+  scrollbar-width: none;
+  mask-image: linear-gradient(#0000 0%, #000 1rem calc(100% - 4rem), #0000 100%);
+}
+
+.timeline-module-scss-module__9z2DGW__timeline .timeline-module-scss-module__9z2DGW__pastTrips::-webkit-scrollbar {
+  display: none;
+}
+
+.timeline-module-scss-module__9z2DGW__timeline .timeline-module-scss-module__9z2DGW__pastTrips .timeline-module-scss-module__9z2DGW__tripCheckpoint {
+  position: relative;
+  padding: .7rem 0;
+  max-width: 33rem;
+  margin-left: -3rem;
+  border-right: .5rem solid #319fff;
+  padding-right: 4rem;
+  overflow: visible;
+}
+
+.timeline-module-scss-module__9z2DGW__timeline .timeline-module-scss-module__9z2DGW__pastTrips .timeline-module-scss-module__9z2DGW__tripCheckpoint:before {
+  content: "";
+  background: #319fff;
+  opacity: .25;
+  width: 4rem;
+  height: .2rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  z-index: -1;
+}
+
+.timeline-module-scss-module__9z2DGW__timeline .timeline-module-scss-module__9z2DGW__pastTrips .timeline-module-scss-module__9z2DGW__tripCheckpoint .timeline-module-scss-module__9z2DGW__dot:before {
+  content: "";
+  background: #319fff;
+  width: 1.5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -1rem;
+}
+
+.timeline-module-scss-module__9z2DGW__timeline .timeline-module-scss-module__9z2DGW__pastTrips .timeline-module-scss-module__9z2DGW__tripCheckpoint .timeline-module-scss-module__9z2DGW__tripCardContainer {
+  position: relative;
+  padding-left: 3rem;
+}
+
+.timeline-module-scss-module__9z2DGW__timeline .timeline-module-scss-module__9z2DGW__pastTrips .timeline-module-scss-module__9z2DGW__tripCheckpoint .timeline-module-scss-module__9z2DGW__tripCardContainer .timeline-module-scss-module__9z2DGW__trashContainer {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -.5rem;
+  white-space: nowrap;
+  border-radius: 50%;
+  padding: .5rem;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.timeline-module-scss-module__9z2DGW__timeline .timeline-module-scss-module__9z2DGW__pastTrips .timeline-module-scss-module__9z2DGW__tripCheckpoint .timeline-module-scss-module__9z2DGW__tripCardContainer .timeline-module-scss-module__9z2DGW__trashContainer:hover {
+  background-color: #eaf5ff;
+}
+
+.timeline-module-scss-module__9z2DGW__timeline .timeline-module-scss-module__9z2DGW__pastTrips .timeline-module-scss-module__9z2DGW__tripCheckpoint .timeline-module-scss-module__9z2DGW__tripCardContainer .timeline-module-scss-module__9z2DGW__trashContainer .timeline-module-scss-module__9z2DGW__trash {
+  height: 2rem;
+}
+
+.timeline-module-scss-module__9z2DGW__timeline .timeline-module-scss-module__9z2DGW__pastTrips .timeline-module-scss-module__9z2DGW__tripCheckpoint .timeline-module-scss-module__9z2DGW__tripCardContainer:hover .timeline-module-scss-module__9z2DGW__trashContainer {
+  display: block;
+}
+
+.timeline-module-scss-module__9z2DGW__timeline .timeline-module-scss-module__9z2DGW__pastTrips .timeline-module-scss-module__9z2DGW__tripCheckpoint .timeline-module-scss-module__9z2DGW__year, .timeline-module-scss-module__9z2DGW__timeline .timeline-module-scss-module__9z2DGW__pastTrips .timeline-module-scss-module__9z2DGW__tripCheckpoint .timeline-module-scss-module__9z2DGW__dates {
+  position: absolute;
+  left: calc(100% + 2rem);
+  font-weight: 300;
+  font-style: italic;
+  color: #24292f;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.timeline-module-scss-module__9z2DGW__timeline .timeline-module-scss-module__9z2DGW__pastTrips .timeline-module-scss-module__9z2DGW__tripCheckpoint .timeline-module-scss-module__9z2DGW__year {
+  top: 10%;
+  font-size: 2rem;
+}
+
+.timeline-module-scss-module__9z2DGW__timeline .timeline-module-scss-module__9z2DGW__pastTrips .timeline-module-scss-module__9z2DGW__tripCheckpoint .timeline-module-scss-module__9z2DGW__dates {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.4rem;
+}
+
+/*# sourceMappingURL=src_styles_timeline_module_scss_module_b52d8e.css.map*/

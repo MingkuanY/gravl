@@ -1,0 +1,15 @@
+/* [project]/src/styles/newtrip.module.scss.module.css [app-client] (css) */
+.newtrip-module-scss-module__kCqrCq__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #24292f4d;
+  z-index: 101;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*# sourceMappingURL=src_styles_newtrip_module_scss_module_b52d8e.css.map*/

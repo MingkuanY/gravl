@@ -1,0 +1,33 @@
+/* [project]/src/styles/userstats.module.scss.module.css [app-ssr] (css) */
+.userstats-module-scss-module__xRjXTG__userStats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 12rem;
+}
+
+.userstats-module-scss-module__xRjXTG__userStats div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userstats-module-scss-module__xRjXTG__userStats div .userstats-module-scss-module__xRjXTG__stat {
+  font-size: 2.6rem;
+  color: #319fff;
+  font-weight: 400;
+}
+
+.userstats-module-scss-module__xRjXTG__userStats div .userstats-module-scss-module__xRjXTG__stat span {
+  font-size: 1.6rem;
+}
+
+.userstats-module-scss-module__xRjXTG__userStats div .userstats-module-scss-module__xRjXTG__desc {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #24292f;
+  text-transform: uppercase;
+  letter-spacing: -.02rem;
+}
+
+/*# sourceMappingURL=src_styles_userstats_module_scss_module_31ffea.css.map*/

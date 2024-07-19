@@ -4,432 +4,792 @@
     {
       "id": "Santa_Clara__CA",
       "visitDate": "2004-07-30",
-      "countyName": "Santa Clara, CA"
+      "countyName": "Santa_Clara__CA"
     },
     {
-      "id": "San_Benito__CA",
+      "id": "Alameda__CA",
       "visitDate": "2004-07-30",
-      "countyName": "Alameda, CA"
+      "countyName": "Alameda__CA"
     },
     {
-      "id": "Monterey__CA",
-      "visitDate": "2012-01-01",
-      "countyName": "San Mateo, CA"
+      "id": "San_Joaquin__CA",
+      "visitDate": "2004-07-30",
+      "countyName": "San_Joaquin__CA"
     },
     {
-      "id": "San_Luis_Obispo__CA",
-      "visitDate": "2012-01-01",
-      "countyName": "San Francisco, CA"
+      "id": "Stanislaus__CA",
+      "visitDate": "2004-07-30",
+      "countyName": "Stanislaus__CA"
     },
     {
-      "id": "Santa_Barbara__CA",
-      "visitDate": "2012-01-01",
-      "countyName": "Marin, CA"
+      "id": "Tuolumne__CA",
+      "visitDate": "2004-07-30",
+      "countyName": "Tuolumne__CA"
     },
     {
-      "id": "Ventura__CA",
-      "visitDate": "2012-01-01",
-      "countyName": "Sonoma, CA"
+      "id": "Mariposa__CA",
+      "visitDate": "2004-07-30",
+      "countyName": "Mariposa__CA"
     },
     {
-      "id": "Los_Angeles__CA",
-      "visitDate": "2012-01-01",
-      "countyName": "Napa, CA"
+      "id": "Mono__CA",
+      "visitDate": "2004-07-30",
+      "countyName": "Mono__CA"
     },
     {
-      "id": "San_Bernardino__CA",
-      "visitDate": "2012-01-01",
-      "countyName": "Solano, CA"
+      "id": "Mineral__NV",
+      "visitDate": "2004-07-30",
+      "countyName": "Mineral__NV"
     },
     {
-      "id": "Riverside__CA",
-      "visitDate": "2012-01-01",
-      "countyName": "Contra Costa, CA"
+      "id": "Esmeralda__NV",
+      "visitDate": "2004-07-30",
+      "countyName": "Esmeralda__NV"
     },
     {
-      "id": "La_Paz__AZ",
-      "visitDate": "2012-01-01",
-      "countyName": "Santa Cruz, CA"
+      "id": "Nye__NV",
+      "visitDate": "2004-07-30",
+      "countyName": "Nye__NV"
     },
     {
-      "id": "Maricopa__AZ",
-      "visitDate": "2012-01-01",
-      "countyName": "Yolo, CA"
+      "id": "Lincoln__NV",
+      "visitDate": "2004-07-30",
+      "countyName": "Lincoln__NV"
     },
     {
-      "id": "Pinal__AZ",
-      "visitDate": "2012-01-01",
-      "countyName": "Lake, CA"
+      "id": "Iron__UT",
+      "visitDate": "2004-07-30",
+      "countyName": "Iron__UT"
     },
     {
-      "id": "Pima__AZ",
-      "visitDate": "2012-01-01",
-      "countyName": "Colusa, CA"
+      "id": "Beaver__UT",
+      "visitDate": "2004-07-30",
+      "countyName": "Beaver__UT"
     },
     {
-      "id": "Cochise__AZ",
-      "visitDate": "2012-01-01",
-      "countyName": "Sacramento, CA"
+      "id": "Millard__UT",
+      "visitDate": "2004-07-30",
+      "countyName": "Millard__UT"
     },
     {
-      "id": "Hidalgo__NM",
-      "visitDate": "2012-01-01",
-      "countyName": "Placer, CA"
+      "id": "Sevier__UT",
+      "visitDate": "2004-07-30",
+      "countyName": "Sevier__UT"
     },
     {
-      "id": "Grant__NM",
-      "visitDate": "2012-01-01",
-      "countyName": "Nevada, CA"
+      "id": "Emery__UT",
+      "visitDate": "2004-07-30",
+      "countyName": "Emery__UT"
     },
     {
-      "id": "Luna__NM",
-      "visitDate": "2012-01-01",
-      "countyName": "Sierra, CA"
+      "id": "Grand__UT",
+      "visitDate": "2004-07-30",
+      "countyName": "Grand__UT"
     },
     {
-      "id": "Dona_Ana__NM",
-      "visitDate": "2012-01-01",
-      "countyName": "Washoe, NV"
+      "id": "Mesa__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Mesa__CO"
     },
     {
-      "id": "Otero__NM",
-      "visitDate": "2012-01-01",
-      "countyName": "Carson City, NV"
+      "id": "Garfield__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Garfield__CO"
     },
     {
-      "id": "Chaves__NM",
-      "visitDate": "2012-01-01",
-      "countyName": "Douglas, NV"
+      "id": "Eagle__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Eagle__CO"
     },
     {
-      "id": "Eddy__NM",
-      "visitDate": "2012-01-01",
-      "countyName": "El Dorado, CA"
+      "id": "Summit__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Summit__CO"
     },
     {
-      "id": "Lea__NM",
-      "visitDate": "2012-01-01",
-      "countyName": "San Joaquin, CA"
+      "id": "Clear_Creek__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Clear_Creek__CO"
     },
     {
-      "id": "Andrews__TX",
-      "visitDate": "2012-01-01",
-      "countyName": "Stanislaus, CA"
+      "id": "Jefferson__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Jefferson__CO"
     },
     {
-      "id": "Martin__TX",
-      "visitDate": "2012-01-01",
-      "countyName": "Merced, CA"
+      "id": "Denver__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Denver__CO"
     },
     {
-      "id": "Howard__TX",
-      "visitDate": "2012-01-01",
-      "countyName": "Tuolumne, CA"
+      "id": "Adams__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Adams__CO"
     },
     {
-      "id": "Glasscock__TX",
-      "visitDate": "2012-01-01",
-      "countyName": "Mariposa, CA"
+      "id": "Arapahoe__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Arapahoe__CO"
     },
     {
-      "id": "Sterling__TX",
-      "visitDate": "2012-01-01",
-      "countyName": "San Benito, CA"
+      "id": "Douglas__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Douglas__CO"
     },
     {
-      "id": "Coke__TX",
-      "visitDate": "2012-01-01",
-      "countyName": "Monterey, CA"
+      "id": "El_Paso__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "El_Paso__CO"
     },
     {
-      "id": "Tom_Green__TX",
-      "visitDate": "2012-01-01",
-      "countyName": "Fresno, CA"
+      "id": "Fremont__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Fremont__CO"
     },
     {
-      "id": "Concho__TX",
-      "visitDate": "2012-01-01",
-      "countyName": "Kings, CA"
+      "id": "Custer__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Custer__CO"
     },
     {
-      "id": "McCulloch__TX",
-      "visitDate": "2012-01-01",
-      "countyName": "Kern, CA"
+      "id": "Pueblo__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Pueblo__CO"
     },
     {
-      "id": "Mason__TX",
-      "visitDate": "2012-01-01",
-      "countyName": "Los Angeles, CA"
+      "id": "Huerfano__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Huerfano__CO"
     },
     {
-      "id": "San_Saba__TX",
-      "visitDate": "2012-01-01",
-      "countyName": "San Bernardino, CA"
+      "id": "Costilla__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Costilla__CO"
     },
     {
-      "id": "Llano__TX",
-      "visitDate": "2012-01-01",
-      "countyName": "Clark, NV"
+      "id": "Alamosa__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Alamosa__CO"
     },
     {
-      "id": "Burnet__TX",
-      "visitDate": "2013-06-18",
-      "countyName": "Duval, FL"
+      "id": "Conejos__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Conejos__CO"
     },
     {
-      "id": "Blanco__TX",
-      "visitDate": "2013-06-19",
-      "countyName": "Clay, FL"
+      "id": "Rio_Arriba__NM",
+      "visitDate": "2004-07-30",
+      "countyName": "Rio_Arriba__NM"
     },
     {
-      "id": "Travis__TX",
-      "visitDate": "2013-06-19",
-      "countyName": "Bradford, FL"
+      "id": "Taos__NM",
+      "visitDate": "2004-07-30",
+      "countyName": "Taos__NM"
     },
     {
-      "id": "Bastrop__TX",
-      "visitDate": "2013-06-19",
-      "countyName": "Alachua, FL"
+      "id": "Santa_Fe__NM",
+      "visitDate": "2004-07-30",
+      "countyName": "Santa_Fe__NM"
     },
     {
-      "id": "Fayette__TX",
-      "visitDate": "2013-06-22",
-      "countyName": "Putnam, FL"
+      "id": "Los_Alamos__NM",
+      "visitDate": "2004-07-30",
+      "countyName": "Los_Alamos__NM"
     },
     {
-      "id": "Colorado__TX",
-      "visitDate": "2013-06-22",
-      "countyName": "St. Johns, FL"
+      "id": "Sandoval__NM",
+      "visitDate": "2004-07-30",
+      "countyName": "Sandoval__NM"
     },
     {
-      "id": "Austin__TX",
-      "visitDate": "2013-06-22",
-      "countyName": "Flagler, FL"
+      "id": "Bernalillo__NM",
+      "visitDate": "2004-07-30",
+      "countyName": "Bernalillo__NM"
     },
     {
-      "id": "Waller__TX",
-      "visitDate": "2013-06-22",
-      "countyName": "Volusia, FL"
+      "id": "San_Juan__NM",
+      "visitDate": "2004-07-30",
+      "countyName": "San_Juan__NM"
     },
     {
-      "id": "Fort_Bend__TX",
-      "visitDate": "2013-06-23",
-      "countyName": "Brevard, FL"
+      "id": "La_Plata__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "La_Plata__CO"
     },
     {
-      "id": "Harris__TX",
-      "visitDate": "2013-06-23",
-      "countyName": "Orange, FL"
+      "id": "San_Juan__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "San_Juan__CO"
     },
     {
-      "id": "Galveston__TX",
-      "visitDate": "2013-06-23",
-      "countyName": "Seminole, FL"
+      "id": "Ouray__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Ouray__CO"
     },
     {
-      "id": "Chambers__TX",
-      "visitDate": "2013-06-23",
-      "countyName": "Lake, FL"
+      "id": "Montrose__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Montrose__CO"
     },
     {
-      "id": "Jefferson__TX",
-      "visitDate": "2013-06-23",
-      "countyName": "Marion, FL"
+      "id": "Delta__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Delta__CO"
     },
     {
-      "id": "Orange__TX",
-      "visitDate": "2013-07-15",
-      "countyName": "Tulare, CA"
+      "id": "Gunnison__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Gunnison__CO"
     },
     {
-      "id": "Calcasieu__LA",
-      "visitDate": "2013-07-15",
-      "countyName": "Madera, CA"
+      "id": "Pitkin__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Pitkin__CO"
     },
     {
-      "id": "Jefferson_Davis__LA",
-      "visitDate": "2014-06-11",
-      "countyName": "Ventura, CA"
+      "id": "Lake__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Lake__CO"
     },
     {
-      "id": "Acadia__LA",
-      "visitDate": "2014-06-12",
-      "countyName": "Santa Barbara, CA"
+      "id": "Weld__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Weld__CO"
     },
     {
-      "id": "Lafayette__LA",
-      "visitDate": "2014-06-13",
-      "countyName": "San Luis Obispo, CA"
+      "id": "Morgan__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Morgan__CO"
     },
     {
-      "id": "St__Martin__LA",
-      "visitDate": "2014-06-14",
-      "countyName": "Orange, CA"
+      "id": "Washington__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Washington__CO"
     },
     {
-      "id": "Iberville__LA",
-      "visitDate": "2014-06-15",
-      "countyName": "San Diego, CA"
+      "id": "Logan__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Logan__CO"
     },
     {
-      "id": "West_Baton_Rouge__LA",
-      "visitDate": "2014-12-11",
-      "countyName": "Miami-Dade, FL"
+      "id": "Sedgwick__CO",
+      "visitDate": "2004-07-30",
+      "countyName": "Sedgwick__CO"
     },
     {
-      "id": "East_Baton_Rouge__LA",
-      "visitDate": "2014-12-12",
-      "countyName": "Broward, FL"
+      "id": "Deuel__NE",
+      "visitDate": "2004-07-30",
+      "countyName": "Deuel__NE"
     },
     {
-      "id": "Ascension__LA",
-      "visitDate": "2014-12-13",
-      "countyName": "Palm Beach, FL"
+      "id": "Keith__NE",
+      "visitDate": "2004-07-30",
+      "countyName": "Keith__NE"
     },
     {
-      "id": "St__James__LA",
-      "visitDate": "2014-12-14",
-      "countyName": "St. Lucie, FL"
+      "id": "Lincoln__NE",
+      "visitDate": "2004-07-30",
+      "countyName": "Lincoln__NE"
     },
     {
-      "id": "St__John_the_Baptist__LA",
-      "visitDate": "2014-12-15",
-      "countyName": "Martin, FL"
+      "id": "Dawson__NE",
+      "visitDate": "2004-07-30",
+      "countyName": "Dawson__NE"
     },
     {
-      "id": "St__Charles__LA",
-      "visitDate": "2014-12-16",
-      "countyName": "Indian River, FL"
+      "id": "Buffalo__NE",
+      "visitDate": "2004-07-30",
+      "countyName": "Buffalo__NE"
     },
     {
-      "id": "Jefferson__LA",
-      "visitDate": "2014-12-17",
-      "countyName": "Sumter, FL"
+      "id": "Hall__NE",
+      "visitDate": "2004-07-30",
+      "countyName": "Hall__NE"
     },
     {
-      "id": "Orleans__LA",
-      "visitDate": "2014-12-18",
-      "countyName": "Hernando, FL"
+      "id": "Hamilton__NE",
+      "visitDate": "2004-07-30",
+      "countyName": "Hamilton__NE"
     },
     {
-      "id": "St__Bernard__LA",
-      "visitDate": "2014-12-19",
-      "countyName": "Pasco, FL"
+      "id": "York__NE",
+      "visitDate": "2004-07-30",
+      "countyName": "York__NE"
     },
     {
-      "id": "St__Tammany__LA",
-      "visitDate": "2014-12-20",
-      "countyName": "Hillsborough, FL"
+      "id": "Seward__NE",
+      "visitDate": "2004-07-30",
+      "countyName": "Seward__NE"
     },
     {
-      "id": "Hancock__MS",
-      "visitDate": "2014-12-20",
-      "countyName": "Manatee, FL"
+      "id": "Lancaster__NE",
+      "visitDate": "2004-07-30",
+      "countyName": "Lancaster__NE"
     },
     {
-      "id": "Harrison__MS",
-      "visitDate": "2014-12-20",
-      "countyName": "Sarasota, FL"
+      "id": "Cass__NE",
+      "visitDate": "2004-07-30",
+      "countyName": "Cass__NE"
     },
     {
-      "id": "Jackson__MS",
-      "visitDate": "2014-12-20",
-      "countyName": "DeSoto, FL"
+      "id": "Sarpy__NE",
+      "visitDate": "2004-07-30",
+      "countyName": "Sarpy__NE"
     },
     {
-      "id": "Mobile__AL",
-      "visitDate": "2014-12-20",
-      "countyName": "Charlotte, FL"
+      "id": "Douglas__NE",
+      "visitDate": "2004-07-30",
+      "countyName": "Douglas__NE"
     },
     {
-      "id": "Baldwin__AL",
-      "visitDate": "2014-12-20",
-      "countyName": "Lee, FL"
+      "id": "Pottawattamie__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Pottawattamie__IA"
     },
     {
-      "id": "Escambia__FL",
-      "visitDate": "2014-12-20",
-      "countyName": "Collier, FL"
+      "id": "Cass__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Cass__IA"
     },
     {
-      "id": "Santa_Rosa__FL",
-      "visitDate": "2015-04-12",
-      "countyName": "Queens, NY"
+      "id": "Adair__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Adair__IA"
     },
     {
-      "id": "Okaloosa__FL",
-      "visitDate": "2015-04-12",
-      "countyName": "Kings, NY"
+      "id": "Madison__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Madison__IA"
     },
     {
-      "id": "Walton__FL",
-      "visitDate": "2015-04-12",
-      "countyName": "New York, NY"
+      "id": "Dallas__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Dallas__IA"
     },
     {
-      "id": "Covington__AL",
-      "visitDate": "2015-12-25",
-      "countyName": "Mono, CA"
+      "id": "Polk__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Polk__IA"
     },
     {
-      "id": "Coffee__AL",
-      "visitDate": "2015-12-25",
-      "countyName": "Inyo, CA"
+      "id": "Jasper__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Jasper__IA"
     },
     {
-      "id": "Pike__AL",
-      "visitDate": "2015-12-25",
-      "countyName": "Esmeralda, NV"
+      "id": "Marion__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Marion__IA"
     },
     {
-      "id": "Montgomery__AL",
-      "visitDate": "2015-12-25",
-      "countyName": "Nye, NV"
+      "id": "Mahaska__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Mahaska__IA"
     },
     {
-      "id": "Macon__AL",
-      "visitDate": "2016-04-14",
-      "countyName": "Loudoun, VA"
+      "id": "Poweshiek__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Poweshiek__IA"
     },
     {
-      "id": "Lee__AL",
-      "visitDate": "2016-04-14",
-      "countyName": "Fairfax Co., VA"
+      "id": "Tama__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Tama__IA"
     },
     {
-      "id": "Chambers__AL",
-      "visitDate": "2016-04-14",
-      "countyName": "Fairfax, VA"
+      "id": "Marshall__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Marshall__IA"
     },
     {
-      "id": "Harris__GA",
-      "visitDate": "2016-04-15",
-      "countyName": "Arlington, VA"
+      "id": "Story__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Story__IA"
     },
     {
-      "id": "Troup__GA",
-      "visitDate": "2016-04-15",
-      "countyName": "Washington, DC"
+      "id": "Hamilton__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Hamilton__IA"
     },
     {
-      "id": "Meriwether__GA",
-      "visitDate": "2016-04-15",
-      "countyName": "Alexandria, VA"
+      "id": "Franklin__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Franklin__IA"
     },
     {
-      "id": "Coweta__GA",
-      "visitDate": "2016-04-17",
-      "countyName": "Montgomery, MD"
+      "id": "Wright__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Wright__IA"
     },
     {
-      "id": "Fulton__GA",
-      "visitDate": "2016-04-17",
-      "countyName": "Prince George's, MD"
+      "id": "Cerro_Gordo__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Cerro_Gordo__IA"
     },
     {
-      "id": "Clayton__GA",
-      "visitDate": "2016-04-17",
-      "countyName": "Howard, MD"
+      "id": "Worth__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Worth__IA"
+    },
+    {
+      "id": "Freeborn__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Freeborn__MN"
+    },
+    {
+      "id": "Steele__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Steele__MN"
+    },
+    {
+      "id": "Rice__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Rice__MN"
+    },
+    {
+      "id": "Scott__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Scott__MN"
+    },
+    {
+      "id": "Dakota__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Dakota__MN"
+    },
+    {
+      "id": "Hennepin__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Hennepin__MN"
+    },
+    {
+      "id": "Ramsey__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Ramsey__MN"
+    },
+    {
+      "id": "Washington__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Washington__MN"
+    },
+    {
+      "id": "St__Croix__WI",
+      "visitDate": "2004-07-30",
+      "countyName": "St__Croix__WI"
+    },
+    {
+      "id": "Polk__WI",
+      "visitDate": "2004-07-30",
+      "countyName": "Polk__WI"
+    },
+    {
+      "id": "Chisago__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Chisago__MN"
+    },
+    {
+      "id": "Anoka__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Anoka__MN"
+    },
+    {
+      "id": "Le_Sueur__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Le_Sueur__MN"
+    },
+    {
+      "id": "Sibley__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Sibley__MN"
+    },
+    {
+      "id": "Nicollet__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Nicollet__MN"
+    },
+    {
+      "id": "Blue_Earth__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Blue_Earth__MN"
+    },
+    {
+      "id": "Watonwan__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Watonwan__MN"
+    },
+    {
+      "id": "Cottonwood__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Cottonwood__MN"
+    },
+    {
+      "id": "Jackson__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Jackson__MN"
+    },
+    {
+      "id": "Nobles__MN",
+      "visitDate": "2004-07-30",
+      "countyName": "Nobles__MN"
+    },
+    {
+      "id": "Osceola__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Osceola__IA"
+    },
+    {
+      "id": "Lyon__IA",
+      "visitDate": "2004-07-30",
+      "countyName": "Lyon__IA"
+    },
+    {
+      "id": "Lincoln__SD",
+      "visitDate": "2004-07-30",
+      "countyName": "Lincoln__SD"
+    },
+    {
+      "id": "Minnehaha__SD",
+      "visitDate": "2004-07-30",
+      "countyName": "Minnehaha__SD"
+    },
+    {
+      "id": "McCook__SD",
+      "visitDate": "2004-07-30",
+      "countyName": "McCook__SD"
+    },
+    {
+      "id": "Hanson__SD",
+      "visitDate": "2004-07-30",
+      "countyName": "Hanson__SD"
+    },
+    {
+      "id": "Davison__SD",
+      "visitDate": "2004-07-30",
+      "countyName": "Davison__SD"
+    },
+    {
+      "id": "Aurora__SD",
+      "visitDate": "2004-07-30",
+      "countyName": "Aurora__SD"
+    },
+    {
+      "id": "Brule__SD",
+      "visitDate": "2004-07-30",
+      "countyName": "Brule__SD"
+    },
+    {
+      "id": "Lyman__SD",
+      "visitDate": "2004-07-30",
+      "countyName": "Lyman__SD"
+    },
+    {
+      "id": "Jones__SD",
+      "visitDate": "2004-07-30",
+      "countyName": "Jones__SD"
+    },
+    {
+      "id": "Jackson__SD",
+      "visitDate": "2004-07-30",
+      "countyName": "Jackson__SD"
+    },
+    {
+      "id": "Pennington__SD",
+      "visitDate": "2004-07-30",
+      "countyName": "Pennington__SD"
+    },
+    {
+      "id": "Meade__SD",
+      "visitDate": "2004-07-30",
+      "countyName": "Meade__SD"
+    },
+    {
+      "id": "Lawrence__SD",
+      "visitDate": "2004-07-30",
+      "countyName": "Lawrence__SD"
+    },
+    {
+      "id": "Butte__SD",
+      "visitDate": "2004-07-30",
+      "countyName": "Butte__SD"
+    },
+    {
+      "id": "Crook__WY",
+      "visitDate": "2004-07-30",
+      "countyName": "Crook__WY"
+    },
+    {
+      "id": "Weston__WY",
+      "visitDate": "2004-07-30",
+      "countyName": "Weston__WY"
+    },
+    {
+      "id": "Custer__SD",
+      "visitDate": "2004-07-30",
+      "countyName": "Custer__SD"
+    },
+    {
+      "id": "Fall_River__SD",
+      "visitDate": "2004-07-30",
+      "countyName": "Fall_River__SD"
+    },
+    {
+      "id": "Niobrara__WY",
+      "visitDate": "2004-07-30",
+      "countyName": "Niobrara__WY"
+    },
+    {
+      "id": "Converse__WY",
+      "visitDate": "2004-07-30",
+      "countyName": "Converse__WY"
+    },
+    {
+      "id": "Natrona__WY",
+      "visitDate": "2004-07-30",
+      "countyName": "Natrona__WY"
+    },
+    {
+      "id": "Carbon__WY",
+      "visitDate": "2004-07-30",
+      "countyName": "Carbon__WY"
+    },
+    {
+      "id": "Fremont__WY",
+      "visitDate": "2004-07-30",
+      "countyName": "Fremont__WY"
+    },
+    {
+      "id": "Sublette__WY",
+      "visitDate": "2004-07-30",
+      "countyName": "Sublette__WY"
+    },
+    {
+      "id": "Sweetwater__WY",
+      "visitDate": "2004-07-30",
+      "countyName": "Sweetwater__WY"
+    },
+    {
+      "id": "Lincoln__WY",
+      "visitDate": "2004-07-30",
+      "countyName": "Lincoln__WY"
+    },
+    {
+      "id": "Uinta__WY",
+      "visitDate": "2004-07-30",
+      "countyName": "Uinta__WY"
+    },
+    {
+      "id": "Summit__UT",
+      "visitDate": "2004-07-30",
+      "countyName": "Summit__UT"
+    },
+    {
+      "id": "Salt_Lake__UT",
+      "visitDate": "2004-07-30",
+      "countyName": "Salt_Lake__UT"
+    },
+    {
+      "id": "Utah__UT",
+      "visitDate": "2004-07-30",
+      "countyName": "Utah__UT"
+    },
+    {
+      "id": "Wasatch__UT",
+      "visitDate": "2004-07-30",
+      "countyName": "Wasatch__UT"
+    },
+    {
+      "id": "Tooele__UT",
+      "visitDate": "2004-07-30",
+      "countyName": "Tooele__UT"
+    },
+    {
+      "id": "Elko__NV",
+      "visitDate": "2004-07-30",
+      "countyName": "Elko__NV"
+    },
+    {
+      "id": "Eureka__NV",
+      "visitDate": "2004-07-30",
+      "countyName": "Eureka__NV"
+    },
+    {
+      "id": "Lander__NV",
+      "visitDate": "2004-07-30",
+      "countyName": "Lander__NV"
+    },
+    {
+      "id": "Humboldt__NV",
+      "visitDate": "2004-07-30",
+      "countyName": "Humboldt__NV"
+    },
+    {
+      "id": "Pershing__NV",
+      "visitDate": "2004-07-30",
+      "countyName": "Pershing__NV"
+    },
+    {
+      "id": "Churchill__NV",
+      "visitDate": "2004-07-30",
+      "countyName": "Churchill__NV"
+    },
+    {
+      "id": "Lyon__NV",
+      "visitDate": "2004-07-30",
+      "countyName": "Lyon__NV"
+    },
+    {
+      "id": "Storey__NV",
+      "visitDate": "2004-07-30",
+      "countyName": "Storey__NV"
+    },
+    {
+      "id": "Washoe__NV",
+      "visitDate": "2004-07-30",
+      "countyName": "Washoe__NV"
+    },
+    {
+      "id": "Sierra__CA",
+      "visitDate": "2004-07-30",
+      "countyName": "Sierra__CA"
+    },
+    {
+      "id": "Nevada__CA",
+      "visitDate": "2004-07-30",
+      "countyName": "Nevada__CA"
+    },
+    {
+      "id": "Placer__CA",
+      "visitDate": "2004-07-30",
+      "countyName": "Placer__CA"
+    },
+    {
+      "id": "Sacramento__CA",
+      "visitDate": "2004-07-30",
+      "countyName": "Sacramento__CA"
+    },
+    {
+      "id": "Yolo__CA",
+      "visitDate": "2004-07-30",
+      "countyName": "Yolo__CA"
+    },
+    {
+      "id": "Solano__CA",
+      "visitDate": "2004-07-30",
+      "countyName": "Solano__CA"
+    },
+    {
+      "id": "Contra_Costa__CA",
+      "visitDate": "2004-07-30",
+      "countyName": "Contra_Costa__CA"
+    },
+    {
+      "id": "San_Francisco__CA",
+      "visitDate": "2004-07-30",
+      "countyName": "San_Francisco__CA"
+    },
+    {
+      "id": "San_Mateo__CA",
+      "visitDate": "2004-07-30",
+      "countyName": "San_Mateo__CA"
     }
   ]
 }

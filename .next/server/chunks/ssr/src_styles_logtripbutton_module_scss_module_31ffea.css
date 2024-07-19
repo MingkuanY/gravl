@@ -1,0 +1,28 @@
+/* [project]/src/styles/logtripbutton.module.scss.module.css [app-ssr] (css) */
+.logtripbutton-module-scss-module__z_JzOa__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26rem;
+  border-radius: 1.5rem;
+  background-color: #319fff;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.logtripbutton-module-scss-module__z_JzOa__button:hover {
+  background-color: #1391ff;
+}
+
+.logtripbutton-module-scss-module__z_JzOa__button .logtripbutton-module-scss-module__z_JzOa__plus {
+  width: 2.5rem;
+}
+
+.logtripbutton-module-scss-module__z_JzOa__button p {
+  margin-left: .5rem;
+  font-size: 1.6rem;
+  color: #fff;
+  font-weight: 400;
+}
+
+/*# sourceMappingURL=src_styles_logtripbutton_module_scss_module_31ffea.css.map*/

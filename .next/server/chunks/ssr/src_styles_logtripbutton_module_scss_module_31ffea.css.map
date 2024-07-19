@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["[project]/src/styles/logtripbutton.module.scss.module.css"],"sourcesContent":[".button{display:flex;align-items:center;justify-content:center;width:26rem;border-radius:1.5rem;background-color:#319fff;cursor:pointer;transition:.3s}.button:hover{background-color:#1391ff}.button .plus{width:2.5rem}.button p{margin-left:.5rem;font-size:1.6rem;color:#fff;font-weight:400}"],"names":[],"mappings":"AAAA;;;;;;;;;;;AAAuJ;;;;AAAuC;;;;AAA2B"}},
+    {"offset": {"line": 26, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

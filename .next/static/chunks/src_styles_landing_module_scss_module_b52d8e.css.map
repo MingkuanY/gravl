@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["[project]/src/styles/landing.module.scss.module.css"],"sourcesContent":[".mainContainer{height:calc(100vh - 9rem);display:flex;flex-direction:column;justify-content:center;align-items:center}.mainContainer .map{margin-top:-4rem;width:90rem;display:flex;justify-content:center;align-items:center}.mainContainer .motto{margin-top:-4rem;font-size:3rem;font-weight:400}"],"names":[],"mappings":"AAAA;;;;;;;;AAAsH;;;;;;;;AAAwG"}},
+    {"offset": {"line": 22, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

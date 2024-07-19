@@ -1,0 +1,148 @@
+/* [project]/src/styles/onboarding.module.scss.module.css [app-client] (css) */
+.onboarding-module-scss-module__YJjY2a__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #24292f4d;
+  z-index: 1001;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container {
+  border-radius: 2rem;
+  background-color: #fff;
+  margin: auto;
+  padding: 4rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__headingContainer {
+  display: flex;
+  align-items: center;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__headingContainer .onboarding-module-scss-module__YJjY2a__pin {
+  margin: -1rem 0;
+  margin-left: .5rem;
+  width: 4rem;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container p {
+  font-size: 3rem;
+  font-weight: 400;
+  color: #24292f;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer {
+  margin-top: 2rem;
+  display: flex;
+  width: 50rem;
+  position: relative;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer .onboarding-module-scss-module__YJjY2a__returnContainer {
+  position: absolute;
+  top: 1.2rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer .onboarding-module-scss-module__YJjY2a__returnContainer p {
+  font-size: 2rem;
+  color: #319fff;
+  font-weight: 100;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer .onboarding-module-scss-module__YJjY2a__returnContainer .onboarding-module-scss-module__YJjY2a__return_arrow {
+  margin-left: .5rem;
+  width: 2.5rem;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer .onboarding-module-scss-module__YJjY2a__wordCount {
+  position: absolute;
+  font-size: 1.4rem;
+  color: #757575;
+  font-weight: 200;
+  top: -2rem;
+  right: .5rem;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer input, .onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer textarea {
+  text-align: center;
+  color: #24292f;
+  font-size: 2rem;
+  font-weight: 300;
+  padding: 1rem 10rem;
+  border: .15rem solid #319fff;
+  border-radius: 1rem;
+  flex: auto;
+  resize: none;
+  font-family: Josefin Sans, sans-serif;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer input[type="file"], .onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer textarea[type="file"] {
+  display: none;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer input:focus, .onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer textarea:focus {
+  outline: none;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer input::placeholder, .onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer textarea::placeholder {
+  color: #989898;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer.onboarding-module-scss-module__YJjY2a__uploadPFPContainer {
+  flex-direction: column;
+  align-items: center;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer.onboarding-module-scss-module__YJjY2a__uploadPFPContainer .onboarding-module-scss-module__YJjY2a__uploadPFP {
+  cursor: pointer;
+  background-color: #fafafa;
+  width: 13.3rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: .15rem solid #319fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .3s;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer.onboarding-module-scss-module__YJjY2a__uploadPFPContainer .onboarding-module-scss-module__YJjY2a__uploadPFP:hover {
+  background-color: #f5f5f5;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer.onboarding-module-scss-module__YJjY2a__uploadPFPContainer .onboarding-module-scss-module__YJjY2a__account {
+  width: 10rem;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__inputContainer.onboarding-module-scss-module__YJjY2a__uploadPFPContainer button {
+  margin-top: 2rem;
+  background-color: #319fff;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  font-size: 2rem;
+  color: #fff;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.onboarding-module-scss-module__YJjY2a__overlay .onboarding-module-scss-module__YJjY2a__container .onboarding-module-scss-module__YJjY2a__warning {
+  position: absolute;
+  font-size: 1.5rem;
+  color: #c30000;
+  bottom: 1.25rem;
+}
+
+/*# sourceMappingURL=src_styles_onboarding_module_scss_module_b52d8e.css.map*/
