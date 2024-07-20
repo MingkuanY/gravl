@@ -2,25 +2,20 @@
 
 import styles from "../../styles/newtrip.module.scss";
 import { useState } from "react";
-import { User } from "@prisma/client";
 import BasicTripInfoCard from "@/components/log/BasicTripInfoCard";
 import ManualFillCard from "@/components/log/ManualFillCard";
 import { PlaceInput } from "@/utils/types";
 
 export default function NewTrip({
-  user,
   places,
   logTripPage,
   setLogTripPage,
-  updateWithNewTrip,
-  updateTrips,
+  addTrip,
 }: {
-  user: User;
   places: PlaceInput[];
   logTripPage: number;
   setLogTripPage: Function;
-  updateWithNewTrip: Function;
-  updateTrips: Function;
+  addTrip: Function;
 }) {
   const [tripData, setTripData] = useState({
     trip_name: "",
@@ -45,14 +40,12 @@ export default function NewTrip({
         )}
         {logTripPage === 1 && (
           <ManualFillCard
-            user={user}
             tripData={tripData}
             visits={visitsData}
             setVisitsData={setVisitsData}
             places={places}
             setLogTripPage={setLogTripPage}
-            updateWithNewTrip={updateWithNewTrip}
-            updateTrips={updateTrips}
+            addTrip={addTrip}
           />
         )}
       </div>

@@ -6,10 +6,11 @@ import MapLoader from "@/components/dashboard/MapLoader";
 import UserStats from "@/components/dashboard/UserStats";
 import Timeline from "@/components/dashboard/Timeline";
 import { useEffect, useMemo, useOptimistic, useState } from "react";
-import { PlaceInput, TripWithVisits } from "@/utils/types";
+import { PlaceInput, TripInput, TripWithVisits } from "@/utils/types";
 import NewTrip from "../log/NewTrip";
 import { sortTrips } from "@/utils/date";
 import Onboarding from "../onboarding/Onboarding";
+import { addTripToUser, deleteTrip } from "@/actions/actions";
 
 export default function Dashboard({
   initialTrips,
@@ -23,34 +24,35 @@ export default function Dashboard({
   const [editProfile, setEditProfile] = useState(false);
 
   const [trips, setTrips] = useState(initialTrips);
-  const updateTrips = (newTrip: TripWithVisits) => {
-    setTrips([...trips, newTrip]);
-  };
-  const [optimisticTrips, setOptimisticTrips] = useOptimistic(trips);
 
   const [logTripPage, setLogTripPage] = useState(-1); // Page of logging a trip
   const [currTrip, setCurrTrip] = useState(-1); // Current trip displayed
   const [tripsForMaps, setTripsForMaps] = useState<TripWithVisits[]>([]);
 
-  const updateWithNewTrip = (newTrip: TripWithVisits) => {
-    setOptimisticTrips([...trips, newTrip]);
+  const addTrip = async (trip: TripInput) => {
+    const newTrip = await addTripToUser(user.id, trip);
+    setTrips((prev) => [...prev, newTrip]);
     setCurrTrip(newTrip.id);
   };
 
+  const handleDelete = async (tripID: number) => {
+    if (currTrip === tripID) setCurrTrip(-1);
+    setTrips((prev) => prev.filter((trip) => trip.id !== tripID));
+    await deleteTrip(tripID);
+  };
+
   useEffect(() => {
-    const sortedTripsChronological = sortTrips(optimisticTrips, true);
+    const sortedTripsChronological = sortTrips(trips, true);
     if (currTrip === -1) {
       setTripsForMaps(sortedTripsChronological);
     } else {
-      const currentTrip = optimisticTrips.find((trip) => trip.id === currTrip);
+      const currentTrip = trips.find((trip) => trip.id === currTrip);
       setTripsForMaps(currentTrip ? [currentTrip] : []);
     }
-  }, [currTrip, optimisticTrips]);
+    console.log("trips changed");
+  }, [currTrip, trips]);
 
-  const sortedTrips = useMemo(
-    () => sortTrips(optimisticTrips),
-    [optimisticTrips]
-  );
+  const sortedTrips = useMemo(() => sortTrips(trips), [trips]);
 
   return (
     <>
@@ -63,22 +65,20 @@ export default function Dashboard({
       )}
       {logTripPage !== -1 && (
         <NewTrip
-          user={user}
           places={places}
           logTripPage={logTripPage}
           setLogTripPage={setLogTripPage}
-          updateWithNewTrip={updateWithNewTrip}
-          updateTrips={updateTrips}
+          addTrip={addTrip}
         />
       )}
       {logTripPage === -1 && (
         <div className={styles.container}>
           <Timeline
-            initialTrips={sortedTrips}
+            trips={sortedTrips}
             setLogTripPage={setLogTripPage}
             currTrip={currTrip}
             setCurrTrip={setCurrTrip}
-            setOptimisticTrips={setOptimisticTrips}
+            handleDelete={handleDelete}
           />
           <div className={styles.main}>
             <div className={styles.profile}>

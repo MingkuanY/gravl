@@ -126,12 +126,6 @@ export default function Counties({
           {hoverInfo.label}
         </div>
       )}
-      {animate && (
-        <div className={styles.visitedOnContainer}>
-          <p className={styles.visitedOn}>Visited on</p>
-          <p className={styles.date}></p>
-        </div>
-      )}
       <svg
         ref={mapRef}
         viewBox="0 0 1460 1000"

@@ -1,38 +1,25 @@
-import { deleteTrip } from "@/actions/actions";
 import styles from "../../styles/timeline.module.scss";
 import Icon from "../icons/Icon";
 import LogTripButton from "./LogTripButton";
 import TripCard from "./TripCard";
 import { formatDates, getTripDates } from "@/utils/date";
 import { TripWithVisits } from "@/utils/types";
-import { useState, useTransition } from "react";
 
 export default function Timeline({
-  initialTrips,
+  trips,
   setLogTripPage,
   currTrip,
   setCurrTrip,
-  setOptimisticTrips,
+  handleDelete,
 }: {
-  initialTrips: TripWithVisits[];
+  trips: TripWithVisits[];
   setLogTripPage: Function;
   currTrip: number;
   setCurrTrip: Function;
-  setOptimisticTrips: Function;
+  handleDelete: Function;
 }) {
   const handleClick = (tripID: number) => {
     setCurrTrip(currTrip !== tripID ? tripID : -1);
-  };
-
-  const [trips, setTrips] = useState(initialTrips);
-
-  const [, startTransition] = useTransition();
-
-  const handleDelete = async (tripID: number) => {
-    setCurrTrip(-1);
-    setOptimisticTrips(trips.filter((trip) => trip.id !== tripID));
-    await deleteTrip(tripID);
-    setTrips(trips.filter((trip) => trip.id !== tripID));
   };
 
   return (
@@ -60,7 +47,7 @@ export default function Timeline({
                   />
                   <button
                     className={styles.trashContainer}
-                    onClick={() => startTransition(() => handleDelete(trip.id))}
+                    onClick={() => handleDelete(trip.id)}
                   >
                     <div className={styles.trash}>
                       <Icon type="trash" fill="#319fff" />

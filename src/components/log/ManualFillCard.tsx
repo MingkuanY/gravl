@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  useEffect,
-  useOptimistic,
-  useRef,
-  useState,
-  useTransition,
-} from "react";
+import { useOptimistic, useState, useTransition } from "react";
 import styles from "../../styles/manualfillcard.module.scss";
 import Counties from "../maps/Counties";
 import { BasicTripInfo } from "./BasicTripInfoCard";
@@ -14,9 +8,7 @@ import { VisitInput } from "@/utils/types";
 import Icon from "../icons/Icon";
 import { addDays, dayOfWeek, formatMDYDate } from "@/utils/date";
 import { PlaceInput } from "@/utils/types";
-import { User } from "@prisma/client";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
-import { addTripToUser } from "@/actions/actions";
 import { addDesignationToLabel } from "@/utils/map";
 
 /**
@@ -36,23 +28,19 @@ export const sortVisits = (list: VisitInput[]) => {
 };
 
 export default function ManualFillCard({
-  user,
   tripData,
   visits,
   setVisitsData,
   places,
   setLogTripPage,
-  updateWithNewTrip,
-  updateTrips,
+  addTrip,
 }: {
-  user: User;
   tripData: BasicTripInfo;
   visits: VisitInput[];
   setVisitsData: Function;
   places: PlaceInput[];
   setLogTripPage: Function;
-  updateWithNewTrip: Function;
-  updateTrips: Function;
+  addTrip: Function;
 }) {
   const placesMap = new Map(
     places.map((place) => [place.place_id, place.label])
@@ -156,7 +144,7 @@ export default function ManualFillCard({
   };
 
   /**
-   * Checks that the user has at least one visit selected, updates the db with the new trip, and navigates the user back to dashboard.
+   * Checks that the user has at least one visit selected, navigates the user back to dashboard, and calls the function to update the db in the dashboard.
    */
   const handleAdd = async () => {
     if (visits) {
@@ -166,9 +154,7 @@ export default function ManualFillCard({
         description: tripData.description,
         visits: visits,
       };
-      updateWithNewTrip(newTrip);
-      await addTripToUser(user.id, newTrip);
-      updateTrips(newTrip);
+      addTrip(newTrip);
     }
   };
 
