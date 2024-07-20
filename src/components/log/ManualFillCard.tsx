@@ -50,7 +50,8 @@ export default function ManualFillCard({
 
   const [dayCount, setDayCount] = useState(1);
   const getCurrentDate = () => {
-    return addDays(tripData.start_date, dayCount - 1);
+    const currentDate = addDays(tripData.start_date, dayCount - 1);
+    return currentDate;
   };
 
   // Change dates

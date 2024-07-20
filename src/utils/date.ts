@@ -62,10 +62,10 @@ export const dayOfWeek = [
  * @returns date in "June 21" (aka long abbreviation) format for timeline
  */
 export const formatDate = (dateString: string) => {
-  const dateObj = new Date(dateString);
+  const dateObj = new Date(dateString.replace(/-/g, "/"));
 
   const month = monthAbbreviations[dateObj.getMonth()];
-  const day = dateObj.getDate() + 1;
+  const day = dateObj.getDate();
 
   const formattedDate = `${month} ${day}`;
   return formattedDate;
@@ -106,13 +106,13 @@ export const formatDates = (date1: string, date2: string) => {
  * @returns string in "Jun 21, 2024" (aka short abbreviation) format
  */
 export const formatMDYDate = (dateString: string, fullMonth?: boolean) => {
-  const dateObj = new Date(dateString);
+  const dateObj = new Date(dateString.replace(/-/g, "/"));
 
   const year = dateObj.getFullYear();
   const month = fullMonth
     ? fullMonthNames[dateObj.getMonth()]
     : shortMonthAbbreviations[dateObj.getMonth()];
-  const day = dateObj.getDate() + 1;
+  const day = dateObj.getDate();
 
   const formattedDate = `${month} ${day}, ${year}`;
   return formattedDate;

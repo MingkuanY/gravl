@@ -38,15 +38,19 @@ export default function BasicTripInfoCard({
     } else if (new Date(tripData.start_date) > new Date(tripData.end_date)) {
       setError("Trying to go back in time, huh?");
     } else {
+      setVisitsData(
+        visits.filter(
+          (visit) =>
+            new Date(visit.date) >= new Date(tripData.start_date) &&
+            new Date(visit.date) <= new Date(tripData.end_date)
+        )
+      );
       setLogTripPage(1);
       setError("");
     }
   };
 
   const handleStartDateChange = (date: string) => {
-    setVisitsData(
-      visits.filter((visit) => new Date(visit.date) >= new Date(date))
-    );
     setTripData({ ...tripData, start_date: date });
   };
 
