@@ -24,13 +24,35 @@ export default function Dashboard({
   const [editProfile, setEditProfile] = useState(false);
 
   const [trips, setTrips] = useState(initialTrips);
+  const [optimisticTrips, setOptimisticTrips] = useOptimistic(trips);
 
   const [logTripPage, setLogTripPage] = useState(-1); // Page of logging a trip
   const [currTrip, setCurrTrip] = useState(-1); // Current trip displayed
   const [tripsForMaps, setTripsForMaps] = useState<TripWithVisits[]>([]);
 
   const addTrip = async (trip: TripInput) => {
+    const tempID = Date.now();
+    const tempTrip: TripWithVisits = {
+      id: tempID,
+      name: trip.trip_name,
+      description: trip.description,
+      userId: user.id,
+      visits: trip.visits.map((visit, index) => ({
+        id: tempID + index,
+        date: new Date(visit.date),
+        order: visit.order,
+        tripId: tempID,
+        placeId: visit.place_id,
+      })),
+    };
+
+    setOptimisticTrips((prev) => [...prev, tempTrip]);
+    setCurrTrip(tempID);
+
+    // adding trip to database
     const newTrip = await addTripToUser(user.id, trip);
+
+    setOptimisticTrips((prev) => prev.filter((t) => t.id !== tempID));
     setTrips((prev) => [...prev, newTrip]);
     setCurrTrip(newTrip.id);
   };
@@ -52,7 +74,10 @@ export default function Dashboard({
     console.log("trips changed");
   }, [currTrip, trips]);
 
-  const sortedTrips = useMemo(() => sortTrips(trips), [trips]);
+  const sortedTrips = useMemo(
+    () => sortTrips(optimisticTrips),
+    [optimisticTrips]
+  );
 
   return (
     <>

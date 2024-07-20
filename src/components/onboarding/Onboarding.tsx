@@ -75,9 +75,9 @@ export default function Onboarding({
     //redirect to user dashboard
     if (setClose) {
       setClose();
-    } else {
-      router.push(`/${accountData.username}`);
     }
+
+    router.push(`/${accountData.username}`);
   };
 
   return (
