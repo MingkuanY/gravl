@@ -26,30 +26,28 @@ export default function Countries({
   const mapRef = useRef<SVGSVGElement>(null);
   const colors = interpolateColors(1, startColor, endColor);
 
-  if (animate && data) {
-    // we want to animate the data based on the other props
+  const resetMap = () => {
+    updateCount && updateCount(0);
+    (
+      mapRef.current?.querySelectorAll(
+        "svg > g > path"
+      ) as NodeListOf<SVGPathElement>
+    ).forEach((country: SVGPathElement) => {
+      country.style.fill = defaultColor;
+    });
+  };
 
-    useEffect(() => {
+  useEffect(() => {
+    if (animate && data) {
+      // we want to animate the data based on the other props
+
       resetMap();
       const clearTimeouts = loadMap(data, 250, colors, updateCount);
       return () => {
         clearTimeouts();
         updateCount && updateCount(total);
       };
-    }, [reload, data]);
-
-    const resetMap = () => {
-      updateCount && updateCount(0);
-      (
-        mapRef.current?.querySelectorAll(
-          "svg > g > path"
-        ) as NodeListOf<SVGPathElement>
-      ).forEach((country: SVGPathElement) => {
-        country.style.fill = defaultColor;
-      });
-    };
-  } else {
-    useEffect(() => {
+    } else {
       refreshMap(
         visits!,
         places!,
@@ -58,8 +56,8 @@ export default function Countries({
         otherColor,
         defaultColor
       );
-    }, [currentDate]);
-  }
+    }
+  }, [reload, data, currentDate]);
 
   // Hover label effect
 

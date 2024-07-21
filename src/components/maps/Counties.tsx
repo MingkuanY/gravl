@@ -38,30 +38,27 @@ export default function Counties({
   // Edit to add color gradient for time spent in each county. Currently hardcoded
   const colors = interpolateColors(1, startColor, endColor, livedInColor);
 
-  if (animate && data) {
-    // we want to animate the data based on the other props
+  const resetMap = () => {
+    updateCount && updateCount(0);
+    (
+      mapRef.current?.querySelectorAll(
+        "svg > path"
+      ) as NodeListOf<SVGPathElement>
+    ).forEach((county: SVGPathElement) => {
+      county.style.fill = defaultColor;
+    });
+  };
 
-    useEffect(() => {
+  useEffect(() => {
+    if (animate && data) {
+      // we want to animate the data based on the other props
       resetMap();
       const clearTimeouts = loadMap(data, pause, colors, updateCount);
       return () => {
         clearTimeouts();
         updateCount && updateCount(total);
       };
-    }, [reload, data]);
-
-    const resetMap = () => {
-      updateCount && updateCount(0);
-      (
-        mapRef.current?.querySelectorAll(
-          "svg > path"
-        ) as NodeListOf<SVGPathElement>
-      ).forEach((county: SVGPathElement) => {
-        county.style.fill = defaultColor;
-      });
-    };
-  } else {
-    useEffect(() => {
+    } else {
       refreshMap(
         visits!,
         places,
@@ -70,8 +67,8 @@ export default function Counties({
         otherColor,
         defaultColor
       );
-    }, [currentDate, visits]);
-  }
+    }
+  }, [reload, data, currentDate, visits]);
 
   // Hover label effect
 

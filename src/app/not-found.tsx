@@ -24,7 +24,7 @@ export default async function NotFound() {
         <div className={styles.deadEndSign}>
           <p>Dead End</p>
         </div>
-        <h1>Oops, it looks like this page doesn't exist!</h1>
+        <h1>Oops, it looks like this page doesn&apos;t exist!</h1>
         <Link href={`/${path}`}>
           <button>U-turn</button>
         </Link>

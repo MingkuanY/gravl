@@ -27,30 +27,28 @@ export default function NationalParks({
   const mapRef = useRef<SVGSVGElement>(null);
   const colors = interpolateColors(1, startColor, endColor);
 
-  if (animate && data) {
-    // we want to animate the data based on the other props
+  const resetMap = () => {
+    updateCount && updateCount(0);
+    (
+      mapRef.current?.querySelectorAll(
+        `.${styles.park} path`
+      ) as NodeListOf<SVGPathElement>
+    ).forEach((park: SVGPathElement) => {
+      park.style.fill = defaultColor;
+    });
+  };
 
-    useEffect(() => {
+  useEffect(() => {
+    if (animate && data) {
+      // we want to animate the data based on the other props
+
       resetMap();
       const clearTimeouts = loadMap(data, 200, colors, updateCount);
       return () => {
         clearTimeouts();
         updateCount && updateCount(total);
       };
-    }, [reload, data]);
-
-    const resetMap = () => {
-      updateCount && updateCount(0);
-      (
-        mapRef.current?.querySelectorAll(
-          `.${styles.park} path`
-        ) as NodeListOf<SVGPathElement>
-      ).forEach((park: SVGPathElement) => {
-        park.style.fill = defaultColor;
-      });
-    };
-  } else {
-    useEffect(() => {
+    } else {
       refreshMap(
         visits!,
         places!,
@@ -59,8 +57,8 @@ export default function NationalParks({
         otherColor,
         defaultColor
       );
-    }, [currentDate]);
-  }
+    }
+  }, [reload, data, currentDate]);
 
   // Hover label effect
 
