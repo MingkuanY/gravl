@@ -9,17 +9,15 @@ import Onboarding from "@/components/onboarding/Onboarding.tsx";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/auth.ts";
 import welcome from "../assets/Welcome.json";
+import SignOut from "@/components/landing/SignOut.tsx";
 
 export default async function Landing({
   searchParams,
 }: {
   searchParams: { ob: string };
 }) {
-  let email = "";
   const session = await getServerSession(authOptions);
-  if (session) {
-    email = session.user.email;
-  }
+  let email = session?.user.email || "";
 
   // welcome to gravl counties map
   const welcome_to_gravl = welcome;
@@ -28,6 +26,7 @@ export default async function Landing({
 
   return (
     <>
+      {session && !searchParams.ob && <SignOut />}
       {session && searchParams.ob && searchParams.ob === "true" && (
         <Onboarding email={email} />
       )}
@@ -41,7 +40,7 @@ export default async function Landing({
             animate={true}
           />
         </div>
-        <p className={styles.motto}>Not all who wander are lost.</p>
+        <p className={styles.motto}>Not all who wander are lost</p>
         <SignUpButton />
       </div>
     </>
