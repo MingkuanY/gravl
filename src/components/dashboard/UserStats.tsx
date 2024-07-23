@@ -18,7 +18,7 @@ export default function UserStats({ trips }: { trips: TripWithVisits[] }) {
     <div className={styles.userStats}>
       <div>
         <p className={styles.stat}>{tripCount}</p>
-        <p className={styles.desc}>Trips</p>
+        <p className={styles.desc}>Trip{tripCount !== 1 && "s"}</p>
       </div>
       <div>
         <p className={styles.stat}>{tripsThisYearCount}</p>

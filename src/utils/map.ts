@@ -154,24 +154,27 @@ export function refreshMap(
   otherColor: string,
   defaultColor: string
 ) {
-  const todayPlaces = new Set<string>();
-
   places.forEach((place) => {
     const element = document.getElementById(place.place_id);
     if (element) {
-      const visit = visits.find((v) => v.place_id === place.place_id);
+      const visit = visits.find(
+        (v) => v.place_id === place.place_id && v.date === currentDate
+      );
       if (visit) {
+        // There is a visit for the current place on the current date, so color it todayColor
         const childPaths = element.querySelectorAll("path");
-        if (visit.date === currentDate) {
-          if (childPaths.length) {
-            childPaths.forEach((path) => {
-              path.style.fill = todayColor;
-            });
-          } else {
-            element.style.fill = todayColor;
-          }
-          todayPlaces.add(visit.place_id);
-        } else if (!todayPlaces.has(visit.place_id)) {
+        if (childPaths.length) {
+          childPaths.forEach((path) => {
+            path.style.fill = todayColor;
+          });
+        } else {
+          element.style.fill = todayColor;
+        }
+      } else {
+        const visit = visits.find((v) => v.place_id === place.place_id);
+        if (visit) {
+          // There is a visit for the current place but on a different date, so color it otherColor
+          const childPaths = element.querySelectorAll("path");
           if (childPaths.length) {
             childPaths.forEach((path) => {
               path.style.fill = otherColor;
@@ -179,9 +182,10 @@ export function refreshMap(
           } else {
             element.style.fill = otherColor;
           }
+        } else {
+          // There is no visit associated with the current place on any date, so color it defaultColor
+          element.style.fill = defaultColor;
         }
-      } else {
-        element.style.fill = defaultColor;
       }
     }
   });

@@ -5,7 +5,13 @@ import EditProfileButton from "@/components/dashboard/EditProfileButton";
 import MapLoader from "@/components/dashboard/MapLoader";
 import UserStats from "@/components/dashboard/UserStats";
 import Timeline from "@/components/dashboard/Timeline";
-import { useEffect, useMemo, useOptimistic, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useOptimistic,
+  useState,
+  useTransition,
+} from "react";
 import { PlaceInput, TripInput, TripWithVisits } from "@/utils/types";
 import NewTrip from "../log/NewTrip";
 import { sortTrips } from "@/utils/date";
@@ -25,6 +31,7 @@ export default function Dashboard({
 
   const [trips, setTrips] = useState(initialTrips);
   const [optimisticTrips, setOptimisticTrips] = useOptimistic(trips);
+  const [, startTransition] = useTransition();
 
   const [logTripPage, setLogTripPage] = useState(-1); // Page of logging a trip
   const [currTrip, setCurrTrip] = useState(-1); // Current trip displayed
@@ -57,6 +64,10 @@ export default function Dashboard({
     setCurrTrip(newTrip.id);
   };
 
+  const handleAddTrip = (trip: TripInput) => {
+    startTransition(() => addTrip(trip));
+  };
+
   const handleDelete = async (tripID: number) => {
     if (currTrip === tripID) setCurrTrip(-1);
     setTrips((prev) => prev.filter((trip) => trip.id !== tripID));
@@ -71,7 +82,6 @@ export default function Dashboard({
       const currentTrip = trips.find((trip) => trip.id === currTrip);
       setTripsForMaps(currentTrip ? [currentTrip] : []);
     }
-    console.log("trips changed");
   }, [currTrip, trips]);
 
   const sortedTrips = useMemo(
@@ -93,7 +103,7 @@ export default function Dashboard({
           places={places}
           logTripPage={logTripPage}
           setLogTripPage={setLogTripPage}
-          addTrip={addTrip}
+          addTrip={handleAddTrip}
         />
       )}
       {logTripPage === -1 && (
@@ -120,7 +130,7 @@ export default function Dashboard({
                 <p className={styles.location}>{user!.location}</p>
                 <p className={styles.bio}>{user!.bio}</p>
               </div>
-              <UserStats trips={user!.trips} />
+              <UserStats trips={trips} />
             </div>
 
             <MapLoader trips={tripsForMaps} places={places} />
