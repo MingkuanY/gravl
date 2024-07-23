@@ -1,6 +1,7 @@
 import { useId } from "react";
 
 export default function Icon({ type, fill }: { type: string; fill: string }) {
+  const id = useId();
   switch (type) {
     case "account":
       return (
@@ -112,7 +113,6 @@ export default function Icon({ type, fill }: { type: string; fill: string }) {
         </svg>
       );
     case "edit":
-      const id = useId();
       return (
         <svg
           width="100%"
