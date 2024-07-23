@@ -11,12 +11,16 @@ export default function Timeline({
   currTrip,
   setCurrTrip,
   handleDelete,
+  handleEditTrip,
+  setEditTrip,
 }: {
   trips: TripWithVisits[];
   setLogTripPage: Function;
   currTrip: number;
   setCurrTrip: Function;
   handleDelete: Function;
+  handleEditTrip: Function;
+  setEditTrip: Function;
 }) {
   const handleClick = (tripID: number) => {
     setCurrTrip(currTrip !== tripID ? tripID : -1);
@@ -24,7 +28,10 @@ export default function Timeline({
 
   return (
     <div className={`${styles.timeline} ${!trips.length && styles.empty}`}>
-      <LogTripButton setLogTripPage={setLogTripPage} />
+      <LogTripButton
+        setLogTripPage={setLogTripPage}
+        setEditTrip={setEditTrip}
+      />
       <div className={styles.pastTrips}>
         {trips.map((trip, index) => {
           const tripDates = getTripDates(trip);
@@ -44,6 +51,7 @@ export default function Timeline({
                     desc={trip.description}
                     selected={currTrip === trip.id}
                     isClicked={() => handleClick(trip.id)}
+                    editTrip={() => handleEditTrip(trip.id)}
                   />
                   <button
                     className={styles.trashContainer}

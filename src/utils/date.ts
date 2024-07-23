@@ -176,3 +176,13 @@ export const sortTrips = (trips: TripWithVisits[], chronological?: boolean) => {
   });
   return tripsWithStartDate;
 };
+
+export const findStartAndEndDates = (visits: { date: Date }[]) => {
+  const dates = visits.map((visit) => new Date(visit.date).getTime());
+  const startDate = new Date(Math.min(...dates));
+  const endDate = new Date(Math.max(...dates));
+
+  const formatDate = (date: Date) => date.toISOString().split("T")[0];
+
+  return { startDate: formatDate(startDate), endDate: formatDate(endDate) };
+};

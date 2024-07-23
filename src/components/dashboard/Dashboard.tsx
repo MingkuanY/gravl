@@ -37,8 +37,7 @@ export default function Dashboard({
   const [currTrip, setCurrTrip] = useState(-1); // Current trip displayed
   const [tripsForMaps, setTripsForMaps] = useState<TripWithVisits[]>([]);
 
-  const addTrip = async (trip: TripInput) => {
-    const tempID = Date.now();
+  const addTrip = async (trip: TripInput, tempID: number) => {
     const tempTrip: TripWithVisits = {
       id: tempID,
       name: trip.trip_name,
@@ -54,7 +53,6 @@ export default function Dashboard({
     };
 
     setOptimisticTrips((prev) => [...prev, tempTrip]);
-    setCurrTrip(tempID);
 
     // adding trip to database
     const newTrip = await addTripToUser(user.id, trip);
@@ -65,13 +63,28 @@ export default function Dashboard({
   };
 
   const handleAddTrip = (trip: TripInput) => {
-    startTransition(() => addTrip(trip));
+    if (editTrip) {
+      handleDelete(editTrip.id);
+      setEditTrip(null);
+    }
+    const tempID = Date.now();
+    setCurrTrip(tempID);
+    startTransition(() => addTrip(trip, tempID));
   };
 
   const handleDelete = async (tripID: number) => {
     if (currTrip === tripID) setCurrTrip(-1);
     setTrips((prev) => prev.filter((trip) => trip.id !== tripID));
     await deleteTrip(tripID);
+  };
+
+  const [editTrip, setEditTrip] = useState<TripWithVisits | undefined | null>(
+    null
+  );
+
+  const handleEditTrip = (tripID: number) => {
+    setEditTrip(trips.find((trip) => trip.id === tripID));
+    setLogTripPage(0);
   };
 
   useEffect(() => {
@@ -104,6 +117,7 @@ export default function Dashboard({
           logTripPage={logTripPage}
           setLogTripPage={setLogTripPage}
           addTrip={handleAddTrip}
+          editTrip={editTrip}
         />
       )}
       {logTripPage === -1 && (
@@ -114,6 +128,8 @@ export default function Dashboard({
             currTrip={currTrip}
             setCurrTrip={setCurrTrip}
             handleDelete={handleDelete}
+            handleEditTrip={handleEditTrip}
+            setEditTrip={setEditTrip}
           />
           <div className={styles.main}>
             <div className={styles.profile}>

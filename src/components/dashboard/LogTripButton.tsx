@@ -5,11 +5,17 @@ import Icon from "../icons/Icon";
 
 export default function LogTripButton({
   setLogTripPage,
+  setEditTrip,
 }: {
   setLogTripPage: Function;
+  setEditTrip: Function;
 }) {
+  const handleClick = () => {
+    setEditTrip(null);
+    setLogTripPage(0);
+  };
   return (
-    <button onClick={() => setLogTripPage(0)} className={styles.button}>
+    <button onClick={handleClick} className={styles.button}>
       <div className={styles.plus}>
         <Icon type="plus" fill="#FFF" />
       </div>

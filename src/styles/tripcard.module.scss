@@ -13,9 +13,21 @@
   padding: 0.6rem;
   transition: 0.3s;
 
-  &:hover,
-  &.selected {
+  &:hover {
     transform: translateX(0.5rem);
+
+    .right {
+      mask-image: linear-gradient(
+        to right,
+        black 0%,
+        black 17rem,
+        transparent 19rem
+      );
+    }
+
+    .editContainer {
+      display: block;
+    }
   }
 
   .right {
@@ -30,6 +42,7 @@
       black 19rem,
       transparent 23rem
     );
+    transition: 0.3s;
 
     .title {
       font-size: 1.8rem;
@@ -50,12 +63,36 @@
     }
   }
 
+  .editContainer {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 2rem;
+    border-radius: 50%;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: mixin.$almost-very-light;
+    }
+
+    .edit {
+      height: 2rem;
+    }
+  }
+
   &.selected {
     background-color: mixin.$gravl-blue;
 
     .title,
     .locations {
       color: mixin.$white;
+    }
+
+    .editContainer:hover {
+      background-color: mixin.$darker-blue;
     }
   }
 }
