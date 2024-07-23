@@ -222,3 +222,28 @@ export async function deleteTrip(trip_id: number) {
 
   return deletedTrip;
 }
+
+export async function updateTrip(trip_id: number, trip: TripInput) {
+  const updatedTrip = await prisma.trip.update({
+    where: {
+      id: trip_id,
+    },
+    data: {
+      name: trip.trip_name,
+      description: trip.description,
+      visits: {
+        deleteMany: {},
+        create: trip.visits.map((visit) => ({
+          placeId: visit.place_id,
+          date: new Date(visit.date),
+          order: visit.order,
+        })),
+      },
+    },
+    include: {
+      visits: true,
+    },
+  });
+
+  return updatedTrip;
+}
