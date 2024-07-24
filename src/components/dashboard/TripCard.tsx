@@ -1,5 +1,6 @@
 import styles from "../../styles/tripcard.module.scss";
 import Icon from "../icons/Icon";
+import classnames from "classnames";
 
 export default function TripCard({
   name,
@@ -27,7 +28,7 @@ export default function TripCard({
   };
   return (
     <div
-      className={`${styles.container} ${selected && styles.selected}`}
+      className={classnames(styles.container, selected && styles.selected)}
       onClick={handleClick}
     >
       <div className={styles.right}>

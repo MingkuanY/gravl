@@ -10,6 +10,7 @@ import "../../styles/circularprogressbar.scss";
 import { useEffect, useState } from "react";
 import { PlaceInput, TripWithVisits, VisitInput } from "@/utils/types";
 import Icon from "../icons/Icon";
+import classnames from "classnames";
 
 export const mapNames = ["counties", "states", "countries", "national parks"];
 
@@ -100,13 +101,14 @@ export default function MapLoader({
       <div className={styles.stats}>
         {mapNames.map((map, index) => (
           <div
-            className={`${styles.progressContainer} ${
+            className={classnames(
+              styles.progressContainer,
               currentMap === index && styles.selected
-            }`}
+            )}
             key={index}
           >
             {currentMap !== index && (
-              <div className={`${styles.unselected} ${styles.hovered}`}>
+              <div className={classnames(styles.unselected, styles.hovered)}>
                 <Icon type="lock" fill="#7dc2ff" />
               </div>
             )}
@@ -125,9 +127,10 @@ export default function MapLoader({
               )}
             </CircularProgressbarWithChildren>
             <div
-              className={`${styles.progressbarBackground} ${
+              className={classnames(
+                styles.progressbarBackground,
                 currentMap === index && styles.selected
-              }`}
+              )}
               onClick={() => statClicked(index)}
             ></div>
           </div>

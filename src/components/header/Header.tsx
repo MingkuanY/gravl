@@ -5,6 +5,7 @@ import styles from "../../styles/header.module.scss";
 import Icon from "../icons/Icon.tsx";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { User } from "@prisma/client";
+import classnames from "classnames";
 
 export default function Header({ user }: { user?: User }) {
   const session = useSession();
@@ -46,9 +47,10 @@ export default function Header({ user }: { user?: User }) {
               />
 
               <div
-                className={`${styles.dropdown} ${
+                className={classnames(
+                  styles.dropdown,
                   userDropdown ? styles.active : styles.inactive
-                }`}
+                )}
               >
                 <ul>
                   <li onClick={() => signOut({ callbackUrl: "/" })}>Log Out</li>

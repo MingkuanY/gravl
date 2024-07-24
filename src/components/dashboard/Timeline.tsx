@@ -4,6 +4,7 @@ import LogTripButton from "./LogTripButton";
 import TripCard from "./TripCard";
 import { findStartAndEndDates, formatDates } from "@/utils/date";
 import { TripWithVisits } from "@/utils/types";
+import classnames from "classnames";
 
 export default function Timeline({
   trips,
@@ -27,7 +28,7 @@ export default function Timeline({
   };
 
   return (
-    <div className={`${styles.timeline} ${!trips.length && styles.empty}`}>
+    <div className={classnames(styles.timeline, !trips.length && styles.empty)}>
       <LogTripButton
         setLogTripPage={setLogTripPage}
         setEditTrip={setEditTrip}
