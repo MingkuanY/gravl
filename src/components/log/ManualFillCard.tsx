@@ -138,7 +138,9 @@ export default function ManualFillCard({
 
   const handleNext = () => {
     if (tripData.end_date === getCurrentDate()) {
-      handleAdd();
+      if (visits.length > 0) {
+        handleAdd();
+      }
     } else {
       changeDate(1);
     }

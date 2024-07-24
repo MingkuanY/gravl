@@ -131,23 +131,12 @@ export const addDays = (input: string, days: number) => {
   return date.toISOString().split("T")[0];
 };
 
-export function getTripDates(trip: TripWithIdAndVisits) {
-  const dates = trip.visits.map((visit) => new Date(visit.date));
-  const startDate = new Date(Math.min(...dates.map((date) => date.getTime())))
-    .toISOString()
-    .split("T")[0];
-  const endDate = new Date(Math.max(...dates.map((date) => date.getTime())))
-    .toISOString()
-    .split("T")[0];
-  return { startDate, endDate };
-}
-
 export function tripsThisYear(trips: TripWithIdAndVisits[]) {
   const currentYear = new Date().getFullYear();
   let tripCount = 0;
 
   trips.forEach((trip) => {
-    const { startDate, endDate } = getTripDates(trip);
+    const { startDate, endDate } = findStartAndEndDates(trip.visits);
     if (
       new Date(startDate).getFullYear() === currentYear ||
       new Date(endDate).getFullYear() === currentYear ||
@@ -164,7 +153,7 @@ export function tripsThisYear(trips: TripWithIdAndVisits[]) {
 export const sortTrips = (trips: TripWithVisits[], chronological?: boolean) => {
   const tripsWithStartDate = trips.map((trip) => ({
     ...trip,
-    startDate: getTripDates(trip).startDate,
+    startDate: findStartAndEndDates(trip.visits).startDate,
   }));
 
   tripsWithStartDate.sort((a, b) => {
@@ -177,6 +166,12 @@ export const sortTrips = (trips: TripWithVisits[], chronological?: boolean) => {
   return tripsWithStartDate;
 };
 
+/**
+ * Finds the date range of the given visits.
+ *
+ * @param visits the visits of the trip
+ * @returns the date of the earliest visit and the date of the latest visit, in "YYYY-MM-DD" format
+ */
 export const findStartAndEndDates = (visits: { date: Date }[]) => {
   const dates = visits.map((visit) => new Date(visit.date).getTime());
   const startDate = new Date(Math.min(...dates));

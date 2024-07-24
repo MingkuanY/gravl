@@ -16,7 +16,7 @@ import { PlaceInput, TripInput, TripWithVisits } from "@/utils/types";
 import NewTrip from "../log/NewTrip";
 import { sortTrips } from "@/utils/date";
 import Onboarding from "../onboarding/Onboarding";
-import { addTripToUser, deleteTrip } from "@/actions/actions";
+import { addTripToUser, deleteTrip, updateTrip } from "@/actions/actions";
 
 export default function Dashboard({
   initialTrips,
@@ -52,21 +52,32 @@ export default function Dashboard({
       })),
     };
 
-    setOptimisticTrips((prev) => [...prev, tempTrip]);
+    let updatedTrip: TripWithVisits;
+    if (editTrip) {
+      // Updating an existing trip
+      setOptimisticTrips((prev) =>
+        prev.map((t) => (t.id === editTrip.id ? tempTrip : t))
+      );
+      updatedTrip = await updateTrip(editTrip.id, trip);
+      setEditTrip(null);
+      setTrips((prev) =>
+        prev.map((t) => (t.id === editTrip.id ? updatedTrip : t))
+      );
+      setOptimisticTrips((prev) =>
+        prev.map((t) => (t.id === editTrip.id ? updatedTrip : t))
+      );
+    } else {
+      // Adding a new trip
+      setOptimisticTrips((prev) => [...prev, tempTrip]);
+      updatedTrip = await addTripToUser(user.id, trip);
+      setTrips((prev) => [...prev, updatedTrip]);
+      setOptimisticTrips((prev) => prev.filter((t) => t.id !== tempID));
+    }
 
-    // adding trip to database
-    const newTrip = await addTripToUser(user.id, trip);
-
-    setOptimisticTrips((prev) => prev.filter((t) => t.id !== tempID));
-    setTrips((prev) => [...prev, newTrip]);
-    setCurrTrip(newTrip.id);
+    setCurrTrip(updatedTrip.id);
   };
 
   const handleAddTrip = (trip: TripInput) => {
-    if (editTrip) {
-      handleDelete(editTrip.id);
-      setEditTrip(null);
-    }
     const tempID = Date.now();
     setCurrTrip(tempID);
     startTransition(() => addTrip(trip, tempID));

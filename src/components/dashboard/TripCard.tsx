@@ -14,7 +14,7 @@ export default function TripCard({
   isClicked: Function;
   editTrip: Function;
 }) {
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     if (e.currentTarget.contains(e.target as Node)) {
       const target = e.target as HTMLElement;
       if (target.closest(`.${styles.editContainer}`)) {
@@ -26,7 +26,7 @@ export default function TripCard({
     }
   };
   return (
-    <button
+    <div
       className={`${styles.container} ${selected && styles.selected}`}
       onClick={handleClick}
     >
@@ -39,6 +39,6 @@ export default function TripCard({
           <Icon type="edit" fill={selected ? "#fff" : "#757575"} />
         </div>
       </button>
-    </button>
+    </div>
   );
 }

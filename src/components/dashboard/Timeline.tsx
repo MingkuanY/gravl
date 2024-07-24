@@ -2,7 +2,7 @@ import styles from "../../styles/timeline.module.scss";
 import Icon from "../icons/Icon";
 import LogTripButton from "./LogTripButton";
 import TripCard from "./TripCard";
-import { formatDates, getTripDates } from "@/utils/date";
+import { findStartAndEndDates, formatDates } from "@/utils/date";
 import { TripWithVisits } from "@/utils/types";
 
 export default function Timeline({
@@ -32,15 +32,24 @@ export default function Timeline({
         setLogTripPage={setLogTripPage}
         setEditTrip={setEditTrip}
       />
+      {trips.length == 0 && (
+        <div className={styles.proTipContainer}>
+          <p className={styles.proTip}>Add Your First Trip</p>
+          <div className={styles.up_arrow}>
+            <Icon type="up_arrow" fill="#319fff" />
+          </div>
+        </div>
+      )}
       <div className={styles.pastTrips}>
         {trips.map((trip, index) => {
-          const tripDates = getTripDates(trip);
+          const tripDates = findStartAndEndDates(trip.visits);
           const previousTrip = index - 1 >= 0 ? trips[index - 1] : null;
           const tripYear = new Date(tripDates.startDate).getFullYear();
           const showYear =
             !previousTrip ||
-            new Date(getTripDates(previousTrip).startDate).getFullYear() !==
-              tripYear;
+            new Date(
+              findStartAndEndDates(previousTrip.visits).startDate
+            ).getFullYear() !== tripYear;
 
           return (
             <div className={styles.tripCheckpoint} key={index}>
