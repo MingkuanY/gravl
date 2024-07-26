@@ -1,0 +1,66 @@
+@use "./mixin" as mixin;
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(36, 41, 47, 0.3);
+  z-index: 1001;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    border-radius: 2rem;
+    background-color: mixin.$white;
+    margin: auto;
+    padding: 4rem 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .warning {
+      font-size: 3rem;
+      font-weight: 500;
+      color: mixin.$dark;
+    }
+
+    .buttons {
+      margin-top: 2rem;
+      display: flex;
+      width: 100%;
+
+      .yes,
+      .no {
+        flex: 1;
+        padding: 1rem;
+        text-align: center;
+        border-radius: 1rem;
+        font-size: 2rem;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .yes {
+        background-color: mixin.$gravl-blue;
+        color: mixin.$white;
+
+        &:hover {
+          background-color: mixin.$darker-blue;
+        }
+      }
+
+      .no {
+        margin-left: 1rem;
+        border: 0.2rem solid mixin.$gravl-blue;
+        color: mixin.$gravl-blue;
+
+        &:hover {
+          background-color: mixin.$very-light-blue;
+        }
+      }
+    }
+  }
+}

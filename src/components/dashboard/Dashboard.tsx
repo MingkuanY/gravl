@@ -17,6 +17,7 @@ import NewTrip from "../log/NewTrip";
 import { sortTrips } from "@/utils/date";
 import Onboarding from "../onboarding/Onboarding";
 import { addTripToUser, deleteTrip, updateTrip } from "@/actions/actions";
+import ConfirmSelection from "../modals/ConfirmSelection";
 
 export default function Dashboard({
   initialTrips,
@@ -113,8 +114,20 @@ export default function Dashboard({
     [optimisticTrips]
   );
 
+  const [confirmDelete, setConfirmDelete] = useState(-1);
+
   return (
     <>
+      {confirmDelete !== -1 && (
+        <ConfirmSelection
+          warningText="Delete this trip?"
+          yesFunction={() => {
+            handleDelete(confirmDelete);
+            setConfirmDelete(-1);
+          }}
+          noFunction={() => setConfirmDelete(-1)}
+        />
+      )}
       {editProfile && (
         <Onboarding
           email={user.email!}
@@ -138,7 +151,7 @@ export default function Dashboard({
             setLogTripPage={setLogTripPage}
             currTrip={currTrip}
             setCurrTrip={setCurrTrip}
-            handleDelete={handleDelete}
+            setConfirmDelete={setConfirmDelete}
             handleEditTrip={handleEditTrip}
             setEditTrip={setEditTrip}
           />

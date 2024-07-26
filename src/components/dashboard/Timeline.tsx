@@ -11,7 +11,7 @@ export default function Timeline({
   setLogTripPage,
   currTrip,
   setCurrTrip,
-  handleDelete,
+  setConfirmDelete,
   handleEditTrip,
   setEditTrip,
 }: {
@@ -19,7 +19,7 @@ export default function Timeline({
   setLogTripPage: Function;
   currTrip: number;
   setCurrTrip: Function;
-  handleDelete: Function;
+  setConfirmDelete: Function;
   handleEditTrip: Function;
   setEditTrip: Function;
 }) {
@@ -65,7 +65,7 @@ export default function Timeline({
                   />
                   <button
                     className={styles.trashContainer}
-                    onClick={() => handleDelete(trip.id)}
+                    onClick={() => setConfirmDelete(trip.id)}
                   >
                     <div className={styles.trash}>
                       <Icon type="trash" fill="#319fff" />

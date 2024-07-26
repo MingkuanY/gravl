@@ -10,6 +10,7 @@ import { addDays, dayOfWeek, formatMDYDate } from "@/utils/date";
 import { PlaceInput } from "@/utils/types";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { addDesignationToLabel } from "@/utils/map";
+import ConfirmSelection from "../modals/ConfirmSelection";
 
 /**
  * Sort visit chronologically by date and order if same date.
@@ -139,7 +140,7 @@ export default function ManualFillCard({
   const handleNext = () => {
     if (tripData.end_date === getCurrentDate()) {
       if (visits.length > 0) {
-        handleAdd();
+        setConfirmFinish(true);
       }
     } else {
       changeDate(1);
@@ -161,8 +162,17 @@ export default function ManualFillCard({
     }
   };
 
+  const [confirmFinish, setConfirmFinish] = useState(false);
+
   return (
     <div className={styles.everything}>
+      {confirmFinish && (
+        <ConfirmSelection
+          warningText="Finish this trip?"
+          yesFunction={handleAdd}
+          noFunction={() => setConfirmFinish(false)}
+        />
+      )}
       <div className={styles.main}>
         <div className={styles.leftSide}>
           <div className={styles.titleContainer}>
