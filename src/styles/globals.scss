@@ -35,15 +35,39 @@
   }
 }
 
-@media (max-width: 740px) {
+@media (max-width: 760px) {
   html {
-    font-size: 5px;
+    font-size: 10px;
   }
 }
 
-@media (max-width: 575px) {
+@media (max-width: 680px) {
   html {
-    font-size: 4px;
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 600px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 520px) {
+  html {
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 440px) {
+  html {
+    font-size: 6px;
+  }
+}
+
+@media (max-width: 380px) {
+  html {
+    font-size: 5px;
   }
 }
 

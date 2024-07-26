@@ -4,13 +4,13 @@
   display: flex;
 
   .main {
-    height: calc(100vh - mixin.$header-height);
+    max-height: calc(100vh - mixin.$header-height);
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 60rem;
     margin-top: -4rem;
-    margin-left: 37.5%;
+    margin-left: 15%;
     transition: transform 0.3s ease;
 
     /* user profile */
@@ -72,6 +72,17 @@
           color: mixin.$faded;
         }
       }
+    }
+  }
+}
+
+@media (max-width: 760px) {
+  .container {
+    flex-direction: column-reverse;
+    align-items: center;
+
+    .main {
+      margin: 0 auto;
     }
   }
 }

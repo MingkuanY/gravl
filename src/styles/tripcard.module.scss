@@ -1,6 +1,7 @@
 @use "./mixin" as mixin;
 
 .container {
+  position: relative;
   display: flex;
   align-items: center;
   width: 26rem;
@@ -12,23 +13,6 @@
   box-shadow: 0 0.3rem 0.3rem 0 rgba(36, 41, 47, 0.25);
   padding: 0.6rem;
   transition: 0.3s;
-
-  &:hover {
-    transform: translateX(0.5rem);
-
-    .right {
-      mask-image: linear-gradient(
-        to right,
-        black 0%,
-        black 17rem,
-        transparent 19rem
-      );
-    }
-
-    .editContainer {
-      display: block;
-    }
-  }
 
   .right {
     margin: 0 1rem;
@@ -93,6 +77,79 @@
 
     .editContainer:hover {
       background-color: mixin.$darker-blue;
+    }
+  }
+
+  &:hover {
+    transform: translateX(0.5rem);
+
+    .right {
+      mask-image: linear-gradient(
+        to right,
+        black 0%,
+        black 17rem,
+        transparent 19rem
+      );
+    }
+
+    .editContainer {
+      display: block;
+    }
+  }
+}
+
+@media (max-width: 760px) {
+  .container {
+    width: 38rem;
+    height: 10rem;
+    border-radius: 5rem;
+    box-shadow: 0 0.5rem 0.5rem 0 rgba(36, 41, 47, 0.25);
+    padding: 1rem;
+
+    .right {
+      margin: 0 1.5rem;
+      mask-image: linear-gradient(
+        to right,
+        black 0%,
+        black 20rem,
+        transparent 26rem
+      );
+
+      .title {
+        font-size: 2.8rem;
+        line-height: 3rem;
+      }
+
+      .locations {
+        margin-top: 0.3rem;
+        font-size: 1.5rem;
+      }
+    }
+
+    .editContainer {
+      display: block;
+      right: 3rem;
+
+      &:hover {
+        background-color: transparent;
+      }
+
+      .edit {
+        height: 3rem;
+      }
+    }
+
+    &:hover {
+      transform: none;
+
+      .right {
+        mask-image: linear-gradient(
+          to right,
+          black 0%,
+          black 20rem,
+          transparent 26rem
+        );
+      }
     }
   }
 }

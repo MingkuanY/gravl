@@ -25,3 +25,19 @@
     font-weight: 400;
   }
 }
+
+@media (max-width: 760px) {
+  .button {
+    width: 50rem;
+    border-radius: 4rem;
+
+    .plus {
+      width: 4rem;
+    }
+
+    p {
+      margin-left: 1rem;
+      font-size: 3rem;
+    }
+  }
+}

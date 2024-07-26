@@ -200,5 +200,16 @@ export function refreshMap(
  */
 export const addDesignationToLabel = (label: string, designation: string) => {
   const parts = label.split(", ");
+  if (designation === "County") {
+    return `${parts[0]}${
+      parts[1] === "AK"
+        ? " Borough"
+        : parts[1] === "LA"
+        ? " Parish"
+        : parts[1] === "DC"
+        ? ""
+        : " " + designation
+    }, ${parts[1]}`;
+  }
   return `${parts[0]} ${designation}, ${parts[1]}`;
 };
