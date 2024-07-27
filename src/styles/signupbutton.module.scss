@@ -31,3 +31,11 @@
     margin-top: 0.3rem;
   }
 }
+
+@media (max-width: 760px) {
+  .button {
+    &:hover {
+      transform: none;
+    }
+  }
+}
