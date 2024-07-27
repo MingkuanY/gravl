@@ -169,22 +169,45 @@
       visibility: hidden;
     }
 
-    .desktopOnlyContainer {
-      width: 50rem;
-      text-align: center;
+    .mobileOnlyContainer {
+      margin-bottom: 1rem;
+      width: 60rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
-      .desktopOnly {
-        font-size: 2.5rem;
+      .desktopOnlyContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .desktopOnly {
+          margin-right: 1.5rem;
+          font-size: 2.5rem;
+          color: mixin.$gravl-blue;
+          font-weight: 400;
+          text-transform: uppercase;
+        }
+
+        .desktop {
+          height: 4rem;
+        }
+      }
+
+      .allTripsBtn {
+        margin-top: 2rem;
+        border: 0.3rem solid mixin.$gravl-blue;
+        border-radius: 3rem;
+        padding: 1rem 2rem;
         color: mixin.$gravl-blue;
-        font-weight: 400;
-        text-transform: uppercase;
+        font-weight: 500;
       }
     }
 
     .pastTrips {
       overflow-y: scroll;
       margin-top: 2rem;
-      transform: translateX(12rem);
+      transform: translateX(18rem);
 
       .tripCheckpoint {
         padding: 1.2rem 0 1.2rem;

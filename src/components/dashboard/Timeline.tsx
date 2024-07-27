@@ -27,14 +27,48 @@ export default function Timeline({
   const isMobile = useScreenWidth();
 
   const handleClick = (tripID: number) => {
-    setCurrTrip(currTrip !== tripID ? tripID : -1);
+    if (isMobile && window.scrollY !== 0) {
+      // if mobile and the user is not already at the top of the screen
+      const handleScroll = () => {
+        if (window.scrollY === 0) {
+          setCurrTrip(currTrip !== tripID ? tripID : -1);
+          window.removeEventListener("scroll", handleScroll);
+        }
+      };
+
+      window.addEventListener("scroll", handleScroll);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      // if the user on desktop or is not currently at the top of screen
+      setCurrTrip(currTrip !== tripID ? tripID : -1);
+    }
   };
 
   return (
     <div className={classnames(styles.timeline, !trips.length && styles.empty)}>
       {isMobile ? (
-        <div className={styles.desktopOnlyContainer}>
-          <p className={styles.desktopOnly}>Log and Edit Trips on Desktop</p>
+        <div className={styles.mobileOnlyContainer}>
+          <div className={styles.desktopOnlyContainer}>
+            {trips.length === 0 ? (
+              <p className={styles.desktopOnly}>
+                Log Your First Trip on Desktop
+              </p>
+            ) : (
+              <p className={styles.desktopOnly}>Log a Trip on Desktop</p>
+            )}
+            <div className={styles.desktop}>
+              <Icon type="desktop" fill="#319fff" />
+            </div>
+          </div>
+
+          {trips.length > 0 && (
+            <button
+              className={styles.allTripsBtn}
+              onClick={() => setCurrTrip(-1)}
+            >
+              See All Trips
+            </button>
+          )}
         </div>
       ) : (
         <LogTripButton
