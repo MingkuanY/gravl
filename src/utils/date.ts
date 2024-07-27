@@ -150,6 +150,13 @@ export function tripsThisYear(trips: TripWithIdAndVisits[]) {
   return tripCount;
 }
 
+/**
+ * Sorts the given trips in chronological or reverse chronological order by trip. Visits within each trip remain in same order.
+ *
+ * @param trips the trips to sort
+ * @param chronological whether to sort in chronological or reverse chronological by trip (for the timeline)
+ * @returns sorted trips
+ */
 export const sortTrips = (trips: TripWithVisits[], chronological?: boolean) => {
   const tripsWithStartDate = trips.map((trip) => ({
     ...trip,

@@ -18,7 +18,7 @@ export default function Timeline({
 }: {
   trips: TripWithVisits[];
   setLogTripPage: Function;
-  currTrip: number;
+  currTrip: number[];
   setCurrTrip: Function;
   setConfirmDelete: Function;
   handleEditTrip: Function;
@@ -26,12 +26,17 @@ export default function Timeline({
 }) {
   const isMobile = useScreenWidth();
 
-  const handleClick = (tripID: number) => {
+  /**
+   * Called when the user clicks on a trip.
+   *
+   * @param tripID the trip the user clicks on
+   */
+  const handleClick = (tripID: number, event: React.MouseEvent) => {
     if (isMobile && window.scrollY !== 0) {
       // if mobile and the user is not already at the top of the screen
       const handleScroll = () => {
         if (window.scrollY === 0) {
-          setCurrTrip(currTrip !== tripID ? tripID : -1);
+          processClick(tripID, event);
           window.removeEventListener("scroll", handleScroll);
         }
       };
@@ -40,7 +45,42 @@ export default function Timeline({
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       // if the user on desktop or is not currently at the top of screen
-      setCurrTrip(currTrip !== tripID ? tripID : -1);
+      processClick(tripID, event);
+    }
+  };
+
+  const processClick = (tripID: number, event: React.MouseEvent) => {
+    const isCommandClick = event.metaKey || event.ctrlKey;
+    const isShiftClick = event.shiftKey;
+    if (isShiftClick && currTrip.length > 0) {
+      // Select range
+      const lastSelectedIndex = trips.findIndex(
+        (trip) => trip.id === currTrip[currTrip.length - 1]
+      );
+      const clickedIndex = trips.findIndex((trip) => trip.id === tripID);
+
+      if (lastSelectedIndex !== -1 && clickedIndex !== -1) {
+        const start = Math.min(lastSelectedIndex, clickedIndex);
+        const end = Math.max(lastSelectedIndex, clickedIndex);
+        const newSelections = trips
+          .slice(start, end + 1)
+          .map((trip) => trip.id);
+        setCurrTrip((prev: number[]) =>
+          Array.from(new Set([...prev, ...newSelections]))
+        );
+      }
+    } else if (isCommandClick) {
+      // Toggle selection
+      setCurrTrip((prev: number[]) =>
+        prev.includes(tripID)
+          ? prev.filter((id) => id !== tripID)
+          : [...prev, tripID]
+      );
+    } else {
+      // Single selection
+      setCurrTrip((prev: number[]) =>
+        prev.length === 1 && prev.includes(tripID) ? [] : [tripID]
+      );
     }
   };
 
@@ -64,7 +104,7 @@ export default function Timeline({
           {trips.length > 0 && (
             <button
               className={styles.allTripsBtn}
-              onClick={() => setCurrTrip(-1)}
+              onClick={() => setCurrTrip([])}
             >
               See All Trips
             </button>
@@ -102,8 +142,11 @@ export default function Timeline({
                   <TripCard
                     name={trip.name}
                     desc={trip.description}
-                    selected={currTrip === trip.id}
-                    isClicked={() => handleClick(trip.id)}
+                    selected={currTrip.includes(trip.id)}
+                    isClicked={(event: React.MouseEvent) => {
+                      console.log("event: ", event);
+                      handleClick(trip.id, event);
+                    }}
                     editTrip={() => handleEditTrip(trip.id)}
                   />
                   {!isMobile && (

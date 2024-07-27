@@ -35,7 +35,7 @@ export default function Dashboard({
   const [, startTransition] = useTransition();
 
   const [logTripPage, setLogTripPage] = useState(-1); // Page of logging a trip
-  const [currTrip, setCurrTrip] = useState(-1); // Current trip displayed
+  const [currTrip, setCurrTrip] = useState<number[]>([]); // Current trip displayed
   const [tripsForMaps, setTripsForMaps] = useState<TripWithVisits[]>([]);
 
   const addTrip = async (trip: TripInput, tempID: number) => {
@@ -75,17 +75,17 @@ export default function Dashboard({
       setOptimisticTrips((prev) => prev.filter((t) => t.id !== tempID));
     }
 
-    setCurrTrip(updatedTrip.id);
+    setCurrTrip([updatedTrip.id]);
   };
 
   const handleAddTrip = (trip: TripInput) => {
     const tempID = Date.now();
-    setCurrTrip(tempID);
+    setCurrTrip([tempID]);
     startTransition(() => addTrip(trip, tempID));
   };
 
   const handleDelete = async (tripID: number) => {
-    if (currTrip === tripID) setCurrTrip(-1);
+    setCurrTrip((prev) => prev.filter((id) => id !== tripID));
     setTrips((prev) => prev.filter((trip) => trip.id !== tripID));
     await deleteTrip(tripID);
   };
@@ -101,11 +101,11 @@ export default function Dashboard({
 
   useEffect(() => {
     const sortedTripsChronological = sortTrips(trips, true);
-    if (currTrip === -1) {
+    if (currTrip.length === 0) {
       setTripsForMaps(sortedTripsChronological);
     } else {
-      const currentTrip = trips.find((trip) => trip.id === currTrip);
-      setTripsForMaps(currentTrip ? [currentTrip] : []);
+      const selectedTrips = trips.filter((trip) => currTrip.includes(trip.id));
+      setTripsForMaps(sortTrips(selectedTrips, true));
     }
   }, [currTrip, trips]);
 

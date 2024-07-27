@@ -25,7 +25,7 @@ export default function TripCard({
         e.stopPropagation();
         editTrip();
       } else {
-        isClicked();
+        isClicked(e);
       }
     }
   };
