@@ -32,7 +32,11 @@ export default function TripCard({
 
   return (
     <div
-      className={classnames(styles.container, selected && styles.selected)}
+      className={classnames(
+        styles.container,
+        selected && styles.selected,
+        "trip-card"
+      )}
       onClick={handleClick}
     >
       <div className={styles.right}>

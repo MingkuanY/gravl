@@ -49,6 +49,12 @@ export default function Timeline({
     }
   };
 
+  /**
+   * Determines whether the user made a single click, cmd + click, or shift + click and acts accordingly.
+   *
+   * @param tripID the trip the user clicks on
+   * @param event the type of click
+   */
   const processClick = (tripID: number, event: React.MouseEvent) => {
     const isCommandClick = event.metaKey || event.ctrlKey;
     const isShiftClick = event.shiftKey;
@@ -100,15 +106,6 @@ export default function Timeline({
               <Icon type="desktop" fill="#319fff" />
             </div>
           </div>
-
-          {trips.length > 0 && (
-            <button
-              className={styles.allTripsBtn}
-              onClick={() => setCurrTrip([])}
-            >
-              See All Trips
-            </button>
-          )}
         </div>
       ) : (
         <LogTripButton

@@ -116,6 +116,25 @@ export default function Dashboard({
 
   const [confirmDelete, setConfirmDelete] = useState(-1);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const tripCards = Array.from(document.querySelectorAll(".trip-card"));
+      if (
+        !tripCards.some((tripCard) =>
+          tripCard.contains(event.target as Node)
+        ) &&
+        currTrip.length > 0
+      ) {
+        setCurrTrip([]);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [currTrip]);
+
   return (
     <>
       {confirmDelete !== -1 && (
