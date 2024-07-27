@@ -111,8 +111,8 @@
       mask-image: linear-gradient(
         to right,
         black 0%,
-        black 20rem,
-        transparent 26rem
+        black 26rem,
+        transparent 32rem
       );
 
       .title {
@@ -126,19 +126,6 @@
       }
     }
 
-    .editContainer {
-      display: block;
-      right: 3rem;
-
-      &:hover {
-        background-color: transparent;
-      }
-
-      .edit {
-        height: 3rem;
-      }
-    }
-
     &:hover {
       transform: none;
 
@@ -146,8 +133,8 @@
         mask-image: linear-gradient(
           to right,
           black 0%,
-          black 20rem,
-          transparent 26rem
+          black 26rem,
+          transparent 32rem
         );
       }
     }

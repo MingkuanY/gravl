@@ -1,3 +1,4 @@
+import { useScreenWidth } from "@/utils/hooks";
 import styles from "../../styles/timeline.module.scss";
 import Icon from "../icons/Icon";
 import LogTripButton from "./LogTripButton";
@@ -23,17 +24,25 @@ export default function Timeline({
   handleEditTrip: Function;
   setEditTrip: Function;
 }) {
+  const isMobile = useScreenWidth();
+
   const handleClick = (tripID: number) => {
     setCurrTrip(currTrip !== tripID ? tripID : -1);
   };
 
   return (
     <div className={classnames(styles.timeline, !trips.length && styles.empty)}>
-      <LogTripButton
-        setLogTripPage={setLogTripPage}
-        setEditTrip={setEditTrip}
-      />
-      {trips.length == 0 && (
+      {isMobile ? (
+        <div className={styles.desktopOnlyContainer}>
+          <p className={styles.desktopOnly}>Log and Edit Trips on Desktop</p>
+        </div>
+      ) : (
+        <LogTripButton
+          setLogTripPage={setLogTripPage}
+          setEditTrip={setEditTrip}
+        />
+      )}
+      {trips.length == 0 && !isMobile && (
         <div className={styles.proTipContainer}>
           <p className={styles.proTip}>Add Your First Trip</p>
           <div className={styles.up_arrow}>
@@ -63,14 +72,16 @@ export default function Timeline({
                     isClicked={() => handleClick(trip.id)}
                     editTrip={() => handleEditTrip(trip.id)}
                   />
-                  <button
-                    className={styles.trashContainer}
-                    onClick={() => setConfirmDelete(trip.id)}
-                  >
-                    <div className={styles.trash}>
-                      <Icon type="trash" fill="#319fff" />
-                    </div>
-                  </button>
+                  {!isMobile && (
+                    <button
+                      className={styles.trashContainer}
+                      onClick={() => setConfirmDelete(trip.id)}
+                    >
+                      <div className={styles.trash}>
+                        <Icon type="trash" fill="#319fff" />
+                      </div>
+                    </button>
+                  )}
                 </div>
                 {showYear && <p className={styles.year}>{tripYear}</p>}
                 <p className={styles.dates}>

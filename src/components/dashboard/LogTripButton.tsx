@@ -14,6 +14,7 @@ export default function LogTripButton({
     setEditTrip(null);
     setLogTripPage(0);
   };
+
   return (
     <button onClick={handleClick} className={styles.button}>
       <div className={styles.plus}>
