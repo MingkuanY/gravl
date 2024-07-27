@@ -14,6 +14,7 @@ import {
   refreshMap,
 } from "../../utils/map.ts";
 import { MapProps, PlaceInput } from "@/utils/types.ts";
+import { useScreenWidth } from "@/utils/hooks.ts";
 
 export const totalCounties = 3413;
 
@@ -29,6 +30,8 @@ export default function Counties({
   setVisits,
   currentDate,
 }: MapProps) {
+  const isMobile = useScreenWidth();
+
   const livedInColor = "#319fff";
   const startColor = "#319fff";
   const endColor = "#319fff";
@@ -112,7 +115,7 @@ export default function Counties({
 
   return (
     <>
-      {hoverInfo.label && (
+      {hoverInfo.label && !isMobile && (
         <div
           className={styles.hoverLabel}
           style={{
