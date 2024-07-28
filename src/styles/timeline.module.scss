@@ -180,9 +180,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        max-width: 100%;
 
         .desktopOnly {
-          margin-right: 1.5rem;
           font-size: 2.5rem;
           color: mixin.$gravl-blue;
           font-weight: 400;
@@ -192,6 +192,7 @@
         }
 
         .desktop {
+          margin-left: 1.5rem;
           height: 4rem;
         }
       }
