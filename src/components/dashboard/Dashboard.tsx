@@ -116,12 +116,19 @@ export default function Dashboard({
 
   const [confirmDelete, setConfirmDelete] = useState(-1);
 
+  // Clicking anywhere outside of a trip card or a progress circle will display all trips
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const tripCards = Array.from(document.querySelectorAll(".trip-card"));
+      const progressCircles = Array.from(
+        document.querySelectorAll(".progress-circle")
+      );
       if (
         !tripCards.some((tripCard) =>
           tripCard.contains(event.target as Node)
+        ) &&
+        !progressCircles.some((progressCircle) =>
+          progressCircle.contains(event.target as Node)
         ) &&
         currTrip.length > 0
       ) {

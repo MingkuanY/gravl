@@ -96,11 +96,11 @@ export default function Timeline({
         <div className={styles.mobileOnlyContainer}>
           <div className={styles.desktopOnlyContainer}>
             {trips.length === 0 ? (
-              <p className={styles.desktopOnly}>
+              <div className={styles.desktopOnly}>
                 Log Your First Trip on Desktop
-              </p>
+              </div>
             ) : (
-              <p className={styles.desktopOnly}>Log a Trip on Desktop</p>
+              <div className={styles.desktopOnly}>Log a Trip on Desktop</div>
             )}
             <div className={styles.desktop}>
               <Icon type="desktop" fill="#319fff" />

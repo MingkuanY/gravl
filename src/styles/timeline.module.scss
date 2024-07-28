@@ -180,7 +180,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        text-align: center;
 
         .desktopOnly {
           margin-right: 1.5rem;
@@ -189,6 +188,7 @@
           font-weight: 400;
           text-transform: uppercase;
           white-space: nowrap;
+          text-align: end;
         }
 
         .desktop {

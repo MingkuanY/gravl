@@ -129,7 +129,8 @@ export default function MapLoader({
             <div
               className={classnames(
                 styles.progressbarBackground,
-                currentMap === index && styles.selected
+                currentMap === index && styles.selected,
+                "progress-circle"
               )}
               onClick={() => statClicked(index)}
             ></div>
