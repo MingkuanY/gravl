@@ -18,6 +18,8 @@ import { sortTrips } from "@/utils/date";
 import Onboarding from "../onboarding/Onboarding";
 import { addTripToUser, deleteTrip, updateTrip } from "@/actions/actions";
 import ConfirmSelection from "../modals/ConfirmSelection";
+import FriendsBar from "./FriendsBar";
+import { useScreenWidth } from "@/utils/hooks";
 
 export default function Dashboard({
   initialTrips,
@@ -28,6 +30,8 @@ export default function Dashboard({
   user: any;
   places: PlaceInput[];
 }) {
+  const isMobile = useScreenWidth();
+
   const [editProfile, setEditProfile] = useState(false);
 
   const [trips, setTrips] = useState(initialTrips);
@@ -172,6 +176,7 @@ export default function Dashboard({
       )}
       {logTripPage === -1 && (
         <div className={styles.container}>
+          {!isMobile && <FriendsBar />}
           <Timeline
             trips={sortedTrips}
             setLogTripPage={setLogTripPage}

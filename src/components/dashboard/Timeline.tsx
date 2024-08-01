@@ -140,10 +140,9 @@ export default function Timeline({
                     name={trip.name}
                     desc={trip.description}
                     selected={currTrip.includes(trip.id)}
-                    isClicked={(event: React.MouseEvent) => {
-                      console.log("event: ", event);
-                      handleClick(trip.id, event);
-                    }}
+                    isClicked={(event: React.MouseEvent) =>
+                      handleClick(trip.id, event)
+                    }
                     editTrip={() => handleEditTrip(trip.id)}
                   />
                   {!isMobile && (
