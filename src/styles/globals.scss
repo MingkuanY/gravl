@@ -13,31 +13,45 @@
   }
 }
 
+/* font sizes */
+
 @media (max-width: 2000px), (max-height: 1100px) {
   html {
     font-size: 12px;
   }
 }
 
-@media (max-width: 1480px), (max-height: 950px) {
+@media (max-width: 1500px), (max-height: 950px) {
   html {
     font-size: 11px;
   }
 }
 
-@media (max-width: 1380px), (max-height: 900px) {
+@media (max-width: 1400px), (max-height: 900px) {
   html {
     font-size: 10px;
   }
 }
 
-@media (max-width: 1124px), (max-height: 800px) {
+@media (max-width: 1300px), (max-height: 800px) {
+  html {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 1150px), (max-height: 800px) {
   html {
     font-size: 8px;
   }
 }
 
-@media (max-width: 868px), (max-height: 700px) {
+@media (max-width: 1000px), (max-height: 700px) {
+  html {
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 900px), (max-height: 700px) {
   html {
     font-size: 6px;
   }

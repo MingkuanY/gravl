@@ -8,7 +8,7 @@ export const useScreenWidth = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const handleResize = () => {
-        setIsMobile(window.innerWidth < 760);
+        setIsMobile(window.innerWidth <= 760);
       };
 
       handleResize();
