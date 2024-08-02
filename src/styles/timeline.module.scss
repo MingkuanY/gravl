@@ -176,22 +176,29 @@
       flex-direction: column;
       align-items: center;
 
+      .yourTrips {
+        font-size: 4.5rem;
+        text-transform: uppercase;
+        color: mixin.$gravl-blue;
+      }
+
       .desktopOnlyContainer {
+        margin-top: 0.5rem;
         display: flex;
         justify-content: center;
         align-items: center;
 
         .desktopOnly {
-          margin-right: 1.5rem;
-          font-size: 2.5rem;
-          color: mixin.$gravl-blue;
+          margin-right: 1rem;
+          font-size: 1.5rem;
+          color: mixin.$dark;
           font-weight: 400;
           text-transform: uppercase;
         }
 
         .desktop {
-          height: 4rem;
-          width: 4rem;
+          height: 2rem;
+          width: 2rem;
         }
       }
     }

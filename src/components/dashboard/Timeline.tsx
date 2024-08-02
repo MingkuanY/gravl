@@ -94,6 +94,7 @@ export default function Timeline({
     <div className={classnames(styles.timeline, !trips.length && styles.empty)}>
       {isMobile ? (
         <div className={styles.mobileOnlyContainer}>
+          <p className={styles.yourTrips}>Your Trips</p>
           <div className={styles.desktopOnlyContainer}>
             {trips.length === 0 ? (
               <div className={styles.desktopOnly}>
@@ -103,7 +104,7 @@ export default function Timeline({
               <div className={styles.desktopOnly}>Log a Trip on Desktop</div>
             )}
             <div className={styles.desktop}>
-              <Icon type="desktop" fill="#319fff" />
+              <Icon type="desktop" fill="#24292f" />
             </div>
           </div>
         </div>
