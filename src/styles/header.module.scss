@@ -94,37 +94,25 @@
 
       .dropdown {
         position: absolute;
-        top: 5rem;
-        right: 0;
+        right: 5rem;
+        top: 0;
         background-color: mixin.$very-light;
         border-radius: 1rem;
-        padding: 1rem 2rem;
+        padding: 0.4rem 2rem;
         width: 10rem;
         box-shadow: 0.2rem 0.3rem 0.3rem 0 rgba(36, 41, 47, 0.25);
         z-index: 100;
 
-        &::before {
-          content: "";
-          position: absolute;
-          top: -0.5rem;
-          right: 1.25rem;
-          height: 1rem;
-          aspect-ratio: 1;
-          background-color: mixin.$very-light;
-          transform: rotate(45deg);
-          z-index: -1;
-        }
-
         &.active {
           opacity: 1;
           visibility: visible;
-          transform: translateY(0);
+          transform: translateX(0);
           transition: 0.3s ease;
         }
         &.inactive {
           opacity: 0;
           visibility: hidden;
-          transform: translateY(-1rem);
+          transform: translateX(1rem);
           transition: 0.3s ease;
         }
 
