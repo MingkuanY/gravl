@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../../styles/friendsbar.module.scss";
 import Icon from "../icons/Icon";
+import FriendModal from "../modals/FriendModal";
 
 export default function FriendsBar() {
   const mock_friends: any[] = [
@@ -26,45 +27,42 @@ export default function FriendsBar() {
     // },
   ];
 
-  const [addFriendData, setAddFriendData] = useState("");
-  const [searchFriendData, setSearchFriendData] = useState("");
+  const [addFriendModal, setAddFriendModal] = useState(false);
+  const [searchFriendModal, setSearchFriendModal] = useState(false);
 
-  useEffect(() => {
-    const handleKeyDown = async (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
-        if (addFriendData) {
-          console.log("Send friend request to ", addFriendData);
-          setAddFriendData("");
-        }
-        if (searchFriendData) {
-          console.log("Search for ", searchFriendData);
-          setSearchFriendData("");
-        }
-      }
-    };
+  const sendFriendRequest = (username: string) => {
+    console.log(`Sending friend request to ${username}...`);
+    setAddFriendModal(false);
+  };
 
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [addFriendData, searchFriendData]);
+  const findFriend = (username: string) => {
+    console.log(`Finding ${username}...`);
+    setSearchFriendModal(false);
+  };
 
   return (
     <div className={styles.container}>
+      {addFriendModal && (
+        <FriendModal
+          prompt="Send a Friend Request"
+          inputPlaceholder="Enter a username..."
+          submitCallback={sendFriendRequest}
+        />
+      )}
+      {searchFriendModal && (
+        <FriendModal
+          prompt="Find a Friend"
+          inputPlaceholder="Enter a username..."
+          submitCallback={findFriend}
+        />
+      )}
       <div className={styles.btnSection}>
-        <button className={styles.addFriendBtn}>
-          <input
-            type="text"
-            value={addFriendData}
-            placeholder="Enter username..."
-            onChange={(e) => setAddFriendData(e.target.value)}
-          />
+        <button
+          className={styles.addFriendBtn}
+          onClick={() => setAddFriendModal(true)}
+        >
           <div className={styles.plus}>
             <Icon type="plus" fill="#fff" />
-          </div>
-          <div className={styles.return_arrow}>
-            <Icon type="return_arrow" fill="#319fff" />
           </div>
           {mock_friends.length === 0 && (
             <div className={styles.noFriendsContainer}>
@@ -75,18 +73,12 @@ export default function FriendsBar() {
             </div>
           )}
         </button>
-        <button className={styles.searchFriendBtn}>
-          <input
-            type="text"
-            value={searchFriendData}
-            placeholder="Find friend..."
-            onChange={(e) => setSearchFriendData(e.target.value)}
-          />
+        <button
+          className={styles.searchFriendBtn}
+          onClick={() => setSearchFriendModal(true)}
+        >
           <div className={styles.search}>
             <Icon type="search" fill="#319fff" />
-          </div>
-          <div className={styles.return_arrow}>
-            <Icon type="return_arrow" fill="#319fff" />
           </div>
         </button>
       </div>

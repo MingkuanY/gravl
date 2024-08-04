@@ -1,0 +1,82 @@
+@use "./mixin" as mixin;
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(36, 41, 47, 0.3);
+  z-index: 1001;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    border-radius: 2rem;
+    background-color: mixin.$white;
+    margin: auto;
+    padding: 4rem 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .prompt {
+      font-size: 3rem;
+      font-weight: 500;
+      color: mixin.$dark;
+    }
+
+    .inputContainer {
+      margin-top: 2rem;
+      display: flex;
+      width: 50rem;
+      position: relative;
+
+      .returnContainer {
+        position: absolute;
+        top: 1.2rem;
+        right: 1rem;
+        display: flex;
+        align-items: center;
+
+        p {
+          font-size: 2rem;
+          color: mixin.$gravl-blue;
+          font-weight: 100;
+        }
+
+        .return_arrow {
+          margin-left: 0.5rem;
+          width: 2.5rem;
+        }
+      }
+
+      input {
+        text-align: center;
+        color: mixin.$gravl-blue;
+        font-size: 2rem;
+        font-weight: 400;
+        padding: 1rem 10rem;
+        border: 0.15rem solid mixin.$gravl-blue;
+        border-radius: 1rem;
+        flex: auto;
+        resize: none;
+        font-family: "Josefin Sans", sans-serif;
+
+        &[type="file"] {
+          display: none;
+        }
+
+        &:focus {
+          outline: none;
+        }
+
+        &::placeholder {
+          color: mixin.$fade;
+          font-weight: 300;
+        }
+      }
+    }
+  }
+}

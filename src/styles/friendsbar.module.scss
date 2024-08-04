@@ -10,7 +10,6 @@
 
   .btnSection {
     border-top: 0.1rem solid mixin.$light;
-    width: 3.5rem;
     padding-top: 0.7rem;
     display: flex;
     flex-direction: column;
@@ -19,74 +18,20 @@
     .addFriendBtn,
     .searchFriendBtn {
       position: relative;
-      transition: 0.8s;
+      transition: 0.3s;
       width: 3.5rem;
-      height: 3.5rem;
-      border-radius: 1.75rem;
-
-      input {
-        display: none;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 0;
-        width: 100%;
-        height: 100%;
-        outline: 0;
-        border: 0;
-        font-size: 1.5rem;
-        color: mixin.$gravl-blue;
-        border-radius: 1.75rem;
-        border: 0.2rem solid mixin.$gravl-blue;
-        padding: 0 1rem;
-        background-color: mixin.$white;
-
-        &::placeholder {
-          font-size: 1.5rem;
-          color: mixin.$gravl-blue;
-          font-weight: 300;
-        }
-      }
-
-      &:hover {
-        width: 18rem;
-
-        input {
-          display: block;
-        }
-
-        .plus,
-        .search {
-          display: none;
-        }
-
-        .return_arrow {
-          display: block;
-        }
-      }
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
     }
 
     .plus,
     .search {
-      display: block;
       width: 2rem;
       height: 2rem;
-      position: absolute;
-      top: 50%;
-      right: 0.75rem;
-      transform: translateY(-50%);
-    }
-
-    .return_arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      right: 1rem;
-      display: none;
-      width: 2.5rem;
-      pointer-events: none;
-      height: 2rem;
-      background-color: mixin.$white;
     }
 
     .addFriendBtn {
@@ -95,8 +40,6 @@
 
       .noFriendsContainer {
         z-index: -1;
-        transition: 0.5s;
-        opacity: 1;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -121,13 +64,17 @@
         }
       }
 
-      &:hover .noFriendsContainer {
-        opacity: 0;
+      &:hover {
+        background-color: mixin.$darker-blue;
       }
     }
 
     .searchFriendBtn {
       background-color: mixin.$almost-very-light;
+
+      &:hover {
+        background-color: mixin.$lighter;
+      }
     }
   }
 
