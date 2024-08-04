@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "../../styles/friendsbar.module.scss";
 import Icon from "../icons/Icon";
 import FriendModal from "../modals/FriendModal";
@@ -46,13 +46,15 @@ export default function FriendsBar() {
         <FriendModal
           prompt="Send a Friend Request"
           inputPlaceholder="Enter a username..."
+          setClose={() => setAddFriendModal(false)}
           submitCallback={sendFriendRequest}
         />
       )}
       {searchFriendModal && (
         <FriendModal
-          prompt="Find a Friend"
+          prompt="Search for a Friend"
           inputPlaceholder="Enter a username..."
+          setClose={() => setSearchFriendModal(false)}
           submitCallback={findFriend}
         />
       )}

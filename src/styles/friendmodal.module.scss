@@ -13,6 +13,7 @@
   align-items: center;
 
   .container {
+    position: relative;
     border-radius: 2rem;
     background-color: mixin.$white;
     margin: auto;
