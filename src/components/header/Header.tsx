@@ -6,9 +6,15 @@ import Icon from "../icons/Icon.tsx";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { User } from "@prisma/client";
 import classnames from "classnames";
+import { useRouter } from "next/navigation";
 
 export default function Header({ user }: { user?: User }) {
+  // HARDCODED NOTIFICATION COUNT
+  const [notifCount, setNotifCount] = useState(2);
+
   const session = useSession();
+
+  const router = useRouter();
 
   // dropdown menu logic
   const [userDropdown, setUserDropdown] = useState(false);
@@ -38,6 +44,15 @@ export default function Header({ user }: { user?: User }) {
       <div className={styles.headerRightContainer}>
         {session.status === "authenticated" && (
           <>
+            <div className={styles.notifContainer}>
+              <div className={styles.notif}>
+                <Icon type="notification" fill="#319fff" />
+              </div>
+              {notifCount > 0 && (
+                <div className={styles.notifCount}>{notifCount}</div>
+              )}
+            </div>
+
             <div className={styles.pfpContainer} ref={dropdownRef}>
               <img
                 src={user?.image as string}
@@ -53,6 +68,9 @@ export default function Header({ user }: { user?: User }) {
                 )}
               >
                 <ul>
+                  <li onClick={() => router.push(`/${user!.username}`)}>
+                    Profile
+                  </li>
                   <li onClick={() => signOut({ callbackUrl: "/" })}>Log Out</li>
                 </ul>
               </div>

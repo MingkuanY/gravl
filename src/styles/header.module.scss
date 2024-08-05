@@ -66,18 +66,29 @@
 
     /* if logged in */
 
-    .pfpContainer {
+    .notifContainer {
+      margin-right: 1rem;
       position: relative;
+      width: 3.5rem;
+      aspect-ratio: 1;
+      background-color: mixin.$almost-very-light;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.3s;
       cursor: pointer;
 
-      .pfp {
-        width: 3.5rem;
-        height: 3.5rem;
-        border-radius: 50%;
-        object-fit: cover;
+      &:hover {
+        background-color: mixin.$lighter;
       }
 
-      .notifContainer {
+      .notif {
+        height: 2rem;
+        aspect-ratio: 1;
+      }
+
+      .notifCount {
         position: absolute;
         top: -0.1rem;
         right: -0.1rem;
@@ -91,14 +102,26 @@
         color: mixin.$white;
         border: 0.2rem solid mixin.$white;
       }
+    }
+
+    .pfpContainer {
+      position: relative;
+      cursor: pointer;
+
+      .pfp {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        object-fit: cover;
+      }
 
       .dropdown {
         position: absolute;
-        right: 5rem;
-        top: 0;
+        top: 4rem;
+        right: 0;
         background-color: mixin.$very-light;
         border-radius: 1rem;
-        padding: 0.4rem 2rem;
+        padding: 1rem 2rem;
         width: 10rem;
         box-shadow: 0.2rem 0.3rem 0.3rem 0 rgba(36, 41, 47, 0.25);
         z-index: 100;
@@ -106,13 +129,13 @@
         &.active {
           opacity: 1;
           visibility: visible;
-          transform: translateX(0);
+          transform: translateY(0);
           transition: 0.3s ease;
         }
         &.inactive {
           opacity: 0;
           visibility: hidden;
-          transform: translateX(1rem);
+          transform: translateY(-1rem);
           transition: 0.3s ease;
         }
 
@@ -123,14 +146,11 @@
             font-size: 1.5rem;
             font-weight: 300;
             transition: 0.3s;
+            text-decoration: none;
 
             &:last-child {
               color: mixin.$dark;
               font-weight: 400;
-            }
-
-            &:hover {
-              color: mixin.$dark;
             }
           }
         }
