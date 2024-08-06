@@ -520,7 +520,7 @@ export default function Icon({ type, fill }: { type: string; fill: string }) {
     case "notification":
       return (
         <svg
-          width="100$"
+          width="100%"
           height="100%"
           viewBox="0 0 24 24"
           fill="none"

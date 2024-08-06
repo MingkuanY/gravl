@@ -9,8 +9,44 @@ import classnames from "classnames";
 import { useRouter } from "next/navigation";
 
 export default function Header({ user }: { user?: User }) {
-  // HARDCODED NOTIFICATION COUNT
-  const [notifCount, setNotifCount] = useState(2);
+  // HARDCODED NOTIFICATIONS
+  const [friendRequests, setFriendRequests] = useState([
+    {
+      userID: "alex",
+      username: "alexkranias",
+      time: "2024-08-04",
+    },
+    {
+      userID: "sam",
+      username: "sparkerly",
+      time: "2024-08-05",
+    },
+    {
+      userID: "ayush",
+      username: "ayush",
+      time: "2024-08-05",
+    },
+    {
+      userID: "colin",
+      username: "obamna",
+      time: "2024-08-05",
+    },
+    {
+      userID: "ally",
+      username: "nosilla",
+      time: "2024-08-05",
+    },
+    {
+      userID: "tanush",
+      username: "tanush",
+      time: "2024-08-05",
+    },
+    {
+      userID: "krish",
+      username: "krish",
+      time: "2024-08-05",
+    },
+  ]);
 
   const session = useSession();
 
@@ -18,11 +54,25 @@ export default function Header({ user }: { user?: User }) {
 
   // dropdown menu logic
   const [userDropdown, setUserDropdown] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const pfpBtnRef = useRef<HTMLDivElement>(null);
+
+  const [notifDropdown, setNotifDropdown] = useState(false);
+  const notifBtnRef = useRef<HTMLDivElement>(null);
+  const notifDropdownRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (!dropdownRef.current?.contains(e.target as Node)) {
+      if (!pfpBtnRef.current?.contains(e.target as Node)) {
         setUserDropdown(false);
+      }
+      if (notifBtnRef.current?.contains(e.target as Node)) {
+        if (!notifDropdownRef.current?.contains(e.target as Node)) {
+          // Clicking on the notif button
+          setNotifDropdown(!notifDropdown);
+        }
+      } else {
+        // Clicking outside of both notif button and dropdown
+        setNotifDropdown(false);
       }
     };
     document.addEventListener("mousedown", handler);
@@ -31,6 +81,16 @@ export default function Header({ user }: { user?: User }) {
       document.removeEventListener("mousedown", handler);
     };
   });
+
+  const handleRequest = (friendUserID: string, response: boolean) => {
+    if (response) {
+      // Accept friend request
+      console.log(`Accept ${friendUserID} as friend.`);
+    } else {
+      // Decline friend request
+      console.log(`Decline ${friendUserID} as friend.`);
+    }
+  };
 
   return (
     <div className={styles.headerContainer}>
@@ -44,16 +104,56 @@ export default function Header({ user }: { user?: User }) {
       <div className={styles.headerRightContainer}>
         {session.status === "authenticated" && (
           <>
-            <div className={styles.notifContainer}>
+            <div className={styles.notifContainer} ref={notifBtnRef}>
               <div className={styles.notif}>
                 <Icon type="notification" fill="#319fff" />
               </div>
-              {notifCount > 0 && (
-                <div className={styles.notifCount}>{notifCount}</div>
+
+              {friendRequests.length > 0 && (
+                <div className={styles.notifCount}>{friendRequests.length}</div>
               )}
+
+              <div
+                className={classnames(
+                  styles.dropdown,
+                  notifDropdown ? styles.active : styles.inactive
+                )}
+                ref={notifDropdownRef}
+              >
+                <ul>
+                  {friendRequests.map((friendRequest, index) => {
+                    return (
+                      <li key={index}>
+                        <p className={styles.text}>
+                          <span>{friendRequest.username}</span> sent a friend
+                          request
+                        </p>
+                        <div className={styles.btns}>
+                          <button
+                            className={styles.accept}
+                            onClick={() =>
+                              handleRequest(friendRequest.userID, true)
+                            }
+                          >
+                            Accept
+                          </button>
+                          <button
+                            className={styles.decline}
+                            onClick={() =>
+                              handleRequest(friendRequest.userID, false)
+                            }
+                          >
+                            Decline
+                          </button>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
 
-            <div className={styles.pfpContainer} ref={dropdownRef}>
+            <div className={styles.pfpContainer} ref={pfpBtnRef}>
               <img
                 src={user?.image as string}
                 alt="PFP"
