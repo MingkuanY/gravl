@@ -16,31 +16,94 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime? @map("email_verified")
-  image         String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @default(now()) @updatedAt
   accounts      Account[]
   sessions      Session[]
 
+  // Customizable
   username String? @unique
   location String?
   bio      String?
+  image    String?
 
+  // Trips
   trips Trip[]
+  likes Like[]
+
+  // Social
+  friends          User[]          @relation("Friendships")
+  friendOf         User[]          @relation("Friendships")
+  outgoingRequests FriendRequest[] @relation("FriendRequestSender")
+  incomingRequests FriendRequest[] @relation("FriendRequestReceiver")
+  notifications    Notification[]
 
   @@map("users")
 }
 
+enum FriendRequestStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+}
+
+model FriendRequest {
+  id         Int                 @id @default(autoincrement())
+  senderId   String
+  receiverId String
+  status     FriendRequestStatus @default(PENDING)
+  createdAt  DateTime            @default(now())
+
+  sender   User @relation("FriendRequestSender", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver User @relation("FriendRequestReceiver", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  @@unique([senderId, receiverId])
+}
+
+enum NotificationType {
+  FRIEND_REQUEST
+  FRIEND_REQUEST_ACCEPTED
+  FRIEND_FINISHED_TRIP
+}
+
+model Notification {
+  id        Int              @id @default(autoincrement())
+  userId    String
+  type      NotificationType
+  message   String
+  createdAt DateTime         @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 // Each Trip has a one-to-many relationship with Visit and represents a trip the User takes
 model Trip {
-  id          Int    @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
   description String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
   visits Visit[]
+  likes  Like[]
+
+  @@index([userId])
+}
+
+model Like {
+  userId    String
+  tripId    Int
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  trip Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  @@id([userId, tripId])
+  @@index([userId])
+  @@index([tripId])
 }
 
 // Each Visit has a many-to-one relationship with both Trip and Place and represents the instance of the User visiting a Place at a specific time
