@@ -149,8 +149,18 @@
           li {
             padding: 0.5rem 0 1rem;
             border-bottom: 0.1rem solid mixin.$lighter;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .date {
+              padding-top: 1rem;
+              color: mixin.$fade;
+              font-size: 1rem;
+            }
 
             .text {
+              width: 100%;
               padding: 0.5rem 0;
               color: mixin.$faded;
               font-size: 1.5rem;
@@ -165,6 +175,7 @@
             }
 
             .btns {
+              width: 100%;
               display: flex;
               align-items: center;
               justify-content: space-between;
@@ -240,7 +251,7 @@
 
         ul {
           li {
-            padding: 0.5rem 0;
+            padding: 0.75rem 0;
             color: mixin.$dark;
             font-size: 1.5rem;
             font-weight: 400;

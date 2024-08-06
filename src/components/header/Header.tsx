@@ -7,6 +7,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { User } from "@prisma/client";
 import classnames from "classnames";
 import { useRouter } from "next/navigation";
+import { formatNotificationTime } from "@/utils/date.ts";
 
 export default function Header({ user }: { user?: User }) {
   // HARDCODED NOTIFICATIONS
@@ -14,37 +15,37 @@ export default function Header({ user }: { user?: User }) {
     {
       userID: "alex",
       username: "alexkranias",
-      time: "2024-08-04",
+      time: new Date("2024/08/02"),
     },
     {
       userID: "sam",
       username: "sparkerly",
-      time: "2024-08-05",
+      time: new Date("2024/08/03"),
     },
     {
       userID: "ayush",
       username: "ayush",
-      time: "2024-08-05",
+      time: new Date("2024/08/04"),
     },
     {
       userID: "colin",
       username: "obamna",
-      time: "2024-08-05",
+      time: new Date("2024/08/04"),
     },
     {
       userID: "ally",
       username: "nosilla",
-      time: "2024-08-05",
+      time: new Date("2024/08/05"),
     },
     {
       userID: "tanush",
       username: "tanush",
-      time: "2024-08-05",
+      time: new Date("2024/08/05"),
     },
     {
       userID: "krish",
       username: "krish",
-      time: "2024-08-05",
+      time: new Date("2024/08/05"),
     },
   ]);
 
@@ -122,8 +123,28 @@ export default function Header({ user }: { user?: User }) {
               >
                 <ul>
                   {friendRequests.map((friendRequest, index) => {
+                    console.log(
+                      `Current notification:\n${
+                        friendRequest.username
+                      }\nCurrent time: ${friendRequest.time}\nPrevious time: ${
+                        index > 0 ? friendRequests[index - 1].time : "N/A"
+                      }\nShow date? ${
+                        index === 0 ||
+                        friendRequests[index - 1].time.getDate() !==
+                          friendRequest.time.getDate()
+                      }\n\n`
+                    );
+                    const showDate =
+                      index === 0 ||
+                      friendRequests[index - 1].time.getDate() !==
+                        friendRequest.time.getDate();
                     return (
                       <li key={index}>
+                        {showDate && (
+                          <p className={styles.date}>
+                            {formatNotificationTime(friendRequest.time)}
+                          </p>
+                        )}
                         <p className={styles.text}>
                           <span>{friendRequest.username}</span> sent a friend
                           request

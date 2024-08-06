@@ -188,3 +188,28 @@ export const findStartAndEndDates = (visits: { date: Date }[]) => {
 
   return { startDate: formatDate(startDate), endDate: formatDate(endDate) };
 };
+
+export const formatNotificationTime = (date: Date) => {
+  const now = new Date();
+
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const inputDate = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate()
+  );
+
+  const diffTime = today.getTime() - inputDate.getTime();
+  const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+  if (diffDays === 0) {
+    return "Today";
+  } else if (diffDays === 1) {
+    return "Yesterday";
+  } else {
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const year = date.getFullYear();
+    return `${month}/${day}/${year}`;
+  }
+};
