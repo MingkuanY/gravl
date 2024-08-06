@@ -8,46 +8,52 @@ import { User } from "@prisma/client";
 import classnames from "classnames";
 import { useRouter } from "next/navigation";
 import { formatNotificationTime } from "@/utils/date.ts";
+import { useScreenWidth } from "@/utils/hooks.ts";
+import FriendsBar from "../dashboard/FriendsBar.tsx";
 
 export default function Header({ user }: { user?: User }) {
   // HARDCODED NOTIFICATIONS
-  const [friendRequests, setFriendRequests] = useState([
-    {
-      userID: "alex",
-      username: "alexkranias",
-      time: new Date("2024/08/02"),
-    },
-    {
-      userID: "sam",
-      username: "sparkerly",
-      time: new Date("2024/08/03"),
-    },
-    {
-      userID: "ayush",
-      username: "ayush",
-      time: new Date("2024/08/04"),
-    },
-    {
-      userID: "colin",
-      username: "obamna",
-      time: new Date("2024/08/04"),
-    },
-    {
-      userID: "ally",
-      username: "nosilla",
-      time: new Date("2024/08/05"),
-    },
-    {
-      userID: "tanush",
-      username: "tanush",
-      time: new Date("2024/08/05"),
-    },
-    {
-      userID: "krish",
-      username: "krish",
-      time: new Date("2024/08/05"),
-    },
-  ]);
+  const [friendRequests, setFriendRequests] = useState(
+    [
+      {
+        userID: "alex",
+        username: "alexkranias",
+        time: new Date("2024/08/02"),
+      },
+      {
+        userID: "sam",
+        username: "sparkerly",
+        time: new Date("2024/08/03"),
+      },
+      {
+        userID: "ayush",
+        username: "ayush",
+        time: new Date("2024/08/04"),
+      },
+      {
+        userID: "colin",
+        username: "obamna",
+        time: new Date("2024/08/04"),
+      },
+      {
+        userID: "ally",
+        username: "nosilla",
+        time: new Date("2024/08/05"),
+      },
+      {
+        userID: "tanush",
+        username: "tanush",
+        time: new Date("2024/08/05"),
+      },
+      {
+        userID: "krish",
+        username: "krish",
+        time: new Date("2024/08/05"),
+      },
+    ].sort((a, b) => b.time.getTime() - a.time.getTime())
+  );
+
+  const isMobile = useScreenWidth();
 
   const session = useSession();
 
@@ -105,6 +111,7 @@ export default function Header({ user }: { user?: User }) {
       <div className={styles.headerRightContainer}>
         {session.status === "authenticated" && (
           <>
+            {!isMobile && <FriendsBar />}
             <div className={styles.notifContainer} ref={notifBtnRef}>
               <div className={styles.notif}>
                 <Icon type="notification" fill="#319fff" />
@@ -123,17 +130,6 @@ export default function Header({ user }: { user?: User }) {
               >
                 <ul>
                   {friendRequests.map((friendRequest, index) => {
-                    console.log(
-                      `Current notification:\n${
-                        friendRequest.username
-                      }\nCurrent time: ${friendRequest.time}\nPrevious time: ${
-                        index > 0 ? friendRequests[index - 1].time : "N/A"
-                      }\nShow date? ${
-                        index === 0 ||
-                        friendRequests[index - 1].time.getDate() !==
-                          friendRequest.time.getDate()
-                      }\n\n`
-                    );
                     const showDate =
                       index === 0 ||
                       friendRequests[index - 1].time.getDate() !==

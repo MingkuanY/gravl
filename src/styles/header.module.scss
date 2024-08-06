@@ -133,6 +133,7 @@
           max-height: 36rem;
           overflow-y: auto;
           scrollbar-width: none;
+          padding-bottom: 1rem;
 
           &::-webkit-scrollbar {
             display: none;
@@ -142,7 +143,7 @@
             to bottom,
             transparent 0%,
             black 1rem,
-            black calc(100% - 1rem),
+            black calc(100% - 2.5rem),
             transparent 100%
           );
 
@@ -151,7 +152,11 @@
             border-bottom: 0.1rem solid mixin.$lighter;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: start;
+
+            &:last-child {
+              border-bottom: none;
+            }
 
             .date {
               padding-top: 1rem;
