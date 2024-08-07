@@ -115,6 +115,7 @@
       }
 
       .username {
+        white-space: nowrap;
         opacity: 0;
         position: absolute;
         top: 50%;
@@ -126,7 +127,13 @@
         transition: 0.3s;
       }
 
-      &:hover .username {
+      .pendingText {
+        margin-left: 0.5rem;
+        color: mixin.$almost-light;
+      }
+
+      &:hover .username,
+      &:hover .pendingText {
         opacity: 1;
       }
 
@@ -139,6 +146,10 @@
         border-radius: 50%;
         border: 0.2rem solid mixin.$white;
         background-color: mixin.$gravl-blue;
+      }
+
+      &.pending .pfp {
+        opacity: 0.5;
       }
     }
   }

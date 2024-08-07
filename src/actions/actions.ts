@@ -107,10 +107,39 @@ export async function getUserWithData(email: string | undefined) {
           visits: true,
         },
       },
-      friends: true,
+      friends: {
+        include: {
+          trips: {
+            include: {
+              visits: true,
+            },
+          },
+        },
+      },
       notifications: true,
     },
   });
+
+  if (user) {
+    // Sort friends based on most recent visit date
+    user.friends.sort((a, b) => {
+      const mostRecentVisitA = a.trips
+        .flatMap((trip) => trip.visits)
+        .reduce(
+          (latest, visit) => (visit.date > latest ? visit.date : latest),
+          new Date(0)
+        );
+      const mostRecentVisitB = b.trips
+        .flatMap((trip) => trip.visits)
+        .reduce(
+          (latest, visit) => (visit.date > latest ? visit.date : latest),
+          new Date(0)
+        );
+
+      return mostRecentVisitB.getTime() - mostRecentVisitA.getTime();
+    });
+  }
+
   return user;
 }
 
@@ -302,18 +331,14 @@ export async function sendFriendRequest(
   senderId: string,
   receiverUsername: string
 ) {
-  console.log("sendFriendRequest called");
-
   // Check if the receiver exists
   const receiverExists = await prisma.user.findUnique({
     where: { username: receiverUsername },
   });
 
   if (!receiverExists) {
-    return false;
+    return null;
   }
-
-  console.log("receiver exists");
 
   const receiverId = receiverExists.id;
 
@@ -328,10 +353,8 @@ export async function sendFriendRequest(
   });
 
   if (existingRequest) {
-    return true;
+    return receiverExists;
   }
-
-  console.log("no existing friend request");
 
   // Create friend request
   const request = await prisma.friendRequest.create({
@@ -341,8 +364,6 @@ export async function sendFriendRequest(
       status: "PENDING",
     },
   });
-
-  console.log("friend request created");
 
   // Send notification to receiver
   await prisma.notification.create({
@@ -354,9 +375,7 @@ export async function sendFriendRequest(
     },
   });
 
-  console.log("notification created");
-
-  return true;
+  return receiverExists;
 }
 
 /**
@@ -484,4 +503,22 @@ export async function readNotifications(userId: string) {
     where: { userId: userId },
     data: { read: true },
   });
+}
+
+/**
+ * Get list of pending friends based on friend requests sent from given user.
+ *
+ * @param userId the user who sent the friend requests
+ * @returns list of pending friends
+ */
+export async function fetchPendingFriends(userId: string) {
+  const pendingRequests = await prisma.friendRequest.findMany({
+    where: {
+      senderId: userId,
+    },
+    include: {
+      receiver: true,
+    },
+  });
+  return pendingRequests.map((request) => request.receiver);
 }

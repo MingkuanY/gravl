@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../../styles/friendsbar.module.scss";
 import Icon from "../icons/Icon";
 import FriendModal from "../modals/FriendModal";
 import { UserWithData } from "@/utils/types";
-import { sendFriendRequest } from "@/actions/actions";
+import { fetchPendingFriends, sendFriendRequest } from "@/actions/actions";
 import { useRouter } from "next/navigation";
 import { User } from "@prisma/client";
+import classnames from "classnames";
 
 export default function FriendsBar({
   user,
@@ -15,6 +16,22 @@ export default function FriendsBar({
   friends: User[];
 }) {
   const router = useRouter();
+
+  // Initialize pending friends
+
+  const [pendingFriends, setPendingFriends] = useState<User[]>([]);
+
+  useEffect(() => {
+    const initializePendingFriends = async () => {
+      const currentUserId = user.id;
+      const friends = await fetchPendingFriends(currentUserId);
+      setPendingFriends(friends);
+    };
+
+    initializePendingFriends();
+  }, [user.id]);
+
+  // Modals for adding and searching friends
 
   const [addFriendModal, setAddFriendModal] = useState(false);
   const [searchFriendModal, setSearchFriendModal] = useState(false);
@@ -27,8 +44,14 @@ export default function FriendsBar({
       !friends.some((friend) => friend.username === username)
     ) {
       setStatus("PENDING");
-      const success = await sendFriendRequest(user.id, username);
-      setStatus(success ? "SUCCESS" : "FAILURE");
+      const newPendingFriend = await sendFriendRequest(user.id, username);
+      setStatus(newPendingFriend ? "SUCCESS" : "FAILURE");
+      if (newPendingFriend) {
+        setPendingFriends((prevPendingFriends) => [
+          ...prevPendingFriends,
+          newPendingFriend,
+        ]);
+      }
     } else {
       setAddFriendModal(false);
     }
@@ -115,6 +138,25 @@ export default function FriendsBar({
                 className={styles.pfp}
               />
               <p className={styles.username}>{friend.username}</p>
+              {false && <div className={styles.unopened}></div>}
+            </div>
+          );
+        })}
+        {pendingFriends.map((friend, index) => {
+          return (
+            <div
+              className={classnames(styles.friend, styles.pending)}
+              key={index}
+            >
+              <img
+                src={friend?.image as string}
+                alt="PFP"
+                className={styles.pfp}
+              />
+              <p className={styles.username}>
+                {friend.username}
+                <span className={styles.pendingText}>(pending)</span>
+              </p>
               {false && <div className={styles.unopened}></div>}
             </div>
           );
