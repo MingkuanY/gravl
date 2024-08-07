@@ -118,7 +118,9 @@ export default function Timeline({
               setEditTrip={setEditTrip}
             />
           ) : (
-            <p className={styles.noTripsYet}>No trips yet</p>
+            trips.length === 0 && (
+              <p className={styles.noTripsYet}>No trips yet</p>
+            )
           )}
         </>
       )}

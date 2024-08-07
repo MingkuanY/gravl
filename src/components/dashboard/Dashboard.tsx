@@ -16,18 +16,29 @@ import { PlaceInput, TripInput, TripWithVisits } from "@/utils/types";
 import NewTrip from "../log/NewTrip";
 import { sortTrips } from "@/utils/date";
 import Onboarding from "../onboarding/Onboarding";
-import { addTripToUser, deleteTrip, updateTrip } from "@/actions/actions";
+import {
+  addTripToUser,
+  deleteTrip,
+  unfriendUsers,
+  updateTrip,
+} from "@/actions/actions";
 import ConfirmSelection from "../modals/ConfirmSelection";
+import { useRouter } from "next/navigation";
+import { User } from "@prisma/client";
 
 export default function Dashboard({
   user,
   places,
   viewOnly,
+  viewer,
 }: {
   user: any;
   places: PlaceInput[];
   viewOnly: boolean;
+  viewer: User;
 }) {
+  const router = useRouter();
+
   const [editProfile, setEditProfile] = useState(false);
 
   const [trips, setTrips] = useState<TripWithVisits[]>(user.trips);
@@ -144,6 +155,11 @@ export default function Dashboard({
     };
   }, [currTrip]);
 
+  const handleUnfriend = () => {
+    unfriendUsers(user.id, viewer.id);
+    router.push(`/${viewer.username!}`);
+  };
+
   return (
     <>
       {confirmDelete !== -1 && (
@@ -200,6 +216,14 @@ export default function Dashboard({
                 </div>
                 <p className={styles.location}>{user!.location}</p>
                 <p className={styles.bio}>{user!.bio}</p>
+                {viewOnly && (
+                  <button
+                    className={styles.unfriendBtn}
+                    onClick={handleUnfriend}
+                  >
+                    Unfriend
+                  </button>
+                )}
               </div>
               <UserStats trips={trips} />
             </div>

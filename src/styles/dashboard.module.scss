@@ -71,6 +71,23 @@
           font-weight: 300;
           color: mixin.$faded;
         }
+
+        .unfriendBtn {
+          margin-top: 1rem;
+          padding: 0.5rem 1rem;
+          width: fit-content;
+          background-color: mixin.$almost-very-light;
+          color: mixin.$fade;
+          font-size: 1.2rem;
+          border-radius: 1rem;
+          text-transform: uppercase;
+          transition: 0.3s;
+          cursor: pointer;
+
+          &:hover {
+            color: mixin.$dark;
+          }
+        }
       }
     }
   }

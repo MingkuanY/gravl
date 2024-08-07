@@ -429,3 +429,35 @@ export async function declineFriendRequest(requestId: number) {
     where: { id: requestId },
   });
 }
+
+/**
+ * Unfriends the two given Users from each other.
+ *
+ * @param userId1 a user to unfriend
+ * @param userId2 the other user to unfriend
+ */
+export async function unfriendUsers(userId1: string, userId2: string) {
+  await prisma.user.update({
+    where: { id: userId1 },
+    data: {
+      friends: {
+        disconnect: { id: userId2 },
+      },
+      friendOf: {
+        disconnect: { id: userId2 },
+      },
+    },
+  });
+
+  await prisma.user.update({
+    where: { id: userId2 },
+    data: {
+      friends: {
+        disconnect: { id: userId1 },
+      },
+      friendOf: {
+        disconnect: { id: userId1 },
+      },
+    },
+  });
+}

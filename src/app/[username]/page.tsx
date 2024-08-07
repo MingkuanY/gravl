@@ -33,7 +33,7 @@ export default async function Profile({
     return (
       <>
         <Header user={user} />
-        <Dashboard user={user} places={places} viewOnly={false} />
+        <Dashboard user={user} places={places} viewOnly={false} viewer={user} />
       </>
     );
   }
@@ -57,7 +57,12 @@ export default async function Profile({
   return (
     <>
       <Header user={user} />
-      <Dashboard user={friendUser} places={places} viewOnly={true} />
+      <Dashboard
+        user={friendUser}
+        places={places}
+        viewOnly={true}
+        viewer={user}
+      />
     </>
   );
 }
