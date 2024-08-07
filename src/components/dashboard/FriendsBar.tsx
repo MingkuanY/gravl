@@ -4,8 +4,11 @@ import Icon from "../icons/Icon";
 import FriendModal from "../modals/FriendModal";
 import { UserWithData } from "@/utils/types";
 import { sendFriendRequest } from "@/actions/actions";
+import { useRouter } from "next/navigation";
 
 export default function FriendsBar({ user }: { user: UserWithData }) {
+  const router = useRouter();
+
   const [friends, setFriends] = useState(user ? user.friends : []);
 
   const [addFriendModal, setAddFriendModal] = useState(false);
@@ -20,6 +23,11 @@ export default function FriendsBar({ user }: { user: UserWithData }) {
   const findFriend = (username: string) => {
     console.log(`Finding ${username}...`);
     setSearchFriendModal(false);
+  };
+
+  const clickFriend = (index: number) => {
+    const username = friends[index].username;
+    router.push(`/${username}`);
   };
 
   return (
@@ -69,7 +77,11 @@ export default function FriendsBar({ user }: { user: UserWithData }) {
       <div className={styles.friendsSection}>
         {friends.map((friend, index) => {
           return (
-            <div className={styles.friend} key={index}>
+            <div
+              className={styles.friend}
+              key={index}
+              onClick={() => clickFriend(index)}
+            >
               <img
                 src={friend?.image as string}
                 alt="PFP"

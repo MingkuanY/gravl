@@ -114,6 +114,22 @@ export async function getUserWithData(email: string | undefined) {
   return user;
 }
 
+export async function getFriendByUsername(username: string) {
+  const user = await prisma.user.findUnique({
+    where: {
+      username: username,
+    },
+    include: {
+      trips: {
+        include: {
+          visits: true,
+        },
+      },
+    },
+  });
+  return user;
+}
+
 /**
  * Updates the User's object with new username, location, and bio.
  *

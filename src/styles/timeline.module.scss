@@ -46,6 +46,17 @@
     }
   }
 
+  .noTripsYet {
+    width: 26rem;
+    height: calc(100vh - mixin.$header-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: mixin.$gravl-blue;
+    text-transform: uppercase;
+  }
+
   .pastTrips {
     margin-top: 1rem;
     margin-left: -20rem;

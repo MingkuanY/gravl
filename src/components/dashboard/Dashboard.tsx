@@ -22,9 +22,11 @@ import ConfirmSelection from "../modals/ConfirmSelection";
 export default function Dashboard({
   user,
   places,
+  viewOnly,
 }: {
   user: any;
   places: PlaceInput[];
+  viewOnly: boolean;
 }) {
   const [editProfile, setEditProfile] = useState(false);
 
@@ -180,6 +182,7 @@ export default function Dashboard({
             setConfirmDelete={setConfirmDelete}
             handleEditTrip={handleEditTrip}
             setEditTrip={setEditTrip}
+            viewOnly={viewOnly}
           />
           <div className={styles.main}>
             <div className={styles.profile}>
@@ -189,9 +192,11 @@ export default function Dashboard({
               <div className={styles.userInfo}>
                 <div className={styles.usernameAndEdit}>
                   <p className={styles.username}>{user!.username}</p>
-                  <div className={styles.edit}>
-                    <EditProfileButton setEditProfile={setEditProfile} />
-                  </div>
+                  {!viewOnly && (
+                    <div className={styles.edit}>
+                      <EditProfileButton setEditProfile={setEditProfile} />
+                    </div>
+                  )}
                 </div>
                 <p className={styles.location}>{user!.location}</p>
                 <p className={styles.bio}>{user!.bio}</p>

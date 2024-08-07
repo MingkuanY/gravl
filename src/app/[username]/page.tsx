@@ -1,5 +1,5 @@
 import Header from "@/components/header/Header";
-import { getUserWithData } from "@/actions/actions";
+import { getFriendByUsername, getUserWithData } from "@/actions/actions";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth.ts";
 import NotFound from "../not-found";
@@ -24,15 +24,40 @@ export default async function Profile({
     loadPlaces(),
   ]);
 
-  if (!user || user.username !== params.username) {
-    //user not logged into the account they are trying to access
+  if (!user) {
+    return NotFound();
+  }
+
+  // Check if current user is trying to access their own profile
+  if (user.username === params.username) {
+    return (
+      <>
+        <Header user={user} />
+        <Dashboard user={user} places={places} viewOnly={false} />
+      </>
+    );
+  }
+
+  const isFriend = user.friends.some(
+    (friend) => friend.username === params.username
+  );
+
+  if (!isFriend) {
+    // User trying to access someone else's account
+    return NotFound();
+  }
+
+  // Get friend's profile (user and trips only)
+  const friendUser = await getFriendByUsername(params.username);
+
+  if (!friendUser) {
     return NotFound();
   }
 
   return (
     <>
       <Header user={user} />
-      <Dashboard user={user} places={places} />
+      <Dashboard user={friendUser} places={places} viewOnly={true} />
     </>
   );
 }

@@ -15,6 +15,7 @@ export default function Timeline({
   setConfirmDelete,
   handleEditTrip,
   setEditTrip,
+  viewOnly,
 }: {
   trips: TripWithVisits[];
   setLogTripPage: Function;
@@ -23,6 +24,7 @@ export default function Timeline({
   setConfirmDelete: Function;
   handleEditTrip: Function;
   setEditTrip: Function;
+  viewOnly: boolean;
 }) {
   const isMobile = useScreenWidth();
 
@@ -109,12 +111,18 @@ export default function Timeline({
           </div>
         </div>
       ) : (
-        <LogTripButton
-          setLogTripPage={setLogTripPage}
-          setEditTrip={setEditTrip}
-        />
+        <>
+          {!viewOnly ? (
+            <LogTripButton
+              setLogTripPage={setLogTripPage}
+              setEditTrip={setEditTrip}
+            />
+          ) : (
+            <p className={styles.noTripsYet}>No trips yet</p>
+          )}
+        </>
       )}
-      {trips.length == 0 && !isMobile && (
+      {!viewOnly && trips.length == 0 && !isMobile && (
         <div className={styles.proTipContainer}>
           <p className={styles.proTip}>Add Your First Trip</p>
           <div className={styles.up_arrow}>
@@ -145,8 +153,9 @@ export default function Timeline({
                       handleClick(trip.id, event)
                     }
                     editTrip={() => handleEditTrip(trip.id)}
+                    viewOnly={viewOnly}
                   />
-                  {!isMobile && (
+                  {!isMobile && !viewOnly && (
                     <button
                       className={styles.trashContainer}
                       onClick={() => setConfirmDelete(trip.id)}
