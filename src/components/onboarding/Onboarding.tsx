@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "../../styles/onboarding.module.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Icon from "../icons/Icon.tsx";
 import { useRouter } from "next/navigation";
 import { uniqueUsername, updateUser } from "@/actions/actions.ts";
@@ -31,6 +31,8 @@ export default function Onboarding({
 
   const [validUsername, setValidUsername] = useState(true);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handleKeyDown = async (e: KeyboardEvent) => {
       if (e.key === "Enter") {
@@ -48,10 +50,22 @@ export default function Onboarding({
       }
     };
 
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node) &&
+        setClose
+      ) {
+        setClose();
+      }
+    };
+
     window.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [accountData, step]);
 
@@ -84,7 +98,7 @@ export default function Onboarding({
     <>
       <div className={styles.overlay}>
         {step === 1 && (
-          <div className={styles.container}>
+          <div className={styles.container} ref={containerRef}>
             <p>Username</p>
             <div className={styles.inputContainer}>
               <div className={styles.returnContainer}>
@@ -109,7 +123,7 @@ export default function Onboarding({
           </div>
         )}
         {step === 2 && (
-          <div className={styles.container}>
+          <div className={styles.container} ref={containerRef}>
             <div className={styles.headingContainer}>
               <p>Home Base</p>
               <div className={styles.pin}>
@@ -136,7 +150,7 @@ export default function Onboarding({
           </div>
         )}
         {step === 3 && (
-          <div className={styles.container}>
+          <div className={styles.container} ref={containerRef}>
             <p>Bio</p>
             <div className={styles.inputContainer}>
               <p className={styles.wordCount}>
@@ -160,7 +174,7 @@ export default function Onboarding({
           </div>
         )}
         {step === 4 && (
-          <div className={styles.container}>
+          <div className={styles.container} ref={containerRef}>
             <p>You&apos;re all set!</p>
             <div
               className={classnames(

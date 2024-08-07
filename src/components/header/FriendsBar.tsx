@@ -5,11 +5,16 @@ import FriendModal from "../modals/FriendModal";
 import { UserWithData } from "@/utils/types";
 import { sendFriendRequest } from "@/actions/actions";
 import { useRouter } from "next/navigation";
+import { User } from "@prisma/client";
 
-export default function FriendsBar({ user }: { user: UserWithData }) {
+export default function FriendsBar({
+  user,
+  friends,
+}: {
+  user: UserWithData;
+  friends: User[];
+}) {
   const router = useRouter();
-
-  const [friends, setFriends] = useState(user ? user.friends : []);
 
   const [addFriendModal, setAddFriendModal] = useState(false);
   const [searchFriendModal, setSearchFriendModal] = useState(false);
@@ -17,7 +22,10 @@ export default function FriendsBar({ user }: { user: UserWithData }) {
   const [status, setStatus] = useState("DEFAULT");
 
   const requestFriend = async (username: string) => {
-    if (username !== user.username) {
+    if (
+      username !== user.username &&
+      !friends.some((friend) => friend.username === username)
+    ) {
       setStatus("PENDING");
       const success = await sendFriendRequest(user.id, username);
       setStatus(success ? "SUCCESS" : "FAILURE");

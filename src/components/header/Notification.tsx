@@ -9,11 +9,15 @@ export default function Notification({
   notification,
   index,
   userDetails,
+  setClose,
+  responseCallback,
 }: {
   notifications: Notif[];
   notification: Notif;
   index: number;
   userDetails: { [key: string]: User };
+  setClose: Function;
+  responseCallback: Function;
 }) {
   const router = useRouter();
 
@@ -21,11 +25,14 @@ export default function Notification({
     if (!requestId) {
       return;
     }
+    setClose();
     if (response) {
       // Accept friend request
+      responseCallback(true);
       await acceptFriendRequest(requestId);
     } else {
       // Decline friend request
+      responseCallback(false);
       await declineFriendRequest(requestId);
     }
   };
@@ -44,12 +51,13 @@ export default function Notification({
       message = "sent a friend request";
       break;
     case "FRIEND_REQUEST_ACCEPTED":
-      message = "accepted your friend request";
+      message = "became friends with you";
       break;
     case "FRIEND_FINISHED_TRIP":
       message = "finished a trip";
       break;
   }
+
   return (
     <div className={styles.container} key={index}>
       {showDate && (

@@ -85,6 +85,30 @@ export default function Header({ user }: { user?: UserWithData }) {
     };
   });
 
+  // Handle add friend when friend request accepted
+
+  const [friends, setFriends] = useState<User[]>(user ? user.friends : []);
+
+  const responseCallback = async (response: boolean, index: number) => {
+    const updatedNotifications = [...notifications];
+    const notification = updatedNotifications[index];
+
+    // Update notification to friend request accepted
+    updatedNotifications[index] = {
+      ...notification,
+      type: "FRIEND_REQUEST_ACCEPTED",
+    };
+    setNotifications(updatedNotifications);
+
+    if (response) {
+      // Accepted friend request
+      const newFriend = await getUserById(notification.userIdInConcern);
+      if (newFriend) {
+        setFriends((prevFriends) => [...prevFriends, newFriend]);
+      }
+    }
+  };
+
   return (
     <div className={styles.headerContainer}>
       <div className={styles.logoContainer}>
@@ -97,7 +121,7 @@ export default function Header({ user }: { user?: UserWithData }) {
       <div className={styles.headerRightContainer}>
         {session.status === "authenticated" && (
           <>
-            {!isMobile && <FriendsBar user={user!} />}
+            {!isMobile && <FriendsBar user={user!} friends={friends} />}
             <div className={styles.notifContainer} ref={notifBtnRef}>
               <div className={styles.notif}>
                 <Icon type="notification" fill="#319fff" />
@@ -128,6 +152,11 @@ export default function Header({ user }: { user?: UserWithData }) {
                         notification={notification}
                         index={index}
                         userDetails={userDetails}
+                        key={index}
+                        setClose={() => setNotifDropdown(false)}
+                        responseCallback={(response: boolean) =>
+                          responseCallback(response, index)
+                        }
                       />
                     );
                   })}

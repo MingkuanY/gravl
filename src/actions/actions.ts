@@ -372,12 +372,15 @@ export async function acceptFriendRequest(requestId: number) {
     },
   });
 
-  // Delete original notification
-  await prisma.notification.deleteMany({
+  // Update original notification to a friend request accepted
+  await prisma.notification.updateMany({
     where: {
       userId: request.receiverId,
       type: "FRIEND_REQUEST",
       requestId: requestId,
+    },
+    data: {
+      type: "FRIEND_REQUEST_ACCEPTED",
     },
   });
 
@@ -425,8 +428,17 @@ export async function acceptFriendRequest(requestId: number) {
  */
 export async function declineFriendRequest(requestId: number) {
   // Deletes the friend request
-  await prisma.friendRequest.delete({
+  const request = await prisma.friendRequest.delete({
     where: { id: requestId },
+  });
+
+  // Deletes original notification
+  await prisma.notification.deleteMany({
+    where: {
+      userId: request.receiverId,
+      type: "FRIEND_REQUEST",
+      requestId: requestId,
+    },
   });
 }
 
