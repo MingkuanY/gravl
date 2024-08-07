@@ -122,52 +122,54 @@ export default function Header({ user }: { user?: UserWithData }) {
         {session.status === "authenticated" && (
           <>
             {!isMobile && <FriendsBar user={user!} friends={friends} />}
-            <div className={styles.notifContainer} ref={notifBtnRef}>
-              <div className={styles.notif}>
-                <Icon type="notification" fill="#319fff" />
-              </div>
-
-              {notifications.filter((notification) => !notification.read)
-                .length > 0 && (
-                <div className={styles.notifCount}>
-                  {
-                    notifications.filter((notification) => !notification.read)
-                      .length
-                  }
+            {!isMobile && (
+              <div className={styles.notifContainer} ref={notifBtnRef}>
+                <div className={styles.notif}>
+                  <Icon type="notification" fill="#319fff" />
                 </div>
-              )}
 
-              <div
-                className={classnames(
-                  styles.dropdown,
-                  notifDropdown ? styles.active : styles.inactive
+                {notifications.filter((notification) => !notification.read)
+                  .length > 0 && (
+                  <div className={styles.notifCount}>
+                    {
+                      notifications.filter((notification) => !notification.read)
+                        .length
+                    }
+                  </div>
                 )}
-                ref={notifDropdownRef}
-              >
-                <ul>
-                  {notifications.map((notification, index) => {
-                    return (
-                      <Notification
-                        notifications={notifications}
-                        notification={notification}
-                        index={index}
-                        userDetails={userDetails}
-                        key={index}
-                        setClose={() => setNotifDropdown(false)}
-                        responseCallback={(response: boolean) =>
-                          responseCallback(response, index)
-                        }
-                      />
-                    );
-                  })}
-                  {notifications.length === 0 && (
-                    <li>
-                      <p className={styles.noNotifs}>No new notifications</p>
-                    </li>
+
+                <div
+                  className={classnames(
+                    styles.dropdown,
+                    notifDropdown ? styles.active : styles.inactive
                   )}
-                </ul>
+                  ref={notifDropdownRef}
+                >
+                  <ul>
+                    {notifications.map((notification, index) => {
+                      return (
+                        <Notification
+                          notifications={notifications}
+                          notification={notification}
+                          index={index}
+                          userDetails={userDetails}
+                          key={index}
+                          setClose={() => setNotifDropdown(false)}
+                          responseCallback={(response: boolean) =>
+                            responseCallback(response, index)
+                          }
+                        />
+                      );
+                    })}
+                    {notifications.length === 0 && (
+                      <li>
+                        <p className={styles.noNotifs}>No new notifications</p>
+                      </li>
+                    )}
+                  </ul>
+                </div>
               </div>
-            </div>
+            )}
 
             <div className={styles.pfpContainer} ref={pfpBtnRef}>
               <img
@@ -184,9 +186,11 @@ export default function Header({ user }: { user?: UserWithData }) {
                 )}
               >
                 <ul>
-                  <li onClick={() => router.push(`/${user!.username}`)}>
-                    Profile
-                  </li>
+                  {!isMobile && (
+                    <li onClick={() => router.push(`/${user!.username}`)}>
+                      Profile
+                    </li>
+                  )}
                   <li onClick={() => signOut({ callbackUrl: "/" })}>Log Out</li>
                 </ul>
               </div>
