@@ -8,12 +8,20 @@ export default function FriendModal({
   inputPlaceholder,
   setClose,
   submitCallback,
+  status,
+  setStatus,
 }: {
   prompt: string;
   inputPlaceholder: string;
   setClose: Function;
   submitCallback: Function;
+  status: string;
+  setStatus: Function;
 }) {
+  useEffect(() => {
+    setStatus("DEFAULT");
+  }, []);
+
   const [inputData, setInputData] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -47,21 +55,57 @@ export default function FriendModal({
     <div className={styles.overlay}>
       <div className={styles.container} ref={containerRef}>
         <CloseBtn setClose={() => setClose()} />
-        <p className={styles.prompt}>{prompt}</p>
-        <div className={styles.inputContainer}>
-          <input
-            type="text"
-            placeholder={inputPlaceholder}
-            value={inputData}
-            onChange={(e) => setInputData(e.target.value)}
-          />
-          <div className={styles.returnContainer}>
-            <p>Enter</p>
-            <div className={styles.return_arrow}>
-              <Icon type="return_arrow" fill="#319fff" />
+
+        {status === "DEFAULT" && (
+          <>
+            <p className={styles.prompt}>{prompt}</p>
+            <div className={styles.inputContainer}>
+              <input
+                type="text"
+                placeholder={inputPlaceholder}
+                value={inputData}
+                onChange={(e) => setInputData(e.target.value)}
+                autoFocus
+              />
+              <div className={styles.returnContainer}>
+                <p>Enter</p>
+                <div className={styles.return_arrow}>
+                  <Icon type="return_arrow" fill="#319fff" />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </>
+        )}
+        {status === "PENDING" && (
+          <>
+            <div className={styles.wheel}>
+              <Icon type="wheel" fill="#24292f" />
+            </div>
+            <p className={styles.pending}>Loading...</p>
+          </>
+        )}
+        {status === "SUCCESS" && (
+          <>
+            <div className={styles.check}>
+              <Icon type="check" fill="#319fff" />
+            </div>
+            <p className={styles.success}>Friend request sent</p>
+            <button className={styles.btn} onClick={() => setStatus("DEFAULT")}>
+              Add Another Friend
+            </button>
+          </>
+        )}
+        {status === "FAILURE" && (
+          <>
+            <div className={styles.sad}>
+              <Icon type="sad" fill="#319fff" />
+            </div>
+            <p className={styles.failure}>User not found</p>
+            <button className={styles.btn} onClick={() => setStatus("DEFAULT")}>
+              Try Again
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

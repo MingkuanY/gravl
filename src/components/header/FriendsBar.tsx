@@ -14,15 +14,30 @@ export default function FriendsBar({ user }: { user: UserWithData }) {
   const [addFriendModal, setAddFriendModal] = useState(false);
   const [searchFriendModal, setSearchFriendModal] = useState(false);
 
-  const submitCallback = async (username: string) => {
-    const success = await sendFriendRequest(user.id, username);
-    console.log("Success? ", success);
-    setAddFriendModal(false);
+  const [status, setStatus] = useState("DEFAULT");
+
+  const requestFriend = async (username: string) => {
+    if (username !== user.username) {
+      setStatus("PENDING");
+      const success = await sendFriendRequest(user.id, username);
+      setStatus(success ? "SUCCESS" : "FAILURE");
+    } else {
+      setAddFriendModal(false);
+    }
   };
 
-  const findFriend = (username: string) => {
-    console.log(`Finding ${username}...`);
-    setSearchFriendModal(false);
+  const findFriend = async (username: string) => {
+    if (username !== user.username) {
+      setStatus("PENDING");
+      const success = friends.some((friend) => friend.username === username);
+      if (success) {
+        router.push(`/${username}`);
+      } else {
+        setStatus("FAILURE");
+      }
+    } else {
+      setAddFriendModal(false);
+    }
   };
 
   const clickFriend = (index: number) => {
@@ -37,7 +52,9 @@ export default function FriendsBar({ user }: { user: UserWithData }) {
           prompt="Send a Friend Request"
           inputPlaceholder="Enter a username..."
           setClose={() => setAddFriendModal(false)}
-          submitCallback={submitCallback}
+          submitCallback={requestFriend}
+          status={status}
+          setStatus={setStatus}
         />
       )}
       {searchFriendModal && (
@@ -46,6 +63,8 @@ export default function FriendsBar({ user }: { user: UserWithData }) {
           inputPlaceholder="Enter a username..."
           setClose={() => setSearchFriendModal(false)}
           submitCallback={findFriend}
+          status={status}
+          setStatus={setStatus}
         />
       )}
       <div className={styles.btnSection}>

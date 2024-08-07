@@ -88,12 +88,11 @@ export default function Icon({ type, fill }: { type: string; fill: string }) {
         <svg
           width="100%"
           height="100%"
-          viewBox="0 0 36 36"
+          viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <circle cx="18" cy="18" r="13.5" stroke={fill} strokeWidth="3" />
-          <path d="M12 18L16.5 22.5L24 13.5" stroke={fill} strokeWidth="3" />
+          <path d="M5 14L9 17L18 6" stroke={fill} strokeWidth="2" />
         </svg>
       );
     case "dropdown":
@@ -535,6 +534,49 @@ export default function Icon({ type, fill }: { type: string; fill: string }) {
             d="M8 17C8 17.5253 8.10346 18.0454 8.30448 18.5307C8.5055 19.016 8.80014 19.457 9.17157 19.8284C9.54301 20.1999 9.98396 20.4945 10.4693 20.6955C10.9546 20.8965 11.4747 21 12 21C12.5253 21 13.0454 20.8965 13.5307 20.6955C14.016 20.4945 14.457 20.1999 14.8284 19.8284C15.1999 19.457 15.4945 19.016 15.6955 18.5307C15.8965 18.0454 16 17.5253 16 17"
             stroke={fill}
             strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+    case "sad":
+      return (
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            cx="12"
+            cy="12"
+            r="10"
+            stroke={fill}
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M7.88124 16.2441C8.37391 15.8174 9.02309 15.5091 9.72265 15.3072C10.4301 15.103 11.2142 15 12 15C12.7858 15 13.5699 15.103 14.2774 15.3072C14.9769 15.5091 15.6261 15.8174 16.1188 16.2441"
+            stroke={fill}
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <circle
+            cx="9"
+            cy="10"
+            r="1.25"
+            fill={fill}
+            stroke={fill}
+            strokeWidth="0.5"
+            strokeLinecap="round"
+          />
+          <circle
+            cx="15"
+            cy="10"
+            r="1.25"
+            fill={fill}
+            stroke={fill}
+            strokeWidth="0.5"
             strokeLinecap="round"
           />
         </svg>

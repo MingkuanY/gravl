@@ -17,17 +17,20 @@
     border-radius: 2rem;
     background-color: mixin.$white;
     margin: auto;
-    padding: 4rem 3.5rem;
+    width: 57rem;
+    height: 18rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+
+    // default
 
     .prompt {
       font-size: 3rem;
       font-weight: 500;
       color: mixin.$dark;
     }
-
     .inputContainer {
       margin-top: 2rem;
       display: flex;
@@ -78,6 +81,66 @@
           font-weight: 300;
         }
       }
+    }
+
+    // pending
+
+    .wheel {
+      width: 10rem;
+      animation: drive 0.95s infinite linear;
+    }
+    @keyframes drive {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    .pending {
+      margin-top: 2rem;
+      font-size: 2.5rem;
+      color: mixin.$gravl-blue;
+      font-weight: 400;
+    }
+
+    // success
+
+    .check {
+      width: 12rem;
+      margin: -3rem 0;
+    }
+    .success {
+      margin-top: 2rem;
+      font-size: 3rem;
+      color: mixin.$gravl-blue;
+      font-weight: 400;
+    }
+    .btn {
+      margin-top: 1rem;
+      background-color: mixin.$very-light-blue;
+      color: mixin.$gravl-blue;
+      padding: 0.5rem 0.8rem;
+      border-radius: 1rem;
+      transition: 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: mixin.$gravl-blue;
+        color: mixin.$white;
+      }
+    }
+
+    // failure
+
+    .sad {
+      width: 6rem;
+    }
+    .failure {
+      margin-top: 2rem;
+      font-size: 3rem;
+      color: mixin.$gravl-blue;
+      font-weight: 400;
     }
   }
 }

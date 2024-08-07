@@ -7,7 +7,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import classnames from "classnames";
 import { useRouter } from "next/navigation";
 import { useScreenWidth } from "@/utils/hooks.ts";
-import FriendsBar from "../dashboard/FriendsBar.tsx";
+import FriendsBar from "./FriendsBar.tsx";
 import { UserWithData } from "@/utils/types.ts";
 import { getUserById, readNotifications } from "@/actions/actions.ts";
 import { User } from "@prisma/client";
