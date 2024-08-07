@@ -6,38 +6,37 @@ import Icon from "../icons/Icon.tsx";
 import { signIn, signOut, useSession } from "next-auth/react";
 import classnames from "classnames";
 import { useRouter } from "next/navigation";
-import { formatNotificationTime } from "@/utils/date.ts";
 import { useScreenWidth } from "@/utils/hooks.ts";
 import FriendsBar from "../dashboard/FriendsBar.tsx";
 import { UserWithData } from "@/utils/types.ts";
-import {
-  acceptFriendRequest,
-  declineFriendRequest,
-  getUsernameById,
-} from "@/actions/actions.ts";
+import { getUserById } from "@/actions/actions.ts";
+import { User } from "@prisma/client";
+import Notification from "./Notification.tsx";
 
 export default function Header({ user }: { user?: UserWithData }) {
   const [notifications, setNotifications] = useState(
     user ? user.notifications : []
   );
-  const [usernames, setUsernames] = useState<{ [key: string]: string }>({});
+  const [userDetails, setUserDetails] = useState<{
+    [key: string]: User;
+  }>({});
 
   useEffect(() => {
-    const fetchUsernames = async () => {
-      const usernamesMap: { [key: string]: string } = {};
+    const fetchUserDetails = async () => {
+      const detailsMap: { [key: string]: User } = {};
       for (const notification of notifications) {
         if (
           notification.userIdInConcern &&
-          !usernamesMap[notification.userIdInConcern]
+          !detailsMap[notification.userIdInConcern]
         ) {
-          const username = await getUsernameById(notification.userIdInConcern);
-          usernamesMap[notification.userIdInConcern] = username!;
+          const user = await getUserById(notification.userIdInConcern);
+          detailsMap[notification.userIdInConcern] = user!;
         }
       }
-      setUsernames(usernamesMap);
+      setUserDetails(detailsMap);
     };
 
-    fetchUsernames();
+    fetchUserDetails();
   }, [notifications]);
 
   const isMobile = useScreenWidth();
@@ -76,19 +75,6 @@ export default function Header({ user }: { user?: UserWithData }) {
     };
   });
 
-  const handleRequest = async (requestId: number | null, response: boolean) => {
-    if (!requestId) {
-      return;
-    }
-    if (response) {
-      // Accept friend request
-      await acceptFriendRequest(requestId);
-    } else {
-      // Decline friend request
-      await declineFriendRequest(requestId);
-    }
-  };
-
   return (
     <div className={styles.headerContainer}>
       <div className={styles.logoContainer}>
@@ -120,57 +106,13 @@ export default function Header({ user }: { user?: UserWithData }) {
               >
                 <ul>
                   {notifications.map((notification, index) => {
-                    const username = notification.userIdInConcern
-                      ? usernames[notification.userIdInConcern]
-                      : "";
-                    const showDate =
-                      index === 0 ||
-                      notifications[index - 1].createdAt.getDate() !==
-                        notification.createdAt.getDate();
-
-                    let message = "";
-                    switch (notification.type) {
-                      case "FRIEND_REQUEST":
-                        message = "sent a friend request";
-                        break;
-                      case "FRIEND_REQUEST_ACCEPTED":
-                        message = "accepted your friend request";
-                        break;
-                      case "FRIEND_FINISHED_TRIP":
-                        message = "finished a trip";
-                        break;
-                    }
                     return (
-                      <li key={index}>
-                        {showDate && (
-                          <p className={styles.date}>
-                            {formatNotificationTime(notification.createdAt)}
-                          </p>
-                        )}
-                        <p className={styles.text}>
-                          <span>{username}</span> {message}
-                        </p>
-                        {notification.type === "FRIEND_REQUEST" && (
-                          <div className={styles.btns}>
-                            <button
-                              className={styles.accept}
-                              onClick={() =>
-                                handleRequest(notification.requestId, true)
-                              }
-                            >
-                              Accept
-                            </button>
-                            <button
-                              className={styles.decline}
-                              onClick={() =>
-                                handleRequest(notification.requestId, false)
-                              }
-                            >
-                              Decline
-                            </button>
-                          </div>
-                        )}
-                      </li>
+                      <Notification
+                        notifications={notifications}
+                        notification={notification}
+                        index={index}
+                        userDetails={userDetails}
+                      />
                     );
                   })}
                   {notifications.length === 0 && (

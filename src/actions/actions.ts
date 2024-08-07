@@ -75,16 +75,16 @@ export async function getUser(email: string | undefined) {
  * @param userId
  * @returns
  */
-export async function getUsernameById(userId: string | null) {
+export async function getUserById(userId: string | null) {
   if (!userId) {
-    return "";
+    return null;
   }
   const user = await prisma.user.findUnique({
     where: {
       id: userId,
     },
   });
-  return user?.username;
+  return user;
 }
 
 /**
