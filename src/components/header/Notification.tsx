@@ -2,6 +2,7 @@ import { acceptFriendRequest, declineFriendRequest } from "@/actions/actions";
 import styles from "../../styles/notification.module.scss";
 import { Notification as Notif, User } from "@prisma/client";
 import { formatNotificationTime } from "@/utils/date";
+import { useRouter } from "next/navigation";
 
 export default function Notification({
   notifications,
@@ -14,6 +15,8 @@ export default function Notification({
   index: number;
   userDetails: { [key: string]: User };
 }) {
+  const router = useRouter();
+
   const handleRequest = async (requestId: number | null, response: boolean) => {
     if (!requestId) {
       return;
@@ -56,7 +59,14 @@ export default function Notification({
       )}
 
       <p className={styles.text}>
-        <span>{currUser?.username}</span> {message}
+        <span
+          onClick={() => {
+            router.push(`/${currUser?.username}`);
+          }}
+        >
+          {currUser?.username}
+        </span>{" "}
+        {message}
       </p>
       {notification.type === "FRIEND_REQUEST" && (
         <div className={styles.btns}>

@@ -461,3 +461,15 @@ export async function unfriendUsers(userId1: string, userId2: string) {
     },
   });
 }
+
+/**
+ * Mark all notifications as read for the given user.
+ *
+ * @param userId the user to mark notifications as read
+ */
+export async function readNotifications(userId: string) {
+  await prisma.notification.updateMany({
+    where: { userId: userId },
+    data: { read: true },
+  });
+}

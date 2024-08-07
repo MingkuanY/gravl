@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useScreenWidth } from "@/utils/hooks.ts";
 import FriendsBar from "../dashboard/FriendsBar.tsx";
 import { UserWithData } from "@/utils/types.ts";
-import { getUserById } from "@/actions/actions.ts";
+import { getUserById, readNotifications } from "@/actions/actions.ts";
 import { User } from "@prisma/client";
 import Notification from "./Notification.tsx";
 
@@ -61,6 +61,16 @@ export default function Header({ user }: { user?: UserWithData }) {
       if (notifBtnRef.current?.contains(e.target as Node)) {
         if (!notifDropdownRef.current?.contains(e.target as Node)) {
           // Clicking on the notif button
+          if (!notifDropdown) {
+            // Mark all notifications as read
+            setNotifications((prevNotifications) =>
+              prevNotifications.map((notification) => ({
+                ...notification,
+                read: true,
+              }))
+            );
+            readNotifications(user!.id);
+          }
           setNotifDropdown(!notifDropdown);
         }
       } else {
@@ -93,8 +103,14 @@ export default function Header({ user }: { user?: UserWithData }) {
                 <Icon type="notification" fill="#319fff" />
               </div>
 
-              {notifications.length > 0 && (
-                <div className={styles.notifCount}>{notifications.length}</div>
+              {notifications.filter((notification) => !notification.read)
+                .length > 0 && (
+                <div className={styles.notifCount}>
+                  {
+                    notifications.filter((notification) => !notification.read)
+                      .length
+                  }
+                </div>
               )}
 
               <div
