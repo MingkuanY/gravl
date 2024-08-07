@@ -2,36 +2,18 @@ import { useState } from "react";
 import styles from "../../styles/friendsbar.module.scss";
 import Icon from "../icons/Icon";
 import FriendModal from "../modals/FriendModal";
+import { UserWithData } from "@/utils/types";
+import { sendFriendRequest } from "@/actions/actions";
 
-export default function FriendsBar() {
-  const mock_friends: any[] = [
-    // {
-    //   username: "alexkranias",
-    //   pfp: "https://lh3.googleusercontent.com/a/ACg8ocIqbg9wxEZW54RHn0lzTXFudOwYXNp7hgUjeQj7Edf74Jm8BDY5tA=s96-c",
-    //   unopened: true,
-    // },
-    // {
-    //   username: "sparkerly",
-    //   pfp: "https://lh3.googleusercontent.com/a/ACg8ocKiFo3cCOvh2eyedgrCUK_U9NCH_gBBuVBYqszpuxllsXQBaIQ=s96-c",
-    //   unopened: true,
-    // },
-    // {
-    //   username: "ayush",
-    //   pfp: "https://lh3.googleusercontent.com/a/ACg8ocKsOQn3L7UzQc3BsPoe0IROHN7qleVqLqjUWkbzVEU8RgPakYdkxQ=s96-c",
-    //   unopened: false,
-    // },
-    // {
-    //   username: "obamna",
-    //   pfp: "https://lh3.googleusercontent.com/a/ACg8ocLr2tt5svEVc6UqIwRFpbKrRQFt9gJ_-zRTYhZdmY_sTYgUsym8=s96-c",
-    //   unopened: false,
-    // },
-  ];
+export default function FriendsBar({ user }: { user: UserWithData }) {
+  const [friends, setFriends] = useState(user ? user.friends : []);
 
   const [addFriendModal, setAddFriendModal] = useState(false);
   const [searchFriendModal, setSearchFriendModal] = useState(false);
 
-  const sendFriendRequest = (username: string) => {
-    console.log(`Sending friend request to ${username}...`);
+  const submitCallback = async (username: string) => {
+    const success = await sendFriendRequest(user.id, username);
+    console.log("Success? ", success);
     setAddFriendModal(false);
   };
 
@@ -47,7 +29,7 @@ export default function FriendsBar() {
           prompt="Send a Friend Request"
           inputPlaceholder="Enter a username..."
           setClose={() => setAddFriendModal(false)}
-          submitCallback={sendFriendRequest}
+          submitCallback={submitCallback}
         />
       )}
       {searchFriendModal && (
@@ -66,7 +48,7 @@ export default function FriendsBar() {
           <div className={styles.plus}>
             <Icon type="plus" fill="#fff" />
           </div>
-          {mock_friends.length === 0 && (
+          {friends.length === 0 && (
             <div className={styles.noFriendsContainer}>
               <p className={styles.noFriends}>Add Your Friends</p>
               <div className={styles.up_arrow}>
@@ -85,12 +67,16 @@ export default function FriendsBar() {
         </button>
       </div>
       <div className={styles.friendsSection}>
-        {mock_friends.map((friend, index) => {
+        {friends.map((friend, index) => {
           return (
             <div className={styles.friend} key={index}>
-              <img src={friend.pfp} alt="PFP" className={styles.pfp} />
+              <img
+                src={friend?.image as string}
+                alt="PFP"
+                className={styles.pfp}
+              />
               <p className={styles.username}>{friend.username}</p>
-              {friend.unopened && <div className={styles.unopened}></div>}
+              {false && <div className={styles.unopened}></div>}
             </div>
           );
         })}

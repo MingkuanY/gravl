@@ -164,7 +164,8 @@
               font-size: 1rem;
             }
 
-            .text {
+            .text,
+            .noNotifs {
               width: 100%;
               padding: 0.5rem 0;
               color: mixin.$faded;
@@ -177,6 +178,10 @@
                 color: mixin.$dark;
                 font-weight: 400;
               }
+            }
+
+            .noNotifs {
+              text-align: center;
             }
 
             .btns {

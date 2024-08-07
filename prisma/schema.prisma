@@ -47,6 +47,7 @@ enum FriendRequestStatus {
   DECLINED
 }
 
+// Every friend request sent from a sender User to a receiver User
 model FriendRequest {
   id         Int                 @id @default(autoincrement())
   senderId   String
@@ -66,12 +67,18 @@ enum NotificationType {
   FRIEND_FINISHED_TRIP
 }
 
+// Every User has a list of notifications, including friend requests
 model Notification {
-  id        Int              @id @default(autoincrement())
-  userId    String
-  type      NotificationType
-  message   String
-  createdAt DateTime         @default(now())
+  id     Int              @id @default(autoincrement())
+  userId String
+  type   NotificationType
+
+  // The User the action is applied to: i.e. sender of the friend request, accepter of outgoing friend request, etc
+  userIdInConcern String?
+
+  requestId Int?
+  createdAt DateTime @default(now())
+  read      Boolean  @default(false)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

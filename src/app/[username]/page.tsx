@@ -1,5 +1,5 @@
 import Header from "@/components/header/Header";
-import { getUserWithTripsAndVisits } from "@/actions/actions";
+import { getUserWithData } from "@/actions/actions";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth.ts";
 import NotFound from "../not-found";
@@ -20,10 +20,8 @@ export default async function Profile({
 
   const userEmail = session.user.email;
   const [user, places] = await Promise.all([
-    getUserWithTripsAndVisits(userEmail),
+    getUserWithData(userEmail),
     loadPlaces(),
-    // Promise.resolve({}),
-    // Promise.resolve([]),
   ]);
 
   if (!user || user.username !== params.username) {
@@ -34,7 +32,7 @@ export default async function Profile({
   return (
     <>
       <Header user={user} />
-      <Dashboard initialTrips={user!.trips} user={user} places={places} />
+      <Dashboard user={user} places={places} />
     </>
   );
 }

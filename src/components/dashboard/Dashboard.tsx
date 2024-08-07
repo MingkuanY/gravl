@@ -20,17 +20,15 @@ import { addTripToUser, deleteTrip, updateTrip } from "@/actions/actions";
 import ConfirmSelection from "../modals/ConfirmSelection";
 
 export default function Dashboard({
-  initialTrips,
   user,
   places,
 }: {
-  initialTrips: TripWithVisits[];
   user: any;
   places: PlaceInput[];
 }) {
   const [editProfile, setEditProfile] = useState(false);
 
-  const [trips, setTrips] = useState(initialTrips);
+  const [trips, setTrips] = useState<TripWithVisits[]>(user.trips);
   const [optimisticTrips, setOptimisticTrips] = useOptimistic(trips);
   const [, startTransition] = useTransition();
 
@@ -44,6 +42,8 @@ export default function Dashboard({
       name: trip.trip_name,
       description: trip.description,
       userId: user.id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
       visits: trip.visits.map((visit, index) => ({
         id: tempID + index,
         date: new Date(visit.date),

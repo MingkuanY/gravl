@@ -1,4 +1,4 @@
-import { Place, Trip, Visit } from "@prisma/client";
+import { Notification, Place, Trip, User, Visit } from "@prisma/client";
 
 // Place
 
@@ -9,6 +9,13 @@ export type PlaceInput = {
 };
 
 export type PlaceWithoutId = Omit<Place, "id">;
+
+// User
+
+export type UserWithData = User & {
+  notifications: Notification[];
+  friends: User[];
+};
 
 // Trip
 

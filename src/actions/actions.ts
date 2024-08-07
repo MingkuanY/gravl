@@ -70,12 +70,30 @@ export async function getUser(email: string | undefined) {
 }
 
 /**
- * Gets the User with the given email in the database, including their trips and visits
+ * Finds username by userID.
+ *
+ * @param userId
+ * @returns
+ */
+export async function getUsernameById(userId: string | null) {
+  if (!userId) {
+    return "";
+  }
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+  return user?.username;
+}
+
+/**
+ * Gets the User with the given email in the database, including their trips, friends, and notifications
  *
  * @param email to look up the User in the database
- * @returns the User with that email along with their trips and visits
+ * @returns the User with that email along with their trips, friends, and notifications
  */
-export async function getUserWithTripsAndVisits(email: string | undefined) {
+export async function getUserWithData(email: string | undefined) {
   if (!email) {
     return null;
   }
@@ -89,6 +107,8 @@ export async function getUserWithTripsAndVisits(email: string | undefined) {
           visits: true,
         },
       },
+      friends: true,
+      notifications: true,
     },
   });
   return user;
@@ -223,6 +243,13 @@ export async function deleteTrip(trip_id: number) {
   return deletedTrip;
 }
 
+/**
+ * Updates a trip upon the User editing it.
+ *
+ * @param trip_id the trip to be updated
+ * @param trip the edited trip to update it with
+ * @returns the updated trip
+ */
 export async function updateTrip(trip_id: number, trip: TripInput) {
   const updatedTrip = await prisma.trip.update({
     where: {
@@ -246,4 +273,143 @@ export async function updateTrip(trip_id: number, trip: TripInput) {
   });
 
   return updatedTrip;
+}
+
+/**
+ * Sends a friend request, checking that the receiverId is valid and no request is already between them
+ *
+ * @param senderId the user who is sending the request
+ * @param receiverId the user who is receiving the request
+ * @returns whether the request has been sent successfully or not
+ */
+export async function sendFriendRequest(
+  senderId: string,
+  receiverUsername: string
+) {
+  console.log("sendFriendRequest called");
+
+  // Check if the receiver exists
+  const receiverExists = await prisma.user.findUnique({
+    where: { username: receiverUsername },
+  });
+
+  if (!receiverExists) {
+    return false;
+  }
+
+  console.log("receiver exists");
+
+  const receiverId = receiverExists.id;
+
+  // Check for existing friend request
+  const existingRequest = await prisma.friendRequest.findFirst({
+    where: {
+      OR: [
+        { senderId: senderId, receiverId: receiverId },
+        { senderId: receiverId, receiverId: senderId },
+      ],
+    },
+  });
+
+  if (existingRequest) {
+    return true;
+  }
+
+  console.log("no existing friend request");
+
+  // Create friend request
+  const request = await prisma.friendRequest.create({
+    data: {
+      senderId: senderId,
+      receiverId: receiverId,
+      status: "PENDING",
+    },
+  });
+
+  console.log("friend request created");
+
+  // Send notification to receiver
+  await prisma.notification.create({
+    data: {
+      userId: receiverId,
+      type: "FRIEND_REQUEST",
+      userIdInConcern: senderId,
+      requestId: request.id,
+    },
+  });
+
+  console.log("notification created");
+
+  return true;
+}
+
+/**
+ * Accept a friend request.
+ *
+ * @param requestId
+ */
+export async function acceptFriendRequest(requestId: number) {
+  // Accept friend request and deletes it
+  const request = await prisma.friendRequest.delete({
+    where: {
+      id: requestId,
+    },
+  });
+
+  // Delete original notification
+  await prisma.notification.deleteMany({
+    where: {
+      userId: request.receiverId,
+      type: "FRIEND_REQUEST",
+      requestId: requestId,
+    },
+  });
+
+  // Add friends/friendOf relationships for both users
+  await prisma.user.update({
+    where: {
+      id: request.senderId,
+    },
+    data: {
+      friends: {
+        connect: { id: request.receiverId },
+      },
+      friendOf: {
+        connect: { id: request.receiverId },
+      },
+    },
+  });
+
+  await prisma.user.update({
+    where: { id: request.receiverId },
+    data: {
+      friends: {
+        connect: { id: request.senderId },
+      },
+      friendOf: {
+        connect: { id: request.senderId },
+      },
+    },
+  });
+
+  // Create notification for sender
+  await prisma.notification.create({
+    data: {
+      userId: request.senderId,
+      type: "FRIEND_REQUEST_ACCEPTED",
+      userIdInConcern: request.receiverId,
+    },
+  });
+}
+
+/**
+ * Declines a friend request by deleting it.
+ *
+ * @param requestId
+ */
+export async function declineFriendRequest(requestId: number) {
+  // Deletes the friend request
+  await prisma.friendRequest.delete({
+    where: { id: requestId },
+  });
 }

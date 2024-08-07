@@ -4,54 +4,41 @@ import { useEffect, useRef, useState } from "react";
 import styles from "../../styles/header.module.scss";
 import Icon from "../icons/Icon.tsx";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { User } from "@prisma/client";
 import classnames from "classnames";
 import { useRouter } from "next/navigation";
 import { formatNotificationTime } from "@/utils/date.ts";
 import { useScreenWidth } from "@/utils/hooks.ts";
 import FriendsBar from "../dashboard/FriendsBar.tsx";
+import { UserWithData } from "@/utils/types.ts";
+import {
+  acceptFriendRequest,
+  declineFriendRequest,
+  getUsernameById,
+} from "@/actions/actions.ts";
 
-export default function Header({ user }: { user?: User }) {
-  // HARDCODED NOTIFICATIONS
-  const [friendRequests, setFriendRequests] = useState(
-    [
-      {
-        userID: "alex",
-        username: "alexkranias",
-        time: new Date("2024/08/02"),
-      },
-      {
-        userID: "sam",
-        username: "sparkerly",
-        time: new Date("2024/08/03"),
-      },
-      {
-        userID: "ayush",
-        username: "ayush",
-        time: new Date("2024/08/04"),
-      },
-      {
-        userID: "colin",
-        username: "obamna",
-        time: new Date("2024/08/04"),
-      },
-      {
-        userID: "ally",
-        username: "nosilla",
-        time: new Date("2024/08/05"),
-      },
-      {
-        userID: "tanush",
-        username: "tanush",
-        time: new Date("2024/08/05"),
-      },
-      {
-        userID: "krish",
-        username: "krish",
-        time: new Date("2024/08/05"),
-      },
-    ].sort((a, b) => b.time.getTime() - a.time.getTime())
+export default function Header({ user }: { user?: UserWithData }) {
+  const [notifications, setNotifications] = useState(
+    user ? user.notifications : []
   );
+  const [usernames, setUsernames] = useState<{ [key: string]: string }>({});
+
+  useEffect(() => {
+    const fetchUsernames = async () => {
+      const usernamesMap: { [key: string]: string } = {};
+      for (const notification of notifications) {
+        if (
+          notification.userIdInConcern &&
+          !usernamesMap[notification.userIdInConcern]
+        ) {
+          const username = await getUsernameById(notification.userIdInConcern);
+          usernamesMap[notification.userIdInConcern] = username!;
+        }
+      }
+      setUsernames(usernamesMap);
+    };
+
+    fetchUsernames();
+  }, [notifications]);
 
   const isMobile = useScreenWidth();
 
@@ -89,13 +76,16 @@ export default function Header({ user }: { user?: User }) {
     };
   });
 
-  const handleRequest = (friendUserID: string, response: boolean) => {
+  const handleRequest = async (requestId: number | null, response: boolean) => {
+    if (!requestId) {
+      return;
+    }
     if (response) {
       // Accept friend request
-      console.log(`Accept ${friendUserID} as friend.`);
+      await acceptFriendRequest(requestId);
     } else {
       // Decline friend request
-      console.log(`Decline ${friendUserID} as friend.`);
+      await declineFriendRequest(requestId);
     }
   };
 
@@ -111,14 +101,14 @@ export default function Header({ user }: { user?: User }) {
       <div className={styles.headerRightContainer}>
         {session.status === "authenticated" && (
           <>
-            {!isMobile && <FriendsBar />}
+            {!isMobile && <FriendsBar user={user!} />}
             <div className={styles.notifContainer} ref={notifBtnRef}>
               <div className={styles.notif}>
                 <Icon type="notification" fill="#319fff" />
               </div>
 
-              {friendRequests.length > 0 && (
-                <div className={styles.notifCount}>{friendRequests.length}</div>
+              {notifications.length > 0 && (
+                <div className={styles.notifCount}>{notifications.length}</div>
               )}
 
               <div
@@ -129,43 +119,65 @@ export default function Header({ user }: { user?: User }) {
                 ref={notifDropdownRef}
               >
                 <ul>
-                  {friendRequests.map((friendRequest, index) => {
+                  {notifications.map((notification, index) => {
+                    const username = notification.userIdInConcern
+                      ? usernames[notification.userIdInConcern]
+                      : "";
                     const showDate =
                       index === 0 ||
-                      friendRequests[index - 1].time.getDate() !==
-                        friendRequest.time.getDate();
+                      notifications[index - 1].createdAt.getDate() !==
+                        notification.createdAt.getDate();
+
+                    let message = "";
+                    switch (notification.type) {
+                      case "FRIEND_REQUEST":
+                        message = "sent a friend request";
+                        break;
+                      case "FRIEND_REQUEST_ACCEPTED":
+                        message = "accepted your friend request";
+                        break;
+                      case "FRIEND_FINISHED_TRIP":
+                        message = "finished a trip";
+                        break;
+                    }
                     return (
                       <li key={index}>
                         {showDate && (
                           <p className={styles.date}>
-                            {formatNotificationTime(friendRequest.time)}
+                            {formatNotificationTime(notification.createdAt)}
                           </p>
                         )}
                         <p className={styles.text}>
-                          <span>{friendRequest.username}</span> sent a friend
-                          request
+                          <span>{username}</span> {message}
                         </p>
-                        <div className={styles.btns}>
-                          <button
-                            className={styles.accept}
-                            onClick={() =>
-                              handleRequest(friendRequest.userID, true)
-                            }
-                          >
-                            Accept
-                          </button>
-                          <button
-                            className={styles.decline}
-                            onClick={() =>
-                              handleRequest(friendRequest.userID, false)
-                            }
-                          >
-                            Decline
-                          </button>
-                        </div>
+                        {notification.type === "FRIEND_REQUEST" && (
+                          <div className={styles.btns}>
+                            <button
+                              className={styles.accept}
+                              onClick={() =>
+                                handleRequest(notification.requestId, true)
+                              }
+                            >
+                              Accept
+                            </button>
+                            <button
+                              className={styles.decline}
+                              onClick={() =>
+                                handleRequest(notification.requestId, false)
+                              }
+                            >
+                              Decline
+                            </button>
+                          </div>
+                        )}
                       </li>
                     );
                   })}
+                  {notifications.length === 0 && (
+                    <li>
+                      <p className={styles.noNotifs}>No new notifications</p>
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>
