@@ -8,14 +8,14 @@ export default function Notification({
   notifications,
   notification,
   index,
-  userDetails,
+  username,
   setClose,
   responseCallback,
 }: {
   notifications: Notif[];
   notification: Notif;
   index: number;
-  userDetails: { [key: string]: User };
+  username: string;
   setClose: Function;
   responseCallback: Function;
 }) {
@@ -37,9 +37,6 @@ export default function Notification({
     }
   };
 
-  const currUser = notification.userIdInConcern
-    ? userDetails[notification.userIdInConcern]
-    : null;
   const showDate =
     index === 0 ||
     notifications[index - 1].createdAt.getDate() !==
@@ -69,10 +66,10 @@ export default function Notification({
       <p className={styles.text}>
         <span
           onClick={() => {
-            router.push(`/${currUser?.username}`);
+            router.push(`/${username}`);
           }}
         >
-          {currUser?.username}
+          {username}
         </span>{" "}
         {message}
       </p>

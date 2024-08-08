@@ -17,27 +17,6 @@ export default function Header({ user }: { user?: UserWithData }) {
   const [notifications, setNotifications] = useState(
     user ? user.notifications : []
   );
-  const [userDetails, setUserDetails] = useState<{
-    [key: string]: User;
-  }>({});
-
-  useEffect(() => {
-    const fetchUserDetails = async () => {
-      const detailsMap: { [key: string]: User } = {};
-      for (const notification of notifications) {
-        if (
-          notification.userIdInConcern &&
-          !detailsMap[notification.userIdInConcern]
-        ) {
-          const user = await getUserById(notification.userIdInConcern);
-          detailsMap[notification.userIdInConcern] = user!;
-        }
-      }
-      setUserDetails(detailsMap);
-    };
-
-    fetchUserDetails();
-  }, [notifications]);
 
   const isMobile = useScreenWidth();
 
@@ -154,12 +133,18 @@ export default function Header({ user }: { user?: UserWithData }) {
                 >
                   <ul>
                     {notifications.map((notification, index) => {
+                      const friend = user.friends.find(
+                        (friend) => friend.id === notification.userIdInConcern
+                      );
+                      const username = friend ? friend.username : null;
+                      if (!username) return null;
+
                       return (
                         <Notification
                           notifications={notifications}
                           notification={notification}
                           index={index}
-                          userDetails={userDetails}
+                          username={username}
                           key={index}
                           setClose={() => setNotifDropdown(false)}
                           responseCallback={(response: boolean) =>
