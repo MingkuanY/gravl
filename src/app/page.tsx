@@ -38,6 +38,7 @@ export default async function Landing({
             data={welcome_to_gravl}
             pause={5}
             animate={true}
+            toggleHighways={false}
           />
         </div>
         <p className={styles.motto}>Not all who wander are lost</p>

@@ -60,4 +60,5 @@ export type MapProps = {
   visits?: VisitInput[];
   setVisits?: Function;
   currentDate?: string;
+  toggleHighways: boolean;
 };

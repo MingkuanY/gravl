@@ -11,6 +11,7 @@ import { PlaceInput } from "@/utils/types";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { addDesignationToLabel } from "@/utils/map";
 import ConfirmSelection from "../modals/ConfirmSelection";
+import ToggleBtn from "./ToggleBtn";
 
 /**
  * Sort visit chronologically by date and order if same date.
@@ -164,6 +165,12 @@ export default function ManualFillCard({
 
   const [confirmFinish, setConfirmFinish] = useState(false);
 
+  const [toggleHighways, setToggleHighways] = useState(false);
+
+  const handleToggle = (checked: boolean) => {
+    setToggleHighways(checked);
+  };
+
   return (
     <div className={styles.everything}>
       {confirmFinish && (
@@ -181,12 +188,17 @@ export default function ManualFillCard({
           </div>
 
           <div className={styles.mapContainer}>
+            <div className={styles.highwayContainer}>
+              <p className={styles.highways}>Show Highways</p>
+              <ToggleBtn onToggle={handleToggle} />
+            </div>
             <Counties
               animate={false}
               places={places}
               visits={visits}
               setVisits={setVisitsData}
               currentDate={getCurrentDate()}
+              toggleHighways={toggleHighways}
             />
           </div>
 

@@ -26,10 +26,21 @@
 
 /* interstates */
 
-#highways path {
-  stroke: mixin.$highways;
-  cursor: pointer;
-  display: none; // only hidden for landing page animation
+#highways {
+  pointer-events: none;
+
+  path {
+    transition: 0.3s;
+    stroke: mixin.$highways;
+    cursor: pointer;
+    visibility: hidden; // can be toggled to help with filling out trips
+    opacity: 0;
+  }
+
+  &.visible path {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 /* state borders */

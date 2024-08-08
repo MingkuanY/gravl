@@ -45,6 +45,7 @@
       /* map */
 
       .mapContainer {
+        position: relative;
         margin-top: 4rem;
         margin-left: -4rem;
         width: 80rem;
@@ -55,6 +56,21 @@
 
         &.largeMapContainer {
           width: 80rem;
+        }
+
+        .highwayContainer {
+          position: absolute;
+          bottom: -2rem;
+          right: 1rem;
+          display: flex;
+          align-items: center;
+
+          .highways {
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: mixin.$gravl-blue;
+            font-weight: 400;
+          }
         }
       }
 

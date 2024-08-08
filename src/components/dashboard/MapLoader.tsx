@@ -95,6 +95,7 @@ export default function MapLoader({
           reload={reload}
           pause={20}
           places={places}
+          toggleHighways={false}
         />
       </div>
 
