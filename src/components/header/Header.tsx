@@ -109,20 +109,27 @@ export default function Header({ user }: { user?: UserWithData }) {
     }
   };
 
+  // Redirect to profile
+  const goToProfile = () => {
+    user && router.push(`/${user.username}`);
+  };
+
   return (
     <div className={styles.headerContainer}>
       <div className={styles.logoContainer}>
-        <div className={styles.logo}>
+        <div className={styles.logo} onClick={goToProfile}>
           <Icon type="car" fill="#319fff" />
         </div>
-        <p className={styles.gravl}>Gravl</p>
+        <p className={styles.gravl} onClick={goToProfile}>
+          Gravl
+        </p>
         <p className={styles.testing}>Alpha</p>
       </div>
       <div className={styles.headerRightContainer}>
-        {session.status === "authenticated" && (
+        {session.status === "authenticated" && user ? (
           <>
-            {!isMobile && user && <FriendsBar user={user} friends={friends} />}
-            {!isMobile && user && (
+            {!isMobile && <FriendsBar user={user} friends={friends} />}
+            {!isMobile && (
               <div className={styles.notifContainer} ref={notifBtnRef}>
                 <div className={styles.notif}>
                   <Icon type="notification" fill="#319fff" />
@@ -173,7 +180,7 @@ export default function Header({ user }: { user?: UserWithData }) {
 
             <div className={styles.pfpContainer} ref={pfpBtnRef}>
               <img
-                src={user?.image as string}
+                src={user.image as string}
                 alt="PFP"
                 className={styles.pfp}
                 onClick={() => setUserDropdown(!userDropdown)}
@@ -186,19 +193,13 @@ export default function Header({ user }: { user?: UserWithData }) {
                 )}
               >
                 <ul>
-                  {!isMobile && (
-                    <li onClick={() => router.push(`/${user!.username}`)}>
-                      Profile
-                    </li>
-                  )}
+                  {!isMobile && <li onClick={goToProfile}>Profile</li>}
                   <li onClick={() => signOut({ callbackUrl: "/" })}>Log Out</li>
                 </ul>
               </div>
             </div>
           </>
-        )}
-
-        {session.status === "unauthenticated" && (
+        ) : (
           <button
             onClick={() => signIn("google", { callbackUrl: "/redirect" })}
             className={styles.loginContainer}
