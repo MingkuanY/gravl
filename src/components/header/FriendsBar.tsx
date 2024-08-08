@@ -41,7 +41,8 @@ export default function FriendsBar({
   const requestFriend = async (username: string) => {
     if (
       username !== user.username &&
-      !friends.some((friend) => friend.username === username)
+      !friends.some((friend) => friend.username === username) &&
+      !pendingFriends.some((friend) => friend.username === username)
     ) {
       setStatus("PENDING");
       const newPendingFriend = await sendFriendRequest(user.id, username);

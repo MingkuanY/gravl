@@ -9,6 +9,7 @@
 
   .wheel {
     width: 16rem;
+    aspect-ratio: 1;
     animation: drive 0.95s infinite linear;
   }
   @keyframes drive {

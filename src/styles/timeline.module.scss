@@ -42,7 +42,8 @@
       text-transform: uppercase;
     }
     .up_arrow {
-      height: 3rem;
+      width: 3rem;
+      aspect-ratio: 1;
     }
   }
 
@@ -138,6 +139,7 @@
 
           .trash {
             height: 2rem;
+            aspect-ratio: 1;
           }
         }
 
@@ -208,8 +210,8 @@
         }
 
         .desktop {
-          height: 2rem;
           width: 2rem;
+          aspect-ratio: 1;
         }
       }
     }

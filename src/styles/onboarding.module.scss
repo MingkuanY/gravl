@@ -31,6 +31,7 @@
         margin: -1rem 0;
         margin-left: 0.5rem;
         width: 4rem;
+        aspect-ratio: 1;
       }
     }
 
@@ -62,6 +63,7 @@
         .return_arrow {
           margin-left: 0.5rem;
           width: 2.5rem;
+          height: 2rem;
         }
       }
 
@@ -123,6 +125,7 @@
 
         .account {
           width: 10rem;
+          aspect-ratio: 1;
         }
 
         button {

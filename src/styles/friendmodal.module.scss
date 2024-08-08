@@ -53,6 +53,7 @@
         .return_arrow {
           margin-left: 0.5rem;
           width: 2.5rem;
+          height: 2rem;
         }
       }
 
@@ -87,6 +88,7 @@
 
     .wheel {
       width: 10rem;
+      aspect-ratio: 1;
       animation: drive 0.95s infinite linear;
     }
     @keyframes drive {
@@ -108,6 +110,7 @@
 
     .check {
       width: 12rem;
+      aspect-ratio: 1;
       margin: -3rem 0;
     }
     .success {
@@ -135,6 +138,7 @@
 
     .sad {
       width: 6rem;
+      aspect-ratio: 1;
     }
     .failure {
       margin-top: 2rem;
