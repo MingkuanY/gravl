@@ -121,8 +121,8 @@ export default function Header({ user }: { user?: UserWithData }) {
       <div className={styles.headerRightContainer}>
         {session.status === "authenticated" && (
           <>
-            {!isMobile && <FriendsBar user={user!} friends={friends} />}
-            {!isMobile && (
+            {!isMobile && user && <FriendsBar user={user} friends={friends} />}
+            {!isMobile && user && (
               <div className={styles.notifContainer} ref={notifBtnRef}>
                 <div className={styles.notif}>
                   <Icon type="notification" fill="#319fff" />
