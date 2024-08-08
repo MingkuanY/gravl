@@ -28,7 +28,7 @@ export default function FriendModal({
   useEffect(() => {
     const handleKeyDown = async (e: KeyboardEvent) => {
       if (e.key === "Enter") {
-        submitCallback(inputData);
+        submitCallback(inputData.toLowerCase());
       }
     };
 

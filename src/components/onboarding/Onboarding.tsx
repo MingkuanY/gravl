@@ -29,22 +29,46 @@ export default function Onboarding({
 
   const wordLimit = 100;
 
-  const [validUsername, setValidUsername] = useState(true);
+  // Possible values: DEFAULT, TAKEN, INVALID
+  const [validUsername, setValidUsername] = useState("DEFAULT");
 
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleKeyDown = async (e: KeyboardEvent) => {
       if (e.key === "Enter") {
-        if (
-          step === 1 &&
-          user &&
-          user.username !== accountData.username &&
-          !(await uniqueUsername(accountData.username))
-        ) {
-          setValidUsername(false);
+        const input = accountData.username.toLowerCase();
+
+        // Validity check that username has no spaces nor special characters except for underscores
+        const validUsernameRegex = /^[a-zA-Z0-9_]+$/;
+        const regexTest = validUsernameRegex.test(input); // True means valid
+
+        // Ensure the inputted username passes a unique test and validity check
+        const validityTest = (await uniqueUsername(input)) && regexTest; // True means valid
+
+        if (step === 1) {
+          // Username
+          if (user) {
+            // Editing profile - profile already exists
+            if (user.username === input || validityTest) {
+              // Not changing username or the new username passes validity test
+              setValidUsername("DEFAULT");
+              setStep((step) => Math.min(step + 1, 4));
+            } else {
+              // Changing to a new, valid username
+              setValidUsername(regexTest ? "TAKEN" : "INVALID");
+            }
+          } else {
+            // Onboarding - profile does not exist yet
+            if (validityTest) {
+              setValidUsername("DEFAULT");
+              setStep((step) => Math.min(step + 1, 4));
+            } else {
+              setValidUsername(regexTest ? "TAKEN" : "INVALID");
+            }
+          }
         } else {
-          setValidUsername(true);
+          // Non-username fields
           setStep((step) => Math.min(step + 1, 4));
         }
       }
@@ -116,8 +140,13 @@ export default function Onboarding({
                 }
               />
             </div>
-            {!validUsername && (
+            {validUsername === "TAKEN" && (
               <p className={styles.warning}>Sorry, this username is taken.</p>
+            )}
+            {validUsername === "INVALID" && (
+              <p className={styles.warning}>
+                Sorry, a username can only consist of letters and underscores.
+              </p>
             )}
             {setClose && <CloseBtn setClose={setClose} />}
           </div>
