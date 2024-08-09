@@ -143,7 +143,7 @@ export async function getUserWithData(email: string | undefined) {
   return user;
 }
 
-export async function getFriendByUsername(username: string) {
+export async function getUserByUsername(username: string) {
   const user = await prisma.user.findUnique({
     where: {
       username: username,

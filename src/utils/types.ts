@@ -12,6 +12,10 @@ export type PlaceWithoutId = Omit<Place, "id">;
 
 // User
 
+export type UserWithTrips = User & {
+  trips: TripWithVisits[];
+};
+
 export type UserWithData = User & {
   notifications: Notification[];
   friends: User[];

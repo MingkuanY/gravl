@@ -12,7 +12,12 @@ import {
   useState,
   useTransition,
 } from "react";
-import { PlaceInput, TripInput, TripWithVisits } from "@/utils/types";
+import {
+  PlaceInput,
+  TripInput,
+  TripWithVisits,
+  UserWithTrips,
+} from "@/utils/types";
 import NewTrip from "../log/NewTrip";
 import { sortTrips } from "@/utils/date";
 import Onboarding from "../onboarding/Onboarding";
@@ -25,6 +30,7 @@ import {
 import ConfirmSelection from "../modals/ConfirmSelection";
 import { useRouter } from "next/navigation";
 import { User } from "@prisma/client";
+import Profile from "./Profile";
 
 export default function Dashboard({
   user,
@@ -32,13 +38,11 @@ export default function Dashboard({
   viewOnly,
   viewer,
 }: {
-  user: any;
+  user: UserWithTrips;
   places: PlaceInput[];
   viewOnly: boolean;
   viewer: User;
 }) {
-  const router = useRouter();
-
   const [editProfile, setEditProfile] = useState(false);
 
   const [trips, setTrips] = useState<TripWithVisits[]>(user.trips);
@@ -155,11 +159,6 @@ export default function Dashboard({
     };
   }, [currTrip]);
 
-  const handleUnfriend = () => {
-    unfriendUsers(user.id, viewer.id);
-    router.push(`/${viewer.username!}`);
-  };
-
   return (
     <>
       {confirmDelete !== -1 && (
@@ -201,32 +200,13 @@ export default function Dashboard({
             viewOnly={viewOnly}
           />
           <div className={styles.main}>
-            <div className={styles.profile}>
-              <div className={styles.pfpContainer}>
-                <img src={user!.image!} alt="PFP" />
-              </div>
-              <div className={styles.userInfo}>
-                <div className={styles.usernameAndEdit}>
-                  <p className={styles.username}>{user!.username}</p>
-                  {!viewOnly && (
-                    <div className={styles.edit}>
-                      <EditProfileButton setEditProfile={setEditProfile} />
-                    </div>
-                  )}
-                </div>
-                <p className={styles.location}>{user!.location}</p>
-                <p className={styles.bio}>{user!.bio}</p>
-                {viewOnly && (
-                  <button
-                    className={styles.unfriendBtn}
-                    onClick={handleUnfriend}
-                  >
-                    Unfriend
-                  </button>
-                )}
-              </div>
-              <UserStats trips={trips} />
-            </div>
+            <Profile
+              user={user}
+              viewOnly={viewOnly}
+              viewer={viewer}
+              setEditProfile={setEditProfile}
+              trips={trips}
+            />
 
             <MapLoader trips={tripsForMaps} places={places} />
           </div>
