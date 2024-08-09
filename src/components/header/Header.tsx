@@ -18,6 +18,16 @@ export default function Header({ user }: { user?: UserWithData }) {
     user ? user.notifications : []
   );
 
+  useEffect(() => {
+    // Sort notifications in recent-first order
+    setNotifications((prevNotifications) =>
+      [...prevNotifications].sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      )
+    );
+  }, [notifications]);
+
   const isMobile = useScreenWidth();
 
   const session = useSession();
@@ -65,9 +75,9 @@ export default function Header({ user }: { user?: UserWithData }) {
   });
 
   // Handle add friend when friend request accepted
-
   const [friends, setFriends] = useState<User[]>(user ? user.friends : []);
 
+  // Handles the optimistic response to a friend request (i.e. accept or decline)
   const responseCallback = async (response: boolean, index: number) => {
     const updatedNotifications = [...notifications];
     const notification = updatedNotifications[index];
@@ -76,6 +86,7 @@ export default function Header({ user }: { user?: UserWithData }) {
     updatedNotifications[index] = {
       ...notification,
       type: "FRIEND_REQUEST_ACCEPTED",
+      createdAt: new Date(),
     };
     setNotifications(updatedNotifications);
 
