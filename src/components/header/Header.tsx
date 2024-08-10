@@ -19,6 +19,10 @@ export default function Header({ user }: { user?: UserWithData }) {
   );
 
   useEffect(() => {
+    sortNotifications();
+  }, []);
+
+  const sortNotifications = () => {
     // Sort notifications in recent-first order
     setNotifications((prevNotifications) =>
       [...prevNotifications].sort(
@@ -26,7 +30,7 @@ export default function Header({ user }: { user?: UserWithData }) {
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       )
     );
-  }, [notifications]);
+  };
 
   const isMobile = useScreenWidth();
 
@@ -89,6 +93,7 @@ export default function Header({ user }: { user?: UserWithData }) {
       createdAt: new Date(),
     };
     setNotifications(updatedNotifications);
+    sortNotifications();
 
     if (response) {
       // Accepted friend request
