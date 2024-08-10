@@ -8,7 +8,7 @@ import classnames from "classnames";
 import { useRouter } from "next/navigation";
 import { useScreenWidth } from "@/utils/hooks.ts";
 import FriendsBar from "./FriendsBar.tsx";
-import { UserWithData } from "@/utils/types.ts";
+import { Status, UserWithData } from "@/utils/types.ts";
 import { getUserById, readNotifications } from "@/actions/actions.ts";
 import { User } from "@prisma/client";
 import Notification from "./Notification.tsx";
@@ -20,7 +20,7 @@ export default function Header({ user }: { user?: UserWithData }) {
 
   useEffect(() => {
     sortNotifications();
-  }, []);
+  }, [user]);
 
   const sortNotifications = () => {
     // Sort notifications in recent-first order
@@ -31,6 +31,46 @@ export default function Header({ user }: { user?: UserWithData }) {
       )
     );
   };
+
+  // look up usernames by id
+
+  const [notifsStatus, setNotifsStatus] = useState<Status>("LOADING");
+
+  const [usernames, setUsernames] = useState<{
+    [key: string]: string;
+  }>({});
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      setNotifsStatus("LOADING");
+      const detailsMap: { [key: string]: string } = {};
+      for (const notification of notifications) {
+        if (
+          notification.userIdInConcern &&
+          !detailsMap[notification.userIdInConcern]
+        ) {
+          let currUsername = "";
+          if (notification.type === "FRIEND_REQUEST") {
+            const currUser = await getUserById(notification.userIdInConcern);
+            if (currUser && currUser.username) {
+              currUsername = currUser.username;
+            }
+          } else {
+            currUsername = friends.find(
+              (friend) => friend.id === notification.userIdInConcern
+            )?.username!;
+          }
+          if (currUsername) {
+            detailsMap[notification.userIdInConcern] = currUsername;
+          }
+        }
+      }
+      setUsernames(detailsMap);
+      setNotifsStatus("DEFAULT");
+    };
+
+    fetchUserDetails();
+  }, [user?.notifications]);
 
   const isMobile = useScreenWidth();
 
@@ -148,27 +188,34 @@ export default function Header({ user }: { user?: UserWithData }) {
                   ref={notifDropdownRef}
                 >
                   <ul>
-                    {notifications.map((notification, index) => {
-                      const friend = user.friends.find(
-                        (friend) => friend.id === notification.userIdInConcern
-                      );
-                      const username = friend ? friend.username : null;
-                      if (!username) return null;
+                    {notifsStatus === "DEFAULT" &&
+                      notifications.map((notification, index) => {
+                        const username =
+                          usernames[notification.userIdInConcern!];
+                        if (!username) return null;
 
-                      return (
-                        <Notification
-                          notifications={notifications}
-                          notification={notification}
-                          index={index}
-                          username={username}
-                          key={index}
-                          setClose={() => setNotifDropdown(false)}
-                          responseCallback={(response: boolean) =>
-                            responseCallback(response, index)
-                          }
-                        />
-                      );
-                    })}
+                        return (
+                          <Notification
+                            notifications={notifications}
+                            notification={notification}
+                            index={index}
+                            username={username}
+                            key={index}
+                            setClose={() => setNotifDropdown(false)}
+                            responseCallback={(response: boolean) =>
+                              responseCallback(response, index)
+                            }
+                          />
+                        );
+                      })}
+                    {notifsStatus === "LOADING" && (
+                      <div className={styles.loadingContainer}>
+                        <div className={styles.wheel}>
+                          <Icon type="wheel" fill="#24292f" />
+                        </div>
+                        <p className={styles.loading}>Loading...</p>
+                      </div>
+                    )}
                     {notifications.length === 0 && (
                       <li>
                         <p className={styles.noNotifs}>No new notifications</p>

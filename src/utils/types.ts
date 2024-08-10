@@ -70,3 +70,5 @@ export type MapProps = {
 // Dashboard
 
 export type Mode = "USER" | "FRIEND" | "NON-FRIEND" | "NON-USER";
+
+export type Status = "DEFAULT" | "LOADING";

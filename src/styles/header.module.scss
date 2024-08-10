@@ -199,6 +199,34 @@
               }
             }
           }
+
+          .loadingContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 0;
+
+            .wheel {
+              width: 8rem;
+              aspect-ratio: 1;
+              animation: drive 0.95s infinite linear;
+            }
+            @keyframes drive {
+              0% {
+                transform: rotate(0deg);
+              }
+              100% {
+                transform: rotate(360deg);
+              }
+            }
+
+            .loading {
+              margin-top: 1rem;
+              font-size: 2rem;
+              color: mixin.$gravl-blue;
+              font-weight: 400;
+            }
+          }
         }
       }
     }
