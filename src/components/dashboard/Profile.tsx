@@ -60,6 +60,9 @@ export default function Profile({
             <p>Add Friend</p>
           </button>
         )}
+        {mode === "NON-USER" && (
+          <p className={styles.signInToView}>Sign In To View Full Profile</p>
+        )}
       </div>
       <UserStats trips={trips} />
     </div>

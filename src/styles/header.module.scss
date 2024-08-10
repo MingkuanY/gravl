@@ -84,10 +84,14 @@
       margin-right: 2rem;
       height: 3.5rem;
       padding: 0 1.4rem;
-      border: 0.2rem solid mixin.$gravl-blue;
+      // border: 0.2rem solid mixin.$gravl-blue;
       border-radius: 2rem;
       cursor: pointer;
       transition: 0.3s;
+
+      &:hover {
+        background-color: mixin.$very-light-blue;
+      }
     }
 
     /* if logged in */

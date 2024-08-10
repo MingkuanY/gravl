@@ -107,5 +107,13 @@
         aspect-ratio: 1;
       }
     }
+
+    .signInToView {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: mixin.$gravl-blue;
+      text-transform: uppercase;
+    }
   }
 }
