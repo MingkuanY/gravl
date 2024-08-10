@@ -2,6 +2,7 @@ import { useScreenWidth } from "@/utils/hooks";
 import styles from "../../styles/tripcard.module.scss";
 import Icon from "../icons/Icon";
 import classnames from "classnames";
+import { Mode } from "@/utils/types";
 
 export default function TripCard({
   name,
@@ -16,7 +17,7 @@ export default function TripCard({
   selected: boolean;
   isClicked: Function;
   editTrip: Function;
-  mode: string;
+  mode: Mode;
 }) {
   const isMobile = useScreenWidth();
 

@@ -66,3 +66,7 @@ export type MapProps = {
   currentDate?: string;
   toggleHighways: boolean;
 };
+
+// Dashboard
+
+export type Mode = "USER" | "FRIEND" | "NON-FRIEND" | "NON-USER";

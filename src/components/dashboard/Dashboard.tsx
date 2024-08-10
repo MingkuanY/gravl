@@ -11,6 +11,7 @@ import {
   useTransition,
 } from "react";
 import {
+  Mode,
   PlaceInput,
   TripInput,
   TripWithVisits,
@@ -24,7 +25,6 @@ import ConfirmSelection from "../modals/ConfirmSelection";
 import { User } from "@prisma/client";
 import Profile from "./Profile";
 import classnames from "classnames";
-import SignUpButton from "../landing/SignUpButton";
 
 /*
 possible modes:
@@ -44,7 +44,7 @@ export default function Dashboard({
 }: {
   user: UserWithTrips;
   places: PlaceInput[];
-  mode: string;
+  mode: Mode;
   viewer?: User;
 }) {
   const [editProfile, setEditProfile] = useState(false);

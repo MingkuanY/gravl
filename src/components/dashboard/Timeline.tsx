@@ -4,7 +4,7 @@ import Icon from "../icons/Icon";
 import LogTripButton from "./LogTripButton";
 import TripCard from "./TripCard";
 import { findStartAndEndDates, formatDates } from "@/utils/date";
-import { TripWithVisits } from "@/utils/types";
+import { Mode, TripWithVisits } from "@/utils/types";
 import classnames from "classnames";
 
 export default function Timeline({
@@ -24,7 +24,7 @@ export default function Timeline({
   setConfirmDelete: Function;
   handleEditTrip: Function;
   setEditTrip: Function;
-  mode: string;
+  mode: Mode;
 }) {
   const isMobile = useScreenWidth();
 

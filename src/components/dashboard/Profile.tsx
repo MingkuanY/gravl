@@ -3,7 +3,7 @@ import styles from "../../styles/profile.module.scss";
 import { useRouter } from "next/navigation";
 import EditProfileButton from "./EditProfileButton";
 import UserStats from "./UserStats";
-import { TripWithVisits, UserWithTrips } from "@/utils/types";
+import { Mode, TripWithVisits, UserWithTrips } from "@/utils/types";
 import { User } from "@prisma/client";
 import Icon from "../icons/Icon";
 
@@ -15,7 +15,7 @@ export default function Profile({
   trips,
 }: {
   user: UserWithTrips;
-  mode: string;
+  mode: Mode;
   viewer?: User;
   setEditProfile?: Function;
   trips: TripWithVisits[];
@@ -53,12 +53,13 @@ export default function Profile({
           </button>
         )}
         {mode === "NON-FRIEND" && (
-          <button className={styles.addFriendBtn} onClick={handleAddFriend}>
-            <div className={styles.plus}>
-              <Icon type="plus" fill="#fff" />
-            </div>
-            <p>Add Friend</p>
-          </button>
+          // <button className={styles.addFriendBtn} onClick={handleAddFriend}>
+          //   <div className={styles.plus}>
+          //     <Icon type="plus" fill="#fff" />
+          //   </div>
+          //   <p>Add Friend</p>
+          // </button>
+          <p className={styles.signInToView}>Add Friend To View Full Profile</p>
         )}
         {mode === "NON-USER" && (
           <p className={styles.signInToView}>Sign In To View Full Profile</p>
