@@ -17,9 +17,11 @@ export const mapNames = ["counties", "states", "countries", "national parks"];
 export default function MapLoader({
   trips,
   places,
+  mode,
 }: {
   trips: TripWithVisits[];
   places: PlaceInput[];
+  mode: string;
 }) {
   const [count, setCount] = useState([0, 0, 0, 0]);
 
@@ -99,45 +101,47 @@ export default function MapLoader({
         />
       </div>
 
-      <div className={styles.stats}>
-        {mapNames.map((map, index) => (
-          <div
-            className={classnames(
-              styles.progressContainer,
-              currentMap === index && styles.selected
-            )}
-            key={index}
-          >
-            {currentMap !== index && (
-              <div className={classnames(styles.unselected, styles.hovered)}>
-                <Icon type="lock" fill="#7dc2ff" />
-              </div>
-            )}
-            <CircularProgressbarWithChildren
-              value={count[index]}
-              maxValue={totalCounts[index]}
-            >
-              {currentMap === index && (
-                <>
-                  <div className={styles.countContainer}>
-                    <p className={styles.count}>{count[index]}</p>
-                    <p className={styles.totalCount}>/{totalCounts[index]}</p>
-                  </div>
-                  <p className={styles.type}>{map}</p>
-                </>
-              )}
-            </CircularProgressbarWithChildren>
+      {mode !== "NON-USER" && (
+        <div className={styles.stats}>
+          {mapNames.map((map, index) => (
             <div
               className={classnames(
-                styles.progressbarBackground,
-                currentMap === index && styles.selected,
-                "progress-circle"
+                styles.progressContainer,
+                currentMap === index && styles.selected
               )}
-              onClick={() => statClicked(index)}
-            ></div>
-          </div>
-        ))}
-      </div>
+              key={index}
+            >
+              {currentMap !== index && (
+                <div className={classnames(styles.unselected, styles.hovered)}>
+                  <Icon type="lock" fill="#7dc2ff" />
+                </div>
+              )}
+              <CircularProgressbarWithChildren
+                value={count[index]}
+                maxValue={totalCounts[index]}
+              >
+                {currentMap === index && (
+                  <>
+                    <div className={styles.countContainer}>
+                      <p className={styles.count}>{count[index]}</p>
+                      <p className={styles.totalCount}>/{totalCounts[index]}</p>
+                    </div>
+                    <p className={styles.type}>{map}</p>
+                  </>
+                )}
+              </CircularProgressbarWithChildren>
+              <div
+                className={classnames(
+                  styles.progressbarBackground,
+                  currentMap === index && styles.selected,
+                  "progress-circle"
+                )}
+                onClick={() => statClicked(index)}
+              ></div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

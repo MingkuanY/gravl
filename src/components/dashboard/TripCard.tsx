@@ -9,14 +9,14 @@ export default function TripCard({
   selected,
   isClicked,
   editTrip,
-  viewOnly,
+  mode,
 }: {
   name: string;
   desc: string;
   selected: boolean;
   isClicked: Function;
   editTrip: Function;
-  viewOnly: boolean;
+  mode: string;
 }) {
   const isMobile = useScreenWidth();
 
@@ -45,7 +45,7 @@ export default function TripCard({
         <p className={styles.title}>{name}</p>
         <p className={styles.locations}>{desc}</p>
       </div>
-      {!isMobile && !viewOnly && (
+      {!isMobile && mode === "USER" && (
         <button className={styles.editContainer} onClick={handleClick}>
           <div className={styles.edit}>
             <Icon type="edit" fill={selected ? "#fff" : "#757575"} />

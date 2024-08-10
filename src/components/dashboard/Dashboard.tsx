@@ -1,9 +1,7 @@
 "use client";
 
 import styles from "../../styles/dashboard.module.scss";
-import EditProfileButton from "@/components/dashboard/EditProfileButton";
 import MapLoader from "@/components/dashboard/MapLoader";
-import UserStats from "@/components/dashboard/UserStats";
 import Timeline from "@/components/dashboard/Timeline";
 import {
   useEffect,
@@ -21,27 +19,33 @@ import {
 import NewTrip from "../log/NewTrip";
 import { sortTrips } from "@/utils/date";
 import Onboarding from "../onboarding/Onboarding";
-import {
-  addTripToUser,
-  deleteTrip,
-  unfriendUsers,
-  updateTrip,
-} from "@/actions/actions";
+import { addTripToUser, deleteTrip, updateTrip } from "@/actions/actions";
 import ConfirmSelection from "../modals/ConfirmSelection";
-import { useRouter } from "next/navigation";
 import { User } from "@prisma/client";
 import Profile from "./Profile";
+import classnames from "classnames";
+import SignUpButton from "../landing/SignUpButton";
+
+/*
+possible modes:
+
+USER - on the current user's own profile
+FRIEND - on the current user's friend's profile
+NON-FRIEND - on a current user's non-friend's profile
+NON-USER - on a non user's non-friend's profile
+
+*/
 
 export default function Dashboard({
   user,
   places,
-  viewOnly,
+  mode,
   viewer,
 }: {
   user: UserWithTrips;
   places: PlaceInput[];
-  viewOnly: boolean;
-  viewer: User;
+  mode: string;
+  viewer?: User;
 }) {
   const [editProfile, setEditProfile] = useState(false);
 
@@ -189,26 +193,39 @@ export default function Dashboard({
       )}
       {logTripPage === -1 && (
         <div className={styles.container}>
-          <Timeline
-            trips={sortedTrips}
-            setLogTripPage={setLogTripPage}
-            currTrip={currTrip}
-            setCurrTrip={setCurrTrip}
-            setConfirmDelete={setConfirmDelete}
-            handleEditTrip={handleEditTrip}
-            setEditTrip={setEditTrip}
-            viewOnly={viewOnly}
-          />
-          <div className={styles.main}>
+          {(mode === "USER" || mode === "FRIEND") && (
+            <Timeline
+              trips={sortedTrips}
+              setLogTripPage={setLogTripPage}
+              currTrip={currTrip}
+              setCurrTrip={setCurrTrip}
+              setConfirmDelete={setConfirmDelete}
+              handleEditTrip={handleEditTrip}
+              setEditTrip={setEditTrip}
+              mode={mode}
+            />
+          )}
+          <div
+            className={classnames(
+              styles.main,
+              mode !== "USER" && mode !== "FRIEND" && styles.centered
+            )}
+          >
             <Profile
               user={user}
-              viewOnly={viewOnly}
+              mode={mode}
               viewer={viewer}
               setEditProfile={setEditProfile}
               trips={trips}
             />
 
-            <MapLoader trips={tripsForMaps} places={places} />
+            <MapLoader trips={tripsForMaps} places={places} mode={mode} />
+            {mode === "NON-USER" && (
+              <div className={styles.signUpContainer}>
+                <SignUpButton />
+                <p className={styles.viewFullProfile}>To View Full Profile</p>
+              </div>
+            )}
           </div>
         </div>
       )}

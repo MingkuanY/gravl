@@ -5,16 +5,17 @@ import EditProfileButton from "./EditProfileButton";
 import UserStats from "./UserStats";
 import { TripWithVisits, UserWithTrips } from "@/utils/types";
 import { User } from "@prisma/client";
+import Icon from "../icons/Icon";
 
 export default function Profile({
   user,
-  viewOnly,
+  mode,
   viewer,
   setEditProfile,
   trips,
 }: {
   user: UserWithTrips;
-  viewOnly: boolean;
+  mode: string;
   viewer?: User;
   setEditProfile?: Function;
   trips: TripWithVisits[];
@@ -28,6 +29,8 @@ export default function Profile({
     }
   };
 
+  const handleAddFriend = () => {};
+
   return (
     <div className={styles.profile}>
       <div className={styles.pfpContainer}>
@@ -36,17 +39,25 @@ export default function Profile({
       <div className={styles.userInfo}>
         <div className={styles.usernameAndEdit}>
           <p className={styles.username}>{user!.username}</p>
-          {!viewOnly && setEditProfile && (
+          {mode === "USER" && (
             <div className={styles.edit}>
-              <EditProfileButton setEditProfile={setEditProfile} />
+              <EditProfileButton setEditProfile={setEditProfile!} />
             </div>
           )}
         </div>
         <p className={styles.location}>{user!.location}</p>
         <p className={styles.bio}>{user!.bio}</p>
-        {viewOnly && viewer && (
+        {mode === "FRIEND" && (
           <button className={styles.unfriendBtn} onClick={handleUnfriend}>
             Unfriend
+          </button>
+        )}
+        {mode === "NON-FRIEND" && (
+          <button className={styles.addFriendBtn} onClick={handleAddFriend}>
+            <div className={styles.plus}>
+              <Icon type="plus" fill="#fff" />
+            </div>
+            <p>Add Friend</p>
           </button>
         )}
       </div>

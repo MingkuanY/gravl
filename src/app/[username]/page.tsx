@@ -5,7 +5,6 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/auth.ts";
 import NotFound from "../not-found";
 import { loadPlaces } from "@/actions/actions";
 import Dashboard from "@/components/dashboard/Dashboard";
-import NonFriendDashboard from "@/components/dashboard/NonFriendDashboard";
 
 export default async function Profile({
   params,
@@ -23,22 +22,21 @@ export default async function Profile({
     return NotFound();
   }
 
+  const places = await loadPlaces();
+
   if (!session) {
     // Not logged in but user they are trying to access exists
     return (
       <>
         <Header />
-        <NonFriendDashboard accessedUser={accessedUser} loggedIn={false} />
+        <Dashboard user={accessedUser} places={places} mode={"NON-USER"} />
       </>
     );
   }
 
   // Current user info
   const userEmail = session.user.email;
-  const [user, places] = await Promise.all([
-    getUserWithData(userEmail),
-    loadPlaces(),
-  ]);
+  const user = await getUserWithData(userEmail);
 
   if (!user) {
     // They (somehow) have a session without a user
@@ -50,7 +48,7 @@ export default async function Profile({
     return (
       <>
         <Header user={user} />
-        <Dashboard user={user} places={places} viewOnly={false} viewer={user} />
+        <Dashboard user={user} places={places} mode={"USER"} viewer={user} />
       </>
     );
   }
@@ -64,7 +62,12 @@ export default async function Profile({
     return (
       <>
         <Header user={user} />
-        <NonFriendDashboard accessedUser={accessedUser} loggedIn={true} />
+        <Dashboard
+          user={accessedUser}
+          places={places}
+          mode={"NON-FRIEND"}
+          viewer={user}
+        />
       </>
     );
   }
@@ -76,7 +79,7 @@ export default async function Profile({
       <Dashboard
         user={accessedUser}
         places={places}
-        viewOnly={true}
+        mode={"FRIEND"}
         viewer={user}
       />
     </>

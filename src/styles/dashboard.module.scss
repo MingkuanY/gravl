@@ -12,6 +12,25 @@
     margin-top: -4rem;
     margin-left: 15%;
     transition: transform 0.3s ease;
+
+    &.centered {
+      margin: auto;
+    }
+
+    .signUpContainer {
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .viewFullProfile {
+        margin-top: 1.5rem;
+        font-size: 1.4rem;
+        color: mixin.$gravl-blue;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+    }
   }
 }
 
