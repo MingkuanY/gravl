@@ -201,15 +201,26 @@ export default function Header({ user }: { user?: UserWithData }) {
             </div>
           </>
         ) : (
-          <button
-            onClick={() => signIn("google", { callbackUrl: "/redirect" })}
-            className={styles.loginContainer}
-          >
-            <div className={styles.login}>Login</div>
-            <div className={styles.account}>
-              <Icon type="account" fill="#319fff" />
-            </div>
-          </button>
+          <>
+            <button
+              onClick={() => signIn("google", { callbackUrl: "/redirect" })}
+              className={styles.signUpContainer}
+            >
+              <div className={styles.account}>
+                <Icon type="go" fill="#319fff" />
+              </div>
+              <div className={styles.signUp}>Sign Up</div>
+            </button>
+            <button
+              onClick={() => signIn("google", { callbackUrl: "/redirect" })}
+              className={styles.loginContainer}
+            >
+              <div className={styles.login}>Login</div>
+              <div className={styles.account}>
+                <Icon type="account" fill="#319fff" />
+              </div>
+            </button>
+          </>
         )}
       </div>
     </div>

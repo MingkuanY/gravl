@@ -219,13 +219,7 @@ export default function Dashboard({
               trips={trips}
             />
 
-            <MapLoader trips={tripsForMaps} places={places} mode={mode} />
-            {mode === "NON-USER" && (
-              <div className={styles.signUpContainer}>
-                <SignUpButton />
-                <p className={styles.viewFullProfile}>To View Full Profile</p>
-              </div>
-            )}
+            <MapLoader trips={tripsForMaps} places={places} />
           </div>
         </div>
       )}
