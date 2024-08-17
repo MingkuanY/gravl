@@ -36,7 +36,7 @@ export default function Header({ user }: { user?: UserWithData }) {
 
   const [notifsStatus, setNotifsStatus] = useState<Status>("LOADING");
 
-  const [usernames, setUsernames] = useState<{
+  const [usernameMap, setUsernameMap] = useState<{
     [key: string]: string;
   }>({});
 
@@ -65,7 +65,7 @@ export default function Header({ user }: { user?: UserWithData }) {
           }
         }
       }
-      setUsernames(detailsMap);
+      setUsernameMap(detailsMap);
       setNotifsStatus("DEFAULT");
     };
 
@@ -191,7 +191,7 @@ export default function Header({ user }: { user?: UserWithData }) {
                     {notifsStatus === "DEFAULT" &&
                       notifications.map((notification, index) => {
                         const username =
-                          usernames[notification.userIdInConcern!];
+                          usernameMap[notification.userIdInConcern!];
                         if (!username) return null;
 
                         return (

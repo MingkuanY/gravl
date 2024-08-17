@@ -53,7 +53,7 @@ export default function Onboarding({
             if (user.username === input || validityTest) {
               // Not changing username or the new username passes validity test
               setValidUsername("DEFAULT");
-              setStep((step) => Math.min(step + 1, 4));
+              nextStep();
             } else {
               // Changing to a new, valid username
               setValidUsername(regexTest ? "TAKEN" : "INVALID");
@@ -62,15 +62,25 @@ export default function Onboarding({
             // Onboarding - profile does not exist yet
             if (validityTest) {
               setValidUsername("DEFAULT");
-              setStep((step) => Math.min(step + 1, 4));
+              nextStep();
             } else {
               setValidUsername(regexTest ? "TAKEN" : "INVALID");
             }
           }
         } else {
           // Non-username fields
-          setStep((step) => Math.min(step + 1, 4));
+          nextStep();
         }
+      }
+    };
+
+    const nextStep = () => {
+      if (user) {
+        // Go to next step if editing profile
+        setStep((step) => Math.min(step + 1, 4));
+      } else {
+        // Skip other profile info if new user
+        handleSubmit();
       }
     };
 
@@ -217,7 +227,7 @@ export default function Onboarding({
                 </div>
               </label>
               <input type="file" id="pfp-upload" /> */}
-              <button onClick={handleSubmit}>Start</button>
+              <button onClick={handleSubmit}>Save</button>
             </div>
           </div>
         )}
