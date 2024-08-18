@@ -7,6 +7,9 @@ import { useRouter } from "next/navigation";
 import { uniqueUsername, updateUser } from "@/actions/actions.ts";
 import CloseBtn from "../log/CloseBtn.tsx";
 import classnames from "classnames";
+import { useScreenWidth } from "@/utils/hooks.ts";
+
+type validity = "DEFAULT" | "TAKEN" | "INVALID";
 
 export default function Onboarding({
   email,
@@ -17,6 +20,8 @@ export default function Onboarding({
   user?: any;
   setClose?: Function;
 }) {
+  const isMobile = useScreenWidth();
+
   const router = useRouter();
 
   const [step, setStep] = useState(1);
@@ -29,58 +34,54 @@ export default function Onboarding({
 
   const wordLimit = 100;
 
-  // Possible values: DEFAULT, TAKEN, INVALID
-  const [validUsername, setValidUsername] = useState("DEFAULT");
+  const [validUsername, setValidUsername] = useState<validity>("DEFAULT");
 
   const containerRef = useRef<HTMLDivElement>(null);
+
+  /**
+   * Called when the user tries to move on to the next step, either through pressing Enter on desktop or clicking Next on mobile
+   */
+  const handleNext = async () => {
+    const input = accountData.username;
+
+    // Validity check that username has no uppercase letters, spaces nor special characters except for underscores
+    const validUsernameRegex = /^[a-z0-9_]+$/;
+    const regexTest = validUsernameRegex.test(input); // True means valid
+
+    // Ensure the inputted username passes a unique test and validity check
+    const validityTest = (await uniqueUsername(input)) && regexTest; // True means valid
+
+    if (step === 1) {
+      // Username
+      if (user) {
+        // Editing profile - profile already exists
+        if (user.username === input || validityTest) {
+          // Not changing username or the new username passes validity test
+          setValidUsername("DEFAULT");
+          nextStep();
+        } else {
+          // Changing to a new, valid username
+          setValidUsername(regexTest ? "TAKEN" : "INVALID");
+        }
+      } else {
+        // Onboarding - profile does not exist yet
+        if (validityTest) {
+          setValidUsername("DEFAULT");
+          nextStep();
+        } else {
+          setValidUsername(regexTest ? "TAKEN" : "INVALID");
+        }
+      }
+    } else {
+      // Non-username fields
+      nextStep();
+    }
+  };
 
   useEffect(() => {
     const handleKeyDown = async (e: KeyboardEvent) => {
       if (e.key === "Enter") {
-        const input = accountData.username.toLowerCase();
-
-        // Validity check that username has no spaces nor special characters except for underscores
-        const validUsernameRegex = /^[a-zA-Z0-9_]+$/;
-        const regexTest = validUsernameRegex.test(input); // True means valid
-
-        // Ensure the inputted username passes a unique test and validity check
-        const validityTest = (await uniqueUsername(input)) && regexTest; // True means valid
-
-        if (step === 1) {
-          // Username
-          if (user) {
-            // Editing profile - profile already exists
-            if (user.username === input || validityTest) {
-              // Not changing username or the new username passes validity test
-              setValidUsername("DEFAULT");
-              nextStep();
-            } else {
-              // Changing to a new, valid username
-              setValidUsername(regexTest ? "TAKEN" : "INVALID");
-            }
-          } else {
-            // Onboarding - profile does not exist yet
-            if (validityTest) {
-              setValidUsername("DEFAULT");
-              nextStep();
-            } else {
-              setValidUsername(regexTest ? "TAKEN" : "INVALID");
-            }
-          }
-        } else {
-          // Non-username fields
-          nextStep();
-        }
-      }
-    };
-
-    const nextStep = () => {
-      if (user) {
-        // Go to next step if editing profile
-        setStep((step) => Math.min(step + 1, 4));
-      } else {
-        // Skip other profile info if new user
-        handleSubmit();
+        await handleNext();
       }
     };
 
@@ -103,7 +104,23 @@ export default function Onboarding({
     };
   }, [accountData, step]);
 
-  const handleSubmit = () => {
+  /**
+   * Correctly guides the user to the next step if editing profile or skips to the end if onboarding
+   */
+  const nextStep = () => {
+    if (user) {
+      // Go to next step if editing profile
+      setStep((step) => Math.min(step + 1, 4));
+    } else {
+      // Skip other profile info if new user
+      handleSubmit();
+    }
+  };
+
+  /**
+   * Updates user with inputed info and redirects user to dashboard
+   */
+  const handleSubmit = async () => {
     if (
       user &&
       user.username === accountData.username &&
@@ -112,7 +129,7 @@ export default function Onboarding({
     ) {
     } else {
       //update user in prisma
-      updateUser(
+      await updateUser(
         email,
         accountData.username,
         accountData.location,
@@ -136,10 +153,18 @@ export default function Onboarding({
             <p>Username</p>
             <div className={styles.inputContainer}>
               <div className={styles.returnContainer}>
-                <p>Enter</p>
-                <div className={styles.return_arrow}>
-                  <Icon type="return_arrow" fill="#319fff" />
-                </div>
+                {isMobile ? (
+                  <button className={styles.nextBtn} onClick={handleNext}>
+                    Next
+                  </button>
+                ) : (
+                  <>
+                    <p>Enter</p>
+                    <div className={styles.return_arrow}>
+                      <Icon type="return_arrow" fill="#319fff" />
+                    </div>
+                  </>
+                )}
               </div>
               <input
                 type="text"
@@ -155,7 +180,7 @@ export default function Onboarding({
             )}
             {validUsername === "INVALID" && (
               <p className={styles.warning}>
-                Sorry, a username can only consist of letters and underscores.
+                Sorry, please only use lowercase letters and underscores.
               </p>
             )}
             {setClose && <CloseBtn setClose={setClose} />}
@@ -171,10 +196,18 @@ export default function Onboarding({
             </div>
             <div className={styles.inputContainer}>
               <div className={styles.returnContainer}>
-                <p>Enter</p>
-                <div className={styles.return_arrow}>
-                  <Icon type="return_arrow" fill="#319fff" />
-                </div>
+                {isMobile ? (
+                  <button className={styles.nextBtn} onClick={handleNext}>
+                    Next
+                  </button>
+                ) : (
+                  <>
+                    <p>Enter</p>
+                    <div className={styles.return_arrow}>
+                      <Icon type="return_arrow" fill="#319fff" />
+                    </div>
+                  </>
+                )}
               </div>
               <input
                 type="text"
@@ -196,10 +229,18 @@ export default function Onboarding({
                 {accountData.bio.length}/{wordLimit}
               </p>
               <div className={styles.returnContainer}>
-                <p>Enter</p>
-                <div className={styles.return_arrow}>
-                  <Icon type="return_arrow" fill="#319fff" />
-                </div>
+                {isMobile ? (
+                  <button className={styles.nextBtn} onClick={handleNext}>
+                    Next
+                  </button>
+                ) : (
+                  <>
+                    <p>Enter</p>
+                    <div className={styles.return_arrow}>
+                      <Icon type="return_arrow" fill="#319fff" />
+                    </div>
+                  </>
+                )}
               </div>
               <textarea
                 maxLength={100}

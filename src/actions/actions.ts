@@ -2,6 +2,7 @@
 
 import { PrismaClient } from "@prisma/client";
 import { PlaceWithoutId, TripInput } from "@/utils/types";
+import { revalidatePath } from "next/cache";
 
 const prisma = new PrismaClient();
 
@@ -187,6 +188,7 @@ export async function updateUser(
       bio: bio,
     },
   });
+  revalidatePath(`/${username}`);
   return user;
 }
 

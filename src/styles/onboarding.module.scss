@@ -44,15 +44,18 @@
     .inputContainer {
       margin-top: 2rem;
       display: flex;
-      width: 50rem;
+      max-width: 50rem;
       position: relative;
 
       .returnContainer {
         position: absolute;
-        top: 1.2rem;
+        top: 50%;
+        transform: translateY(-50%);
         right: 1rem;
         display: flex;
         align-items: center;
+
+        // If desktop, show Enter arrow
 
         p {
           font-size: 2rem;
@@ -64,6 +67,21 @@
           margin-left: 0.5rem;
           width: 2.5rem;
           height: 2rem;
+        }
+
+        // If mobile show Next button
+
+        .nextBtn {
+          background-color: mixin.$gravl-blue;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 3rem;
+          width: 5.5rem;
+          border-radius: 0.75rem;
+          font-size: 1.75rem;
+          color: mixin.$white;
+          font-weight: 400;
         }
       }
 
