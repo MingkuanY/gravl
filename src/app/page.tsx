@@ -42,6 +42,7 @@ export default async function Landing({
           />
         </div>
         <p className={styles.motto}>Not all who wander are lost</p>
+        <p className={styles.subtitle}>Map out your adventures</p>
         <SignUpButton />
       </div>
     </>

@@ -180,7 +180,7 @@ export default function Onboarding({
             )}
             {validUsername === "INVALID" && (
               <p className={styles.warning}>
-                Sorry, please only use lowercase letters and underscores.
+                Please only use lowercase letters and underscores.
               </p>
             )}
             {setClose && <CloseBtn setClose={setClose} />}
