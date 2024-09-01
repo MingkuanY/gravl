@@ -45,8 +45,14 @@ export default function Profile({
             </div>
           )}
         </div>
-        <p className={styles.location}>{user!.location || "Add a location"}</p>
-        <p className={styles.bio}>{user!.bio || "Add a bio"}</p>
+        {(user!.location || mode === "USER") && (
+          <p className={styles.location}>
+            {user!.location || "Add a location"}
+          </p>
+        )}
+        {(user!.bio || mode === "USER") && (
+          <p className={styles.bio}>{user!.bio || "Add a bio"}</p>
+        )}
         {mode === "FRIEND" && (
           <button className={styles.unfriendBtn} onClick={handleUnfriend}>
             Unfriend
