@@ -24,7 +24,7 @@ export default function MapLoader({
 }) {
   const [count, setCount] = useState([0, 0, 0, 0]);
 
-  const [mapDate, setMapDate] = useState("July 2004 - August 2024");
+  const [mapDate, setMapDate] = useState("");
 
   const [sortedVisits, setSortedVisits] = useState<VisitInput[]>([]);
 
