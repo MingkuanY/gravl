@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { PlaceInput, TripWithVisits, VisitInput } from "@/utils/types";
 import Icon from "../icons/Icon";
 import classnames from "classnames";
+import { formatMDYDate } from "@/utils/date";
 
 export const mapNames = ["counties", "states", "countries", "national parks"];
 
@@ -22,6 +23,8 @@ export default function MapLoader({
   places: PlaceInput[];
 }) {
   const [count, setCount] = useState([0, 0, 0, 0]);
+
+  const [mapDate, setMapDate] = useState("July 2004 - August 2024");
 
   const [sortedVisits, setSortedVisits] = useState<VisitInput[]>([]);
 
@@ -91,6 +94,7 @@ export default function MapLoader({
           animate={true}
           data={sortedVisits}
           updateCount={updateCount}
+          updateDate={setMapDate}
           total={count[0]}
           reload={reload}
           pause={20}
@@ -98,6 +102,10 @@ export default function MapLoader({
           toggleHighways={false}
         />
       </div>
+
+      <p className={styles.mapDate}>
+        {mapDate ? formatMDYDate(mapDate, true) : ""}
+      </p>
 
       <div className={styles.stats}>
         {mapNames.map((map, index) => (

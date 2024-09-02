@@ -19,20 +19,30 @@ Selecting the document element with the given id will select the g-tag, so loop 
  * @param pause the amount of time to pause between visits when animating
  * @param colors the list of colors to color the places on the map with
  * @param updateCount a function to update or reset the progress bar
+ * @param updateDate a function to update or reset the animated date
  * @returns the timeouts to cancel them upon component offload
  */
 export const loadMap = (
   data: VisitInput[],
   pause: number | undefined,
   colors: string[],
-  updateCount?: Function
+  updateCount?: Function,
+  updateDate?: Function
 ) => {
   let timeCounter = 0;
   let timeouts: NodeJS.Timeout[] = [];
-  const uniqueVisits = new Set<string>();
-  data.forEach((visit) => uniqueVisits.add(visit.place_id));
+  const uniqueVisits = new Map<string, string>();
 
-  uniqueVisits.forEach((place_id: string) => {
+  data.forEach((visit) => {
+    if (
+      !uniqueVisits.has(visit.place_id) ||
+      visit.date < uniqueVisits.get(visit.place_id)!
+    ) {
+      uniqueVisits.set(visit.place_id, visit.date);
+    }
+  });
+
+  uniqueVisits.forEach((date, place_id: string) => {
     const color = colors[0];
 
     const timeoutId = setTimeout(() => {
@@ -47,6 +57,7 @@ export const loadMap = (
           element.style.fill = color;
         }
         place_id !== "DC" && updateCount && updateCount(); // make sure DC doesn't get counted as a state
+        updateDate && updateDate(date);
       }
     }, 500 + pause! * timeCounter++);
     timeouts.push(timeoutId);

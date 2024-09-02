@@ -22,6 +22,7 @@ export const totalCounties = 3413;
 export default function Counties({
   data,
   updateCount,
+  updateDate,
   total,
   reload,
   pause,
@@ -58,12 +59,19 @@ export default function Counties({
     if (animate && data) {
       // we want to animate the data based on the other props
       resetMap();
-      const clearTimeouts = loadMap(data, pause, colors, updateCount);
+      const clearTimeouts = loadMap(
+        data,
+        pause,
+        colors,
+        updateCount,
+        updateDate
+      );
       return () => {
         clearTimeouts();
         updateCount && updateCount(total);
       };
     } else {
+      // when the user edits a map
       refreshMap(
         visits!,
         places,
