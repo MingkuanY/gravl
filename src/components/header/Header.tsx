@@ -242,6 +242,12 @@ export default function Header({ user }: { user?: UserWithData }) {
               >
                 <ul>
                   {!isMobile && <li onClick={goToProfile}>Profile</li>}
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSdD5nUmuHoiwyL8rBwFFAf3I3PgmnXaXbOySBW_6sKH6mUwMA/viewform?usp=sf_link"
+                    target="_blank"
+                  >
+                    <li>Feedback</li>
+                  </a>
                   <li onClick={() => signOut({ callbackUrl: "/" })}>Log Out</li>
                 </ul>
               </div>
