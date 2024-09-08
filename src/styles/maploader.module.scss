@@ -19,9 +19,28 @@
 
   .mapDate {
     margin-bottom: 3rem;
-    font-size: 1.5rem;
     height: 1.5rem;
-    color: mixin.$gravl-blue;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    p {
+      font-size: 1.5rem;
+      color: mixin.$gravl-blue;
+
+      &.month {
+        width: 7rem;
+        text-align: end;
+      }
+      &.day {
+        width: 3rem;
+        text-align: center;
+      }
+      &.year {
+        width: 7rem;
+        text-align: start;
+      }
+    }
   }
 
   /* circular progress stats */

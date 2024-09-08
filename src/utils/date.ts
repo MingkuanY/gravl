@@ -119,6 +119,23 @@ export const formatMDYDate = (dateString: string, fullMonth?: boolean) => {
 };
 
 /**
+ * Formats a date into ["June", "21", "2024"] format.
+ *
+ * @param dateString a date in YYYY-MM-DD format
+ * @returns list in ["June", "21", "2024"] (aka separated full) format
+ */
+export const formatSeparatedDate = (dateString: string) => {
+  const dateObj = new Date(dateString.replace(/-/g, "/"));
+
+  const year = dateObj.getFullYear();
+  const month = fullMonthNames[dateObj.getMonth()];
+  const day = dateObj.getDate();
+
+  const formattedDate = [month.toString(), day.toString(), year.toString()];
+  return formattedDate;
+};
+
+/**
  * Adds days to a given date.
  *
  * @param input date in YYYY-MM-DD format to add days to

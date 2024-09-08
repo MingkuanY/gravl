@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { PlaceInput, TripWithVisits, VisitInput } from "@/utils/types";
 import Icon from "../icons/Icon";
 import classnames from "classnames";
-import { formatMDYDate } from "@/utils/date";
+import { formatSeparatedDate } from "@/utils/date";
 
 export const mapNames = ["counties", "states", "countries", "national parks"];
 
@@ -103,9 +103,17 @@ export default function MapLoader({
         />
       </div>
 
-      <p className={styles.mapDate}>
-        {mapDate ? formatMDYDate(mapDate, true) : ""}
-      </p>
+      <div className={styles.mapDate}>
+        {mapDate &&
+          formatSeparatedDate(mapDate).map((dateVal, index) => {
+            const classes = [styles.month, styles.day, styles.year];
+            return (
+              <p key={index} className={classes[index]}>
+                {dateVal}
+              </p>
+            );
+          })}
+      </div>
 
       <div className={styles.stats}>
         {mapNames.map((map, index) => (
