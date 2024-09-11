@@ -41,6 +41,11 @@
       color: mixin.$dark;
     }
 
+    &.combinedModal .bioLabel,
+    &.combinedModal .headingContainer {
+      margin-top: 2rem;
+    }
+
     .inputContainer {
       margin-top: 2rem;
       display: flex;
@@ -100,7 +105,8 @@
         color: mixin.$dark;
         font-size: 2rem;
         font-weight: 300;
-        padding: 1rem 10rem;
+        padding: 1rem 6rem;
+        width: 38rem;
         border: 0.15rem solid mixin.$gravl-blue;
         border-radius: 1rem;
         flex: auto;
@@ -157,6 +163,10 @@
           cursor: pointer;
         }
       }
+    }
+
+    &.combinedModal .returnContainer {
+      display: none;
     }
 
     .warning {

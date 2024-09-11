@@ -5,7 +5,6 @@ import EditProfileButton from "./EditProfileButton";
 import UserStats from "./UserStats";
 import { Mode, TripWithVisits, UserWithTrips } from "@/utils/types";
 import { User } from "@prisma/client";
-import Icon from "../icons/Icon";
 
 export default function Profile({
   user,

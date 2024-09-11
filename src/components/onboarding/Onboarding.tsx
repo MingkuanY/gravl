@@ -80,7 +80,7 @@ export default function Onboarding({
 
   useEffect(() => {
     const handleKeyDown = async (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
+      if (!setClose && e.key === "Enter") {
         await handleNext();
       }
     };
@@ -148,130 +148,138 @@ export default function Onboarding({
   return (
     <>
       <div className={styles.overlay}>
-        {step === 1 && (
-          <div className={styles.container} ref={containerRef}>
-            <p>Username</p>
-            <div className={styles.inputContainer}>
-              <div className={styles.returnContainer}>
-                {isMobile ? (
-                  <button className={styles.nextBtn} onClick={handleNext}>
-                    Next
-                  </button>
-                ) : (
-                  <>
-                    <p>Enter</p>
-                    <div className={styles.return_arrow}>
-                      <Icon type="return_arrow" fill="#319fff" />
-                    </div>
-                  </>
-                )}
+        <div
+          className={classnames(
+            styles.container,
+            setClose && styles.combinedModal
+          )}
+          ref={containerRef}
+        >
+          {(step === 1 || setClose) && (
+            <>
+              <p>Username</p>
+              <div className={styles.inputContainer}>
+                <div className={styles.returnContainer}>
+                  {isMobile ? (
+                    <button className={styles.nextBtn} onClick={handleNext}>
+                      Next
+                    </button>
+                  ) : (
+                    <>
+                      <p>Enter</p>
+                      <div className={styles.return_arrow}>
+                        <Icon type="return_arrow" fill="#319fff" />
+                      </div>
+                    </>
+                  )}
+                </div>
+                <input
+                  type="text"
+                  value={accountData.username}
+                  required
+                  onChange={(e) =>
+                    setAccountData({ ...accountData, username: e.target.value })
+                  }
+                />
               </div>
-              <input
-                type="text"
-                value={accountData.username}
-                required
-                onChange={(e) =>
-                  setAccountData({ ...accountData, username: e.target.value })
-                }
-              />
-            </div>
-            {validUsername === "TAKEN" && (
-              <p className={styles.warning}>Sorry, this username is taken.</p>
-            )}
-            {validUsername === "INVALID" && (
-              <p className={styles.warning}>
-                Please only use lowercase letters and underscores.
-              </p>
-            )}
-            {setClose && <CloseBtn setClose={setClose} />}
-          </div>
-        )}
-        {step === 2 && (
-          <div className={styles.container} ref={containerRef}>
-            <div className={styles.headingContainer}>
-              <p>Home Base</p>
-              <div className={styles.pin}>
-                <Icon type="pin" fill="#319fff" />
-              </div>
-            </div>
-            <div className={styles.inputContainer}>
-              <div className={styles.returnContainer}>
-                {isMobile ? (
-                  <button className={styles.nextBtn} onClick={handleNext}>
-                    Next
-                  </button>
-                ) : (
-                  <>
-                    <p>Enter</p>
-                    <div className={styles.return_arrow}>
-                      <Icon type="return_arrow" fill="#319fff" />
-                    </div>
-                  </>
-                )}
-              </div>
-              <input
-                type="text"
-                value={accountData.location}
-                placeholder="i.e. Atlanta, Georgia"
-                onChange={(e) =>
-                  setAccountData({ ...accountData, location: e.target.value })
-                }
-              />
-            </div>
-            {setClose && <CloseBtn setClose={setClose} />}
-          </div>
-        )}
-        {step === 3 && (
-          <div className={styles.container} ref={containerRef}>
-            <p>Bio</p>
-            <div className={styles.inputContainer}>
-              <p className={styles.wordCount}>
-                {accountData.bio.length}/{wordLimit}
-              </p>
-              <div className={styles.returnContainer}>
-                {isMobile ? (
-                  <button className={styles.nextBtn} onClick={handleNext}>
-                    Next
-                  </button>
-                ) : (
-                  <>
-                    <p>Enter</p>
-                    <div className={styles.return_arrow}>
-                      <Icon type="return_arrow" fill="#319fff" />
-                    </div>
-                  </>
-                )}
-              </div>
-              <textarea
-                maxLength={100}
-                value={accountData.bio}
-                onChange={(e) =>
-                  setAccountData({ ...accountData, bio: e.target.value })
-                }
-              />
-            </div>
-            {setClose && <CloseBtn setClose={setClose} />}
-          </div>
-        )}
-        {step === 4 && (
-          <div className={styles.container} ref={containerRef}>
-            <p>You&apos;re all set!</p>
-            <div
-              className={classnames(
-                styles.inputContainer,
-                styles.uploadPFPContainer
+              {validUsername === "TAKEN" && (
+                <p className={styles.warning}>Sorry, this username is taken.</p>
               )}
-            >
-              {/* <label className={styles.uploadPFP} htmlFor="pfp-upload">
+              {validUsername === "INVALID" && (
+                <p className={styles.warning}>
+                  Please only use lowercase letters and underscores.
+                </p>
+              )}
+              {setClose && <CloseBtn setClose={setClose} />}
+            </>
+          )}
+          {(step === 2 || setClose) && (
+            <>
+              <div className={styles.headingContainer}>
+                <p>Home Base</p>
+                <div className={styles.pin}>
+                  <Icon type="pin" fill="#319fff" />
+                </div>
+              </div>
+              <div className={styles.inputContainer}>
+                <div className={styles.returnContainer}>
+                  {isMobile ? (
+                    <button className={styles.nextBtn} onClick={handleNext}>
+                      Next
+                    </button>
+                  ) : (
+                    <>
+                      <p>Enter</p>
+                      <div className={styles.return_arrow}>
+                        <Icon type="return_arrow" fill="#319fff" />
+                      </div>
+                    </>
+                  )}
+                </div>
+                <input
+                  type="text"
+                  value={accountData.location}
+                  placeholder="i.e. Atlanta, Georgia"
+                  onChange={(e) =>
+                    setAccountData({ ...accountData, location: e.target.value })
+                  }
+                />
+              </div>
+              {setClose && <CloseBtn setClose={setClose} />}
+            </>
+          )}
+          {(step === 3 || setClose) && (
+            <>
+              <p className={styles.bioLabel}>Bio</p>
+              <div className={styles.inputContainer}>
+                <p className={styles.wordCount}>
+                  {accountData.bio.length}/{wordLimit}
+                </p>
+                <div className={styles.returnContainer}>
+                  {isMobile ? (
+                    <button className={styles.nextBtn} onClick={handleNext}>
+                      Next
+                    </button>
+                  ) : (
+                    <>
+                      <p>Enter</p>
+                      <div className={styles.return_arrow}>
+                        <Icon type="return_arrow" fill="#319fff" />
+                      </div>
+                    </>
+                  )}
+                </div>
+                <textarea
+                  maxLength={100}
+                  value={accountData.bio}
+                  onChange={(e) =>
+                    setAccountData({ ...accountData, bio: e.target.value })
+                  }
+                />
+              </div>
+              {setClose && <CloseBtn setClose={setClose} />}
+            </>
+          )}
+          {(step === 4 || setClose) && (
+            <>
+              {!setClose && <p>You&apos;re all set!</p>}
+              <div
+                className={classnames(
+                  styles.inputContainer,
+                  styles.uploadPFPContainer
+                )}
+              >
+                {/* <label className={styles.uploadPFP} htmlFor="pfp-upload">
                 <div className={styles.account}>
                   <Icon type="account" fill="#319fff" />
                 </div>
               </label>
               <input type="file" id="pfp-upload" /> */}
-              <button onClick={handleSubmit}>Save</button>
-            </div>
-          </div>
-        )}
+                <button onClick={handleSubmit}>Save</button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </>
   );
