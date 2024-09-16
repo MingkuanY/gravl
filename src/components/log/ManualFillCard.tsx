@@ -12,6 +12,7 @@ import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { addDesignationToLabel } from "@/utils/map";
 import ConfirmSelection from "../modals/ConfirmSelection";
 import ToggleBtn from "./ToggleBtn";
+import DirectionsInput from "./DirectionsInput";
 
 /**
  * Sort visit chronologically by date and order if same date.
@@ -231,11 +232,13 @@ export default function ManualFillCard({
             <p className={styles.text}>you visited...</p>
           </div>
 
+          <DirectionsInput />
+
           <p className={styles.instruction}>
             {visits.filter((visit) => visit.date === getCurrentDate()).length >
             0
               ? "Drag to reorder."
-              : "Click on a place on the map."}
+              : "Or select a place on the map..."}
           </p>
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId={"visits"}>

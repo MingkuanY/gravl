@@ -1,0 +1,59 @@
+@use "./mixin" as mixin;
+
+.container {
+  margin-top: 1.8rem;
+  display: flex;
+  flex-direction: column;
+
+  .inputContainer {
+    display: flex;
+    align-items: center;
+
+    .icon {
+      width: 3rem;
+      margin-right: 1rem;
+
+      &.car {
+        height: 2.6rem;
+      }
+      &.pin {
+        aspect-ratio: 1;
+      }
+    }
+
+    input {
+      flex: auto;
+      height: 3rem;
+      border-radius: 1.5rem;
+      background-color: mixin.$almost-very-light;
+      padding: 0 1rem;
+      color: mixin.$dark;
+      font-weight: 100;
+      font-size: 2rem;
+
+      &::placeholder {
+        text-align: center;
+        color: mixin.$almost-light;
+        font-weight: 100;
+        font-size: 2rem;
+      }
+    }
+  }
+
+  .dotContainer {
+    margin: 0.3rem 0;
+    width: 3rem;
+    height: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    div {
+      height: 0.33rem;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background-color: mixin.$lighter;
+    }
+  }
+}
