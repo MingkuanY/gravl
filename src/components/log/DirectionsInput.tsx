@@ -146,6 +146,42 @@ export default function DirectionsInput() {
       );
     });
 
+  /**
+   * Uses Google Maps Directions Service to get the polyline from origin to destination and makes a request to FastAPI server to get corresponding county FIPS codes.
+   *
+   * @returns FIPS codes in order of intersection (travel)
+   */
+  const calculateRoute = async () => {
+    if (!startCoords || !endCoords) {
+      return;
+    }
+    const directionsService = new google.maps.DirectionsService();
+    const results = await directionsService.route({
+      origin: `${startCoords.lat}, ${startCoords.lng}`,
+      destination: `${endCoords.lat}, ${endCoords.lng}`,
+      travelMode: google.maps.TravelMode.DRIVING,
+    });
+
+    // Polyline between origin and destination
+    const polyline = results.routes[0].overview_polyline;
+
+    const decodedPolyline = google.maps.geometry.encoding
+      .decodePath(polyline)
+      .map((latLng) => [latLng.lat(), latLng.lng()]);
+
+    // Send polyline to FastAPI server
+    const response = await fetch("http://localhost:8000/process_polyline/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(decodedPolyline),
+    });
+
+    const data = await response.json();
+    console.log("FIPS codes! ", data.fips_codes);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.inputContainer} ref={refFrom}>
@@ -188,6 +224,7 @@ export default function DirectionsInput() {
           styles.searchBtn,
           startCoords && endCoords && styles.active
         )}
+        onClick={calculateRoute}
       >
         <Icon type="go" fill="#fff" />
       </button>
