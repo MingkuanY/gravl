@@ -6,6 +6,7 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
+import { useState } from "react";
 
 type Suggestion = {
   description: string;
@@ -17,6 +18,15 @@ type Suggestion = {
 };
 
 export default function DirectionsInput() {
+  const [startCoords, setStartCoords] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
+  const [endCoords, setEndCoords] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
+
   // starting point autocomplete
   const {
     ready: readyFrom,
@@ -25,7 +35,7 @@ export default function DirectionsInput() {
     setValue: setValueFrom,
     clearSuggestions: clearSuggestionsFrom,
   } = usePlacesAutocomplete({
-    callbackName: "YOUR_CALLBACK_NAME",
+    callbackName: "PLACES_AUTOCOMPLETE_FROM",
     requestOptions: {
       /* Define search scope here */
     },
@@ -40,7 +50,7 @@ export default function DirectionsInput() {
     setValue: setValueTo,
     clearSuggestions: clearSuggestionsTo,
   } = usePlacesAutocomplete({
-    callbackName: "YOUR_CALLBACK_NAME",
+    callbackName: "PLACES_AUTOCOMPLETE_TO",
     requestOptions: {
       /* Define search scope here */
     },
@@ -79,6 +89,7 @@ export default function DirectionsInput() {
       // Get latitude and longitude via utility functions
       getGeocode({ address: description }).then((results) => {
         const { lat, lng } = getLatLng(results[0]);
+        setStartCoords({ lat, lng });
         console.log(`📍 From ${lat} ${lng}`);
       });
     };
@@ -93,6 +104,7 @@ export default function DirectionsInput() {
       // Get latitude and longitude via utility functions
       getGeocode({ address: description }).then((results) => {
         const { lat, lng } = getLatLng(results[0]);
+        setEndCoords({ lat, lng });
         console.log(`📍 To ${lat} ${lng}`);
       });
     };
@@ -171,6 +183,14 @@ export default function DirectionsInput() {
           <ul className={styles.searchResults}>{renderSuggestionsTo()}</ul>
         )}
       </div>
+      <button
+        className={classnames(
+          styles.searchBtn,
+          startCoords && endCoords && styles.active
+        )}
+      >
+        <Icon type="go" fill="#fff" />
+      </button>
     </div>
   );
 }

@@ -45,6 +45,7 @@
 
   .dotContainer {
     margin: 0.3rem 0;
+    padding-right: 0.4rem;
     width: 3rem;
     height: 1.6rem;
     display: flex;
@@ -104,6 +105,25 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         font-size: 1.3rem;
+      }
+    }
+  }
+
+  .searchBtn {
+    margin: 2rem auto -1rem;
+    width: 3rem;
+    height: 3rem;
+    background-color: mixin.$lighter-blue;
+    border-radius: 50%;
+    padding: 0.3rem;
+    transition: 0.3s;
+
+    &.active {
+      cursor: pointer;
+      background-color: mixin.$gravl-blue;
+
+      &:hover {
+        background-color: mixin.$darker-blue;
       }
     }
   }
