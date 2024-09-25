@@ -167,7 +167,7 @@ export default function DirectionsInput() {
 
     const decodedPolyline = google.maps.geometry.encoding
       .decodePath(polyline)
-      .map((latLng) => [latLng.lat(), latLng.lng()]);
+      .map((latLng) => [latLng.lng(), latLng.lat()]);
 
     // Send polyline to FastAPI server
     const response = await fetch("http://localhost:8000/process_polyline/", {
@@ -175,8 +175,13 @@ export default function DirectionsInput() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(decodedPolyline),
+      body: JSON.stringify({ polyline: decodedPolyline }),
     });
+
+    if (!response.ok) {
+      console.error("Error processing polyline:", response.statusText);
+      return;
+    }
 
     const data = await response.json();
     console.log("FIPS codes! ", data.fips_codes);
