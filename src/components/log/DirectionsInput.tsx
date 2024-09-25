@@ -44,6 +44,7 @@ export default function DirectionsInput() {
   const handleSelect =
     ({ description }: Suggestion) =>
     () => {
+      console.log("clicked");
       // When the user selects a place, we can replace the keyword without request data from API
       // by setting the second parameter to "false"
       setValue(description, false);
@@ -64,8 +65,13 @@ export default function DirectionsInput() {
       } = suggestion;
 
       return (
-        <li key={place_id} onClick={handleSelect(suggestion)}>
-          <strong>{main_text}</strong> <small>{secondary_text}</small>
+        <li
+          key={place_id}
+          className={styles.result}
+          onClick={handleSelect(suggestion)}
+        >
+          <span className={styles.main}>{main_text}</span>
+          <span className={styles.secondary}>{secondary_text}</span>
         </li>
       );
     });
@@ -83,7 +89,9 @@ export default function DirectionsInput() {
           onChange={handleInput}
           disabled={!ready}
         />
-        {status === "OK" && <ul>{renderSuggestions()}</ul>}
+        {status === "OK" && (
+          <ul className={styles.searchResults}>{renderSuggestions()}</ul>
+        )}
       </div>
       <div className={styles.dotContainer}>
         <div></div>
