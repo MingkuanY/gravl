@@ -17,12 +17,13 @@ type Suggestion = {
 };
 
 export default function DirectionsInput() {
+  // starting point autocomplete
   const {
-    ready,
-    value,
-    suggestions: { status, data },
-    setValue,
-    clearSuggestions,
+    ready: readyFrom,
+    value: valueFrom,
+    suggestions: { status: statusFrom, data: dataFrom },
+    setValue: setValueFrom,
+    clearSuggestions: clearSuggestionsFrom,
   } = usePlacesAutocomplete({
     callbackName: "YOUR_CALLBACK_NAME",
     requestOptions: {
@@ -30,35 +31,74 @@ export default function DirectionsInput() {
     },
     debounce: 300,
   });
-  const ref = useOnclickOutside(() => {
-    // When the user clicks outside of the component, we can dismiss
-    // the searched suggestions by calling this method
-    clearSuggestions();
+
+  // ending point autocomplete
+  const {
+    ready: readyTo,
+    value: valueTo,
+    suggestions: { status: statusTo, data: dataTo },
+    setValue: setValueTo,
+    clearSuggestions: clearSuggestionsTo,
+  } = usePlacesAutocomplete({
+    callbackName: "YOUR_CALLBACK_NAME",
+    requestOptions: {
+      /* Define search scope here */
+    },
+    debounce: 300,
   });
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // handles clicks outside for "from" and "to"
+  const refFrom = useOnclickOutside(() => {
+    // When the user clicks outside of the component, we can dismiss
+    // the searched suggestions by calling this method
+    clearSuggestionsFrom();
+  });
+  const refTo = useOnclickOutside(() => {
+    // When the user clicks outside of the component, we can dismiss
+    // the searched suggestions by calling this method
+    clearSuggestionsTo();
+  });
+
+  const handleInputFrom = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Update the keyword of the input element
-    setValue(e.target.value);
+    setValueFrom(e.target.value);
+  };
+  const handleInputTo = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Update the keyword of the input element
+    setValueTo(e.target.value);
   };
 
-  const handleSelect =
+  const handleSelectFrom =
     ({ description }: Suggestion) =>
     () => {
-      console.log("clicked");
       // When the user selects a place, we can replace the keyword without request data from API
       // by setting the second parameter to "false"
-      setValue(description, false);
-      clearSuggestions();
+      setValueFrom(description, false);
+      clearSuggestionsFrom();
 
       // Get latitude and longitude via utility functions
       getGeocode({ address: description }).then((results) => {
         const { lat, lng } = getLatLng(results[0]);
-        console.log("📍 Coordinates: ", { lat, lng });
+        console.log(`📍 From ${lat} ${lng}`);
+      });
+    };
+  const handleSelectTo =
+    ({ description }: Suggestion) =>
+    () => {
+      // When the user selects a place, we can replace the keyword without request data from API
+      // by setting the second parameter to "false"
+      setValueTo(description, false);
+      clearSuggestionsTo();
+
+      // Get latitude and longitude via utility functions
+      getGeocode({ address: description }).then((results) => {
+        const { lat, lng } = getLatLng(results[0]);
+        console.log(`📍 To ${lat} ${lng}`);
       });
     };
 
-  const renderSuggestions = () =>
-    data.map((suggestion) => {
+  const renderSuggestionsFrom = () =>
+    dataFrom.map((suggestion) => {
       const {
         place_id,
         structured_formatting: { main_text, secondary_text },
@@ -68,7 +108,25 @@ export default function DirectionsInput() {
         <li
           key={place_id}
           className={styles.result}
-          onClick={handleSelect(suggestion)}
+          onClick={handleSelectFrom(suggestion)}
+        >
+          <span className={styles.main}>{main_text}</span>
+          <span className={styles.secondary}>{secondary_text}</span>
+        </li>
+      );
+    });
+  const renderSuggestionsTo = () =>
+    dataTo.map((suggestion) => {
+      const {
+        place_id,
+        structured_formatting: { main_text, secondary_text },
+      } = suggestion;
+
+      return (
+        <li
+          key={place_id}
+          className={styles.result}
+          onClick={handleSelectTo(suggestion)}
         >
           <span className={styles.main}>{main_text}</span>
           <span className={styles.secondary}>{secondary_text}</span>
@@ -78,19 +136,19 @@ export default function DirectionsInput() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.inputContainer} ref={ref}>
+      <div className={styles.inputContainer} ref={refFrom}>
         <div className={classnames(styles.icon, styles.car)}>
           <Icon type="car" fill="#319fff" />
         </div>
         <input
           type="text"
           placeholder="from"
-          value={value}
-          onChange={handleInput}
-          disabled={!ready}
+          value={valueFrom}
+          onChange={handleInputFrom}
+          disabled={!readyFrom}
         />
-        {status === "OK" && (
-          <ul className={styles.searchResults}>{renderSuggestions()}</ul>
+        {statusFrom === "OK" && (
+          <ul className={styles.searchResults}>{renderSuggestionsFrom()}</ul>
         )}
       </div>
       <div className={styles.dotContainer}>
@@ -98,11 +156,20 @@ export default function DirectionsInput() {
         <div></div>
         <div></div>
       </div>
-      <div className={styles.inputContainer}>
+      <div className={styles.inputContainer} ref={refTo}>
         <div className={classnames(styles.icon, styles.pin)}>
           <Icon type="pin" fill="#319fff" />
         </div>
-        <input type="text" placeholder="to" />
+        <input
+          type="text"
+          placeholder="to"
+          value={valueTo}
+          onChange={handleInputTo}
+          disabled={!readyTo}
+        />
+        {statusTo === "OK" && (
+          <ul className={styles.searchResults}>{renderSuggestionsTo()}</ul>
+        )}
       </div>
     </div>
   );

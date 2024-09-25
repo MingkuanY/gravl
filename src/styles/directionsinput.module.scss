@@ -5,12 +5,12 @@
   display: flex;
   flex-direction: column;
   max-width: 100%;
-  position: relative;
 
   .inputContainer {
     display: flex;
     align-items: center;
     width: 100%;
+    position: relative;
 
     .icon {
       width: 3rem;
