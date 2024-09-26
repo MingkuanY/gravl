@@ -1,4 +1,4 @@
-# Script to populate the Place table
+# Populate fips code mapping
 
 from updated_place_to_fips import place_to_fips
 
@@ -25,5 +25,3 @@ def populate_place_to_fips(fips_list, place_to_fips, state_abbr):
     for place_id, fips_code in place_to_fips.items():
       file.write(f'  "{place_id}": "{fips_code}",\n')
     file.write("}\n")
-
-populate_place_to_fips(fips_list, place_to_fips, "WV")

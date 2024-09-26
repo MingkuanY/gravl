@@ -1,4 +1,10 @@
-place_to_fips = {
+// Script to populate the Place table
+
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient();
+
+const placeIdToFipsMap = {
   "Aleutians_East__AK": "02013",
   "Aleutians_West__AK": "02016",
   "Anchorage__AK": "02020",
@@ -3143,3 +3149,23 @@ place_to_fips = {
   "Washakie__WY": "56043",
   "Weston__WY": "56045",
 }
+
+const migrateFipsCodes = async () => {
+  const places = await prisma.place.findMany();
+
+  for (const place of places) {
+    const fipsCode = placeIdToFipsMap[place.place_id]
+    if (fipsCode) {
+      await prisma.place.update({
+        where: {id: place.id},
+        data: {fips_code: fipsCode}
+      });
+    } else {
+      console.log(`no FIPS code found for place_id: ${place.place_id}`)
+    }
+  }
+
+  console.log("Migration completed")
+}
+
+migrateFipsCodes().catch(e => console.error(e)).finally((() => prisma.$disconnect()))

@@ -130,14 +130,14 @@ model Visit {
 model Place {
   id Int @id @default(autoincrement())
 
-  place_id  String  @unique
+  place_id  String @unique
   map_type  String
   label     String
-  fips_code String?
+  fips_code String
 
   visits Visit[]
 
-  @@index([place_id])
+  @@index([fips_code])
 }
 
 model Account {
