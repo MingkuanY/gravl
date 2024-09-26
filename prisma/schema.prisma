@@ -130,9 +130,10 @@ model Visit {
 model Place {
   id Int @id @default(autoincrement())
 
-  place_id String @unique
-  map_type String
-  label    String
+  place_id  String  @unique
+  map_type  String
+  label     String
+  fips_code String?
 
   visits Visit[]
 
