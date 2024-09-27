@@ -70,7 +70,7 @@ export default function Dashboard({
         date: new Date(visit.date),
         order: visit.order,
         tripId: tempID,
-        placeId: visit.place_id,
+        placeFipsCode: visit.fips_code,
       })),
     };
 

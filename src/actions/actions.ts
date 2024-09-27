@@ -15,14 +15,14 @@ function idToLabel(id: string) {
 }
 
 /**
- * Add Places to the postgres db from list of Place IDs.
+ * Add Places to the postgres db from list of Place IDs. OBSOLETE AFTER ADOPTING FIPS CODES.
  *
  * @param type the type of Place (i.e. counties, states, etc)
  * @param places array of string Place IDs
  * @returns new Places
  */
 export async function addPlaces(type: string, places: string[]) {
-  const formattedPlaces: PlaceWithoutId[] = places.map((place_id) => ({
+  const formattedPlaces: any[] = places.map((place_id) => ({
     place_id: place_id,
     map_type: type,
     label: idToLabel(place_id),
@@ -44,7 +44,7 @@ export async function addPlaces(type: string, places: string[]) {
 export async function loadPlaces() {
   const places = await prisma.place.findMany({
     select: {
-      place_id: true,
+      fips_code: true,
       label: true,
       map_type: true,
     },
@@ -262,7 +262,7 @@ export async function addTripToUser(user_id: string, trip: TripInput) {
       userId: user_id,
       visits: {
         create: trip.visits.map((visit) => ({
-          placeId: visit.place_id,
+          placeFipsCode: visit.fips_code,
           date: new Date(visit.date),
           order: visit.order,
         })),
@@ -308,7 +308,7 @@ export async function updateTrip(trip_id: number, trip: TripInput) {
       visits: {
         deleteMany: {},
         create: trip.visits.map((visit) => ({
-          placeId: visit.place_id,
+          placeFipsCode: visit.fips_code,
           date: new Date(visit.date),
           order: visit.order,
         })),

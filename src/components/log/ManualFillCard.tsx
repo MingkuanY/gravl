@@ -46,7 +46,7 @@ export default function ManualFillCard({
   addTrip: Function;
 }) {
   const placesMap = new Map(
-    places.map((place) => [place.place_id, place.label])
+    places.map((place) => [place.fips_code, place.label])
   );
 
   // Tracks which day the user is logging
@@ -70,10 +70,10 @@ export default function ManualFillCard({
       return visits;
     }
     const dragIndex = visits.findIndex(
-      (visit) => visit.place_id === visit1 && visit.date === getCurrentDate()
+      (visit) => visit.fips_code === visit1 && visit.date === getCurrentDate()
     );
     const dropIndex = visits.findIndex(
-      (visit) => visit.place_id === visit2 && visit.date === getCurrentDate()
+      (visit) => visit.fips_code === visit2 && visit.date === getCurrentDate()
     );
 
     const draggedVisit = visits[dragIndex];
@@ -99,10 +99,10 @@ export default function ManualFillCard({
     visits,
     (state, { sourceVisitId, destinationVisitId }) => {
       const sourceIndex = state.findIndex(
-        (visit) => visit.place_id === sourceVisitId
+        (visit) => visit.fips_code === sourceVisitId
       );
       const destinationIndex = state.findIndex(
-        (visit) => visit.place_id === destinationVisitId
+        (visit) => visit.fips_code === destinationVisitId
       );
       const newState = [...state];
       newState[sourceIndex] = state[destinationIndex];
@@ -116,7 +116,7 @@ export default function ManualFillCard({
   const onDragEnd = (result: any) => {
     const sourceVisitId = result.draggableId;
     if (result.destination) {
-      const destinationVisitId = visits[result.destination.index].place_id;
+      const destinationVisitId = visits[result.destination.index].fips_code;
       startTransition(() => {
         swapOptimistic({ sourceVisitId, destinationVisitId });
       });
@@ -253,18 +253,18 @@ export default function ManualFillCard({
                     .map((visit, index) => {
                       const originalIndex = optimisticState.findIndex(
                         (v) =>
-                          v.place_id === visit.place_id && v.date === visit.date
+                          v.fips_code === visit.fips_code && v.date === visit.date
                       );
                       return (
                         <Draggable
-                          key={visit.place_id}
-                          draggableId={visit.place_id}
+                          key={visit.fips_code}
+                          draggableId={visit.fips_code}
                           index={originalIndex}
                         >
                           {(provided) => (
                             <p
                               className={styles.visitedPlace}
-                              key={visit.place_id}
+                              key={visit.fips_code}
                               ref={provided.innerRef}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
@@ -273,7 +273,7 @@ export default function ManualFillCard({
                                 1 +
                                 ". " +
                                 addDesignationToLabel(
-                                  placesMap.get(visit.place_id)!,
+                                  placesMap.get(visit.fips_code)!,
                                   "County"
                                 )}
                             </p>

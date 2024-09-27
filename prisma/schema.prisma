@@ -10,7 +10,7 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-// Each user has a list of their maps (exactly four maps for now)
+// Each user has multiple Trips
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -124,6 +124,8 @@ model Visit {
 
   place   Place  @relation(fields: [placeId], references: [place_id])
   placeId String
+
+  placeFipsCode String?
 }
 
 // Each Place will have the info to be linked to the map and has a one-to-many relationship with Visit
@@ -133,7 +135,7 @@ model Place {
   place_id  String @unique
   map_type  String
   label     String
-  fips_code String
+  fips_code String @unique
 
   visits Visit[]
 

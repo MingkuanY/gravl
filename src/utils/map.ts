@@ -35,18 +35,18 @@ export const loadMap = (
 
   data.forEach((visit) => {
     if (
-      !uniqueVisits.has(visit.place_id) ||
-      visit.date < uniqueVisits.get(visit.place_id)!
+      !uniqueVisits.has(visit.fips_code) ||
+      visit.date < uniqueVisits.get(visit.fips_code)!
     ) {
-      uniqueVisits.set(visit.place_id, visit.date);
+      uniqueVisits.set(visit.fips_code, visit.date);
     }
   });
 
-  uniqueVisits.forEach((date, place_id: string) => {
+  uniqueVisits.forEach((date, fips_code: string) => {
     const color = colors[0];
 
     const timeoutId = setTimeout(() => {
-      const element = document.getElementById(place_id);
+      const element = document.getElementById(fips_code);
       if (element) {
         const childPaths = element.querySelectorAll("path");
         if (childPaths.length) {
@@ -56,7 +56,7 @@ export const loadMap = (
         } else {
           element.style.fill = color;
         }
-        place_id !== "DC" && updateCount && updateCount(); // make sure DC doesn't get counted as a state
+        fips_code !== "11001" && updateCount && updateCount(); // make sure DC doesn't get counted as a state
         updateDate && updateDate(date);
       }
     }, 500 + pause! * timeCounter++);
@@ -102,17 +102,17 @@ export const handleMapClick = (
     if (placeIDs && placeIDs.has(placeID)) {
       const element = document.getElementById(placeID);
       const visitExists = visits.some(
-        (visit) => visit.place_id === placeID && visit.date == currentDate
+        (visit) => visit.fips_code === placeID && visit.date == currentDate
       );
       const childPaths = element?.querySelectorAll("path");
       if (visitExists) {
         // Remove the visit if it exists
         const updatedVisits = visits.filter(
-          (visit) => !(visit.place_id === placeID && visit.date === currentDate)
+          (visit) => !(visit.fips_code === placeID && visit.date === currentDate)
         );
         setVisits(updatedVisits);
         const stillExists = updatedVisits.findIndex(
-          (v) => v.place_id === placeID
+          (v) => v.fips_code === placeID
         );
 
         const color = stillExists === -1 ? defaultColor : otherColor;
@@ -139,7 +139,7 @@ export const handleMapClick = (
         }
 
         const newVisit = {
-          place_id: placeID,
+          fips_code: placeID,
           date: currentDate,
           order: visits.filter((visit) => visit.date === currentDate).length,
         };
@@ -166,10 +166,10 @@ export function refreshMap(
   defaultColor: string
 ) {
   places.forEach((place) => {
-    const element = document.getElementById(place.place_id);
+    const element = document.getElementById(place.fips_code);
     if (element) {
       const visit = visits.find(
-        (v) => v.place_id === place.place_id && v.date === currentDate
+        (v) => v.fips_code === place.fips_code && v.date === currentDate
       );
       if (visit) {
         // There is a visit for the current place on the current date, so color it todayColor
@@ -182,7 +182,7 @@ export function refreshMap(
           element.style.fill = todayColor;
         }
       } else {
-        const visit = visits.find((v) => v.place_id === place.place_id);
+        const visit = visits.find((v) => v.fips_code === place.fips_code);
         if (visit) {
           // There is a visit for the current place but on a different date, so color it otherColor
           const childPaths = element.querySelectorAll("path");

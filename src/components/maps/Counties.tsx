@@ -86,7 +86,7 @@ export default function Counties({
   // Hover label effect
 
   const placesMap = new Map(
-    places!.map((place: PlaceInput) => [place.place_id, place.label])
+    places!.map((place: PlaceInput) => [place.fips_code, place.label])
   );
 
   const [hoverInfo, setHoverInfo] = useState<{
@@ -98,10 +98,10 @@ export default function Counties({
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
       const target = event.target as SVGPathElement;
-      const placeID = target.id;
-      if (target.tagName === "path" && placeIDs.has(placeID)) {
+      const placeFipsCode = target.id;
+      if (target.tagName === "path" && placeIDs.has(placeFipsCode)) {
         const placeLabel = addDesignationToLabel(
-          placesMap.get(placeID)!,
+          placesMap.get(placeFipsCode)!,
           "County"
         );
         setHoverInfo({
@@ -121,7 +121,7 @@ export default function Counties({
     };
   }, []);
 
-  const placeIDs = new Set(places?.map((place) => place.place_id));
+  const placeIDs = new Set(places?.map((place) => place.fips_code));
 
   return (
     <>

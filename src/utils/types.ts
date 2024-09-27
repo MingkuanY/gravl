@@ -3,7 +3,7 @@ import { Notification, Place, Trip, User, Visit } from "@prisma/client";
 // Place
 
 export type PlaceInput = {
-  place_id: string;
+  fips_code: string;
   label: string;
   map_type: string;
 };
@@ -46,7 +46,7 @@ export type TripWithDates = TripWithVisits & {
 // Visit
 
 export type VisitInput = {
-  place_id: string;
+  fips_code: string;
   date: string;
   order: number;
 };

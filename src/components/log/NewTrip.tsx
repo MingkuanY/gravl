@@ -32,7 +32,7 @@ export default function NewTrip({
     return visits.map((visit) => ({
       date: visit.date.toISOString().split("T")[0],
       order: visit.order,
-      place_id: visit.placeId,
+      fips_code: visit.placeFipsCode,
     }));
   };
 

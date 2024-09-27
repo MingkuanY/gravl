@@ -35,13 +35,13 @@ export default function MapLoader({
     trips.map((trip) => {
       trip.visits.forEach((visit) => {
         const v = {
-          place_id: visit.placeId,
+          fips_code: visit.placeFipsCode,
           date: visit.date.toISOString().split("T")[0],
           order: visit.order,
         };
 
         newSortedVisits.push(v);
-        uniqueVisits.add(v.place_id);
+        uniqueVisits.add(v.fips_code);
       });
     });
 

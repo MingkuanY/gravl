@@ -34,7 +34,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/actions/prisma.ts",
-    "src/assets/migrate.mjs"
+    "src/assets/migrate.mjs",
+    "updatePlaceFipsCode.mjs"
   ],
   "exclude": [
     "node_modules"
