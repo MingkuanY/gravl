@@ -122,10 +122,10 @@ model Visit {
   trip   Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
   tripId Int
 
-  place   Place  @relation(fields: [placeId], references: [place_id])
-  placeId String
+  place   Place   @relation(fields: [placeFipsCode], references: [fips_code])
+  placeId String?
 
-  placeFipsCode String?
+  placeFipsCode String
 }
 
 // Each Place will have the info to be linked to the map and has a one-to-many relationship with Visit

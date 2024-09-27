@@ -1,2186 +1,2186 @@
 [
   {
-    "place_id": "Big_Horn__MT",
+    "fips_code": "30003",
     "date": "2004-07-30",
     "order": 1
   },
   {
-    "place_id": "Yellowstone__MT",
+    "fips_code": "30111",
     "date": "2004-07-30",
     "order": 2
   },
   {
-    "place_id": "Musselshell__MT",
+    "fips_code": "30065",
     "date": "2004-07-30",
     "order": 3
   },
   {
-    "place_id": "Golden_Valley__MT",
+    "fips_code": "30037",
     "date": "2004-07-30",
     "order": 4
   },
   {
-    "place_id": "Stillwater__MT",
+    "fips_code": "30095",
     "date": "2004-07-30",
     "order": 5
   },
   {
-    "place_id": "Sweet_Grass__MT",
+    "fips_code": "30097",
     "date": "2004-07-30",
     "order": 6
   },
   {
-    "place_id": "Wheatland__MT",
+    "fips_code": "30107",
     "date": "2004-07-30",
     "order": 7
   },
   {
-    "place_id": "Meagher__MT",
+    "fips_code": "30059",
     "date": "2004-07-30",
     "order": 8
   },
   {
-    "place_id": "Broadwater__MT",
+    "fips_code": "30007",
     "date": "2004-07-30",
     "order": 9
   },
   {
-    "place_id": "Jefferson__MT",
+    "fips_code": "30043",
     "date": "2004-07-30",
     "order": 10
   },
   {
-    "place_id": "Lewis_and_Clark__MT",
+    "fips_code": "30049",
     "date": "2004-07-30",
     "order": 11
   },
   {
-    "place_id": "Powell__MT",
+    "fips_code": "30077",
     "date": "2004-07-30",
     "order": 12
   },
   {
-    "place_id": "Deer_Lodge__MT",
+    "fips_code": "30023",
     "date": "2004-07-30",
     "order": 13
   },
   {
-    "place_id": "Granite__MT",
+    "fips_code": "30039",
     "date": "2004-07-30",
     "order": 14
   },
   {
-    "place_id": "Missoula__MT",
+    "fips_code": "30063",
     "date": "2004-07-30",
     "order": 15
   },
   {
-    "place_id": "Ravalli__MT",
+    "fips_code": "30081",
     "date": "2004-07-30",
     "order": 16
   },
   {
-    "place_id": "Idaho__ID",
+    "fips_code": "16049",
     "date": "2004-07-30",
     "order": 17
   },
   {
-    "place_id": "Adams__ID",
+    "fips_code": "16003",
     "date": "2004-07-30",
     "order": 18
   },
   {
-    "place_id": "Washington__ID",
+    "fips_code": "16087",
     "date": "2004-07-30",
     "order": 19
   },
   {
-    "place_id": "Payette__ID",
+    "fips_code": "16075",
     "date": "2004-07-30",
     "order": 20
   },
   {
-    "place_id": "Baker__OR",
+    "fips_code": "41001",
     "date": "2004-07-30",
     "order": 21
   },
   {
-    "place_id": "Malheur__OR",
+    "fips_code": "41045",
     "date": "2004-07-30",
     "order": 22
   },
   {
-    "place_id": "Harney__OR",
+    "fips_code": "41025",
     "date": "2004-07-30",
     "order": 23
   },
   {
-    "place_id": "Humboldt__NV",
+    "fips_code": "32013",
     "date": "2004-07-30",
     "order": 24
   },
   {
-    "place_id": "Pershing__NV",
+    "fips_code": "32027",
     "date": "2004-07-30",
     "order": 25
   },
   {
-    "place_id": "Washoe__NV",
+    "fips_code": "32031",
     "date": "2004-07-30",
     "order": 26
   },
   {
-    "place_id": "Churchill__NV",
+    "fips_code": "32001",
     "date": "2004-07-30",
     "order": 27
   },
   {
-    "place_id": "Storey__NV",
+    "fips_code": "32029",
     "date": "2004-07-30",
     "order": 28
   },
   {
-    "place_id": "Lyon__NV",
+    "fips_code": "32019",
     "date": "2004-07-30",
     "order": 29
   },
   {
-    "place_id": "Carson_City__NV",
+    "fips_code": "32510",
     "date": "2004-07-30",
     "order": 30
   },
   {
-    "place_id": "Douglas__NV",
+    "fips_code": "32005",
     "date": "2004-07-30",
     "order": 31
   },
   {
-    "place_id": "Mineral__NV",
+    "fips_code": "32021",
     "date": "2004-07-30",
     "order": 32
   },
   {
-    "place_id": "Mono__CA",
+    "fips_code": "06051",
     "date": "2004-07-30",
     "order": 33
   },
   {
-    "place_id": "Esmeralda__NV",
+    "fips_code": "32009",
     "date": "2004-07-30",
     "order": 34
   },
   {
-    "place_id": "Inyo__CA",
+    "fips_code": "06027",
     "date": "2004-07-30",
     "order": 35
   },
   {
-    "place_id": "Nye__NV",
+    "fips_code": "32023",
     "date": "2004-07-30",
     "order": 36
   },
   {
-    "place_id": "Lincoln__NV",
+    "fips_code": "32017",
     "date": "2004-07-30",
     "order": 37
   },
   {
-    "place_id": "Clark__NV",
+    "fips_code": "32003",
     "date": "2004-07-30",
     "order": 38
   },
   {
-    "place_id": "Mohave__AZ",
+    "fips_code": "04015",
     "date": "2004-07-30",
     "order": 39
   },
   {
-    "place_id": "Coconino__AZ",
+    "fips_code": "04005",
     "date": "2004-07-30",
     "order": 40
   },
   {
-    "place_id": "Navajo__AZ",
+    "fips_code": "04017",
     "date": "2004-07-30",
     "order": 41
   },
   {
-    "place_id": "Apache__AZ",
+    "fips_code": "04001",
     "date": "2004-07-30",
     "order": 42
   },
   {
-    "place_id": "McKinley__NM",
+    "fips_code": "35031",
     "date": "2004-07-30",
     "order": 43
   },
   {
-    "place_id": "San_Juan__NM",
+    "fips_code": "35045",
     "date": "2004-07-30",
     "order": 44
   },
   {
-    "place_id": "San_Juan__UT",
+    "fips_code": "49037",
     "date": "2004-07-30",
     "order": 45
   },
   {
-    "place_id": "Montezuma__CO",
+    "fips_code": "08083",
     "date": "2004-07-30",
     "order": 46
   },
   {
-    "place_id": "La_Plata__CO",
+    "fips_code": "08067",
     "date": "2004-07-30",
     "order": 47
   },
   {
-    "place_id": "Dolores__CO",
+    "fips_code": "08033",
     "date": "2004-07-30",
     "order": 48
   },
   {
-    "place_id": "San_Juan__CO",
+    "fips_code": "08111",
     "date": "2004-07-30",
     "order": 49
   },
   {
-    "place_id": "San_Miguel__CO",
+    "fips_code": "08113",
     "date": "2004-07-30",
     "order": 50
   },
   {
-    "place_id": "Ouray__CO",
+    "fips_code": "08091",
     "date": "2004-07-30",
     "order": 51
   },
   {
-    "place_id": "Montrose__CO",
+    "fips_code": "08085",
     "date": "2004-07-30",
     "order": 52
   },
   {
-    "place_id": "Delta__CO",
+    "fips_code": "08029",
     "date": "2004-07-30",
     "order": 53
   },
   {
-    "place_id": "Mesa__CO",
+    "fips_code": "08077",
     "date": "2004-07-30",
     "order": 54
   },
   {
-    "place_id": "Garfield__CO",
+    "fips_code": "08045",
     "date": "2004-07-30",
     "order": 55
   },
   {
-    "place_id": "Rio_Blanco__CO",
+    "fips_code": "08103",
     "date": "2004-07-30",
     "order": 56
   },
   {
-    "place_id": "Moffat__CO",
+    "fips_code": "08081",
     "date": "2004-07-30",
     "order": 57
   },
   {
-    "place_id": "Uintah__UT",
+    "fips_code": "49047",
     "date": "2004-07-30",
     "order": 58
   },
   {
-    "place_id": "Daggett__UT",
+    "fips_code": "49009",
     "date": "2004-07-30",
     "order": 59
   },
   {
-    "place_id": "Duchesne__UT",
+    "fips_code": "49013",
     "date": "2004-07-30",
     "order": 60
   },
   {
-    "place_id": "Wasatch__UT",
+    "fips_code": "49051",
     "date": "2004-07-30",
     "order": 61
   },
   {
-    "place_id": "Summit__UT",
+    "fips_code": "49043",
     "date": "2004-07-30",
     "order": 62
   },
   {
-    "place_id": "Uinta__WY",
+    "fips_code": "56041",
     "date": "2004-07-30",
     "order": 63
   },
   {
-    "place_id": "Weld__CO",
+    "fips_code": "08123",
     "date": "2004-07-30",
     "order": 64
   },
   {
-    "place_id": "Morgan__CO",
+    "fips_code": "08087",
     "date": "2004-07-30",
     "order": 65
   },
   {
-    "place_id": "Adams__CO",
+    "fips_code": "08001",
     "date": "2004-07-30",
     "order": 66
   },
   {
-    "place_id": "Arapahoe__CO",
+    "fips_code": "08005",
     "date": "2004-07-30",
     "order": 67
   },
   {
-    "place_id": "Elbert__CO",
+    "fips_code": "08039",
     "date": "2004-07-30",
     "order": 68
   },
   {
-    "place_id": "El_Paso__CO",
+    "fips_code": "08041",
     "date": "2004-07-30",
     "order": 69
   },
   {
-    "place_id": "Lincoln__CO",
+    "fips_code": "08073",
     "date": "2004-07-30",
     "order": 70
   },
   {
-    "place_id": "Pueblo__CO",
+    "fips_code": "08101",
     "date": "2004-07-30",
     "order": 71
   },
   {
-    "place_id": "Crowley__CO",
+    "fips_code": "08025",
     "date": "2004-07-30",
     "order": 72
   },
   {
-    "place_id": "Otero__CO",
+    "fips_code": "08089",
     "date": "2004-07-30",
     "order": 73
   },
   {
-    "place_id": "Huerfano__CO",
+    "fips_code": "08055",
     "date": "2004-07-30",
     "order": 74
   },
   {
-    "place_id": "Las_Animas__CO",
+    "fips_code": "08071",
     "date": "2004-07-30",
     "order": 75
   },
   {
-    "place_id": "Colfax__NM",
+    "fips_code": "35007",
     "date": "2004-07-30",
     "order": 76
   },
   {
-    "place_id": "Mora__NM",
+    "fips_code": "35033",
     "date": "2004-07-30",
     "order": 77
   },
   {
-    "place_id": "San_Miguel__NM",
+    "fips_code": "35047",
     "date": "2004-07-30",
     "order": 78
   },
   {
-    "place_id": "Guadalupe__NM",
+    "fips_code": "35019",
     "date": "2004-07-30",
     "order": 79
   },
   {
-    "place_id": "Washington__CO",
+    "fips_code": "08121",
     "date": "2004-07-30",
     "order": 80
   },
   {
-    "place_id": "Yuma__CO",
+    "fips_code": "08125",
     "date": "2004-07-30",
     "order": 81
   },
   {
-    "place_id": "Phillips__CO",
+    "fips_code": "08095",
     "date": "2004-07-30",
     "order": 82
   },
   {
-    "place_id": "Chase__NE",
+    "fips_code": "31029",
     "date": "2004-07-30",
     "order": 83
   },
   {
-    "place_id": "Dundy__NE",
+    "fips_code": "31057",
     "date": "2004-07-30",
     "order": 84
   },
   {
-    "place_id": "Hayes__NE",
+    "fips_code": "31085",
     "date": "2004-07-30",
     "order": 85
   },
   {
-    "place_id": "Hitchcock__NE",
+    "fips_code": "31087",
     "date": "2004-07-30",
     "order": 86
   },
   {
-    "place_id": "Buchanan__MO",
+    "fips_code": "29021",
     "date": "2004-07-30",
     "order": 87
   },
   {
-    "place_id": "Platte__MO",
+    "fips_code": "29165",
     "date": "2004-07-30",
     "order": 88
   },
   {
-    "place_id": "Leavenworth__KS",
+    "fips_code": "20103",
     "date": "2004-07-30",
     "order": 89
   },
   {
-    "place_id": "Doniphan__KS",
+    "fips_code": "20043",
     "date": "2004-07-30",
     "order": 90
   },
   {
-    "place_id": "Atchison__KS",
+    "fips_code": "20005",
     "date": "2004-07-30",
     "order": 91
   },
   {
-    "place_id": "Jefferson__KS",
+    "fips_code": "20087",
     "date": "2004-07-30",
     "order": 92
   },
   {
-    "place_id": "Richardson__NE",
+    "fips_code": "31147",
     "date": "2004-07-30",
     "order": 93
   },
   {
-    "place_id": "Brown__KS",
+    "fips_code": "20013",
     "date": "2004-07-30",
     "order": 94
   },
   {
-    "place_id": "Jackson__KS",
+    "fips_code": "20085",
     "date": "2004-07-30",
     "order": 95
   },
   {
-    "place_id": "Pawnee__NE",
+    "fips_code": "31133",
     "date": "2004-07-30",
     "order": 96
   },
   {
-    "place_id": "Nemaha__KS",
+    "fips_code": "20131",
     "date": "2004-07-30",
     "order": 97
   },
   {
-    "place_id": "Pottawatomie__KS",
+    "fips_code": "20149",
     "date": "2004-07-30",
     "order": 98
   },
   {
-    "place_id": "Gage__NE",
+    "fips_code": "31067",
     "date": "2004-07-30",
     "order": 99
   },
   {
-    "place_id": "Marshall__KS",
+    "fips_code": "20117",
     "date": "2004-07-30",
     "order": 100
   },
   {
-    "place_id": "Jefferson__NE",
+    "fips_code": "31095",
     "date": "2004-07-30",
     "order": 101
   },
   {
-    "place_id": "Washington__KS",
+    "fips_code": "20201",
     "date": "2004-07-30",
     "order": 102
   },
   {
-    "place_id": "Riley__KS",
+    "fips_code": "20161",
     "date": "2004-07-30",
     "order": 103
   },
   {
-    "place_id": "Republic__KS",
+    "fips_code": "20157",
     "date": "2004-07-30",
     "order": 104
   },
   {
-    "place_id": "Cloud__KS",
+    "fips_code": "20029",
     "date": "2004-07-30",
     "order": 105
   },
   {
-    "place_id": "Clay__KS",
+    "fips_code": "20027",
     "date": "2004-07-30",
     "order": 106
   },
   {
-    "place_id": "Jewell__KS",
+    "fips_code": "20089",
     "date": "2004-07-30",
     "order": 107
   },
   {
-    "place_id": "Mitchell__KS",
+    "fips_code": "20123",
     "date": "2004-07-30",
     "order": 108
   },
   {
-    "place_id": "Ottawa__KS",
+    "fips_code": "20143",
     "date": "2004-07-30",
     "order": 109
   },
   {
-    "place_id": "Smith__KS",
+    "fips_code": "20183",
     "date": "2004-07-30",
     "order": 110
   },
   {
-    "place_id": "Osborne__KS",
+    "fips_code": "20141",
     "date": "2004-07-30",
     "order": 111
   },
   {
-    "place_id": "Lincoln__KS",
+    "fips_code": "20105",
     "date": "2004-07-30",
     "order": 112
   },
   {
-    "place_id": "Rooks__KS",
+    "fips_code": "20163",
     "date": "2004-07-30",
     "order": 113
   },
   {
-    "place_id": "Ellis__KS",
+    "fips_code": "20051",
     "date": "2004-07-30",
     "order": 114
   },
   {
-    "place_id": "Russell__KS",
+    "fips_code": "20167",
     "date": "2004-07-30",
     "order": 115
   },
   {
-    "place_id": "Trego__KS",
+    "fips_code": "20195",
     "date": "2004-07-30",
     "order": 116
   },
   {
-    "place_id": "Ness__KS",
+    "fips_code": "20135",
     "date": "2004-07-30",
     "order": 117
   },
   {
-    "place_id": "Rush__KS",
+    "fips_code": "20165",
     "date": "2004-07-30",
     "order": 118
   },
   {
-    "place_id": "Pawnee__KS",
+    "fips_code": "20145",
     "date": "2004-07-30",
     "order": 119
   },
   {
-    "place_id": "Hodgeman__KS",
+    "fips_code": "20083",
     "date": "2004-07-30",
     "order": 120
   },
   {
-    "place_id": "Edwards__KS",
+    "fips_code": "20047",
     "date": "2004-07-30",
     "order": 121
   },
   {
-    "place_id": "Gray__KS",
+    "fips_code": "20069",
     "date": "2004-07-30",
     "order": 122
   },
   {
-    "place_id": "Ford__KS",
+    "fips_code": "20057",
     "date": "2004-07-30",
     "order": 123
   },
   {
-    "place_id": "Kiowa__KS",
+    "fips_code": "20097",
     "date": "2004-07-30",
     "order": 124
   },
   {
-    "place_id": "Meade__KS",
+    "fips_code": "20119",
     "date": "2004-07-30",
     "order": 125
   },
   {
-    "place_id": "Clark__KS",
+    "fips_code": "20025",
     "date": "2004-07-30",
     "order": 126
   },
   {
-    "place_id": "Comanche__KS",
+    "fips_code": "20033",
     "date": "2004-07-30",
     "order": 127
   },
   {
-    "place_id": "Beaver__OK",
+    "fips_code": "40007",
     "date": "2004-07-30",
     "order": 128
   },
   {
-    "place_id": "Harper__OK",
+    "fips_code": "40059",
     "date": "2004-07-30",
     "order": 129
   },
   {
-    "place_id": "Lipscomb__TX",
+    "fips_code": "48295",
     "date": "2004-07-30",
     "order": 130
   },
   {
-    "place_id": "Ellis__OK",
+    "fips_code": "40045",
     "date": "2004-07-30",
     "order": 131
   },
   {
-    "place_id": "Woodward__OK",
+    "fips_code": "40153",
     "date": "2004-07-30",
     "order": 132
   },
   {
-    "place_id": "Roger_Mills__OK",
+    "fips_code": "40129",
     "date": "2004-07-30",
     "order": 133
   },
   {
-    "place_id": "Custer__OK",
+    "fips_code": "40039",
     "date": "2004-07-30",
     "order": 134
   },
   {
-    "place_id": "Dewey__OK",
+    "fips_code": "40043",
     "date": "2004-07-30",
     "order": 135
   },
   {
-    "place_id": "Beckham__OK",
+    "fips_code": "40009",
     "date": "2004-07-30",
     "order": 136
   },
   {
-    "place_id": "Washita__OK",
+    "fips_code": "40149",
     "date": "2004-07-30",
     "order": 137
   },
   {
-    "place_id": "Greer__OK",
+    "fips_code": "40055",
     "date": "2004-07-30",
     "order": 138
   },
   {
-    "place_id": "Kiowa__OK",
+    "fips_code": "40075",
     "date": "2004-07-30",
     "order": 139
   },
   {
-    "place_id": "Tillman__OK",
+    "fips_code": "40141",
     "date": "2004-07-30",
     "order": 140
   },
   {
-    "place_id": "Comanche__OK",
+    "fips_code": "40031",
     "date": "2004-07-30",
     "order": 141
   },
   {
-    "place_id": "Caddo__OK",
+    "fips_code": "40015",
     "date": "2004-07-30",
     "order": 142
   },
   {
-    "place_id": "Cotton__OK",
+    "fips_code": "40033",
     "date": "2004-07-30",
     "order": 143
   },
   {
-    "place_id": "Stephens__OK",
+    "fips_code": "40137",
     "date": "2004-07-30",
     "order": 144
   },
   {
-    "place_id": "Grady__OK",
+    "fips_code": "40051",
     "date": "2004-07-30",
     "order": 145
   },
   {
-    "place_id": "Carter__OK",
+    "fips_code": "40019",
     "date": "2004-07-30",
     "order": 146
   },
   {
-    "place_id": "Murray__OK",
+    "fips_code": "40099",
     "date": "2004-07-30",
     "order": 147
   },
   {
-    "place_id": "Garvin__OK",
+    "fips_code": "40049",
     "date": "2004-07-30",
     "order": 148
   },
   {
-    "place_id": "McClain__OK",
+    "fips_code": "40087",
     "date": "2004-07-30",
     "order": 149
   },
   {
-    "place_id": "Marshall__OK",
+    "fips_code": "40095",
     "date": "2004-07-30",
     "order": 150
   },
   {
-    "place_id": "Johnston__OK",
+    "fips_code": "40069",
     "date": "2004-07-30",
     "order": 151
   },
   {
-    "place_id": "Pontotoc__OK",
+    "fips_code": "40123",
     "date": "2004-07-30",
     "order": 152
   },
   {
-    "place_id": "Bryan__OK",
+    "fips_code": "40013",
     "date": "2004-07-30",
     "order": 153
   },
   {
-    "place_id": "Atoka__OK",
+    "fips_code": "40005",
     "date": "2004-07-30",
     "order": 154
   },
   {
-    "place_id": "Coal__OK",
+    "fips_code": "40029",
     "date": "2004-07-30",
     "order": 155
   },
   {
-    "place_id": "Choctaw__OK",
+    "fips_code": "40023",
     "date": "2004-07-30",
     "order": 156
   },
   {
-    "place_id": "Pushmataha__OK",
+    "fips_code": "40127",
     "date": "2004-07-30",
     "order": 157
   },
   {
-    "place_id": "Pittsburg__OK",
+    "fips_code": "40121",
     "date": "2004-07-30",
     "order": 158
   },
   {
-    "place_id": "McCurtain__OK",
+    "fips_code": "40089",
     "date": "2004-07-30",
     "order": 159
   },
   {
-    "place_id": "Latimer__OK",
+    "fips_code": "40077",
     "date": "2004-07-30",
     "order": 160
   },
   {
-    "place_id": "Le_Flore__OK",
+    "fips_code": "40079",
     "date": "2004-07-30",
     "order": 161
   },
   {
-    "place_id": "Polk__AR",
+    "fips_code": "05113",
     "date": "2004-07-30",
     "order": 162
   },
   {
-    "place_id": "Scott__AR",
+    "fips_code": "05127",
     "date": "2004-07-30",
     "order": 163
   },
   {
-    "place_id": "Sebastian__AR",
+    "fips_code": "05131",
     "date": "2004-07-30",
     "order": 164
   },
   {
-    "place_id": "Yell__AR",
+    "fips_code": "05149",
     "date": "2004-07-30",
     "order": 165
   },
   {
-    "place_id": "Logan__AR",
+    "fips_code": "05083",
     "date": "2004-07-30",
     "order": 166
   },
   {
-    "place_id": "Franklin__AR",
+    "fips_code": "05047",
     "date": "2004-07-30",
     "order": 167
   },
   {
-    "place_id": "Crawford__AR",
+    "fips_code": "05033",
     "date": "2004-07-30",
     "order": 168
   },
   {
-    "place_id": "Johnson__AR",
+    "fips_code": "05071",
     "date": "2004-07-30",
     "order": 169
   },
   {
-    "place_id": "Newton__AR",
+    "fips_code": "05101",
     "date": "2004-07-30",
     "order": 170
   },
   {
-    "place_id": "Madison__AR",
+    "fips_code": "05087",
     "date": "2004-07-30",
     "order": 171
   },
   {
-    "place_id": "Washington__AR",
+    "fips_code": "05143",
     "date": "2004-07-30",
     "order": 172
   },
   {
-    "place_id": "Carroll__AR",
+    "fips_code": "05015",
     "date": "2004-07-30",
     "order": 173
   },
   {
-    "place_id": "Benton__AR",
+    "fips_code": "05007",
     "date": "2004-07-30",
     "order": 174
   },
   {
-    "place_id": "Stone__MO",
+    "fips_code": "29209",
     "date": "2004-07-30",
     "order": 175
   },
   {
-    "place_id": "Barry__MO",
+    "fips_code": "29009",
     "date": "2004-07-30",
     "order": 176
   },
   {
-    "place_id": "McDonald__MO",
+    "fips_code": "29119",
     "date": "2004-07-30",
     "order": 177
   },
   {
-    "place_id": "Newton__MO",
+    "fips_code": "29145",
     "date": "2004-07-30",
     "order": 178
   },
   {
-    "place_id": "Lawrence__MO",
+    "fips_code": "29109",
     "date": "2004-07-30",
     "order": 179
   },
   {
-    "place_id": "Jasper__MO",
+    "fips_code": "29097",
     "date": "2004-07-30",
     "order": 180
   },
   {
-    "place_id": "Dade__MO",
+    "fips_code": "29057",
     "date": "2004-07-30",
     "order": 181
   },
   {
-    "place_id": "Barton__MO",
+    "fips_code": "29011",
     "date": "2004-07-30",
     "order": 182
   },
   {
-    "place_id": "Cedar__MO",
+    "fips_code": "29039",
     "date": "2004-07-30",
     "order": 183
   },
   {
-    "place_id": "Vernon__MO",
+    "fips_code": "29217",
     "date": "2004-07-30",
     "order": 184
   },
   {
-    "place_id": "Bourbon__KS",
+    "fips_code": "20011",
     "date": "2004-07-30",
     "order": 185
   },
   {
-    "place_id": "St__Clair__MO",
+    "fips_code": "29185",
     "date": "2004-07-30",
     "order": 186
   },
   {
-    "place_id": "Henry__MO",
+    "fips_code": "29083",
     "date": "2004-07-30",
     "order": 187
   },
   {
-    "place_id": "Bates__MO",
+    "fips_code": "29013",
     "date": "2004-07-30",
     "order": 188
   },
   {
-    "place_id": "Linn__KS",
+    "fips_code": "20107",
     "date": "2004-07-30",
     "order": 189
   },
   {
-    "place_id": "Johnson__MO",
+    "fips_code": "29101",
     "date": "2004-07-30",
     "order": 190
   },
   {
-    "place_id": "Cass__MO",
+    "fips_code": "29037",
     "date": "2004-07-30",
     "order": 191
   },
   {
-    "place_id": "Miami__KS",
+    "fips_code": "20121",
     "date": "2004-07-30",
     "order": 192
   },
   {
-    "place_id": "Lafayette__MO",
+    "fips_code": "29107",
     "date": "2004-07-30",
     "order": 193
   },
   {
-    "place_id": "Jackson__MO",
+    "fips_code": "29095",
     "date": "2004-07-30",
     "order": 194
   },
   {
-    "place_id": "Johnson__KS",
+    "fips_code": "20091",
     "date": "2004-07-30",
     "order": 195
   },
   {
-    "place_id": "Carroll__MO",
+    "fips_code": "29033",
     "date": "2004-07-30",
     "order": 196
   },
   {
-    "place_id": "Ray__MO",
+    "fips_code": "29177",
     "date": "2004-07-30",
     "order": 197
   },
   {
-    "place_id": "Clay__MO",
+    "fips_code": "29047",
     "date": "2004-07-30",
     "order": 198
   },
   {
-    "place_id": "Wyandotte__KS",
+    "fips_code": "20209",
     "date": "2004-07-30",
     "order": 199
   },
   {
-    "place_id": "Livingston__MO",
+    "fips_code": "29117",
     "date": "2004-07-30",
     "order": 200
   },
   {
-    "place_id": "Caldwell__MO",
+    "fips_code": "29025",
     "date": "2004-07-30",
     "order": 201
   },
   {
-    "place_id": "Clinton__MO",
+    "fips_code": "29049",
     "date": "2004-07-30",
     "order": 202
   },
   {
-    "place_id": "Grundy__MO",
+    "fips_code": "29079",
     "date": "2004-07-30",
     "order": 203
   },
   {
-    "place_id": "Daviess__MO",
+    "fips_code": "29061",
     "date": "2004-07-30",
     "order": 204
   },
   {
-    "place_id": "DeKalb__MO",
+    "fips_code": "29063",
     "date": "2004-07-30",
     "order": 205
   },
   {
-    "place_id": "Gentry__MO",
+    "fips_code": "29075",
     "date": "2004-07-30",
     "order": 206
   },
   {
-    "place_id": "Montgomery__AR",
+    "fips_code": "05097",
     "date": "2004-07-30",
     "order": 207
   },
   {
-    "place_id": "Garland__AR",
+    "fips_code": "05051",
     "date": "2004-07-30",
     "order": 208
   },
   {
-    "place_id": "Howard__AR",
+    "fips_code": "05061",
     "date": "2004-07-30",
     "order": 209
   },
   {
-    "place_id": "Pike__AR",
+    "fips_code": "05109",
     "date": "2004-07-30",
     "order": 210
   },
   {
-    "place_id": "Hot_Spring__AR",
+    "fips_code": "05059",
     "date": "2004-07-30",
     "order": 211
   },
   {
-    "place_id": "Clark__AR",
+    "fips_code": "05019",
     "date": "2004-07-30",
     "order": 212
   },
   {
-    "place_id": "Hempstead__AR",
+    "fips_code": "05057",
     "date": "2004-07-30",
     "order": 213
   },
   {
-    "place_id": "Nevada__AR",
+    "fips_code": "05099",
     "date": "2004-07-30",
     "order": 214
   },
   {
-    "place_id": "Ouachita__AR",
+    "fips_code": "05103",
     "date": "2004-07-30",
     "order": 215
   },
   {
-    "place_id": "Ralls__MO",
+    "fips_code": "29173",
     "date": "2004-07-30",
     "order": 216
   },
   {
-    "place_id": "Pike__IL",
+    "fips_code": "17149",
     "date": "2004-07-30",
     "order": 217
   },
   {
-    "place_id": "Pike__MO",
+    "fips_code": "29163",
     "date": "2004-07-30",
     "order": 218
   },
   {
-    "place_id": "Calhoun__IL",
+    "fips_code": "17013",
     "date": "2004-07-30",
     "order": 219
   },
   {
-    "place_id": "Montgomery__MO",
+    "fips_code": "29139",
     "date": "2004-07-30",
     "order": 220
   },
   {
-    "place_id": "Lincoln__MO",
+    "fips_code": "29113",
     "date": "2004-07-30",
     "order": 221
   },
   {
-    "place_id": "Warren__MO",
+    "fips_code": "29219",
     "date": "2004-07-30",
     "order": 222
   },
   {
-    "place_id": "St__Charles__MO",
+    "fips_code": "29183",
     "date": "2004-07-30",
     "order": 223
   },
   {
-    "place_id": "Franklin__MO",
+    "fips_code": "29071",
     "date": "2004-07-30",
     "order": 224
   },
   {
-    "place_id": "St__Louis_Co___MO",
+    "fips_code": "29189",
     "date": "2004-07-30",
     "order": 225
   },
   {
-    "place_id": "Jefferson__MO",
+    "fips_code": "29099",
     "date": "2004-07-30",
     "order": 226
   },
   {
-    "place_id": "Crawford__MO",
+    "fips_code": "29055",
     "date": "2004-07-30",
     "order": 227
   },
   {
-    "place_id": "Washington__MO",
+    "fips_code": "29221",
     "date": "2004-07-30",
     "order": 228
   },
   {
-    "place_id": "St__Francois__MO",
+    "fips_code": "29187",
     "date": "2004-07-30",
     "order": 229
   },
   {
-    "place_id": "Sainte_Genevieve__MO",
+    "fips_code": "29186",
     "date": "2004-07-30",
     "order": 230
   },
   {
-    "place_id": "Iron__MO",
+    "fips_code": "29093",
     "date": "2004-07-30",
     "order": 231
   },
   {
-    "place_id": "Madison__MO",
+    "fips_code": "29123",
     "date": "2004-07-30",
     "order": 232
   },
   {
-    "place_id": "Wayne__MO",
+    "fips_code": "29223",
     "date": "2004-07-30",
     "order": 233
   },
   {
-    "place_id": "Bollinger__MO",
+    "fips_code": "29017",
     "date": "2004-07-30",
     "order": 234
   },
   {
-    "place_id": "Butler__MO",
+    "fips_code": "29023",
     "date": "2004-07-30",
     "order": 235
   },
   {
-    "place_id": "Stoddard__MO",
+    "fips_code": "29207",
     "date": "2004-07-30",
     "order": 236
   },
   {
-    "place_id": "Clay__AR",
+    "fips_code": "05021",
     "date": "2004-07-30",
     "order": 237
   },
   {
-    "place_id": "Dunklin__MO",
+    "fips_code": "29069",
     "date": "2004-07-30",
     "order": 238
   },
   {
-    "place_id": "New_Madrid__MO",
+    "fips_code": "29143",
     "date": "2004-07-30",
     "order": 239
   },
   {
-    "place_id": "Pemiscot__MO",
+    "fips_code": "29155",
     "date": "2004-07-30",
     "order": 240
   },
   {
-    "place_id": "Lake__TN",
+    "fips_code": "47095",
     "date": "2004-07-30",
     "order": 241
   },
   {
-    "place_id": "Mississippi__AR",
+    "fips_code": "05093",
     "date": "2004-07-30",
     "order": 242
   },
   {
-    "place_id": "Lauderdale__TN",
+    "fips_code": "47097",
     "date": "2004-07-30",
     "order": 243
   },
   {
-    "place_id": "Dyer__TN",
+    "fips_code": "47045",
     "date": "2004-07-30",
     "order": 244
   },
   {
-    "place_id": "Tipton__TN",
+    "fips_code": "47167",
     "date": "2004-07-30",
     "order": 245
   },
   {
-    "place_id": "Haywood__TN",
+    "fips_code": "47075",
     "date": "2004-07-30",
     "order": 246
   },
   {
-    "place_id": "Crockett__TN",
+    "fips_code": "47033",
     "date": "2004-07-30",
     "order": 247
   },
   {
-    "place_id": "Shelby__TN",
+    "fips_code": "47157",
     "date": "2004-07-30",
     "order": 248
   },
   {
-    "place_id": "Fayette__TN",
+    "fips_code": "47047",
     "date": "2004-07-30",
     "order": 249
   },
   {
-    "place_id": "Hardeman__TN",
+    "fips_code": "47069",
     "date": "2004-07-30",
     "order": 250
   },
   {
-    "place_id": "Marshall__MS",
+    "fips_code": "28093",
     "date": "2004-07-30",
     "order": 251
   },
   {
-    "place_id": "Benton__MS",
+    "fips_code": "28009",
     "date": "2004-07-30",
     "order": 252
   },
   {
-    "place_id": "Tippah__MS",
+    "fips_code": "28139",
     "date": "2004-07-30",
     "order": 253
   },
   {
-    "place_id": "Alcorn__MS",
+    "fips_code": "28003",
     "date": "2004-07-30",
     "order": 254
   },
   {
-    "place_id": "Lafayette__MS",
+    "fips_code": "28071",
     "date": "2004-07-30",
     "order": 255
   },
   {
-    "place_id": "Union__MS",
+    "fips_code": "28145",
     "date": "2004-07-30",
     "order": 256
   },
   {
-    "place_id": "Prentiss__MS",
+    "fips_code": "28117",
     "date": "2004-07-30",
     "order": 257
   },
   {
-    "place_id": "Pontotoc__MS",
+    "fips_code": "28115",
     "date": "2004-07-30",
     "order": 258
   },
   {
-    "place_id": "Lee__MS",
+    "fips_code": "28081",
     "date": "2004-07-30",
     "order": 259
   },
   {
-    "place_id": "Itawamba__MS",
+    "fips_code": "28057",
     "date": "2004-07-30",
     "order": 260
   },
   {
-    "place_id": "Chickasaw__MS",
+    "fips_code": "28017",
     "date": "2004-07-30",
     "order": 261
   },
   {
-    "place_id": "Monroe__MS",
+    "fips_code": "28095",
     "date": "2004-07-30",
     "order": 262
   },
   {
-    "place_id": "Lowndes__MS",
+    "fips_code": "28087",
     "date": "2004-07-30",
     "order": 263
   },
   {
-    "place_id": "Lamar__AL",
+    "fips_code": "01075",
     "date": "2004-07-30",
     "order": 264
   },
   {
-    "place_id": "Marion__AL",
+    "fips_code": "01093",
     "date": "2004-07-30",
     "order": 265
   },
   {
-    "place_id": "Franklin__AL",
+    "fips_code": "01059",
     "date": "2004-07-30",
     "order": 266
   },
   {
-    "place_id": "Tishomingo__MS",
+    "fips_code": "28141",
     "date": "2004-07-30",
     "order": 267
   },
   {
-    "place_id": "Colbert__AL",
+    "fips_code": "01033",
     "date": "2004-07-30",
     "order": 268
   },
   {
-    "place_id": "Lauderdale__AL",
+    "fips_code": "01077",
     "date": "2004-07-30",
     "order": 269
   },
   {
-    "place_id": "Wayne__TN",
+    "fips_code": "47181",
     "date": "2004-07-30",
     "order": 270
   },
   {
-    "place_id": "Lawrence__TN",
+    "fips_code": "47099",
     "date": "2004-07-30",
     "order": 271
   },
   {
-    "place_id": "Giles__TN",
+    "fips_code": "47055",
     "date": "2004-07-30",
     "order": 272
   },
   {
-    "place_id": "Lewis__TN",
+    "fips_code": "47101",
     "date": "2004-07-30",
     "order": 273
   },
   {
-    "place_id": "Maury__TN",
+    "fips_code": "47119",
     "date": "2004-07-30",
     "order": 274
   },
   {
-    "place_id": "Hickman__TN",
+    "fips_code": "47081",
     "date": "2004-07-30",
     "order": 275
   },
   {
-    "place_id": "Williamson__TN",
+    "fips_code": "47187",
     "date": "2004-07-30",
     "order": 276
   },
   {
-    "place_id": "Dickson__TN",
+    "fips_code": "47043",
     "date": "2004-07-30",
     "order": 277
   },
   {
-    "place_id": "Cheatham__TN",
+    "fips_code": "47021",
     "date": "2004-07-30",
     "order": 278
   },
   {
-    "place_id": "Davidson__TN",
+    "fips_code": "47037",
     "date": "2004-07-30",
     "order": 279
   },
   {
-    "place_id": "Montgomery__TN",
+    "fips_code": "47125",
     "date": "2004-07-30",
     "order": 280
   },
   {
-    "place_id": "Robertson__TN",
+    "fips_code": "47147",
     "date": "2004-07-30",
     "order": 281
   },
   {
-    "place_id": "Christian__KY",
+    "fips_code": "21047",
     "date": "2004-07-30",
     "order": 282
   },
   {
-    "place_id": "Todd__KY",
+    "fips_code": "21219",
     "date": "2004-07-30",
     "order": 283
   },
   {
-    "place_id": "Logan__KY",
+    "fips_code": "21141",
     "date": "2004-07-30",
     "order": 284
   },
   {
-    "place_id": "Simpson__KY",
+    "fips_code": "21213",
     "date": "2004-07-30",
     "order": 285
   },
   {
-    "place_id": "Muhlenberg__KY",
+    "fips_code": "21177",
     "date": "2004-07-30",
     "order": 286
   },
   {
-    "place_id": "Butler__KY",
+    "fips_code": "21031",
     "date": "2004-07-30",
     "order": 287
   },
   {
-    "place_id": "McLean__KY",
+    "fips_code": "21149",
     "date": "2004-07-30",
     "order": 288
   },
   {
-    "place_id": "Ohio__KY",
+    "fips_code": "21183",
     "date": "2004-07-30",
     "order": 289
   },
   {
-    "place_id": "Daviess__KY",
+    "fips_code": "21059",
     "date": "2004-07-30",
     "order": 290
   },
   {
-    "place_id": "Hancock__KY",
+    "fips_code": "21091",
     "date": "2004-07-30",
     "order": 291
   },
   {
-    "place_id": "Warrick__IN",
+    "fips_code": "18173",
     "date": "2004-07-30",
     "order": 292
   },
   {
-    "place_id": "Spencer__IN",
+    "fips_code": "18147",
     "date": "2004-07-30",
     "order": 293
   },
   {
-    "place_id": "Perry__IN",
+    "fips_code": "18123",
     "date": "2004-07-30",
     "order": 294
   },
   {
-    "place_id": "Crawford__IN",
+    "fips_code": "18025",
     "date": "2004-07-30",
     "order": 295
   },
   {
-    "place_id": "Pike__IN",
+    "fips_code": "18125",
     "date": "2004-07-30",
     "order": 296
   },
   {
-    "place_id": "Dubois__IN",
+    "fips_code": "18037",
     "date": "2004-07-30",
     "order": 297
   },
   {
-    "place_id": "Orange__IN",
+    "fips_code": "18117",
     "date": "2004-07-30",
     "order": 298
   },
   {
-    "place_id": "Daviess__IN",
+    "fips_code": "18027",
     "date": "2004-07-30",
     "order": 299
   },
   {
-    "place_id": "Martin__IN",
+    "fips_code": "18101",
     "date": "2004-07-30",
     "order": 300
   },
   {
-    "place_id": "Lawrence__IN",
+    "fips_code": "18093",
     "date": "2004-07-30",
     "order": 301
   },
   {
-    "place_id": "Greene__IN",
+    "fips_code": "18055",
     "date": "2004-07-30",
     "order": 302
   },
   {
-    "place_id": "Monroe__IN",
+    "fips_code": "18105",
     "date": "2004-07-30",
     "order": 303
   },
   {
-    "place_id": "Brown__IN",
+    "fips_code": "18013",
     "date": "2004-07-30",
     "order": 304
   },
   {
-    "place_id": "Clay__IN",
+    "fips_code": "18021",
     "date": "2004-07-30",
     "order": 305
   },
   {
-    "place_id": "Owen__IN",
+    "fips_code": "18119",
     "date": "2004-07-30",
     "order": 306
   },
   {
-    "place_id": "Morgan__IN",
+    "fips_code": "18109",
     "date": "2004-07-30",
     "order": 307
   },
   {
-    "place_id": "Putnam__IN",
+    "fips_code": "18133",
     "date": "2004-07-30",
     "order": 308
   },
   {
-    "place_id": "Hendricks__IN",
+    "fips_code": "18063",
     "date": "2004-07-30",
     "order": 309
   },
   {
-    "place_id": "Kalkaska__MI",
+    "fips_code": "26079",
     "date": "2004-07-30",
     "order": 310
   },
   {
-    "place_id": "Crawford__MI",
+    "fips_code": "26039",
     "date": "2004-07-30",
     "order": 311
   },
   {
-    "place_id": "Missaukee__MI",
+    "fips_code": "26113",
     "date": "2004-07-30",
     "order": 312
   },
   {
-    "place_id": "Roscommon__MI",
+    "fips_code": "26143",
     "date": "2004-07-30",
     "order": 313
   },
   {
-    "place_id": "Osceola__MI",
+    "fips_code": "26133",
     "date": "2004-07-30",
     "order": 314
   },
   {
-    "place_id": "Clare__MI",
+    "fips_code": "26035",
     "date": "2004-07-30",
     "order": 315
   },
   {
-    "place_id": "Gladwin__MI",
+    "fips_code": "26051",
     "date": "2004-07-30",
     "order": 316
   },
   {
-    "place_id": "Mecosta__MI",
+    "fips_code": "26107",
     "date": "2004-07-30",
     "order": 317
   },
   {
-    "place_id": "Isabella__MI",
+    "fips_code": "26073",
     "date": "2004-07-30",
     "order": 318
   },
   {
-    "place_id": "Midland__MI",
+    "fips_code": "26111",
     "date": "2004-07-30",
     "order": 319
   },
   {
-    "place_id": "Montcalm__MI",
+    "fips_code": "26117",
     "date": "2004-07-30",
     "order": 320
   },
   {
-    "place_id": "Gratiot__MI",
+    "fips_code": "26057",
     "date": "2004-07-30",
     "order": 321
   },
   {
-    "place_id": "Saginaw__MI",
+    "fips_code": "26145",
     "date": "2004-07-30",
     "order": 322
   },
   {
-    "place_id": "Ionia__MI",
+    "fips_code": "26067",
     "date": "2004-07-30",
     "order": 323
   },
   {
-    "place_id": "Clinton__MI",
+    "fips_code": "26037",
     "date": "2004-07-30",
     "order": 324
   },
   {
-    "place_id": "Shiawassee__MI",
+    "fips_code": "26155",
     "date": "2004-07-30",
     "order": 325
   },
   {
-    "place_id": "Eaton__MI",
+    "fips_code": "26045",
     "date": "2004-07-30",
     "order": 326
   },
   {
-    "place_id": "Ingham__MI",
+    "fips_code": "26065",
     "date": "2004-07-30",
     "order": 327
   },
   {
-    "place_id": "Livingston__MI",
+    "fips_code": "26093",
     "date": "2004-07-30",
     "order": 328
   },
   {
-    "place_id": "Calhoun__MI",
+    "fips_code": "26025",
     "date": "2004-07-30",
     "order": 329
   },
   {
-    "place_id": "Jackson__MI",
+    "fips_code": "26075",
     "date": "2004-07-30",
     "order": 330
   },
   {
-    "place_id": "Washtenaw__MI",
+    "fips_code": "26161",
     "date": "2004-07-30",
     "order": 331
   },
   {
-    "place_id": "Hillsdale__MI",
+    "fips_code": "26059",
     "date": "2004-07-30",
     "order": 332
   },
   {
-    "place_id": "Lenawee__MI",
+    "fips_code": "26091",
     "date": "2004-07-30",
     "order": 333
   },
   {
-    "place_id": "Monroe__MI",
+    "fips_code": "26115",
     "date": "2004-07-30",
     "order": 334
   },
   {
-    "place_id": "Williams__OH",
+    "fips_code": "39171",
     "date": "2004-07-30",
     "order": 335
   },
   {
-    "place_id": "Fulton__OH",
+    "fips_code": "39051",
     "date": "2004-07-30",
     "order": 336
   },
   {
-    "place_id": "Lucas__OH",
+    "fips_code": "39095",
     "date": "2004-07-30",
     "order": 337
   },
   {
-    "place_id": "Defiance__OH",
+    "fips_code": "39039",
     "date": "2004-07-30",
     "order": 338
   },
   {
-    "place_id": "Henry__OH",
+    "fips_code": "39069",
     "date": "2004-07-30",
     "order": 339
   },
   {
-    "place_id": "Wood__OH",
+    "fips_code": "39173",
     "date": "2004-07-30",
     "order": 340
   },
   {
-    "place_id": "Paulding__OH",
+    "fips_code": "39125",
     "date": "2004-07-30",
     "order": 341
   },
   {
-    "place_id": "Putnam__OH",
+    "fips_code": "39137",
     "date": "2004-07-30",
     "order": 342
   },
   {
-    "place_id": "Hancock__OH",
+    "fips_code": "39063",
     "date": "2004-07-30",
     "order": 343
   },
   {
-    "place_id": "Van_Wert__OH",
+    "fips_code": "39161",
     "date": "2004-07-30",
     "order": 344
   },
   {
-    "place_id": "Allen__OH",
+    "fips_code": "39003",
     "date": "2004-07-30",
     "order": 345
   },
   {
-    "place_id": "Hardin__OH",
+    "fips_code": "39065",
     "date": "2004-07-30",
     "order": 346
   },
   {
-    "place_id": "Mercer__OH",
+    "fips_code": "39107",
     "date": "2004-07-30",
     "order": 347
   },
   {
-    "place_id": "Auglaize__OH",
+    "fips_code": "39011",
     "date": "2004-07-30",
     "order": 348
   },
   {
-    "place_id": "Shelby__OH",
+    "fips_code": "39149",
     "date": "2004-07-30",
     "order": 349
   },
   {
-    "place_id": "Logan__OH",
+    "fips_code": "39091",
     "date": "2004-07-30",
     "order": 350
   },
   {
-    "place_id": "Union__OH",
+    "fips_code": "39159",
     "date": "2004-07-30",
     "order": 351
   },
   {
-    "place_id": "Darke__OH",
+    "fips_code": "39037",
     "date": "2004-07-30",
     "order": 352
   },
   {
-    "place_id": "Miami__OH",
+    "fips_code": "39109",
     "date": "2004-07-30",
     "order": 353
   },
   {
-    "place_id": "Champaign__OH",
+    "fips_code": "39021",
     "date": "2004-07-30",
     "order": 354
   },
   {
-    "place_id": "Clark__OH",
+    "fips_code": "39023",
     "date": "2004-07-30",
     "order": 355
   },
   {
-    "place_id": "Madison__OH",
+    "fips_code": "39097",
     "date": "2004-07-30",
     "order": 356
   },
   {
-    "place_id": "Montgomery__OH",
+    "fips_code": "39113",
     "date": "2004-07-30",
     "order": 357
   },
   {
-    "place_id": "Greene__OH",
+    "fips_code": "39057",
     "date": "2004-07-30",
     "order": 358
   },
   {
-    "place_id": "Fayette__OH",
+    "fips_code": "39047",
     "date": "2004-07-30",
     "order": 359
   },
   {
-    "place_id": "Warren__OH",
+    "fips_code": "39165",
     "date": "2004-07-30",
     "order": 360
   },
   {
-    "place_id": "Clinton__OH",
+    "fips_code": "39027",
     "date": "2004-07-30",
     "order": 361
   },
   {
-    "place_id": "Highland__OH",
+    "fips_code": "39071",
     "date": "2004-07-30",
     "order": 362
   },
   {
-    "place_id": "Clermont__OH",
+    "fips_code": "39025",
     "date": "2004-07-30",
     "order": 363
   },
   {
-    "place_id": "Brown__OH",
+    "fips_code": "39015",
     "date": "2004-07-30",
     "order": 364
   },
   {
-    "place_id": "Adams__OH",
+    "fips_code": "39001",
     "date": "2004-07-30",
     "order": 365
   },
   {
-    "place_id": "Bracken__KY",
+    "fips_code": "21023",
     "date": "2004-07-30",
     "order": 366
   },
   {
-    "place_id": "Mason__KY",
+    "fips_code": "21161",
     "date": "2004-07-30",
     "order": 367
   },
   {
-    "place_id": "Lewis__KY",
+    "fips_code": "21135",
     "date": "2004-07-30",
     "order": 368
   },
   {
-    "place_id": "Robertson__KY",
+    "fips_code": "21201",
     "date": "2004-07-30",
     "order": 369
   },
   {
-    "place_id": "Fleming__KY",
+    "fips_code": "21069",
     "date": "2004-07-30",
     "order": 370
   },
   {
-    "place_id": "Nicholas__KY",
+    "fips_code": "21181",
     "date": "2004-07-30",
     "order": 371
   },
   {
-    "place_id": "Bath__KY",
+    "fips_code": "21011",
     "date": "2004-07-30",
     "order": 372
   },
   {
-    "place_id": "Rowan__KY",
+    "fips_code": "21205",
     "date": "2004-07-30",
     "order": 373
   },
   {
-    "place_id": "Elliott__KY",
+    "fips_code": "21063",
     "date": "2004-07-30",
     "order": 374
   },
   {
-    "place_id": "Montgomery__KY",
+    "fips_code": "21173",
     "date": "2004-07-30",
     "order": 375
   },
   {
-    "place_id": "Menifee__KY",
+    "fips_code": "21165",
     "date": "2004-07-30",
     "order": 376
   },
   {
-    "place_id": "Morgan__KY",
+    "fips_code": "21175",
     "date": "2004-07-30",
     "order": 377
   },
   {
-    "place_id": "Powell__KY",
+    "fips_code": "21197",
     "date": "2004-07-30",
     "order": 378
   },
   {
-    "place_id": "Wolfe__KY",
+    "fips_code": "21237",
     "date": "2004-07-30",
     "order": 379
   },
   {
-    "place_id": "Magoffin__KY",
+    "fips_code": "21153",
     "date": "2004-07-30",
     "order": 380
   },
   {
-    "place_id": "Estill__KY",
+    "fips_code": "21065",
     "date": "2004-07-30",
     "order": 381
   },
   {
-    "place_id": "Lee__KY",
+    "fips_code": "21129",
     "date": "2004-07-30",
     "order": 382
   },
   {
-    "place_id": "Breathitt__KY",
+    "fips_code": "21025",
     "date": "2004-07-30",
     "order": 383
   },
   {
-    "place_id": "Jackson__KY",
+    "fips_code": "21109",
     "date": "2004-07-30",
     "order": 384
   },
   {
-    "place_id": "Owsley__KY",
+    "fips_code": "21189",
     "date": "2004-07-30",
     "order": 385
   },
   {
-    "place_id": "Perry__KY",
+    "fips_code": "21193",
     "date": "2004-07-30",
     "order": 386
   },
   {
-    "place_id": "Knott__KY",
+    "fips_code": "21119",
     "date": "2004-07-30",
     "order": 387
   },
   {
-    "place_id": "Clay__KY",
+    "fips_code": "21051",
     "date": "2004-07-30",
     "order": 388
   },
   {
-    "place_id": "Leslie__KY",
+    "fips_code": "21131",
     "date": "2004-07-30",
     "order": 389
   },
   {
-    "place_id": "Letcher__KY",
+    "fips_code": "21133",
     "date": "2004-07-30",
     "order": 390
   },
   {
-    "place_id": "Knox__KY",
+    "fips_code": "21121",
     "date": "2004-07-30",
     "order": 391
   },
   {
-    "place_id": "Bell__KY",
+    "fips_code": "21013",
     "date": "2004-07-30",
     "order": 392
   },
   {
-    "place_id": "Harlan__KY",
+    "fips_code": "21095",
     "date": "2004-07-30",
     "order": 393
   },
   {
-    "place_id": "Wise__VA",
+    "fips_code": "51195",
     "date": "2004-07-30",
     "order": 394
   },
   {
-    "place_id": "Norton__VA",
+    "fips_code": "51720",
     "date": "2004-07-30",
     "order": 395
   },
   {
-    "place_id": "Leslie__KY",
+    "fips_code": "21131",
     "date": "2004-07-30",
     "order": 396
   },
   {
-    "place_id": "Claiborne__TN",
+    "fips_code": "47025",
     "date": "2004-07-30",
     "order": 397
   },
   {
-    "place_id": "Lee__VA",
+    "fips_code": "51105",
     "date": "2004-07-30",
     "order": 398
   },
   {
-    "place_id": "Hancock__TN",
+    "fips_code": "47067",
     "date": "2004-07-30",
     "order": 399
   },
   {
-    "place_id": "Scott__VA",
+    "fips_code": "51169",
     "date": "2004-07-30",
     "order": 400
   },
   {
-    "place_id": "Union__TN",
+    "fips_code": "47173",
     "date": "2004-07-30",
     "order": 401
   },
   {
-    "place_id": "Grainger__TN",
+    "fips_code": "47057",
     "date": "2004-07-30",
     "order": 402
   },
   {
-    "place_id": "Hawkins__TN",
+    "fips_code": "47073",
     "date": "2004-07-30",
     "order": 403
   },
   {
-    "place_id": "Knox__TN",
+    "fips_code": "47093",
     "date": "2004-07-30",
     "order": 404
   },
   {
-    "place_id": "Jefferson__TN",
+    "fips_code": "47089",
     "date": "2004-07-30",
     "order": 405
   },
   {
-    "place_id": "Hamblen__TN",
+    "fips_code": "47063",
     "date": "2004-07-30",
     "order": 406
   },
   {
-    "place_id": "Greene__TN",
+    "fips_code": "47059",
     "date": "2004-07-30",
     "order": 407
   },
   {
-    "place_id": "Blount__TN",
+    "fips_code": "47009",
     "date": "2004-07-30",
     "order": 408
   },
   {
-    "place_id": "Sevier__TN",
+    "fips_code": "47155",
     "date": "2004-07-30",
     "order": 409
   },
   {
-    "place_id": "Cocke__TN",
+    "fips_code": "47029",
     "date": "2004-07-30",
     "order": 410
   },
   {
-    "place_id": "Graham__NC",
+    "fips_code": "37075",
     "date": "2004-07-30",
     "order": 411
   },
   {
-    "place_id": "Swain__NC",
+    "fips_code": "37173",
     "date": "2004-07-30",
     "order": 412
   },
   {
-    "place_id": "Haywood__NC",
+    "fips_code": "37087",
     "date": "2004-07-30",
     "order": 413
   },
   {
-    "place_id": "Madison__NC",
+    "fips_code": "37115",
     "date": "2004-07-30",
     "order": 414
   },
   {
-    "place_id": "Macon__NC",
+    "fips_code": "37113",
     "date": "2004-07-30",
     "order": 415
   },
   {
-    "place_id": "Jackson__NC",
+    "fips_code": "37099",
     "date": "2004-07-30",
     "order": 416
   },
   {
-    "place_id": "Buncombe__NC",
+    "fips_code": "37021",
     "date": "2004-07-30",
     "order": 417
   },
   {
-    "place_id": "Rabun__GA",
+    "fips_code": "13241",
     "date": "2004-07-30",
     "order": 418
   },
   {
-    "place_id": "Transylvania__NC",
+    "fips_code": "37175",
     "date": "2004-07-30",
     "order": 419
   },
   {
-    "place_id": "Henderson__NC",
+    "fips_code": "37089",
     "date": "2004-07-30",
     "order": 420
   },
   {
-    "place_id": "Oconee__SC",
+    "fips_code": "45073",
     "date": "2004-07-30",
     "order": 421
   },
   {
-    "place_id": "Pickens__SC",
+    "fips_code": "45077",
     "date": "2004-07-30",
     "order": 422
   },
   {
-    "place_id": "Greenville__SC",
+    "fips_code": "45045",
     "date": "2004-07-30",
     "order": 423
   },
   {
-    "place_id": "Stephens__GA",
+    "fips_code": "13257",
     "date": "2004-07-30",
     "order": 424
   },
   {
-    "place_id": "Franklin__GA",
+    "fips_code": "13119",
     "date": "2004-07-30",
     "order": 425
   },
   {
-    "place_id": "Hart__GA",
+    "fips_code": "13147",
     "date": "2004-07-30",
     "order": 426
   },
   {
-    "place_id": "Anderson__SC",
+    "fips_code": "45007",
     "date": "2004-07-30",
     "order": 427
   },
   {
-    "place_id": "Elbert__GA",
+    "fips_code": "13105",
     "date": "2004-07-30",
     "order": 428
   },
   {
-    "place_id": "Abbeville__SC",
+    "fips_code": "45001",
     "date": "2004-07-30",
     "order": 429
   },
   {
-    "place_id": "Laurens__SC",
+    "fips_code": "45059",
     "date": "2004-07-30",
     "order": 430
   },
   {
-    "place_id": "Greenwood__SC",
+    "fips_code": "45047",
     "date": "2004-07-30",
     "order": 431
   },
   {
-    "place_id": "Wilkes__GA",
+    "fips_code": "13317",
     "date": "2004-07-30",
     "order": 432
   },
   {
-    "place_id": "Lincoln__GA",
+    "fips_code": "13181",
     "date": "2004-07-30",
     "order": 433
   },
   {
-    "place_id": "McCormick__SC",
+    "fips_code": "45065",
     "date": "2004-07-30",
     "order": 434
   },
   {
-    "place_id": "McDuffie__GA",
+    "fips_code": "13189",
     "date": "2004-07-30",
     "order": 435
   },
   {
-    "place_id": "Columbia__GA",
+    "fips_code": "13073",
     "date": "2004-07-30",
     "order": 436
   },
   {
-    "place_id": "Edgefield__SC",
+    "fips_code": "45037",
     "date": "2004-07-30",
     "order": 437
   }
