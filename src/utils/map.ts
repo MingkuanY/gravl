@@ -78,7 +78,7 @@ export const loadMap = (
  * @returns a function called when the user clicks on the map
  */
 export const handleMapClick = (
-  placeIDs: Set<string>,
+  fipsCodes: Set<string>,
   visits: VisitInput[],
   setVisits: Function,
   currentDate: string
@@ -87,32 +87,32 @@ export const handleMapClick = (
     const fillColor = "#319fff";
     const defaultColor = "#012241";
     const target = event.target as SVGPathElement;
-    let placeID = "";
+    let fipsCode = "";
 
     if (
       target.tagName === "path" &&
       target.parentElement &&
       target.parentElement.tagName === "g"
     ) {
-      placeID = target.parentElement.id; // Get the id from the parent g tag
+      fipsCode = target.parentElement.id; // Get the id from the parent g tag
     } else {
-      placeID = target.id; // Get the id from the current path tag
+      fipsCode = target.id; // Get the id from the current path tag
     }
 
-    if (placeIDs && placeIDs.has(placeID)) {
-      const element = document.getElementById(placeID);
+    if (fipsCodes && fipsCodes.has(fipsCode)) {
+      const element = document.getElementById(fipsCode);
       const visitExists = visits.some(
-        (visit) => visit.fips_code === placeID && visit.date == currentDate
+        (visit) => visit.fips_code === fipsCode && visit.date == currentDate
       );
       const childPaths = element?.querySelectorAll("path");
       if (visitExists) {
         // Remove the visit if it exists
         const updatedVisits = visits.filter(
-          (visit) => !(visit.fips_code === placeID && visit.date === currentDate)
+          (visit) => !(visit.fips_code === fipsCode && visit.date === currentDate)
         );
         setVisits(updatedVisits);
         const stillExists = updatedVisits.findIndex(
-          (v) => v.fips_code === placeID
+          (v) => v.fips_code === fipsCode
         );
 
         const color = stillExists === -1 ? defaultColor : otherColor;
@@ -139,7 +139,7 @@ export const handleMapClick = (
         }
 
         const newVisit = {
-          fips_code: placeID,
+          fips_code: fipsCode,
           date: currentDate,
           order: visits.filter((visit) => visit.date === currentDate).length,
         };

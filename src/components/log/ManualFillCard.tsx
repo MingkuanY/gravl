@@ -232,11 +232,11 @@ export default function ManualFillCard({
             <p className={styles.text}>you visited...</p>
           </div>
 
-          <DirectionsInput />
+          <DirectionsInput currentDate={getCurrentDate()} visits={visits} setVisits={setVisitsData} />
 
           <p className={styles.instruction}>
             {visits.filter((visit) => visit.date === getCurrentDate()).length >
-            0
+              0
               ? "Drag to reorder."
               : "Or select a place on the map..."}
           </p>

@@ -7,6 +7,8 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
 import { useState } from "react";
+import { VisitInput } from "@/utils/types";
+import { sortVisits } from "./ManualFillCard";
 
 type Suggestion = {
   description: string;
@@ -17,7 +19,11 @@ type Suggestion = {
   };
 };
 
-export default function DirectionsInput() {
+export default function DirectionsInput({ currentDate, visits, setVisits }: {
+  currentDate: string,
+  visits: VisitInput[],
+  setVisits: Function
+}) {
   const [startCoords, setStartCoords] = useState<{
     lat: number;
     lng: number;
@@ -80,34 +86,32 @@ export default function DirectionsInput() {
 
   const handleSelectFrom =
     ({ description }: Suggestion) =>
-    () => {
-      // When the user selects a place, we can replace the keyword without request data from API
-      // by setting the second parameter to "false"
-      setValueFrom(description, false);
-      clearSuggestionsFrom();
+      () => {
+        // When the user selects a place, we can replace the keyword without request data from API
+        // by setting the second parameter to "false"
+        setValueFrom(description, false);
+        clearSuggestionsFrom();
 
-      // Get latitude and longitude via utility functions
-      getGeocode({ address: description }).then((results) => {
-        const { lat, lng } = getLatLng(results[0]);
-        setStartCoords({ lat, lng });
-        console.log(`📍 From ${lat} ${lng}`);
-      });
-    };
+        // Get latitude and longitude via utility functions
+        getGeocode({ address: description }).then((results) => {
+          const { lat, lng } = getLatLng(results[0]);
+          setStartCoords({ lat, lng });
+        });
+      };
   const handleSelectTo =
     ({ description }: Suggestion) =>
-    () => {
-      // When the user selects a place, we can replace the keyword without request data from API
-      // by setting the second parameter to "false"
-      setValueTo(description, false);
-      clearSuggestionsTo();
+      () => {
+        // When the user selects a place, we can replace the keyword without request data from API
+        // by setting the second parameter to "false"
+        setValueTo(description, false);
+        clearSuggestionsTo();
 
-      // Get latitude and longitude via utility functions
-      getGeocode({ address: description }).then((results) => {
-        const { lat, lng } = getLatLng(results[0]);
-        setEndCoords({ lat, lng });
-        console.log(`📍 To ${lat} ${lng}`);
-      });
-    };
+        // Get latitude and longitude via utility functions
+        getGeocode({ address: description }).then((results) => {
+          const { lat, lng } = getLatLng(results[0]);
+          setEndCoords({ lat, lng });
+        });
+      };
 
   const renderSuggestionsFrom = () =>
     dataFrom.map((suggestion) => {
@@ -184,7 +188,18 @@ export default function DirectionsInput() {
     }
 
     const data = await response.json();
-    console.log("FIPS codes! ", data.fips_codes);
+    const fipsCodes: string[] = data.fips_codes;
+    const newVisits = fipsCodes.map(fips_code => {
+      return {
+        fips_code: fips_code,
+        date: currentDate,
+        order: visits.filter((visit) => visit.date === currentDate).length,
+      };
+    });
+
+    console.log("Adding:", newVisits)
+
+    setVisits(sortVisits([...visits, ...newVisits]));
   };
 
   return (
