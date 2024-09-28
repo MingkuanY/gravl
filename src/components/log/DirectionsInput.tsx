@@ -6,7 +6,7 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { VisitInput } from "@/utils/types";
 import { sortVisits } from "./ManualFillCard";
 
@@ -197,10 +197,14 @@ export default function DirectionsInput({ currentDate, visits, setVisits }: {
       };
     });
 
-    console.log("Adding:", newVisits)
-
     setVisits(sortVisits([...visits, ...newVisits]));
   };
+
+  useEffect(() => {
+    if (startCoords && endCoords) {
+      calculateRoute();
+    }
+  }, [startCoords, endCoords])
 
   return (
     <div className={styles.container}>
@@ -239,15 +243,6 @@ export default function DirectionsInput({ currentDate, visits, setVisits }: {
           <ul className={styles.searchResults}>{renderSuggestionsTo()}</ul>
         )}
       </div>
-      <button
-        className={classnames(
-          styles.searchBtn,
-          startCoords && endCoords && styles.active
-        )}
-        onClick={calculateRoute}
-      >
-        <Icon type="go" fill="#fff" />
-      </button>
     </div>
   );
 }

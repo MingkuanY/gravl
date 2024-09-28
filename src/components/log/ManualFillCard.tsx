@@ -224,68 +224,73 @@ export default function ManualFillCard({
         </div>
 
         <div className={styles.rightSide}>
-          <div className={styles.header}>
-            <p className={styles.text}>
-              On {dayOfWeek[new Date(getCurrentDate()).getDay()]}
+          <div className={styles.top}>
+            <div className={styles.header}>
+              <p className={styles.text}>
+                On {dayOfWeek[new Date(getCurrentDate()).getDay()]}
+              </p>
+              <p className={styles.date}>{formatMDYDate(getCurrentDate())}</p>
+              <p className={styles.text}>you visited...</p>
+            </div>
+
+            <DirectionsInput currentDate={getCurrentDate()} visits={visits} setVisits={setVisitsData} />
+
+            <p className={styles.instruction}>
+              {visits.filter((visit) => visit.date === getCurrentDate()).length >
+                0
+                ? "Drag to reorder."
+                : "Or select a place on the map..."}
             </p>
-            <p className={styles.date}>{formatMDYDate(getCurrentDate())}</p>
-            <p className={styles.text}>you visited...</p>
           </div>
 
-          <DirectionsInput currentDate={getCurrentDate()} visits={visits} setVisits={setVisitsData} />
-
-          <p className={styles.instruction}>
-            {visits.filter((visit) => visit.date === getCurrentDate()).length >
-              0
-              ? "Drag to reorder."
-              : "Or select a place on the map..."}
-          </p>
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId={"visits"}>
-              {(droppableProvided) => (
-                <div
-                  className={styles.visitedList}
-                  ref={droppableProvided.innerRef}
-                  {...droppableProvided.droppableProps}
-                >
-                  {optimisticState
-                    .filter((visit) => visit.date === getCurrentDate())
-                    .map((visit, index) => {
-                      const originalIndex = optimisticState.findIndex(
-                        (v) =>
-                          v.fips_code === visit.fips_code && v.date === visit.date
-                      );
-                      return (
-                        <Draggable
-                          key={visit.fips_code}
-                          draggableId={visit.fips_code}
-                          index={originalIndex}
-                        >
-                          {(provided) => (
-                            <p
-                              className={styles.visitedPlace}
-                              key={visit.fips_code}
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                            >
-                              {index +
-                                1 +
-                                ". " +
-                                addDesignationToLabel(
-                                  placesMap.get(visit.fips_code)!,
-                                  "County"
-                                )}
-                            </p>
-                          )}
-                        </Draggable>
-                      );
-                    })}
-                  {droppableProvided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
+          <div className={styles.middle}>
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId={"visits"}>
+                {(droppableProvided) => (
+                  <div
+                    className={styles.visitedList}
+                    ref={droppableProvided.innerRef}
+                    {...droppableProvided.droppableProps}
+                  >
+                    {optimisticState
+                      .filter((visit) => visit.date === getCurrentDate())
+                      .map((visit, index) => {
+                        const originalIndex = optimisticState.findIndex(
+                          (v) =>
+                            v.fips_code === visit.fips_code && v.date === visit.date
+                        );
+                        return (
+                          <Draggable
+                            key={visit.fips_code}
+                            draggableId={visit.fips_code}
+                            index={originalIndex}
+                          >
+                            {(provided) => (
+                              <p
+                                className={styles.visitedPlace}
+                                key={visit.fips_code}
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                {index +
+                                  1 +
+                                  ". " +
+                                  addDesignationToLabel(
+                                    placesMap.get(visit.fips_code)!,
+                                    "County"
+                                  )}
+                              </p>
+                            )}
+                          </Draggable>
+                        );
+                      })}
+                    {droppableProvided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </div>
 
           <button className={styles.clearBtn} onClick={clearToday}>
             Clear Day

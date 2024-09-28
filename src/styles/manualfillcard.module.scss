@@ -146,62 +146,98 @@
 
     .rightSide {
       width: 26rem;
+      height: 66rem;
       display: flex;
       flex-direction: column;
       align-items: center;
 
-      .header {
+      .top {
+        flex-shrink: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
-        font-weight: 300;
 
-        .text {
-          color: mixin.$dark;
-          font-size: 2rem;
+        .header {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font-weight: 300;
+
+          .text {
+            color: mixin.$dark;
+            font-size: 2rem;
+          }
+
+          .date {
+            color: mixin.$dark;
+            font-size: 2.75rem;
+            margin: 0.5rem 0;
+          }
         }
 
-        .date {
-          color: mixin.$dark;
-          font-size: 2.75rem;
-          margin: 0.5rem 0;
+        .instruction {
+          margin-top: 3rem;
+          color: mixin.$faded;
+          font-size: 1.3rem;
+          font-weight: 200;
+          margin-bottom: 1rem;
         }
+
       }
 
-      .instruction {
-        margin-top: 3rem;
-        color: mixin.$faded;
-        font-size: 1.3rem;
-        font-weight: 200;
-        margin-bottom: 1rem;
-      }
+      .middle {
+        position: relative;
+        flex-grow: 1;
+        overflow: hidden;
 
-      .visitedList {
-        max-height: 38rem;
-        padding: 1rem 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        overflow-y: scroll;
-        scrollbar-width: none;
-        &::-webkit-scrollbar {
-          display: none;
+        &::before, &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          pointer-events: none;
+        }
+        &::before {
+          top: 0;
+          height: 1rem;
+          background: linear-gradient(to bottom, mixin.$white, transparent);
+        }
+        &::after {
+          bottom: 0;
+          height: 2rem;
+          background: linear-gradient(to top, mixin.$white, transparent);
         }
 
-        .visitedPlace {
-          margin-bottom: 2rem;
-          color: mixin.$gravl-blue;
-          font-size: 1.6rem;
-          font-weight: 400;
-          text-align: center;
-          cursor: pointer;
+        .visitedList {
+          height: 100%;
+          overflow-y: auto;
+          padding: 1rem 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          scrollbar-width: none;
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+
+          .visitedPlace {
+            margin-bottom: 2rem;
+            color: mixin.$gravl-blue;
+            font-size: 1.6rem;
+            font-weight: 400;
+            text-align: center;
+            cursor: pointer;
+          }
         }
+
       }
 
       .clearBtn {
-        margin-top: auto;
+        margin-top: 1rem;
         width: 100%;
         height: 4rem;
+        flex-shrink: 0;
         display: flex;
         justify-content: center;
         align-items: center;
