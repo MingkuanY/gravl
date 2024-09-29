@@ -174,7 +174,7 @@ export default function DirectionsInput({ currentDate, visits, setVisits }: {
       .map((latLng) => [latLng.lng(), latLng.lat()]);
 
     // Send polyline to FastAPI server
-    const response = await fetch("http://localhost:8000/process_polyline/", {
+    const response = await fetch("https://tvl4fw67ebzzhfihr6kxttsovu0hnkre.lambda-url.us-east-1.on.aws/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
