@@ -1,3 +1,12 @@
+# Welcome to Gravl!
+### Map Out Your Adventures
+
+This one-stop travel site allows users to record and share trips on interactive maps!
+
+Built with Next.js, TypeScript, Python, SCSS, HTML, Postgres, Prisma, and Google Maps API.
+
+### How To Run
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
