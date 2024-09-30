@@ -28,7 +28,8 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
   visits: VisitInput[],
   setVisits: Function,
   setLoadingRoute: Function,
-}>(({ currentDate, visits, setVisits, setLoadingRoute }, ref) => {
+  setErrorMessage: Function,
+}>(({ currentDate, visits, setVisits, setLoadingRoute, setErrorMessage }, ref) => {
   const [startCoords, setStartCoords] = useState<{
     lat: number;
     lng: number;
@@ -181,55 +182,66 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
       return;
     }
 
-    // Start loading wheel
-    setLoadingRoute(true);
-
     const directionsService = new google.maps.DirectionsService();
-    const results = await directionsService.route({
-      origin: `${startCoords.lat}, ${startCoords.lng}`,
-      destination: `${endCoords.lat}, ${endCoords.lng}`,
-      travelMode: google.maps.TravelMode.DRIVING,
-    });
 
-    // Polyline between origin and destination
-    const polyline = results.routes[0].overview_polyline;
+    try {
+      const results = await directionsService.route({
+        origin: `${startCoords.lat}, ${startCoords.lng}`,
+        destination: `${endCoords.lat}, ${endCoords.lng}`,
+        travelMode: google.maps.TravelMode.DRIVING,
+      });
 
-    const decodedPolyline = google.maps.geometry.encoding
-      .decodePath(polyline)
-      .map((latLng) => [latLng.lng(), latLng.lat()]);
+      // Start loading wheel
+      setLoadingRoute(true);
 
-    // Send polyline to FastAPI server - https://tvl4fw67ebzzhfihr6kxttsovu0hnkre.lambda-url.us-east-1.on.aws/
-    const response = await fetch("http://localhost:8000/process_polyline/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ polyline: decodedPolyline }),
-    });
+      // Polyline between origin and destination
+      const polyline = results.routes[0].overview_polyline;
 
-    if (!response.ok) {
-      console.error("Error processing polyline:", response.statusText);
-      return;
+      const decodedPolyline = google.maps.geometry.encoding
+        .decodePath(polyline)
+        .map((latLng) => [latLng.lng(), latLng.lat()]);
+
+      // Send polyline to FastAPI server - https://tvl4fw67ebzzhfihr6kxttsovu0hnkre.lambda-url.us-east-1.on.aws/
+      const response = await fetch("http://localhost:8000/process_polyline/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ polyline: decodedPolyline }),
+      });
+
+      if (!response.ok) {
+        console.error("Error processing polyline:", response.statusText);
+        return;
+      }
+
+      const data = await response.json();
+      const fipsCodes: string[] = data.fips_codes;
+      const newVisits = fipsCodes.map(fips_code => {
+        return {
+          fips_code: fips_code,
+          date: currentDate,
+          order: visits.filter((visit) => visit.date === currentDate).length,
+        };
+      });
+
+      setVisits(sortVisits([...visits, ...newVisits]));
+    } catch (error: unknown) {
+      if (error && typeof error === 'object' && 'code' in error && error.code === google.maps.DirectionsStatus.ZERO_RESULTS) {
+        setErrorMessage('No route found. :(')
+      }
     }
-
-    const data = await response.json();
-    const fipsCodes: string[] = data.fips_codes;
-    const newVisits = fipsCodes.map(fips_code => {
-      return {
-        fips_code: fips_code,
-        date: currentDate,
-        order: visits.filter((visit) => visit.date === currentDate).length,
-      };
-    });
 
     // Stop loading wheel
     setLoadingRoute(false);
-
-    setVisits(sortVisits([...visits, ...newVisits]));
   };
 
+  // When either route inputs change
   useEffect(() => {
+    setErrorMessage('');
+
     if (startCoords && endCoords) {
+      // Calculate the route if the user inputs both start and end
       calculateRoute();
     }
   }, [startCoords, endCoords]);

@@ -49,6 +49,9 @@ export default function ManualFillCard({
   // Displaying loading wheel when generating route
   const [loadingRoute, setLoadingRoute] = useState(false);
 
+  // Display error message (i.e. No route found.)
+  const [errorMessage, setErrorMessage] = useState("");
+
   // Maps fips_codes to labels for displaying visits
   const placesMap = new Map(
     places.map((place) => [place.fips_code, place.label])
@@ -172,10 +175,11 @@ export default function ManualFillCard({
     }
   };
 
+  // Confirm trip modal
   const [confirmFinish, setConfirmFinish] = useState(false);
 
+  // Toggle highways
   const [toggleHighways, setToggleHighways] = useState(false);
-
   const handleToggle = (checked: boolean) => {
     setToggleHighways(checked);
   };
@@ -241,7 +245,7 @@ export default function ManualFillCard({
               <p className={styles.text}>you visited...</p>
             </div>
 
-            <DirectionsInput ref={directionsRef} currentDate={getCurrentDate()} visits={visits} setVisits={setVisitsData} setLoadingRoute={setLoadingRoute} />
+            <DirectionsInput ref={directionsRef} currentDate={getCurrentDate()} visits={visits} setVisits={setVisitsData} setLoadingRoute={setLoadingRoute} setErrorMessage={setErrorMessage} />
 
             <p className={styles.instruction}>
               {visits.filter((visit) => visit.date === getCurrentDate()).length >
@@ -249,6 +253,8 @@ export default function ManualFillCard({
                 ? "Drag to reorder."
                 : "Or select a place on the map..."}
             </p>
+
+            <p className={styles.error}>{errorMessage}</p>
           </div>
 
           <div className={styles.middle}>
