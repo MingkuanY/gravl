@@ -1,6 +1,6 @@
 "use client";
 
-import { useOptimistic, useState, useTransition } from "react";
+import { useOptimistic, useRef, useState, useTransition } from "react";
 import styles from "../../styles/manualfillcard.module.scss";
 import Counties from "../maps/Counties";
 import { BasicTripInfo } from "./BasicTripInfoCard";
@@ -12,7 +12,7 @@ import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { addDesignationToLabel } from "@/utils/map";
 import ConfirmSelection from "../modals/ConfirmSelection";
 import ToggleBtn from "./ToggleBtn";
-import DirectionsInput from "./DirectionsInput";
+import DirectionsInput, { DirectionsInputHandle } from "./DirectionsInput";
 
 /**
  * Sort visit chronologically by date and order if same date.
@@ -126,8 +126,11 @@ export default function ManualFillCard({
     }
   };
 
+  const directionsRef = useRef<DirectionsInputHandle>(null);
+
   const clearToday = () => {
     const newVisits = visits.filter((visit) => visit.date !== getCurrentDate());
+    directionsRef.current?.clearInputs();
     setVisitsData(newVisits);
   };
 
@@ -233,7 +236,7 @@ export default function ManualFillCard({
               <p className={styles.text}>you visited...</p>
             </div>
 
-            <DirectionsInput currentDate={getCurrentDate()} visits={visits} setVisits={setVisitsData} />
+            <DirectionsInput ref={directionsRef} currentDate={getCurrentDate()} visits={visits} setVisits={setVisitsData} />
 
             <p className={styles.instruction}>
               {visits.filter((visit) => visit.date === getCurrentDate()).length >

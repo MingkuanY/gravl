@@ -6,7 +6,7 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { VisitInput } from "@/utils/types";
 import { sortVisits } from "./ManualFillCard";
 
@@ -19,11 +19,15 @@ type Suggestion = {
   };
 };
 
-export default function DirectionsInput({ currentDate, visits, setVisits }: {
+export type DirectionsInputHandle = {
+  clearInputs: () => void;
+}
+
+const DirectionsInput = forwardRef<DirectionsInputHandle, {
   currentDate: string,
   visits: VisitInput[],
   setVisits: Function
-}) {
+}>(({ currentDate, visits, setVisits }, ref) => {
   const [startCoords, setStartCoords] = useState<{
     lat: number;
     lng: number;
@@ -32,6 +36,22 @@ export default function DirectionsInput({ currentDate, visits, setVisits }: {
     lat: number;
     lng: number;
   } | null>(null);
+
+  const clearInputs = () => {
+    // clear input fields
+    setValueFrom('');
+    setValueTo('');
+
+    // clear input state variables
+    setStartCoords(null);
+    setEndCoords(null);
+  }
+
+  useImperativeHandle(ref, () => {
+    return {
+      clearInputs
+    }
+  })
 
   // starting point autocomplete
   const {
@@ -173,8 +193,8 @@ export default function DirectionsInput({ currentDate, visits, setVisits }: {
       .decodePath(polyline)
       .map((latLng) => [latLng.lng(), latLng.lat()]);
 
-    // Send polyline to FastAPI server
-    const response = await fetch("https://tvl4fw67ebzzhfihr6kxttsovu0hnkre.lambda-url.us-east-1.on.aws/", {
+    // Send polyline to FastAPI server - https://tvl4fw67ebzzhfihr6kxttsovu0hnkre.lambda-url.us-east-1.on.aws/
+    const response = await fetch("http://localhost:8000/process_polyline/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -245,4 +265,6 @@ export default function DirectionsInput({ currentDate, visits, setVisits }: {
       </div>
     </div>
   );
-}
+});
+
+export default DirectionsInput;
