@@ -26,8 +26,9 @@ export type DirectionsInputHandle = {
 const DirectionsInput = forwardRef<DirectionsInputHandle, {
   currentDate: string,
   visits: VisitInput[],
-  setVisits: Function
-}>(({ currentDate, visits, setVisits }, ref) => {
+  setVisits: Function,
+  setLoadingRoute: Function,
+}>(({ currentDate, visits, setVisits, setLoadingRoute }, ref) => {
   const [startCoords, setStartCoords] = useState<{
     lat: number;
     lng: number;
@@ -179,6 +180,10 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
     if (!startCoords || !endCoords) {
       return;
     }
+
+    // Start loading wheel
+    setLoadingRoute(true);
+
     const directionsService = new google.maps.DirectionsService();
     const results = await directionsService.route({
       origin: `${startCoords.lat}, ${startCoords.lng}`,
@@ -217,6 +222,9 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
       };
     });
 
+    // Stop loading wheel
+    setLoadingRoute(false);
+
     setVisits(sortVisits([...visits, ...newVisits]));
   };
 
@@ -224,7 +232,7 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
     if (startCoords && endCoords) {
       calculateRoute();
     }
-  }, [startCoords, endCoords])
+  }, [startCoords, endCoords]);
 
   return (
     <div className={styles.container}>

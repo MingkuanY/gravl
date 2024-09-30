@@ -13,6 +13,7 @@ import { addDesignationToLabel } from "@/utils/map";
 import ConfirmSelection from "../modals/ConfirmSelection";
 import ToggleBtn from "./ToggleBtn";
 import DirectionsInput, { DirectionsInputHandle } from "./DirectionsInput";
+import LoadingWheel from "../icons/LoadingWheel";
 
 /**
  * Sort visit chronologically by date and order if same date.
@@ -45,6 +46,10 @@ export default function ManualFillCard({
   setLogTripPage: Function;
   addTrip: Function;
 }) {
+  // Displaying loading wheel when generating route
+  const [loadingRoute, setLoadingRoute] = useState(false);
+
+  // Maps fips_codes to labels for displaying visits
   const placesMap = new Map(
     places.map((place) => [place.fips_code, place.label])
   );
@@ -236,7 +241,7 @@ export default function ManualFillCard({
               <p className={styles.text}>you visited...</p>
             </div>
 
-            <DirectionsInput ref={directionsRef} currentDate={getCurrentDate()} visits={visits} setVisits={setVisitsData} />
+            <DirectionsInput ref={directionsRef} currentDate={getCurrentDate()} visits={visits} setVisits={setVisitsData} setLoadingRoute={setLoadingRoute} />
 
             <p className={styles.instruction}>
               {visits.filter((visit) => visit.date === getCurrentDate()).length >
@@ -247,6 +252,7 @@ export default function ManualFillCard({
           </div>
 
           <div className={styles.middle}>
+            {loadingRoute && <LoadingWheel />}
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId={"visits"}>
                 {(droppableProvided) => (
