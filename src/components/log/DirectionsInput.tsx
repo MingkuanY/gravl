@@ -65,7 +65,7 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
   } = usePlacesAutocomplete({
     callbackName: "PLACES_AUTOCOMPLETE_FROM",
     requestOptions: {
-      /* Define search scope here */
+      componentRestrictions: { country: 'us' }
     },
     debounce: 300,
   });
@@ -80,7 +80,7 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
   } = usePlacesAutocomplete({
     callbackName: "PLACES_AUTOCOMPLETE_TO",
     requestOptions: {
-      /* Define search scope here */
+      componentRestrictions: { country: 'us' }
     },
     debounce: 300,
   });

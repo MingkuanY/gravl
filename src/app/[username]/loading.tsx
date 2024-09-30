@@ -7,7 +7,7 @@ export default function Loading() {
       <div className={styles.wheel}>
         <Icon type="wheel" fill="#24292f" />
       </div>
-      <p>Loading trips...</p>
+      <p>Generating maps...</p>
     </div>
   );
 }
