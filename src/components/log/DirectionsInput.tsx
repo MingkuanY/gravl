@@ -287,4 +287,6 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
   );
 });
 
+DirectionsInput.displayName = "DirectionsInput";
+
 export default DirectionsInput;
