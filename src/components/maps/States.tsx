@@ -8,9 +8,64 @@ import { MapProps, PlaceInput } from "@/utils/types.ts";
 
 export const totalStates = 50; // plus DC
 
+const statesLabels: { [key: string]: string } = {
+  "01": "Alabama",
+  "02": "Alaska",
+  "04": "Arizona",
+  "05": "Arkansas",
+  "06": "California",
+  "08": "Colorado",
+  "09": "Connecticut",
+  "10": "Delaware",
+  "11": "District of Columbia",
+  "12": "Florida",
+  "13": "Georgia",
+  "15": "Hawaii",
+  "16": "Idaho",
+  "17": "Illinois",
+  "18": "Indiana",
+  "19": "Iowa",
+  "20": "Kansas",
+  "21": "Kentucky",
+  "22": "Louisiana",
+  "23": "Maine",
+  "24": "Maryland",
+  "25": "Massachusetts",
+  "26": "Michigan",
+  "27": "Minnesota",
+  "28": "Mississippi",
+  "29": "Missouri",
+  "30": "Montana",
+  "31": "Nebraska",
+  "32": "Nevada",
+  "33": "New Hampshire",
+  "34": "New Jersey",
+  "35": "New Mexico",
+  "36": "New York",
+  "37": "North Carolina",
+  "38": "North Dakota",
+  "39": "Ohio",
+  "40": "Oklahoma",
+  "41": "Oregon",
+  "42": "Pennsylvania",
+  "44": "Rhode Island",
+  "45": "South Carolina",
+  "46": "South Dakota",
+  "47": "Tennessee",
+  "48": "Texas",
+  "49": "Utah",
+  "50": "Vermont",
+  "51": "Virginia",
+  "53": "Washington",
+  "54": "West Virginia",
+  "55": "Wisconsin",
+  "56": "Wyoming"
+}
+
 export default function States({
   data,
   updateCount,
+  updateDate,
   total,
   reload,
   animate,
@@ -42,28 +97,26 @@ export default function States({
       // we want to animate the data based on the other props
 
       resetMap();
-      const clearTimeouts = loadMap(data, 200, colors, updateCount);
+      const clearTimeouts = loadMap(data, 200, colors, updateCount, updateDate);
       return () => {
         clearTimeouts();
         updateCount && updateCount(total);
       };
     } else {
-      refreshMap(
-        visits!,
-        places!,
-        currentDate!,
-        todayColor,
-        otherColor,
-        defaultColor!
-      );
+      // Can't directly log states yet
+
+      // refreshMap(
+      //   visits!,
+      //   places!,
+      //   currentDate!,
+      //   todayColor,
+      //   otherColor,
+      //   defaultColor!
+      // );
     }
   }, [reload, data, currentDate]);
 
   // Hover label effect
-
-  const placesMap = new Map(
-    places!.map((place: PlaceInput) => [place.fips_code, place.label])
-  );
 
   const [hoverInfo, setHoverInfo] = useState<{
     x: number;
@@ -75,8 +128,8 @@ export default function States({
     const handleMouseMove = (event: MouseEvent) => {
       const target = event.target as SVGPathElement;
       const placeID = target.id;
-      if (target.tagName === "path" && placeIDs.has(placeID)) {
-        const placeLabel = placesMap.get(placeID);
+      if (target.tagName === "path" && placeID in statesLabels) {
+        const placeLabel = statesLabels[placeID];
         setHoverInfo({
           x: event.clientX,
           y: event.clientY,
@@ -93,8 +146,6 @@ export default function States({
       document.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
-
-  const placeIDs = new Set(places?.map((place) => place.fips_code));
 
   return (
     <>
@@ -115,13 +166,11 @@ export default function States({
         id={styles.map}
         viewBox="0 0 1000 700"
         version="1.1"
-        {...(!animate && {
-          onClick: handleMapClick(placeIDs!, visits!, setVisits!, currentDate!),
-        })}
       >
         <g id="ID_group">
+          {/* Place_id: ID */}
           <path
-            id="ID"
+            id="16"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -138,8 +187,9 @@ export default function States({
     </text> */}
         </g>
         <g id="HI_group">
+          {/* Place_id: HI */}
           <path
-            id="HI"
+            id="15"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -156,8 +206,9 @@ export default function States({
     </text> */}
         </g>
         <g id="AK_group">
+          {/* Place_id: AK */}
           <path
-            id="AK"
+            id="02"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -174,8 +225,9 @@ export default function States({
     </text> */}
         </g>
         <g id="FL_group">
+          {/* Place_id: FL */}
           <path
-            id="FL"
+            id="12"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -192,8 +244,9 @@ export default function States({
     </text> */}
         </g>
         <g id="NH_group">
+          {/* Place_id: NH */}
           <path
-            id="NH"
+            id="33"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -210,8 +263,9 @@ export default function States({
     </text> */}
         </g>
         <g id="VT_group">
+          {/* Place_id: VT */}
           <path
-            id="VT"
+            id="50"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -229,8 +283,9 @@ export default function States({
     </text> */}
         </g>
         <g id="ME_group">
+          {/* Place_id: ME */}
           <path
-            id="ME"
+            id="23"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -247,8 +302,9 @@ export default function States({
     </text> */}
         </g>
         <g id="RI_group">
+          {/* Place_id: RI */}
           <path
-            id="RI"
+            id="44"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -266,8 +322,9 @@ export default function States({
     </text> */}
         </g>
         <g id="NY_group">
+          {/* Place_id: NY */}
           <path
-            id="NY"
+            id="36"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -284,8 +341,9 @@ export default function States({
     </text> */}
         </g>
         <g id="PA_group">
+          {/* Place_id: PA */}
           <path
-            id="PA"
+            id="42"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -302,8 +360,9 @@ export default function States({
     </text> */}
         </g>
         <g id="VA_group">
+          {/* Place_id: VA */}
           <path
-            id="VA"
+            id="51"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -320,8 +379,9 @@ export default function States({
     </text> */}
         </g>
         <g id="WV_group">
+          {/* Place_id: WV */}
           <path
-            id="WV"
+            id="54"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -338,8 +398,9 @@ export default function States({
     </text> */}
         </g>
         <g id="OH_group">
+          {/* Place_id: OH */}
           <path
-            id="OH"
+            id="39"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -356,8 +417,9 @@ export default function States({
     </text> */}
         </g>
         <g id="IN_group">
+          {/* Place_id: IN */}
           <path
-            id="IN"
+            id="18"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -374,8 +436,9 @@ export default function States({
     </text> */}
         </g>
         <g id="IL_group">
+          {/* Place_id: IL */}
           <path
-            id="IL"
+            id="17"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -392,8 +455,9 @@ export default function States({
     </text> */}
         </g>
         <g id="CT_group">
+          {/* Place_id: CT */}
           <path
-            id="CT"
+            id="09"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -410,8 +474,9 @@ export default function States({
     </text> */}
         </g>
         <g id="WI_group">
+          {/* Place_id: WI */}
           <path
-            id="WI"
+            id="55"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -428,8 +493,9 @@ export default function States({
     </text> */}
         </g>
         <g id="NC_group">
+          {/* Place_id: NC */}
           <path
-            id="NC"
+            id="37"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -446,8 +512,9 @@ export default function States({
     </text> */}
         </g>
         <g id="MA_group">
+          {/* Place_id: MA */}
           <path
-            id="MA"
+            id="25"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -464,8 +531,9 @@ export default function States({
     </text> */}
         </g>
         <g id="MO_group">
+          {/* Place_id: MO */}
           <path
-            id="MO"
+            id="29"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -482,8 +550,9 @@ export default function States({
     </text> */}
         </g>
         <g id="GA_group">
+          {/* Place_id: GA */}
           <path
-            id="GA"
+            id="13"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -500,8 +569,9 @@ export default function States({
     </text> */}
         </g>
         <g id="SC_group">
+          {/* Place_id: SC */}
           <path
-            id="SC"
+            id="45"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -518,8 +588,9 @@ export default function States({
     </text> */}
         </g>
         <g id="KY_group">
+          {/* Place_id: KY */}
           <path
-            id="KY"
+            id="21"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -536,8 +607,9 @@ export default function States({
     </text> */}
         </g>
         <g id="AL_group">
+          {/* Place_id: AL */}
           <path
-            id="AL"
+            id="01"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -554,8 +626,9 @@ export default function States({
     </text> */}
         </g>
         <g id="LA_group">
+          {/* Place_id: LA */}
           <path
-            id="LA"
+            id="22"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -572,8 +645,9 @@ export default function States({
     </text> */}
         </g>
         <g id="MS_group">
+          {/* Place_id: MS */}
           <path
-            id="MS"
+            id="28"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -590,8 +664,9 @@ export default function States({
     </text> */}
         </g>
         <g id="IA_group">
+          {/* Place_id: IA */}
           <path
-            id="IA"
+            id="19"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -608,8 +683,9 @@ export default function States({
     </text> */}
         </g>
         <g id="MN_group">
+          {/* Place_id: MN */}
           <path
-            id="MN"
+            id="27"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -626,8 +702,9 @@ export default function States({
     </text> */}
         </g>
         <g id="OK_group">
+          {/* Place_id: OK */}
           <path
-            id="OK"
+            id="40"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -644,8 +721,9 @@ export default function States({
     </text> */}
         </g>
         <g id="TX_group">
+          {/* Place_id: TX */}
           <path
-            id="TX"
+            id="48"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -662,8 +740,9 @@ export default function States({
     </text> */}
         </g>
         <g id="NM_group">
+          {/* Place_id: NM */}
           <path
-            id="NM"
+            id="35"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -680,8 +759,9 @@ export default function States({
     </text> */}
         </g>
         <g id="KS_group">
+          {/* Place_id: KS */}
           <path
-            id="KS"
+            id="20"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -698,8 +778,9 @@ export default function States({
     </text> */}
         </g>
         <g id="WY_group">
+          {/* Place_id: WY */}
           <path
-            id="WY"
+            id="56"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -716,8 +797,9 @@ export default function States({
     </text> */}
         </g>
         <g id="MT_group">
+          {/* Place_id: MT */}
           <path
-            id="MT"
+            id="30"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -734,8 +816,9 @@ export default function States({
     </text> */}
         </g>
         <g id="CO_group">
+          {/* Place_id: CO */}
           <path
-            id="CO"
+            id="08"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -752,8 +835,9 @@ export default function States({
     </text> */}
         </g>
         <g id="UT_group">
+          {/* Place_id: UT */}
           <path
-            id="UT"
+            id="49"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -770,8 +854,9 @@ export default function States({
     </text> */}
         </g>
         <g id="AZ_group">
+          {/* Place_id: AZ */}
           <path
-            id="AZ"
+            id="04"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -788,8 +873,9 @@ export default function States({
     </text> */}
         </g>
         <g id="NV_group">
+          {/* Place_id: NV */}
           <path
-            id="NV"
+            id="32"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -806,8 +892,9 @@ export default function States({
     </text> */}
         </g>
         <g id="OR_group">
+          {/* Place_id: OR */}
           <path
-            id="OR"
+            id="41"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -824,8 +911,9 @@ export default function States({
     </text> */}
         </g>
         <g id="WA_group">
+          {/* Place_id: WA */}
           <path
-            id="WA"
+            id="53"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -842,8 +930,9 @@ export default function States({
     </text> */}
         </g>
         <g id="CA_group">
+          {/* Place_id: CA */}
           <path
-            id="CA"
+            id="06"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -860,8 +949,9 @@ export default function States({
     </text> */}
         </g>
         <g id="TN_group">
+          {/* Place_id: TN */}
           <path
-            id="TN"
+            id="47"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -878,8 +968,9 @@ export default function States({
     </text> */}
         </g>
         <g id="AR_group">
+          {/* Place_id: AR */}
           <path
-            id="AR"
+            id="05"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -896,8 +987,9 @@ export default function States({
     </text> */}
         </g>
         <g id="MD_group">
+          {/* Place_id: MD */}
           <path
-            id="MD"
+            id="24"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -915,8 +1007,9 @@ export default function States({
     </text> */}
         </g>
         <g id="DE_group">
+          {/* Place_id: DE */}
           <path
-            id="DE"
+            id="10"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -934,8 +1027,9 @@ export default function States({
     </text> */}
         </g>
         <g id="NJ_group">
+          {/* Place_id: NJ */}
           <path
-            id="NJ"
+            id="34"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -953,8 +1047,9 @@ export default function States({
     </text> */}
         </g>
         <g id="MI_group">
+          {/* Place_id: MI */}
           <path
-            id="MI"
+            id="26"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -972,10 +1067,11 @@ export default function States({
         <g id="DC_group">
           {/* <path id="DC_line" stroke="#000" stroke-opacity="1" d="m768.48 282.47 42.3 32.06Z" style="stroke-width:1.02694" /> */}
           {/* <text id="DC_label" x="822.95" y="324.13" stroke-width=".82" font-size="9.89">
-      <tspan id="DC_tspan" x="822.95" y="324.13" fill="#000" stroke-width=".82" dy="0" font-family="Arial" font-size="12.36" font-style="normal" font-weight="400" style="text-align:center" text-anchor="middle">DC</tspan>
-    </text> */}
+            font-weight="400" style="text-align:center" text-anchor="middle">DC</tspan>
+          </text> */}
+          {/* Place_id: DC */}
           <path
-            id="DC"
+            id="11"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -988,8 +1084,9 @@ export default function States({
           />
         </g>
         <g id="NE_group">
+          {/* Place_id: NE */}
           <path
-            id="NE"
+            id="31"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -1006,8 +1103,9 @@ export default function States({
     </text> */}
         </g>
         <g id="SD_group">
+          {/* Place_id: SD */}
           <path
-            id="SD"
+            id="46"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"
@@ -1024,8 +1122,9 @@ export default function States({
     </text> */}
         </g>
         <g id="ND_group">
+          {/* Place_id: ND */}
           <path
-            id="ND"
+            id="38"
             fill="#d1dbdd"
             fillOpacity={1}
             stroke="#000"

@@ -56,7 +56,7 @@ export const loadMap = (
         } else {
           element.style.fill = color;
         }
-        fips_code !== "11001" && updateCount && updateCount(); // make sure DC doesn't get counted as a state
+        fips_code !== "11" && updateCount && updateCount(); // make sure DC doesn't get counted as a state
         updateDate && updateDate(date);
       }
     }, 500 + pause! * timeCounter++);
