@@ -201,8 +201,8 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
         .decodePath(polyline)
         .map((latLng) => [latLng.lng(), latLng.lat()]);
 
-      // Send polyline to FastAPI server - https://tvl4fw67ebzzhfihr6kxttsovu0hnkre.lambda-url.us-east-1.on.aws/
-      const response = await fetch("http://localhost:8000/process_polyline/", {
+      // Send polyline to FastAPI server running on EC2 instance
+      const response = await fetch("http://54.205.206.224/process_polyline/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
