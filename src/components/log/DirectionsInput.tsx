@@ -202,7 +202,7 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
         .map((latLng) => [latLng.lng(), latLng.lat()]);
 
       // Send polyline to FastAPI server running on EC2 instance
-      const response = await fetch("http://54.205.206.224/process_polyline/", {
+      const response = await fetch("https://api.gravl.org/process_polyline/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
