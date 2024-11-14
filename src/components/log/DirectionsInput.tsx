@@ -217,15 +217,24 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
 
       const data = await response.json();
       const fipsCodes: string[] = data.fips_codes;
-      const newVisits = fipsCodes.map(fips_code => {
-        return {
-          fips_code: fips_code,
-          date: currentDate,
-          order: visits.filter((visit) => visit.date === currentDate).length,
-        };
-      });
+      const seenFipsCodes = new Set();
+      const newVisits = fipsCodes
+        .filter(fips_code => {
+          if (seenFipsCodes.has(fips_code)) {
+            return false;
+          }
+          seenFipsCodes.add(fips_code)
+          return true;
+        })
+        .map(fips_code => {
+          return {
+            fips_code: fips_code,
+            date: currentDate,
+            order: visits.filter((visit) => visit.date === currentDate).length,
+          };
+        });
 
-      setVisits(sortVisits([...visits, ...newVisits]));
+      setVisits(sortVisits(newVisits));
     } catch (error: unknown) {
       if (error && typeof error === 'object' && 'code' in error && error.code === google.maps.DirectionsStatus.ZERO_RESULTS) {
         setErrorMessage('No route found. :(')

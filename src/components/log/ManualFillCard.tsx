@@ -258,53 +258,54 @@ export default function ManualFillCard({
           </div>
 
           <div className={styles.middle}>
-            {loadingRoute && <LoadingWheel />}
-            <DragDropContext onDragEnd={onDragEnd}>
-              <Droppable droppableId={"visits"}>
-                {(droppableProvided) => (
-                  <div
-                    className={styles.visitedList}
-                    ref={droppableProvided.innerRef}
-                    {...droppableProvided.droppableProps}
-                  >
-                    {optimisticState
-                      .filter((visit) => visit.date === getCurrentDate())
-                      .map((visit, index) => {
-                        const originalIndex = optimisticState.findIndex(
-                          (v) =>
-                            v.fips_code === visit.fips_code && v.date === visit.date
-                        );
-                        return (
-                          <Draggable
-                            key={visit.fips_code}
-                            draggableId={visit.fips_code}
-                            index={originalIndex}
-                          >
-                            {(provided) => (
-                              <p
-                                className={styles.visitedPlace}
-                                key={visit.fips_code}
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                              >
-                                {index +
-                                  1 +
-                                  ". " +
-                                  addDesignationToLabel(
-                                    placesMap.get(visit.fips_code)!,
-                                    "County"
-                                  )}
-                              </p>
-                            )}
-                          </Draggable>
-                        );
-                      })}
-                    {droppableProvided.placeholder}
-                  </div>
-                )}
-              </Droppable>
-            </DragDropContext>
+            {loadingRoute ? <LoadingWheel /> :
+              <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId={"visits"}>
+                  {(droppableProvided) => (
+                    <div
+                      className={styles.visitedList}
+                      ref={droppableProvided.innerRef}
+                      {...droppableProvided.droppableProps}
+                    >
+                      {optimisticState
+                        .filter((visit) => visit.date === getCurrentDate())
+                        .map((visit, index) => {
+                          const originalIndex = optimisticState.findIndex(
+                            (v) =>
+                              v.fips_code === visit.fips_code && v.date === visit.date
+                          );
+                          return (
+                            <Draggable
+                              key={visit.fips_code}
+                              draggableId={visit.fips_code}
+                              index={originalIndex}
+                            >
+                              {(provided) => (
+                                <p
+                                  className={styles.visitedPlace}
+                                  key={visit.fips_code}
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                >
+                                  {index +
+                                    1 +
+                                    ". " +
+                                    addDesignationToLabel(
+                                      placesMap.get(visit.fips_code)!,
+                                      "County"
+                                    )}
+                                </p>
+                              )}
+                            </Draggable>
+                          );
+                        })}
+                      {droppableProvided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
+            }
           </div>
 
           <button className={styles.clearBtn} onClick={clearToday}>
