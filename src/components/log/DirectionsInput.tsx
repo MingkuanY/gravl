@@ -23,6 +23,11 @@ export type DirectionsInputHandle = {
   clearInputs: () => void;
 }
 
+type InputField = {
+  value: string;
+  coords: { lat: number; lng: number } | null;
+}
+
 const DirectionsInput = forwardRef<DirectionsInputHandle, {
   currentDate: string,
   visits: VisitInput[],
@@ -30,38 +35,34 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
   setLoadingRoute: Function,
   setErrorMessage: Function,
 }>(({ currentDate, visits, setVisits, setLoadingRoute, setErrorMessage }, ref) => {
-  const [startCoords, setStartCoords] = useState<{
-    lat: number;
-    lng: number;
-  } | null>(null);
-  const [endCoords, setEndCoords] = useState<{
-    lat: number;
-    lng: number;
-  } | null>(null);
+  const [inputs, setInputs] = useState<InputField[]>([{ value: "", coords: null }, { value: "", coords: null }]);
+
+  // Which input is focused on and should get autocomplete
+  const [focusedInputIndex, setFocusedInputIndex] = useState<number | null>(null)
 
   const clearInputs = () => {
-    // clear input fields
-    setValueFrom('');
-    setValueTo('');
+    setInputs([{ value: "", coords: null }, { value: "", coords: null }]);
+  };
 
-    // clear input state variables
-    setStartCoords(null);
-    setEndCoords(null);
-  }
+  useImperativeHandle(ref, () => ({
+    clearInputs
+  }));
 
-  useImperativeHandle(ref, () => {
-    return {
-      clearInputs
-    }
-  })
+  const addInput = () => {
+    setInputs(prev => [...prev, { value: "", coords: null }]);
+  };
 
-  // starting point autocomplete
+  const removeInput = (index: number) => {
+    setInputs((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  // Input autocomplete
   const {
-    ready: readyFrom,
-    value: valueFrom,
-    suggestions: { status: statusFrom, data: dataFrom },
-    setValue: setValueFrom,
-    clearSuggestions: clearSuggestionsFrom,
+    ready,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
   } = usePlacesAutocomplete({
     callbackName: "PLACES_AUTOCOMPLETE_FROM",
     requestOptions: {
@@ -70,73 +71,48 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
     debounce: 300,
   });
 
-  // ending point autocomplete
-  const {
-    ready: readyTo,
-    value: valueTo,
-    suggestions: { status: statusTo, data: dataTo },
-    setValue: setValueTo,
-    clearSuggestions: clearSuggestionsTo,
-  } = usePlacesAutocomplete({
-    callbackName: "PLACES_AUTOCOMPLETE_TO",
-    requestOptions: {
-      componentRestrictions: { country: 'us' }
-    },
-    debounce: 300,
-  });
-
   // handles clicks outside for "from" and "to"
-  const refFrom = useOnclickOutside(() => {
-    // When the user clicks outside of the component, we can dismiss
-    // the searched suggestions by calling this method
-    clearSuggestionsFrom();
-  });
-  const refTo = useOnclickOutside(() => {
-    // When the user clicks outside of the component, we can dismiss
-    // the searched suggestions by calling this method
-    clearSuggestionsTo();
+  const refInput = useOnclickOutside(() => {
+    // When the user clicks outside of the component, we can dismiss the searched suggestions by calling this method
+    clearSuggestions();
   });
 
-  const handleInputFrom = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Update the keyword of the input element
-    setValueFrom(e.target.value);
-  };
-  const handleInputTo = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Update the keyword of the input element
-    setValueTo(e.target.value);
+  const handleInputChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const updatedInputs = [...inputs];
+    updatedInputs[index].value = e.target.value;
+    setInputs(updatedInputs);
+    setValue(e.target.value); // Update autocomplete value for active input
+    setFocusedInputIndex(index); // Set focused input for suggestions
   };
 
-  const handleSelectFrom =
-    ({ description }: Suggestion) =>
+  const handleSelect =
+    (index: number, suggestion: Suggestion) =>
       () => {
-        // When the user selects a place, we can replace the keyword without request data from API
-        // by setting the second parameter to "false"
-        setValueFrom(description, false);
-        clearSuggestionsFrom();
+        const updatedInputs = [...inputs];
+        updatedInputs[index].value = suggestion.description;
+        setInputs(updatedInputs);
+        setValue(suggestion.description, false);
+        clearSuggestions();
 
         // Get latitude and longitude via utility functions
-        getGeocode({ address: description }).then((results) => {
+        getGeocode({ address: suggestion.description }).then((results) => {
           const { lat, lng } = getLatLng(results[0]);
-          setStartCoords({ lat, lng });
-        });
-      };
-  const handleSelectTo =
-    ({ description }: Suggestion) =>
-      () => {
-        // When the user selects a place, we can replace the keyword without request data from API
-        // by setting the second parameter to "false"
-        setValueTo(description, false);
-        clearSuggestionsTo();
-
-        // Get latitude and longitude via utility functions
-        getGeocode({ address: description }).then((results) => {
-          const { lat, lng } = getLatLng(results[0]);
-          setEndCoords({ lat, lng });
+          updatedInputs[index].coords = { lat, lng };
+          setInputs(updatedInputs);
         });
       };
 
-  const renderSuggestionsFrom = () =>
-    dataFrom.map((suggestion) => {
+  const handleAddStop = () => {
+    setInputs([...inputs, { value: "", coords: null }]);
+  }
+
+  const handleRemoveStop = (index: number) => () => {
+    const updatedInputs = inputs.filter((_, i) => i !== index);
+    setInputs(updatedInputs);
+  };
+
+  const renderSuggestions = () =>
+    data.map((suggestion) => {
       const {
         place_id,
         structured_formatting: { main_text, secondary_text },
@@ -146,25 +122,7 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
         <li
           key={place_id}
           className={styles.result}
-          onClick={handleSelectFrom(suggestion)}
-        >
-          <span className={styles.main}>{main_text}</span>
-          <span className={styles.secondary}>{secondary_text}</span>
-        </li>
-      );
-    });
-  const renderSuggestionsTo = () =>
-    dataTo.map((suggestion) => {
-      const {
-        place_id,
-        structured_formatting: { main_text, secondary_text },
-      } = suggestion;
-
-      return (
-        <li
-          key={place_id}
-          className={styles.result}
-          onClick={handleSelectTo(suggestion)}
+          onClick={handleSelect(focusedInputIndex!, suggestion)}
         >
           <span className={styles.main}>{main_text}</span>
           <span className={styles.secondary}>{secondary_text}</span>
@@ -178,7 +136,7 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
    * @returns FIPS codes in order of intersection (travel)
    */
   const calculateRoute = async () => {
-    if (!startCoords || !endCoords) {
+    if (inputs.every(input => input.coords)) {
       return;
     }
 
@@ -249,49 +207,62 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
   useEffect(() => {
     setErrorMessage('');
 
-    if (startCoords && endCoords) {
-      // Calculate the route if the user inputs both start and end
-      calculateRoute();
+    if (inputs.every(input => input.coords)) {
+      // Calculate the route if every input is filled
+      // calculateRoute();
+      console.log("Calculate route for: ", inputs)
     }
-  }, [startCoords, endCoords]);
+  }, [inputs]);
 
   return (
     <div className={styles.container}>
-      <div className={styles.inputContainer} ref={refFrom}>
-        <div className={classnames(styles.icon, styles.car)}>
-          <Icon type="car" fill="#319fff" />
+      {inputs.map((input, index) => (
+        <div key={index}>
+          <div className={styles.inputContainer} ref={index === focusedInputIndex ? refInput : null}>
+            <div className={classnames(styles.icon, index === 0 ? styles.car : styles.pin)}>
+              {
+                index === 0 ? <Icon type="car" fill="#319fff" /> :
+                  index === inputs.length - 1 ? <Icon type="pin" fill="#319fff" /> :
+                    <div className={styles.dotContainer}><div></div></div>
+              }
+            </div>
+            <input
+              type="text"
+              placeholder={index === 0 ? "from" : "to"}
+              value={input.value}
+              onChange={handleInputChange(index)}
+              onFocus={() => setFocusedInputIndex(index)}
+              disabled={!ready}
+            />
+            <div className={styles.rightSide}>
+              {inputs.length > 2 && (
+                <button className={styles.removeBtn} onClick={handleRemoveStop(index)}>
+                  <Icon type="close" fill="#ababab" />
+                </button>
+              )}
+            </div>
+
+            {index === focusedInputIndex && status === "OK" && (
+              <ul className={styles.searchResults}>{renderSuggestions()}</ul>
+            )}
+          </div>
+
+          {index < inputs.length - 1 && <div className={styles.dots}>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>}
         </div>
-        <input
-          type="text"
-          placeholder="from"
-          value={valueFrom}
-          onChange={handleInputFrom}
-          disabled={!readyFrom}
-        />
-        {statusFrom === "OK" && (
-          <ul className={styles.searchResults}>{renderSuggestionsFrom()}</ul>
-        )}
-      </div>
-      <div className={styles.dotContainer}>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <div className={styles.inputContainer} ref={refTo}>
-        <div className={classnames(styles.icon, styles.pin)}>
-          <Icon type="pin" fill="#319fff" />
+      ))}
+
+      {inputs.every(input => input.value) && <div className={styles.addStop} onClick={handleAddStop}>
+        <div className={styles.leftSide}>
+          <div className={styles.plus}>
+            <Icon type="plus" fill="#319fff" />
+          </div>
         </div>
-        <input
-          type="text"
-          placeholder="to"
-          value={valueTo}
-          onChange={handleInputTo}
-          disabled={!readyTo}
-        />
-        {statusTo === "OK" && (
-          <ul className={styles.searchResults}>{renderSuggestionsTo()}</ul>
-        )}
-      </div>
+        <p>Add Stop</p>
+      </div>}
     </div>
   );
 });

@@ -13,7 +13,7 @@
     position: relative;
 
     .icon {
-      width: 3rem;
+      width: 4rem;
       margin-right: 1rem;
 
       &.car {
@@ -21,6 +21,20 @@
       }
       &.pin {
         aspect-ratio: 1;
+      }
+
+      .dotContainer {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        div {
+          height: 0.66rem;
+          aspect-ratio: 1;
+          border-radius: 50%;
+          background-color: mixin.$gravl-blue;
+        }
       }
     }
 
@@ -41,9 +55,19 @@
         font-size: 1.8rem;
       }
     }
+
+    .rightSide {
+      width: 3rem;
+      
+      .removeBtn {
+        height: 100%;
+        margin-left: 0.5rem;
+        cursor: pointer;
+      }
+    }
   }
 
-  .dotContainer {
+  .dots {
     margin: 0.3rem 0;
     padding-right: 0.4rem;
     width: 3rem;
@@ -109,22 +133,34 @@
     }
   }
 
-  .searchBtn {
-    margin: 2rem auto -1rem;
-    width: 3rem;
+  .addStop {
+    margin-top: 1.6rem;
+    display: flex;
+    align-items: center;
     height: 3rem;
-    background-color: mixin.$lighter-blue;
-    border-radius: 50%;
-    padding: 0.3rem;
-    transition: 0.3s;
+    width: 100%;
+    padding-right: 2rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
 
-    &.active {
-      cursor: pointer;
-      background-color: mixin.$gravl-blue;
+    .leftSide {
+      width: 3rem;
+      margin-right: 1rem;
+      display: flex;
+      justify-content: center;
 
-      &:hover {
-        background-color: mixin.$darker-blue;
+      .plus {
+        height: 2rem;
+        aspect-ratio: 1;
       }
+    }
+
+    p {
+      width: 100%;
+      text-align: center;
+      text-transform: uppercase;
+      color: mixin.$gravl-blue;
+      font-size: 1.25rem;
     }
   }
 }
