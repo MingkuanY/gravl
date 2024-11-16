@@ -26,6 +26,8 @@ export default function BasicTripInfoCard({
   setTripData: Function;
   setLogTripPage: Function;
 }) {
+  const characterLimit = 250;
+
   const [error, setError] = useState("");
 
   const handleNext = () => {
@@ -71,15 +73,20 @@ export default function BasicTripInfoCard({
           setTripData({ ...tripData, trip_name: e.target.value })
         }
       />
-      <textarea
-        className={styles.descInput}
-        placeholder="Tell us about it..."
-        maxLength={160}
-        value={tripData.description}
-        onChange={(e) =>
-          setTripData({ ...tripData, description: e.target.value })
-        }
-      />
+      <div className={styles.textareaContainer}>
+        <p className={styles.characterCount}>
+          {tripData.description.length}/{characterLimit}
+        </p>
+        <textarea
+          className={styles.descInput}
+          placeholder="Tell us about it..."
+          maxLength={characterLimit}
+          value={tripData.description}
+          onChange={(e) =>
+            setTripData({ ...tripData, description: e.target.value })
+          }
+        />
+      </div>
       <div className={styles.bottom}>
         <div className={styles.dateContainer}>
           <div className={styles.chooseDate}>

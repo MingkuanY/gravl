@@ -32,7 +32,7 @@ export default function Onboarding({
     pfp: "",
   });
 
-  const wordLimit = 100;
+  const characterLimit = 100;
 
   const [validUsername, setValidUsername] = useState<validity>("DEFAULT");
 
@@ -232,8 +232,8 @@ export default function Onboarding({
             <>
               <p className={styles.bioLabel}>Bio</p>
               <div className={styles.inputContainer}>
-                <p className={styles.wordCount}>
-                  {accountData.bio.length}/{wordLimit}
+                <p className={styles.characterCount}>
+                  {accountData.bio.length}/{characterLimit}
                 </p>
                 <div className={styles.returnContainer}>
                   {isMobile ? (
@@ -250,7 +250,7 @@ export default function Onboarding({
                   )}
                 </div>
                 <textarea
-                  maxLength={100}
+                  maxLength={characterLimit}
                   value={accountData.bio}
                   onChange={(e) =>
                     setAccountData({ ...accountData, bio: e.target.value })

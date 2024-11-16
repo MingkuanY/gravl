@@ -28,7 +28,7 @@ export default function Profile({
     }
   };
 
-  const handleAddFriend = () => {};
+  const handleAddFriend = () => { };
 
   return (
     <div className={styles.profile}>
@@ -54,7 +54,7 @@ export default function Profile({
         )}
         {mode === "FRIEND" && (
           <button className={styles.unfriendBtn} onClick={handleUnfriend}>
-            Unfriend
+            Remove
           </button>
         )}
         {mode === "NON-FRIEND" && (

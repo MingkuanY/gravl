@@ -25,22 +25,36 @@
     }
   }
 
-  .descInput {
+  .textareaContainer {
+    position: relative;
     margin-top: 1.5rem;
-    height: 9rem;
-    overflow: auto;
-    padding: 1.5rem 2rem;
-    border: 0.2rem solid mixin.$gravl-blue;
-    border-radius: 1rem;
 
-    color: mixin.$dark;
-    font-size: 2rem;
-    font-weight: 200;
+    .descInput {
+      height: 9rem;
+      width: 100%;
+      overflow: auto;
+      padding: 1.5rem 2rem;
+      border: 0.2rem solid mixin.$gravl-blue;
+      border-radius: 1rem;
 
-    &::placeholder {
-      color: mixin.$faded;
+      color: mixin.$dark;
       font-size: 2rem;
-      font-weight: 100;
+      font-weight: 200;
+
+      &::placeholder {
+        color: mixin.$faded;
+        font-size: 2rem;
+        font-weight: 100;
+      }
+    }
+
+    .characterCount {
+      position: absolute;
+      font-size: 1.4rem;
+      color: mixin.$faded;
+      font-weight: 200;
+      bottom: 1rem;
+      right: 1rem;
     }
   }
 

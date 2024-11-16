@@ -5,14 +5,13 @@
   display: flex;
   align-items: center;
   width: 26rem;
-  height: 6rem;
   border-radius: 3rem;
   background-color: mixin.$very-light;
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0 0.3rem 0.3rem 0 rgba(36, 41, 47, 0.25);
-  padding: 0.6rem;
-  transition: 0.3s;
+  padding: 1.25rem 0.6rem;
+  transition: height 0.3s ease, transform 0.3s ease;
 
   // Don't allow the text to be selected on Shift + Click
   user-select: none;
@@ -21,7 +20,7 @@
 
   .right {
     margin: 0 1rem;
-    flex: auto;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -47,8 +46,13 @@
       margin-top: 0.2rem;
       color: mixin.$faded;
       font-size: 1rem;
+      line-height: 1.2rem;;
       font-weight: 400;
-      transition: 0.3s;
+      transition: color 0.3s ease;
+      overflow: hidden;
+      white-space: nowrap;
+      max-height: 1.2rem;
+      text-overflow: ellipsis;
     }
   }
 
@@ -81,6 +85,12 @@
       color: mixin.$white;
     }
 
+    .locations {
+      white-space: normal;
+      overflow: visible;
+      max-height: none;
+    }
+
     .editContainer:hover {
       background-color: mixin.$darker-blue;
     }
@@ -89,7 +99,7 @@
   &:hover {
     transform: translateX(0.5rem);
 
-    .right {
+    .right.editMode {
       mask-image: linear-gradient(
         to right,
         black 0%,

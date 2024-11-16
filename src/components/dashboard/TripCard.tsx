@@ -42,9 +42,9 @@ export default function TripCard({
       )}
       onClick={handleClick}
     >
-      <div className={styles.right}>
+      <div className={classnames(styles.right, mode === "USER" && styles.editMode)}>
         <p className={styles.title}>{name}</p>
-        <p className={styles.locations}>{desc}</p>
+        <p className={classnames(styles.locations, selected && styles.expanded)}>{desc}</p>
       </div>
       {!isMobile && mode === "USER" && (
         <button className={styles.editContainer} onClick={handleClick}>
