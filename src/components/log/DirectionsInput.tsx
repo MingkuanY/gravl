@@ -97,13 +97,7 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
         getGeocode({ address: suggestion.description }).then((results) => {
           const { lat, lng } = getLatLng(results[0]);
           updatedInputs[index].coords = { lat, lng };
-          setInputs(updatedInputs);
-
-          // When any route input changes
-          if (updatedInputs.every(input => input.coords)) {
-            // Calculate the route if every input is filled
-            calculateRoute();
-          }
+          setInputs([...updatedInputs]);
         });
       };
 
@@ -113,12 +107,7 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
 
   const handleRemoveStop = (index: number) => () => {
     const updatedInputs = inputs.filter((_, i) => i !== index);
-    setInputs(updatedInputs);
-
-    console.log("Calculating route for:", updatedInputs);
-
-    // Recalculate route with the remaining stops
-    calculateRoute();
+    setInputs([...updatedInputs]);
   };
 
   const renderSuggestions = () =>
@@ -153,8 +142,6 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
       setLoadingRoute(true);
 
       const routeSegments: RouteSegment[] = [];
-
-      console.log("calculateRoute:", inputs)
 
       for (let i = 0; i < inputs.length - 1; i++) {
         const start = inputs[i].coords;
@@ -243,6 +230,13 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
     // Stop loading wheel
     setLoadingRoute(false);
   };
+
+  useEffect(() => {
+    // Calculates route whenever input coords change and only when all coords are filled out
+    if (inputs.every(input => input.coords)) {
+      calculateRoute();
+    }
+  }, [inputs]);
 
   return (
     <div className={styles.container}>
