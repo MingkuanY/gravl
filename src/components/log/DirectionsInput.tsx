@@ -28,6 +28,13 @@ type InputField = {
   coords: { lat: number; lng: number } | null;
 }
 
+type RouteSegment = {
+  start: { lat: number, lng: number };
+  end: { lat: number, lng: number };
+  polyline: string;
+  fipsCodes: string[];
+}
+
 const DirectionsInput = forwardRef<DirectionsInputHandle, {
   currentDate: string,
   visits: VisitInput[],
@@ -47,14 +54,6 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
   useImperativeHandle(ref, () => ({
     clearInputs
   }));
-
-  const addInput = () => {
-    setInputs(prev => [...prev, { value: "", coords: null }]);
-  };
-
-  const removeInput = (index: number) => {
-    setInputs((prev) => prev.filter((_, i) => i !== index));
-  };
 
   // Input autocomplete
   const {
@@ -99,6 +98,12 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
           const { lat, lng } = getLatLng(results[0]);
           updatedInputs[index].coords = { lat, lng };
           setInputs(updatedInputs);
+
+          // When any route input changes
+          if (updatedInputs.every(input => input.coords)) {
+            // Calculate the route if every input is filled
+            calculateRoute();
+          }
         });
       };
 
@@ -109,6 +114,11 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
   const handleRemoveStop = (index: number) => () => {
     const updatedInputs = inputs.filter((_, i) => i !== index);
     setInputs(updatedInputs);
+
+    console.log("Calculating route for:", updatedInputs);
+
+    // Recalculate route with the remaining stops
+    calculateRoute();
   };
 
   const renderSuggestions = () =>
@@ -136,47 +146,78 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
    * @returns FIPS codes in order of intersection (travel)
    */
   const calculateRoute = async () => {
-    if (inputs.every(input => input.coords)) {
-      return;
-    }
-
     const directionsService = new google.maps.DirectionsService();
 
     try {
-      const results = await directionsService.route({
-        origin: `${startCoords.lat}, ${startCoords.lng}`,
-        destination: `${endCoords.lat}, ${endCoords.lng}`,
-        travelMode: google.maps.TravelMode.DRIVING,
-      });
-
       // Start loading wheel
       setLoadingRoute(true);
 
-      // Polyline between origin and destination
-      const polyline = results.routes[0].overview_polyline;
+      const routeSegments: RouteSegment[] = [];
 
-      const decodedPolyline = google.maps.geometry.encoding
-        .decodePath(polyline)
-        .map((latLng) => [latLng.lng(), latLng.lat()]);
+      console.log("calculateRoute:", inputs)
 
-      // Send polyline to FastAPI server running on EC2 instance
-      const response = await fetch("https://api.gravl.org/process_polyline/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ polyline: decodedPolyline }),
-      });
+      for (let i = 0; i < inputs.length - 1; i++) {
+        const start = inputs[i].coords;
+        const end = inputs[i + 1].coords;
 
-      if (!response.ok) {
-        console.error("Error processing polyline:", response.statusText);
-        return;
+        if (!start || !end) continue;
+
+        // Check if this segment is already calculated
+        const existingSegment = routeSegments.find(segment =>
+          segment.start.lat === start.lat &&
+          segment.start.lng === start.lng &&
+          segment.end.lat === end.lat &&
+          segment.end.lat === end.lng
+        );
+
+        if (existingSegment) {
+          routeSegments.push(existingSegment);
+          continue;
+        }
+
+        // Calculate route for this segment
+        const results = await directionsService.route({
+          origin: `${start.lat}, ${start.lng}`,
+          destination: `${end.lat}, ${end.lng}`,
+          travelMode: google.maps.TravelMode.DRIVING,
+        });
+
+        // Polyline between origin and destination
+        const polyline = results.routes[0].overview_polyline;
+
+        const decodedPolyline = google.maps.geometry.encoding
+          .decodePath(polyline)
+          .map((latLng) => [latLng.lng(), latLng.lat()]);
+
+        // Send polyline to FastAPI server running on EC2 instance
+        const response = await fetch("https://api.gravl.org/process_polyline/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ polyline: decodedPolyline }),
+        });
+
+        if (!response.ok) {
+          console.error("Error processing polyline:", response.statusText);
+          return;
+        }
+
+        const data = await response.json();
+        const fipsCodes: string[] = data.fips_codes;
+
+        routeSegments.push({
+          start,
+          end,
+          polyline,
+          fipsCodes
+        });
       }
 
-      const data = await response.json();
-      const fipsCodes: string[] = data.fips_codes;
+      // Merge all segments
+      const allFipsCodes = routeSegments.flatMap(segment => segment.fipsCodes)
       const seenFipsCodes = new Set();
-      const newVisits = fipsCodes
+      const newVisits = allFipsCodes
         .filter(fips_code => {
           if (seenFipsCodes.has(fips_code)) {
             return false;
@@ -202,17 +243,6 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
     // Stop loading wheel
     setLoadingRoute(false);
   };
-
-  // When either route inputs change
-  useEffect(() => {
-    setErrorMessage('');
-
-    if (inputs.every(input => input.coords)) {
-      // Calculate the route if every input is filled
-      // calculateRoute();
-      console.log("Calculate route for: ", inputs)
-    }
-  }, [inputs]);
 
   return (
     <div className={styles.container}>
@@ -255,7 +285,7 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
         </div>
       ))}
 
-      {inputs.every(input => input.value) && <div className={styles.addStop} onClick={handleAddStop}>
+      {inputs.every(input => input.value) && inputs.length < 5 && <div className={styles.addStop} onClick={handleAddStop}>
         <div className={styles.leftSide}>
           <div className={styles.plus}>
             <Icon type="plus" fill="#319fff" />
