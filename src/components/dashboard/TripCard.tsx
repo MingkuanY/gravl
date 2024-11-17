@@ -3,6 +3,7 @@ import styles from "../../styles/tripcard.module.scss";
 import Icon from "../icons/Icon";
 import classnames from "classnames";
 import { Mode } from "@/utils/types";
+import { useRef } from "react";
 
 export default function TripCard({
   name,
@@ -20,6 +21,8 @@ export default function TripCard({
   mode: Mode;
 }) {
   const isMobile = useScreenWidth();
+  const titleRef = useRef<HTMLParagraphElement>(null);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     if (e.currentTarget.contains(e.target as Node)) {
@@ -43,8 +46,8 @@ export default function TripCard({
       onClick={handleClick}
     >
       <div className={classnames(styles.right, mode === "USER" && styles.editMode)}>
-        <p className={styles.title}>{name}</p>
-        <p className={classnames(styles.locations, selected && styles.expanded)}>{desc}</p>
+        <p className={styles.title} ref={titleRef} style={{ maxHeight: selected ? `${titleRef.current?.scrollHeight}px` : "2rem" }}>{name}</p>
+        <p className={styles.description} ref={descriptionRef} style={{ maxHeight: selected ? `${descriptionRef.current?.scrollHeight}px` : "1.2rem" }}>{desc}</p>
       </div>
       {!isMobile && mode === "USER" && (
         <button className={styles.editContainer} onClick={handleClick}>

@@ -36,23 +36,19 @@
       font-size: 1.8rem;
       line-height: 2rem;
       overflow: hidden;
-      white-space: nowrap;
       color: mixin.$dark;
       font-weight: 400;
-      transition: 0.3s;
+      transition: 0.3s ease;
     }
 
-    .locations {
+    .description {
       margin-top: 0.2rem;
       color: mixin.$faded;
       font-size: 1rem;
       line-height: 1.2rem;;
       font-weight: 400;
-      transition: color 0.3s ease;
+      transition: 0.3s ease;
       overflow: hidden;
-      white-space: nowrap;
-      max-height: 1.2rem;
-      text-overflow: ellipsis;
     }
   }
 
@@ -81,14 +77,8 @@
     background-color: mixin.$gravl-blue;
 
     .title,
-    .locations {
+    .description {
       color: mixin.$white;
-    }
-
-    .locations {
-      white-space: normal;
-      overflow: visible;
-      max-height: none;
     }
 
     .editContainer:hover {
@@ -136,7 +126,7 @@
         line-height: 3rem;
       }
 
-      .locations {
+      .description {
         margin-top: 0.3rem;
         font-size: 1.5rem;
       }
