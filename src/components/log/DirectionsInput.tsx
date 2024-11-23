@@ -23,7 +23,7 @@ export type DirectionsInputHandle = {
   clearInputs: () => void;
 }
 
-type InputField = {
+export type InputField = {
   value: string;
   coords: { lat: number; lng: number } | null;
 }
@@ -41,8 +41,9 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
   setVisits: Function,
   setLoadingRoute: Function,
   setErrorMessage: Function,
-}>(({ currentDate, visits, setVisits, setLoadingRoute, setErrorMessage }, ref) => {
-  const [inputs, setInputs] = useState<InputField[]>([{ value: "", coords: null }, { value: "", coords: null }]);
+  inputs: InputField[],
+  setInputs: (newInputs: InputField[]) => void,
+}>(({ currentDate, visits, setVisits, setLoadingRoute, setErrorMessage, inputs, setInputs }, ref) => {
 
   // Which input is focused on and should get autocomplete
   const [focusedInputIndex, setFocusedInputIndex] = useState<number | null>(null)
@@ -220,7 +221,9 @@ const DirectionsInput = forwardRef<DirectionsInputHandle, {
           };
         });
 
-      setVisits(sortVisits(newVisits));
+      setVisits(sortVisits([...visits, ...newVisits].filter((visit, index, self) => {
+        return self.findIndex(v => v.fips_code === visit.fips_code) === index;
+      })));
     } catch (error: unknown) {
       if (error && typeof error === 'object' && 'code' in error && error.code === google.maps.DirectionsStatus.ZERO_RESULTS) {
         setErrorMessage('No route found. :(')

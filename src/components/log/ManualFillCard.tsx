@@ -12,7 +12,7 @@ import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { addDesignationToLabel } from "@/utils/map";
 import ConfirmSelection from "../modals/ConfirmSelection";
 import ToggleBtn from "./ToggleBtn";
-import DirectionsInput, { DirectionsInputHandle } from "./DirectionsInput";
+import DirectionsInput, { DirectionsInputHandle, InputField } from "./DirectionsInput";
 import LoadingWheel from "../icons/LoadingWheel";
 
 /**
@@ -64,6 +64,21 @@ export default function ManualFillCard({
     const currentDate = addDays(tripData.start_date, dayCount - 1);
     return currentDate;
   };
+
+  // Sets inputs by date to pass to DirectionsInput.tsx
+
+  const [inputsByDate, setInputsByDate] = useState<Record<string, InputField[]>>({});
+  const currentInputs = inputsByDate[getCurrentDate()] || [
+    { value: '', coords: null },
+    { value: '', coords: null },
+  ]
+
+  const setCurrentInputs = (newInputs: InputField[]) => {
+    setInputsByDate((prev) => ({
+      ...prev,
+      [getCurrentDate()]: newInputs,
+    }))
+  }
 
   // Change dates
 
@@ -245,7 +260,7 @@ export default function ManualFillCard({
               <p className={styles.text}>you visited...</p>
             </div>
 
-            <DirectionsInput ref={directionsRef} currentDate={getCurrentDate()} visits={visits} setVisits={setVisitsData} setLoadingRoute={setLoadingRoute} setErrorMessage={setErrorMessage} />
+            <DirectionsInput ref={directionsRef} currentDate={getCurrentDate()} visits={visits} setVisits={setVisitsData} setLoadingRoute={setLoadingRoute} setErrorMessage={setErrorMessage} inputs={currentInputs} setInputs={setCurrentInputs} />
 
             <p className={styles.instruction}>
               {visits.filter((visit) => visit.date === getCurrentDate()).length >
