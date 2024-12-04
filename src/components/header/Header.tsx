@@ -13,7 +13,18 @@ import { getUserById, readNotifications } from "@/actions/actions.ts";
 import { User } from "@prisma/client";
 import Notification from "./Notification.tsx";
 
-export default function Header({ user }: { user?: UserWithData }) {
+export default function Header({ user, toggleWrapped = false }: { user?: UserWithData, toggleWrapped?: boolean }) {
+  /**
+   * When user clicks "See Wrapped" or "Back".
+   */
+  const handleWrapped = () => {
+    if (toggleWrapped) {
+      router.push(`/${user!.username}`);
+    } else {
+      router.push(`/${user!.username}/wrapped`);
+    }
+  }
+
   const [notifications, setNotifications] = useState(
     user ? user.notifications : []
   );
@@ -164,7 +175,7 @@ export default function Header({ user }: { user?: UserWithData }) {
         {session.status === "authenticated" && user ? (
           <>
             {!isMobile && <FriendsBar user={user} friends={friends} />}
-            <div className={styles.seeWrappedBtn} onClick={() => router.push(`/${user.username}/wrapped`)}>See Wrapped</div>
+            <div className={styles.seeWrappedBtn} onClick={handleWrapped}>{toggleWrapped ? "Back" : "See Wrapped"}</div>
             {!isMobile && (
               <div className={styles.notifContainer} ref={notifBtnRef}>
                 <div className={styles.notif}>

@@ -1,0 +1,113 @@
+@use "./mixin" as mixin;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  /* map */
+
+  .mapContainer {
+    margin-bottom: -5rem;
+    width: 110%;
+    height: 45rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mapDate {
+    margin-bottom: 3rem;
+    height: 1.5rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    p {
+      font-size: 1.5rem;
+      color: mixin.$gravl-blue;
+
+      &.month {
+        width: 7rem;
+        text-align: end;
+      }
+      &.day {
+        width: 3rem;
+        text-align: center;
+      }
+      &.year {
+        width: 7rem;
+        text-align: start;
+      }
+    }
+  }
+
+  /* circular progress stats */
+
+  .stats {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    .progressContainer {
+      width: 12rem;
+      position: relative;
+      transition: 0.3s;
+
+      .countContainer {
+        display: flex;
+        align-items: flex-end;
+
+        .count {
+          font-size: 3.5rem;
+          color: mixin.$dark;
+          margin: 0 -0.3rem 0.3rem 0;
+          font-weight: 400;
+        }
+        .totalCount {
+          font-size: 1.75rem;
+          color: mixin.$dark;
+          font-weight: 400;
+        }
+      }
+
+      .type {
+        margin-top: 0.5rem;
+        font-size: 1.4rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+        max-height: 1.4rem;
+      }
+
+      .unselected {
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translateX(-50%) scale(1);
+        z-index: -100;
+      }
+
+      .progressbarBackground {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: mixin.$white;
+        opacity: 0.5;
+        transform: scale(1);
+
+        &.selected {
+          opacity: 0;
+          cursor: pointer;
+        }
+      }
+    }
+    .selected {
+      transform: scale(1.25);
+    }
+  }
+}

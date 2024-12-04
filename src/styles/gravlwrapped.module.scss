@@ -1,0 +1,32 @@
+@use "./mixin" as mixin;
+
+.viewport {
+  height: calc(100vh - mixin.$header-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60rem;
+  margin: auto;
+  margin-top: -4rem;
+  text-align: center;
+
+  h1 {
+    font-size: 8rem;
+    color: mixin.$gravl-blue;
+  }
+
+  .stat {
+    margin-top: 1rem;
+    font-size: 3rem;
+    font-weight: 300;
+  }
+
+  .link {
+    margin-top: 3rem;
+    font-size: 2rem;
+    color: mixin.$gravl-blue;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+}
