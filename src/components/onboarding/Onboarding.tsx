@@ -39,21 +39,40 @@ export default function Onboarding({
   const containerRef = useRef<HTMLDivElement>(null);
 
   /**
-   * Called when the user tries to move on to the next step, either through pressing Enter on desktop or clicking Next on mobile
+   * Validity test for proposed username.
+   *
+   * @param input proposed username
+   * @returns values of validityTest (whether username already exists or is a keyword) and regexTest (if it doesn't contain the right characters)
    */
-  const handleNext = async () => {
-    const input = accountData.username;
-
+  const valid = async (input: string) => {
     // Validity check that username has no uppercase letters, spaces nor special characters except for underscores
     const validUsernameRegex = /^[a-z0-9_]+$/;
     const regexTest = validUsernameRegex.test(input); // True means valid
 
-    // Ensure the inputted username passes a unique test and validity check
-    const validityTest = (await uniqueUsername(input)) && regexTest; // True means valid
+    // Keywords that username cannot be
+    const disallowedKeywords = [
+      "wrapped"
+    ]
+    const keywordTest = !disallowedKeywords.includes(input.toLowerCase());
+
+    // Ensure the inputted username passes unique, validity, and keyword checks
+    const validityTest = (await uniqueUsername(input)) && regexTest && keywordTest; // True means valid
+    return { validityTest, regexTest }
+  }
+
+  /**
+   * Called when the user tries to move on to the next step, either through pressing Enter on desktop or clicking Next on mobile
+   */
+  const handleNext = async () => {
+    console.log("triggered")
+    const input = accountData.username;
+
+    const { validityTest, regexTest } = await valid(input)
 
     if (step === 1) {
       // Username
       if (user) {
+        console.log("Next step with existing user")
         // Editing profile - profile already exists
         if (user.username === input || validityTest) {
           // Not changing username or the new username passes validity test
@@ -128,13 +147,19 @@ export default function Onboarding({
       user.bio === accountData.bio
     ) {
     } else {
-      //update user in prisma
-      await updateUser(
-        email,
-        accountData.username,
-        accountData.location,
-        accountData.bio
-      );
+      const { validityTest, regexTest } = await valid(accountData.username)
+      if (validityTest) {
+        //update user in prisma
+        await updateUser(
+          email,
+          accountData.username,
+          accountData.location,
+          accountData.bio
+        );
+      } else {
+        setValidUsername(regexTest ? "TAKEN" : "INVALID");
+        return;
+      }
     }
 
     //redirect to user dashboard
