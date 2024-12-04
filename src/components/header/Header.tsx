@@ -164,6 +164,7 @@ export default function Header({ user }: { user?: UserWithData }) {
         {session.status === "authenticated" && user ? (
           <>
             {!isMobile && <FriendsBar user={user} friends={friends} />}
+            <div className={styles.seeWrappedBtn} onClick={() => router.push(`/${user.username}/wrapped`)}>See Wrapped</div>
             {!isMobile && (
               <div className={styles.notifContainer} ref={notifBtnRef}>
                 <div className={styles.notif}>
@@ -172,13 +173,13 @@ export default function Header({ user }: { user?: UserWithData }) {
 
                 {notifications.filter((notification) => !notification.read)
                   .length > 0 && (
-                  <div className={styles.notifCount}>
-                    {
-                      notifications.filter((notification) => !notification.read)
-                        .length
-                    }
-                  </div>
-                )}
+                    <div className={styles.notifCount}>
+                      {
+                        notifications.filter((notification) => !notification.read)
+                          .length
+                      }
+                    </div>
+                  )}
 
                 <div
                   className={classnames(

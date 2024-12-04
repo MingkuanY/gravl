@@ -96,6 +96,27 @@
 
     /* if logged in */
 
+    .seeWrappedBtn {
+      margin-right: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 1.5rem;
+      height: 3.5rem;
+      border-radius: 1.75rem;
+      background: mixin.$gravl-blue;
+      text-transform: uppercase;
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: mixin.$white;
+      cursor: pointer;
+      transition: transform 0.3s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
     .notifContainer {
       margin-right: 1rem;
       position: relative;
