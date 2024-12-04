@@ -8,7 +8,7 @@ export default function WrappedPage() {
       <Header />
       <div className={styles.container}>
         <h1>2024 Travel Wrapped</h1>
-        <h2>See where you've been this year.</h2>
+        <h2>See where you&apos;ve been this year.</h2>
         <SignUpButton />
       </div>
     </>
