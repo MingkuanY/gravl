@@ -117,31 +117,31 @@ export default function WrappedLoader({
     });
   };
 
+  const updateStates = (reset: number) => {
+    setCount((prevCounts) => {
+      const newCounts = [...prevCounts];
+      if (reset !== undefined) {
+        newCounts[1] = reset;
+      } else {
+        newCounts[1] += 1;
+      }
+      return newCounts;
+    });
+  };
+
   const renderMap = () => {
-    switch (currentMap) {
-      case 0:
-        return (<Counties
-          animate={true}
-          data={sortedVisits}
-          updateCount={updateCount}
-          updateDate={setMapDate}
-          total={count[0]}
-          reload={reload}
-          pause={20}
-          places={places}
-          toggleHighways={false}
-        />)
-      case 1:
-        return (<States animate={true}
-          data={sortedStates}
-          updateCount={updateCount}
-          updateDate={setMapDate}
-          total={count[1]}
-          reload={reload}
-          pause={20}
-          places={places}
-          toggleHighways={false} />)
-    }
+    return (<Counties
+      animate={true}
+      data={sortedVisits}
+      updateCount={updateCount}
+      updateStates={updateStates}
+      updateDate={setMapDate}
+      total={count[0]}
+      reload={reload}
+      pause={20}
+      places={places}
+      toggleHighways={false}
+    />)
   }
 
   return (
@@ -167,7 +167,7 @@ export default function WrappedLoader({
           <div
             className={classnames(
               styles.progressContainer,
-              currentMap === index && styles.selected
+              styles.selected
             )}
             key={index}
           >
@@ -196,7 +196,7 @@ export default function WrappedLoader({
                 index <= 1 && styles.selected,
                 "progress-circle"
               )}
-              onClick={() => statClicked(index)}
+              onClick={() => statClicked(0)}
             ></div>
           </div>
         ))}

@@ -22,6 +22,7 @@ export const totalCounties = 3413;
 export default function Counties({
   data,
   updateCount,
+  updateStates,
   updateDate,
   total,
   reload,
@@ -46,6 +47,7 @@ export default function Counties({
 
   const resetMap = () => {
     updateCount && updateCount(0);
+    updateStates && updateStates(0);
     (
       mapRef.current?.querySelectorAll(
         "svg > path"
@@ -64,6 +66,7 @@ export default function Counties({
         pause,
         colors,
         updateCount,
+        updateStates,
         updateDate
       );
       return () => {

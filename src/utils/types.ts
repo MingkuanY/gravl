@@ -56,6 +56,7 @@ export type VisitInput = {
 export type MapProps = {
   data?: VisitInput[];
   updateCount?: Function;
+  updateStates?: Function;
   updateDate?: Function;
   total?: number;
   reload?: boolean;

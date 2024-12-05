@@ -27,6 +27,7 @@ export const loadMap = (
   pause: number | undefined,
   colors: string[],
   updateCount?: Function,
+  updateStates?: Function,
   updateDate?: Function
 ) => {
   let timeCounter = 0;
@@ -42,6 +43,8 @@ export const loadMap = (
     }
   });
 
+  const uniqueStates = new Set();
+
   uniqueVisits.forEach((date, fips_code: string) => {
     const color = colors[0];
 
@@ -55,6 +58,11 @@ export const loadMap = (
           });
         } else {
           element.style.fill = color;
+        }
+        const stateFips = fips_code.slice(0, 2);
+        if (!uniqueStates.has(stateFips)) {
+          uniqueStates.add(stateFips);
+          stateFips !== "11" && updateStates && updateStates();
         }
         fips_code !== "11" && updateCount && updateCount(); // make sure DC doesn't get counted as a state
         updateDate && updateDate(date);
