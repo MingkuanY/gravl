@@ -13,7 +13,7 @@ import Icon from "@/components/icons/Icon";
 import classnames from "classnames";
 import { formatSeparatedDate } from "@/utils/date";
 
-export const mapNames = ["counties", "states", "countries", "national parks"];
+export const mapNames = ["counties", "states"];
 
 export default function WrappedLoader({
   trips,
@@ -22,7 +22,7 @@ export default function WrappedLoader({
   trips: TripWithVisits[];
   places: PlaceInput[];
 }) {
-  const [count, setCount] = useState([0, 0, 0, 0]);
+  const [count, setCount] = useState([0, 0]);
 
   const [mapDate, setMapDate] = useState("");
 
