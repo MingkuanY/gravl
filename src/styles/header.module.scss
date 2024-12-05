@@ -105,6 +105,7 @@
       height: 3.5rem;
       border-radius: 1.75rem;
       background: mixin.$gravl-blue;
+      box-shadow: 0 0 0.5rem mixin.$gravl-blue, 0 0 2rem mixin.$gravl-blue;
       text-transform: uppercase;
       font-size: 1.8rem;
       font-weight: 500;
