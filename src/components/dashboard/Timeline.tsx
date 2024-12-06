@@ -94,17 +94,37 @@ export default function Timeline({
 
   return (
     <div className={classnames(styles.timeline, !trips.length && styles.empty)}>
-      {mode === "USER" ? (
-        <LogTripButton
-          setLogTripPage={setLogTripPage}
-          setEditTrip={setEditTrip}
-        />
+      {isMobile ? (
+        <div className={styles.mobileOnlyContainer}>
+          <p className={styles.yourTrips}>Your Trips</p>
+          <div className={styles.desktopOnlyContainer}>
+            {trips.length === 0 ? (
+              <div className={styles.desktopOnly}>
+                Log Your First Trip on Desktop
+              </div>
+            ) : (
+              <div className={styles.desktopOnly}>Log a Trip on Desktop</div>
+            )}
+            <div className={styles.desktop}>
+              <Icon type="desktop" fill="#24292f" />
+            </div>
+          </div>
+        </div>
       ) : (
-        trips.length === 0 && (
-          <p className={styles.noTripsYet}>No trips yet</p>
-        )
+        <>
+          {mode === "USER" ? (
+            <LogTripButton
+              setLogTripPage={setLogTripPage}
+              setEditTrip={setEditTrip}
+            />
+          ) : (
+            trips.length === 0 && (
+              <p className={styles.noTripsYet}>No trips yet</p>
+            )
+          )}
+        </>
       )}
-      {mode === "USER" && trips.length == 0 && (
+      {mode === "USER" && trips.length == 0 && !isMobile && (
         <div className={styles.proTipContainer}>
           <p className={styles.proTip}>Add Your First Trip</p>
           <div className={styles.up_arrow}>
