@@ -47,7 +47,7 @@ export default function TripCard({
     >
       <div className={classnames(styles.right, mode === "USER" && styles.editMode)}>
         <p className={styles.title} ref={titleRef} style={{ maxHeight: selected ? `${titleRef.current?.scrollHeight}px` : isMobile ? "2.8rem" : "2rem" }}>{name}</p>
-        <p className={styles.description} ref={descriptionRef} style={{ maxHeight: selected ? `${descriptionRef.current?.scrollHeight}px` : "1.2rem" }}>{desc}</p>
+        <p className={styles.description} ref={descriptionRef} style={{ maxHeight: selected ? `${descriptionRef.current?.scrollHeight}px` : isMobile ? "1.6rem" : "1.2rem" }}>{desc}</p>
       </div>
       {!isMobile && mode === "USER" && (
         <button className={styles.editContainer} onClick={handleClick}>

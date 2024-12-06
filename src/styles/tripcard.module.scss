@@ -107,19 +107,13 @@
 @media (max-width: 760px) {
   .container {
     width: 38rem;
-    height: 10rem;
     border-radius: 5rem;
     box-shadow: 0 0.5rem 0.5rem 0 rgba(36, 41, 47, 0.25);
-    padding: 1rem;
+    padding: 2rem 1rem;
 
     .right {
       margin: 0 1.5rem;
-      mask-image: linear-gradient(
-        to right,
-        black 0%,
-        black 26rem,
-        transparent 32rem
-      );
+      mask-image: none;
 
       .title {
         font-size: 2.8rem;
@@ -129,19 +123,15 @@
       .description {
         margin-top: 0.3rem;
         font-size: 1.5rem;
+        line-height: 1.8rem;
       }
     }
 
     &:hover {
       transform: none;
 
-      .right {
-        mask-image: linear-gradient(
-          to right,
-          black 0%,
-          black 26rem,
-          transparent 32rem
-        );
+      .right.editMode {
+        mask-image: none;
       }
     }
   }

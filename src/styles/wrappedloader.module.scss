@@ -113,3 +113,15 @@
     }
   }
 }
+
+@media (max-width: 760px) {
+  .container {
+    .mapDate {
+      transform: scale(1.5)
+    }
+    
+    .stats {
+      margin: 2rem 0;
+    }
+  }
+}
