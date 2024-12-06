@@ -64,7 +64,6 @@ export default function Onboarding({
    * Called when the user tries to move on to the next step, either through pressing Enter on desktop or clicking Next on mobile
    */
   const handleNext = async () => {
-    console.log("triggered")
     const input = accountData.username;
 
     const { validityTest, regexTest } = await valid(input)
@@ -72,7 +71,6 @@ export default function Onboarding({
     if (step === 1) {
       // Username
       if (user) {
-        console.log("Next step with existing user")
         // Editing profile - profile already exists
         if (user.username === input || validityTest) {
           // Not changing username or the new username passes validity test
@@ -147,9 +145,9 @@ export default function Onboarding({
       user.bio === accountData.bio
     ) {
     } else {
-      const { validityTest, regexTest } = await valid(accountData.username)
-      if (validityTest) {
-        //update user in prisma
+      if (user.username === accountData.username) {
+        // User updated location or bio only
+        // Update user in prisma
         await updateUser(
           email,
           accountData.username,
@@ -157,8 +155,20 @@ export default function Onboarding({
           accountData.bio
         );
       } else {
-        setValidUsername(regexTest ? "TAKEN" : "INVALID");
-        return;
+        // User updated username and maybe the other fields too
+        const { validityTest, regexTest } = await valid(accountData.username)
+        if (validityTest) {
+          // Update user in prisma
+          await updateUser(
+            email,
+            accountData.username,
+            accountData.location,
+            accountData.bio
+          );
+        } else {
+          setValidUsername(regexTest ? "TAKEN" : "INVALID");
+          return;
+        }
       }
     }
 

@@ -54,6 +54,7 @@ export default function BasicTripInfoCard({
 
   const handleStartDateChange = (date: string) => {
     if (tripData.end_date === "") {
+      // Default end date to start date if not yet inputted
       setTripData({ ...tripData, start_date: date, end_date: date });
     } else {
       setTripData({ ...tripData, start_date: date });
