@@ -117,3 +117,24 @@
     }
   }
 }
+
+@media (max-width: 760px) {
+  .profile {
+    .userInfo {
+      .usernameAndEdit {
+        .username {
+          font-size: 3.5rem;
+        }
+      }
+
+      .location {
+        font-size: 1.3rem;
+      }
+
+      .bio {
+        font-size: 2rem;
+        width: 29rem;
+      }
+    }
+  }
+}

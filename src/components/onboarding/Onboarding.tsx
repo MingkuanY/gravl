@@ -47,7 +47,7 @@ export default function Onboarding({
   const valid = async (input: string) => {
     // Validity check that username has no uppercase letters, spaces nor special characters except for underscores
     const validUsernameRegex = /^[a-z0-9_]+$/;
-    const regexTest = validUsernameRegex.test(input); // True means valid
+    const regexTest = validUsernameRegex.test(input) && input.length <= 15; // True means valid
 
     // Keywords that username cannot be
     const disallowedKeywords = [

@@ -8,3 +8,9 @@
   aspect-ratio: 1;
   cursor: pointer;
 }
+
+@media (max-width: 760px) {
+  .close {
+    width: 5rem;
+  }
+}

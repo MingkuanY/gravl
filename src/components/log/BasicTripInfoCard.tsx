@@ -53,7 +53,11 @@ export default function BasicTripInfoCard({
   };
 
   const handleStartDateChange = (date: string) => {
-    setTripData({ ...tripData, start_date: date });
+    if (tripData.end_date === "") {
+      setTripData({ ...tripData, start_date: date, end_date: date });
+    } else {
+      setTripData({ ...tripData, start_date: date });
+    }
   };
 
   const handleEndDateChange = (date: string) => {

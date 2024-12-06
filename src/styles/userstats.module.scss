@@ -29,3 +29,17 @@
     }
   }
 }
+
+@media (max-width: 760px) {
+  .userStats {
+    div {
+      .stat {
+        font-size: 3.5rem;
+      }
+
+      .desc {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}

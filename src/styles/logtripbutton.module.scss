@@ -29,8 +29,13 @@
 
 @media (max-width: 760px) {
   .button {
+    margin: 0 5rem;
     width: 50rem;
     border-radius: 4rem;
+
+    &:hover {
+      background-color: mixin.$gravl-blue;
+    }
 
     .plus {
       width: 4rem;

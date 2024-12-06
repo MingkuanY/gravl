@@ -113,8 +113,75 @@
   .error {
     position: absolute;
     bottom: 1.5rem;
-    left: 3.5rem;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 1.3rem;
     color: mixin.$warning;
+  }
+}
+
+@media (max-width: 760px) {
+  .container {
+    width: 60rem;
+    padding: 6rem 3.5rem;
+
+    .nameInput {
+      font-size: 4rem;
+      line-height: 4.5rem;
+
+      &::placeholder {
+        font-size: 4rem;
+      }
+    }
+
+    .textareaContainer {
+      .descInput {
+        height: 35rem;
+        font-size: 3.5rem;
+
+        &::placeholder {
+          font-size: 3.5rem;
+        }
+      }
+
+      .characterCount {
+        font-size: 2.5rem;
+      }
+    }
+
+    .bottom {
+      flex-direction: column;
+      .dateContainer {
+        .chooseDate {
+          margin: 1rem 0;
+          p {
+            font-size: 3rem;
+          }
+        }
+      }
+  
+      button {
+        margin-top: 3rem;
+        padding: 2rem 2rem 2rem 4rem;
+        font-size: 4rem;
+        margin-right: 4rem;
+
+        &::after {
+          right: -4rem;
+          border-left: 4rem solid mixin.$gravl-blue;
+          border-top: 4rem solid transparent;
+          border-bottom: 4rem solid transparent;
+        }
+
+        &:hover {
+          transform: none;
+        }
+      }
+    }
+  
+    .error {
+      font-size: 2rem;
+      bottom: 0;
+    }
   }
 }
