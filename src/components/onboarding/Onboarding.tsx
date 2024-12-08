@@ -145,7 +145,7 @@ export default function Onboarding({
       user.bio === accountData.bio
     ) {
     } else {
-      if (user.username === accountData.username) {
+      if (user && user.username === accountData.username) {
         // User updated location or bio only
         // Update user in prisma
         await updateUser(
