@@ -17,22 +17,49 @@ const getLocationName = async (
   lat: number,
   lng: number
 ): Promise<string | null> => {
-  try {
-    const response = await fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`
-    );
-
-    const data = await response.json();
-    if (data.status === "OK") {
-      return data.results[0]?.formatted_address || null;
-    } else {
-      console.warn("Geocoding failed:", data.status);
-      return null;
-    }
-  } catch (err) {
-    console.error("Error with geocoding request:", err);
+  if (!window.google || !window.google.maps) {
+    console.error("Google Maps JavaScript API is not loaded.");
     return null;
   }
+
+  return new Promise((resolve) => {
+    const geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+      if (status === "OK" && results && results.length > 0) {
+        const components = results[0].address_components;
+
+        let city: string | undefined;
+        let state: string | undefined;
+
+        for (const component of components) {
+          const types = component.types;
+
+          if (types.includes("locality")) {
+            city = component.long_name;
+          }
+
+          if (
+            types.includes("administrative_area_level_1") &&
+            component.short_name.length === 2
+          ) {
+            state = component.short_name;
+          }
+        }
+
+        if (city && state) {
+          resolve(`${city}, ${state}`);
+        } else if (state) {
+          resolve(state);
+        } else {
+          resolve(results[0].formatted_address || null);
+        }
+      } else {
+        console.warn("Geocoding failed:", status);
+        resolve(null);
+      }
+    });
+  });
 };
 
 export default function Life() {
