@@ -1,0 +1,39 @@
+@use "./mixin" as mixin;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5rem;
+  font-family: sans-serif;
+}
+
+.button {
+  background-color: mixin.$gravl-blue;
+  color: white;
+  border: none;
+  padding: 1.5rem 3rem;
+  font-size: 5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.button:hover {
+  background-color: #248de3;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  max-width: 600px;
+}
+
+.item {
+  text-align: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ccc;
+  font-size: 2rem;
+}
