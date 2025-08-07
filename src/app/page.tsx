@@ -3,7 +3,7 @@
 import styles from "../styles/landing.module.scss";
 import Header from "@/components/header/Header.tsx";
 import Counties from "../components/maps/Counties.tsx";
-import SignUpButton from "@/components/landing/SignUpButton.tsx";
+import MapOutYourLife from "@/components/landing/MapOutYourLife.tsx";
 import { loadPlaces } from "@/actions/actions.ts";
 import Onboarding from "@/components/onboarding/Onboarding.tsx";
 import { getServerSession } from "next-auth";
@@ -42,8 +42,7 @@ export default async function Landing({
           />
         </div>
         <p className={styles.motto}>Not all who wander are lost</p>
-        <p className={styles.subtitle}>Map out your adventures</p>
-        <SignUpButton />
+        <MapOutYourLife />
       </div>
     </>
   );

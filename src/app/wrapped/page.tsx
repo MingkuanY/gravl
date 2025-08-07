@@ -1,6 +1,6 @@
-import SignUpButton from '@/components/landing/SignUpButton'
-import styles from '../../styles/wrapped.module.scss'
-import Header from '@/components/header/Header'
+import SignUpButton from "@/components/landing/MapOutYourLife";
+import styles from "../../styles/wrapped.module.scss";
+import Header from "@/components/header/Header";
 
 export default function WrappedPage() {
   return (
@@ -12,5 +12,5 @@ export default function WrappedPage() {
         <SignUpButton />
       </div>
     </>
-  )
+  );
 }

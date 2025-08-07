@@ -5,6 +5,8 @@ import exifr from "exifr";
 import styles from "../../styles/life.module.scss";
 import WrappedLoader from "../../components/maps/WrappedLoader";
 import { PlaceInput, TripWithVisits, VisitInput } from "../../utils/types";
+import Loading from "../load";
+import { useRouter } from "next/navigation";
 
 type PhotoData = {
   timestamp: string;
@@ -16,10 +18,12 @@ type PhotoData = {
 
 export default function GravlLife({ places }: { places: PlaceInput[] }) {
   const [visits, setVisits] = useState<VisitInput[]>([]);
+  const router = useRouter();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [tripName, setTripName] = useState("");
   const [mapReady, setMapReady] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -28,6 +32,8 @@ export default function GravlLife({ places }: { places: PlaceInput[] }) {
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files) return;
+
+    setIsLoading(true);
 
     const photos = await extractPhotoMetadata(files);
     if (photos.length < 2) {
@@ -38,6 +44,7 @@ export default function GravlLife({ places }: { places: PlaceInput[] }) {
     const routeSegments = await getRouteSegments(photos);
     const visits = generateVisitsFromSegments(routeSegments);
 
+    setIsLoading(false);
     setMapReady(true);
     setVisits(visits);
   };
@@ -187,28 +194,47 @@ export default function GravlLife({ places }: { places: PlaceInput[] }) {
     })),
   };
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <>
       {!mapReady ? (
         <div className={styles.container}>
-          <input
-            type="text"
-            className={styles.tripNameInput}
-            placeholder="Name your trip..."
-            value={tripName}
-            onChange={(e) => setTripName(e.target.value)}
-          />
-          <button className={styles.button} onClick={handleButtonClick}>
-            Map Your Trip
+          <div className={styles.centerContent}>
+            <input
+              type="text"
+              className={styles.tripNameInput}
+              placeholder="Name your trip..."
+              value={tripName}
+              onChange={(e) => setTripName(e.target.value)}
+            />
+            <button
+              className={`${styles.button} ${
+                tripName.trim() === "" ? styles.disabledButton : ""
+              }`}
+              onClick={handleButtonClick}
+              disabled={tripName.trim() === ""}
+            >
+              Map Your Trip
+            </button>
+            <input
+              type="file"
+              ref={fileInputRef}
+              accept="image/*"
+              multiple
+              onChange={handleFileChange}
+              style={{ display: "none" }}
+            />
+          </div>
+
+          <button
+            className={styles.backButton}
+            onClick={() => router.push(`/`)}
+          >
+            ←
           </button>
-          <input
-            type="file"
-            ref={fileInputRef}
-            accept="image/*"
-            multiple
-            onChange={handleFileChange}
-            style={{ display: "none" }}
-          />
         </div>
       ) : (
         <div className={styles.viewport}>
@@ -217,6 +243,13 @@ export default function GravlLife({ places }: { places: PlaceInput[] }) {
           <p className={styles.stat}>{newStates} new states</p>
           <WrappedLoader trips={[newTrip]} places={places} />
           <p className={styles.link}>gravl.org</p>
+
+          <button
+            className={styles.backButton}
+            onClick={() => router.push(`/`)}
+          >
+            ←
+          </button>
         </div>
       )}
     </>

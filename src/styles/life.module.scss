@@ -3,12 +3,21 @@
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
+  position: relative;
   padding: 5rem;
   font-family: sans-serif;
   text-align: center;
+}
+
+.centerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
 }
 
 .tripNameInput {
@@ -35,13 +44,13 @@
   padding: 2rem 4rem;
   font-size: 4rem;
   border-radius: 5rem;
-  cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: background 0.2s ease;
 }
 
-.button:hover {
-  background-color: #248de3;
+.disabledButton {
+  background-color: mixin.$lighter-blue;
+  cursor: not-allowed;
 }
 
 .viewport {
@@ -73,4 +82,22 @@
     text-transform: uppercase;
     font-weight: 800;
   }
+}
+
+.backButton {
+  position: absolute;
+  bottom: 8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6rem;
+  aspect-ratio: 1;
+  background-color: mixin.$very-light-blue;
+  border: none;
+  border-radius: 50%;
+  color: mixin.$lighter-blue;
+  font-size: 3.5rem;
+  line-height: 6rem;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  user-select: none;
 }
