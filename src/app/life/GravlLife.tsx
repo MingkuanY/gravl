@@ -87,6 +87,7 @@ export default function GravlLife({ places }: { places: PlaceInput[] }) {
     for (let i = 0; i < photos.length - 1; i++) {
       const start = photos[i].location!;
       const end = photos[i + 1].location!;
+      const timestamp = photos[i].timestamp;
 
       try {
         const results = await directionsService.route({
@@ -122,6 +123,7 @@ export default function GravlLife({ places }: { places: PlaceInput[] }) {
           end,
           polyline,
           fipsCodes: data.fips_codes as string[],
+          timestamp,
         });
       } catch (err) {
         console.error("Error calculating route:", err);
@@ -131,22 +133,28 @@ export default function GravlLife({ places }: { places: PlaceInput[] }) {
     return segments;
   };
 
-  const generateVisitsFromSegments = (segments: { fipsCodes: string[] }[]) => {
-    const allFipsCodes = segments.flatMap((s) => s.fipsCodes);
+  const generateVisitsFromSegments = (
+    segments: { fipsCodes: string[]; timestamp: string }[]
+  ) => {
     const seen = new Set<string>();
-    const currentDate = new Date().toISOString().split("T")[0];
+    const visits = [];
 
-    return allFipsCodes
-      .filter((code) => {
-        if (seen.has(code)) return false;
-        seen.add(code);
-        return true;
-      })
-      .map((fips_code, index) => ({
-        fips_code,
-        date: currentDate,
-        order: index,
-      }));
+    for (const segment of segments) {
+      const { fipsCodes, timestamp } = segment;
+
+      for (const fips_code of fipsCodes) {
+        if (!seen.has(fips_code)) {
+          seen.add(fips_code);
+          visits.push({
+            fips_code,
+            date: timestamp.split("T")[0], // format date as YYYY-MM-DD
+            order: visits.length,
+          });
+        }
+      }
+    }
+
+    return visits;
   };
 
   // Map
