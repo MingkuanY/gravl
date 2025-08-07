@@ -13,7 +13,15 @@ import { getUserById, readNotifications } from "@/actions/actions.ts";
 import { User } from "@prisma/client";
 import Notification from "./Notification.tsx";
 
-export default function Header({ user, toggleWrapped = false }: { user?: UserWithData, toggleWrapped?: boolean }) {
+export default function Header({
+  user,
+  toggleWrapped = false,
+}: {
+  user?: UserWithData;
+  toggleWrapped?: boolean;
+}) {
+  const showWrapped = new Date().getMonth() === 11; // Only show in December
+
   /**
    * When user clicks "See Wrapped" or "Back".
    */
@@ -23,7 +31,7 @@ export default function Header({ user, toggleWrapped = false }: { user?: UserWit
     } else {
       router.push(`/${user!.username}/wrapped`);
     }
-  }
+  };
 
   const [notifications, setNotifications] = useState(
     user ? user.notifications : []
@@ -175,7 +183,11 @@ export default function Header({ user, toggleWrapped = false }: { user?: UserWit
         {session.status === "authenticated" && user ? (
           <>
             {!isMobile && <FriendsBar user={user} friends={friends} />}
-            <div className={styles.seeWrappedBtn} onClick={handleWrapped}>{toggleWrapped ? "Back" : "See Wrapped"}</div>
+            {showWrapped && (
+              <div className={styles.seeWrappedBtn} onClick={handleWrapped}>
+                {toggleWrapped ? "Back" : "See Wrapped"}
+              </div>
+            )}
             {!isMobile && (
               <div className={styles.notifContainer} ref={notifBtnRef}>
                 <div className={styles.notif}>
@@ -184,13 +196,13 @@ export default function Header({ user, toggleWrapped = false }: { user?: UserWit
 
                 {notifications.filter((notification) => !notification.read)
                   .length > 0 && (
-                    <div className={styles.notifCount}>
-                      {
-                        notifications.filter((notification) => !notification.read)
-                          .length
-                      }
-                    </div>
-                  )}
+                  <div className={styles.notifCount}>
+                    {
+                      notifications.filter((notification) => !notification.read)
+                        .length
+                    }
+                  </div>
+                )}
 
                 <div
                   className={classnames(
