@@ -10,61 +10,11 @@ type PhotoData = {
     lat: number;
     lng: number;
   };
-  locationName?: string;
-};
-
-const getLocationName = async (
-  lat: number,
-  lng: number
-): Promise<string | null> => {
-  if (!window.google || !window.google.maps) {
-    console.error("Google Maps JavaScript API is not loaded.");
-    return null;
-  }
-
-  return new Promise((resolve) => {
-    const geocoder = new google.maps.Geocoder();
-
-    geocoder.geocode({ location: { lat, lng } }, (results, status) => {
-      if (status === "OK" && results && results.length > 0) {
-        const components = results[0].address_components;
-
-        let city: string | undefined;
-        let state: string | undefined;
-
-        for (const component of components) {
-          const types = component.types;
-
-          if (types.includes("locality")) {
-            city = component.long_name;
-          }
-
-          if (
-            types.includes("administrative_area_level_1") &&
-            component.short_name.length === 2
-          ) {
-            state = component.short_name;
-          }
-        }
-
-        if (city && state) {
-          resolve(`${city}, ${state}`);
-        } else if (state) {
-          resolve(state);
-        } else {
-          resolve(results[0].formatted_address || null);
-        }
-      } else {
-        console.warn("Geocoding failed:", status);
-        resolve(null);
-      }
-    });
-  });
 };
 
 export default function Life() {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [photos, setPhotos] = useState<PhotoData[]>([]);
+  const [tripName, setTripName] = useState("");
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -74,6 +24,21 @@ export default function Life() {
     const files = e.target.files;
     if (!files) return;
 
+    const photos = await extractPhotoMetadata(files);
+    if (photos.length < 2) {
+      console.warn("Need at least 2 geotagged photos to calculate a route.");
+      return;
+    }
+
+    const routeSegments = await getRouteSegments(photos);
+    const visits = generateVisitsFromSegments(routeSegments);
+
+    console.log("Generated visits:", visits);
+  };
+
+  const extractPhotoMetadata = async (
+    files: FileList
+  ): Promise<PhotoData[]> => {
     const results: PhotoData[] = [];
 
     for (const file of Array.from(files)) {
@@ -84,16 +49,9 @@ export default function Life() {
         const lng = exifData?.longitude;
 
         if (timestamp) {
-          const formattedTime = new Date(timestamp).toLocaleString();
-
-          let locationName: string | undefined;
-          if (lat && lng) {
-            locationName = (await getLocationName(lat, lng)) ?? undefined;
-          }
           results.push({
-            timestamp: formattedTime,
+            timestamp: new Date(timestamp).toISOString(),
             location: lat && lng ? { lat, lng } : undefined,
-            locationName,
           });
         }
       } catch (err) {
@@ -101,11 +59,92 @@ export default function Life() {
       }
     }
 
-    setPhotos(results);
+    return results
+      .filter((p) => p.location)
+      .sort(
+        (a, b) =>
+          new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+      );
+  };
+
+  const getRouteSegments = async (photos: PhotoData[]) => {
+    const directionsService = new google.maps.DirectionsService();
+    const segments = [];
+
+    for (let i = 0; i < photos.length - 1; i++) {
+      const start = photos[i].location!;
+      const end = photos[i + 1].location!;
+
+      try {
+        const results = await directionsService.route({
+          origin: `${start.lat}, ${start.lng}`,
+          destination: `${end.lat}, ${end.lng}`,
+          travelMode: google.maps.TravelMode.DRIVING,
+        });
+
+        const polyline = results.routes[0].overview_polyline;
+
+        const decodedPolyline = google.maps.geometry.encoding
+          .decodePath(polyline)
+          .map((latLng) => [latLng.lng(), latLng.lat()]);
+
+        const response = await fetch(
+          "https://api.gravl.org/process_polyline/",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ polyline: decodedPolyline }),
+          }
+        );
+
+        if (!response.ok) {
+          console.error("Error processing polyline:", response.statusText);
+          continue;
+        }
+
+        const data = await response.json();
+
+        segments.push({
+          start,
+          end,
+          polyline,
+          fipsCodes: data.fips_codes as string[],
+        });
+      } catch (err) {
+        console.error("Error calculating route:", err);
+      }
+    }
+
+    return segments;
+  };
+
+  const generateVisitsFromSegments = (segments: { fipsCodes: string[] }[]) => {
+    const allFipsCodes = segments.flatMap((s) => s.fipsCodes);
+    const seen = new Set<string>();
+    const currentDate = new Date().toISOString().split("T")[0];
+
+    return allFipsCodes
+      .filter((code) => {
+        if (seen.has(code)) return false;
+        seen.add(code);
+        return true;
+      })
+      .map((fips_code, index) => ({
+        fips_code,
+        date: currentDate,
+        order: index,
+      }));
   };
 
   return (
     <div className={styles.container}>
+      <input
+        type="text"
+        className={styles.tripNameInput}
+        placeholder="Name your trip..."
+        value={tripName}
+        onChange={(e) => setTripName(e.target.value)}
+      />
       <button className={styles.button} onClick={handleButtonClick}>
         Map Your Trip
       </button>
@@ -117,26 +156,6 @@ export default function Life() {
         onChange={handleFileChange}
         style={{ display: "none" }}
       />
-      <ul className={styles.list}>
-        {photos.map((photo, idx) => (
-          <li key={idx} className={styles.item}>
-            <strong>{photo.timestamp}</strong>
-            {photo.location ? (
-              <span>
-                {" "}
-                — 📍{" "}
-                {photo.locationName
-                  ? photo.locationName
-                  : `${photo.location.lat.toFixed(
-                      5
-                    )}, ${photo.location.lng.toFixed(5)}`}
-              </span>
-            ) : (
-              <span> — No location data</span>
-            )}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

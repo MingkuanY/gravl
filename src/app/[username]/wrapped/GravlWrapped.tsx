@@ -1,11 +1,14 @@
-"use client"
+"use client";
 
-import { PlaceInput, UserWithTrips } from '@/utils/types';
-import styles from '../../../styles/gravlwrapped.module.scss';
-import WrappedLoader from './WrappedLoader';
-import { findStartAndEndDates, sortTrips } from '@/utils/date';
+import { PlaceInput, UserWithTrips } from "@/utils/types";
+import styles from "../../../styles/gravlwrapped.module.scss";
+import WrappedLoader from "../../../components/maps/WrappedLoader";
+import { findStartAndEndDates, sortTrips } from "@/utils/date";
 
-export default function GravlWrapped({ user, places }: {
+export default function GravlWrapped({
+  user,
+  places,
+}: {
   user: UserWithTrips;
   places: PlaceInput[];
 }) {
@@ -45,7 +48,7 @@ export default function GravlWrapped({ user, places }: {
       if (tripStartYear < year || tripEndYear < year) {
         // For previous years, add to the allVisitedStates set
         allVisitedStates.add(stateFips);
-      } else if (!allVisitedStates.has(stateFips) && stateFips != '11') {
+      } else if (!allVisitedStates.has(stateFips) && stateFips != "11") {
         // For current year, add to newVisitedStates if not in allVisitedStates
         newVisitedStates.add(stateFips);
       }
@@ -70,8 +73,11 @@ export default function GravlWrapped({ user, places }: {
       <h1>{year}</h1>
       <p className={styles.stat}>{newCounties} new counties</p>
       <p className={styles.stat}>{newStates} new states</p>
-      <WrappedLoader trips={sortTrips(currentYearTrips, true)} places={places} />
+      <WrappedLoader
+        trips={sortTrips(currentYearTrips, true)}
+        places={places}
+      />
       <p className={styles.link}>gravl.org/wrapped</p>
     </div>
-  )
+  );
 }
