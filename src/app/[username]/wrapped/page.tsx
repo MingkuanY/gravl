@@ -17,7 +17,7 @@ export default async function Wrapped({
   // Get the profile the user is trying to access (user and trips only)
   const accessedUser = await getUserByUsername(params.username);
 
-  if (!accessedUser) {
+  if (!accessedUser || new Date().getMonth() !== 11) {
     // Trying to access profile that doesn't exist
     return NotFound();
   }
