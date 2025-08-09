@@ -16,11 +16,6 @@ export type UserWithTrips = User & {
   trips: TripWithVisits[];
 };
 
-export type UserWithData = User & {
-  notifications: Notification[];
-  friends: User[];
-};
-
 // Trip
 
 export type TripInput = {
@@ -71,6 +66,6 @@ export type MapProps = {
 
 // Dashboard
 
-export type Mode = "USER" | "FRIEND" | "NON-FRIEND" | "NON-USER";
+export type Mode = "USER" | "NON-USER";
 
 export type Status = "DEFAULT" | "LOADING";

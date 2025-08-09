@@ -1,7 +1,7 @@
 "use server";
 
 import { PrismaClient } from "@prisma/client";
-import { PlaceWithoutId, TripInput } from "@/utils/types";
+import { TripInput } from "@/utils/types";
 import { revalidatePath } from "next/cache";
 
 const prisma = new PrismaClient();
@@ -89,10 +89,10 @@ export async function getUserById(userId: string | null) {
 }
 
 /**
- * Gets the User with the given email in the database, including their trips, friends, and notifications
+ * Gets the User with the given email in the database, including their trips
  *
  * @param email to look up the User in the database
- * @returns the User with that email along with their trips, friends, and notifications
+ * @returns the User with that email along with their trips
  */
 export async function getUserWithData(email: string | undefined) {
   if (!email) {
@@ -108,38 +108,8 @@ export async function getUserWithData(email: string | undefined) {
           visits: true,
         },
       },
-      friends: {
-        include: {
-          trips: {
-            include: {
-              visits: true,
-            },
-          },
-        },
-      },
-      notifications: true,
     },
   });
-
-  if (user) {
-    // Sort friends based on most recent visit date
-    user.friends.sort((a, b) => {
-      const mostRecentVisitA = a.trips
-        .flatMap((trip) => trip.visits)
-        .reduce(
-          (latest, visit) => (visit.date > latest ? visit.date : latest),
-          new Date(0)
-        );
-      const mostRecentVisitB = b.trips
-        .flatMap((trip) => trip.visits)
-        .reduce(
-          (latest, visit) => (visit.date > latest ? visit.date : latest),
-          new Date(0)
-        );
-
-      return mostRecentVisitB.getTime() - mostRecentVisitA.getTime();
-    });
-  }
 
   return user;
 }
@@ -320,207 +290,4 @@ export async function updateTrip(trip_id: number, trip: TripInput) {
   });
 
   return updatedTrip;
-}
-
-/**
- * Sends a friend request, checking that the receiverId is valid and no request is already between them
- *
- * @param senderId the user who is sending the request
- * @param receiverId the user who is receiving the request
- * @returns whether the request has been sent successfully or not
- */
-export async function sendFriendRequest(
-  senderId: string,
-  receiverUsername: string
-) {
-  // Check if the receiver exists
-  const receiverExists = await prisma.user.findUnique({
-    where: { username: receiverUsername },
-  });
-
-  if (!receiverExists) {
-    return null;
-  }
-
-  const receiverId = receiverExists.id;
-
-  // Check for existing friend request
-  const existingRequest = await prisma.friendRequest.findFirst({
-    where: {
-      OR: [
-        { senderId: senderId, receiverId: receiverId },
-        { senderId: receiverId, receiverId: senderId },
-      ],
-    },
-  });
-
-  if (existingRequest) {
-    return receiverExists;
-  }
-
-  // Create friend request
-  const request = await prisma.friendRequest.create({
-    data: {
-      senderId: senderId,
-      receiverId: receiverId,
-      status: "PENDING",
-    },
-  });
-
-  // Send notification to receiver
-  await prisma.notification.create({
-    data: {
-      userId: receiverId,
-      type: "FRIEND_REQUEST",
-      userIdInConcern: senderId,
-      requestId: request.id,
-    },
-  });
-
-  return receiverExists;
-}
-
-/**
- * Accept a friend request.
- *
- * @param requestId
- */
-export async function acceptFriendRequest(requestId: number) {
-  // Accept friend request and deletes it
-  const request = await prisma.friendRequest.delete({
-    where: {
-      id: requestId,
-    },
-  });
-
-  // Update original notification to a friend request accepted
-  await prisma.notification.updateMany({
-    where: {
-      userId: request.receiverId,
-      type: "FRIEND_REQUEST",
-      requestId: requestId,
-    },
-    data: {
-      type: "FRIEND_REQUEST_ACCEPTED",
-    },
-  });
-
-  // Add friends/friendOf relationships for both users
-  await prisma.user.update({
-    where: {
-      id: request.senderId,
-    },
-    data: {
-      friends: {
-        connect: { id: request.receiverId },
-      },
-      friendOf: {
-        connect: { id: request.receiverId },
-      },
-    },
-  });
-
-  await prisma.user.update({
-    where: { id: request.receiverId },
-    data: {
-      friends: {
-        connect: { id: request.senderId },
-      },
-      friendOf: {
-        connect: { id: request.senderId },
-      },
-    },
-  });
-
-  // Create notification for sender
-  await prisma.notification.create({
-    data: {
-      userId: request.senderId,
-      type: "FRIEND_REQUEST_ACCEPTED",
-      userIdInConcern: request.receiverId,
-    },
-  });
-}
-
-/**
- * Declines a friend request by deleting it.
- *
- * @param requestId
- */
-export async function declineFriendRequest(requestId: number) {
-  // Deletes the friend request
-  const request = await prisma.friendRequest.delete({
-    where: { id: requestId },
-  });
-
-  // Deletes original notification
-  await prisma.notification.deleteMany({
-    where: {
-      userId: request.receiverId,
-      type: "FRIEND_REQUEST",
-      requestId: requestId,
-    },
-  });
-}
-
-/**
- * Unfriends the two given Users from each other.
- *
- * @param userId1 a user to unfriend
- * @param userId2 the other user to unfriend
- */
-export async function unfriendUsers(userId1: string, userId2: string) {
-  await prisma.user.update({
-    where: { id: userId1 },
-    data: {
-      friends: {
-        disconnect: { id: userId2 },
-      },
-      friendOf: {
-        disconnect: { id: userId2 },
-      },
-    },
-  });
-
-  await prisma.user.update({
-    where: { id: userId2 },
-    data: {
-      friends: {
-        disconnect: { id: userId1 },
-      },
-      friendOf: {
-        disconnect: { id: userId1 },
-      },
-    },
-  });
-}
-
-/**
- * Mark all notifications as read for the given user.
- *
- * @param userId the user to mark notifications as read
- */
-export async function readNotifications(userId: string) {
-  await prisma.notification.updateMany({
-    where: { userId: userId },
-    data: { read: true },
-  });
-}
-
-/**
- * Get list of pending friends based on friend requests sent from given user.
- *
- * @param userId the user who sent the friend requests
- * @returns list of pending friends
- */
-export async function fetchPendingFriends(userId: string) {
-  const pendingRequests = await prisma.friendRequest.findMany({
-    where: {
-      senderId: userId,
-    },
-    include: {
-      receiver: true,
-    },
-  });
-  return pendingRequests.map((request) => request.receiver);
 }

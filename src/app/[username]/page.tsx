@@ -24,64 +24,32 @@ export default async function Profile({
 
   const places = await loadPlaces();
 
-  if (!session) {
-    // Not logged in but user they are trying to access exists
-    return (
-      <>
-        <Header />
-        <Dashboard user={accessedUser} places={places} mode={"NON-USER"} />
-      </>
-    );
+  if (session) {
+    // Current user info
+    const userEmail = session.user.email;
+    const user = await getUserWithData(userEmail);
+
+    if (!user) {
+      // They (somehow) have a session without a user
+      return NotFound();
+    }
+
+    if (user.username === params.username) {
+      // Current user is trying to access their own profile
+      return (
+        <>
+          <Header user={user} />
+          <Dashboard user={user} places={places} mode={"USER"} viewer={user} />
+        </>
+      );
+    }
   }
 
-  // Current user info
-  const userEmail = session.user.email;
-  const user = await getUserWithData(userEmail);
-
-  if (!user) {
-    // They (somehow) have a session without a user
-    return NotFound();
-  }
-
-  if (user.username === params.username) {
-    // Current user is trying to access their own profile
-    return (
-      <>
-        <Header user={user} />
-        <Dashboard user={user} places={places} mode={"USER"} viewer={user} />
-      </>
-    );
-  }
-
-  const isFriend = user.friends.some(
-    (friend) => friend.username === params.username
-  );
-
-  if (!isFriend) {
-    // User trying to access a non-friend's account
-    return (
-      <>
-        <Header user={user} />
-        <Dashboard
-          user={accessedUser}
-          places={places}
-          mode={"NON-FRIEND"}
-          viewer={user}
-        />
-      </>
-    );
-  }
-
-  // User is accessing a friend's account
+  // Not logged in but user they are trying to access exists
   return (
     <>
-      <Header user={user} />
-      <Dashboard
-        user={accessedUser}
-        places={places}
-        mode={"FRIEND"}
-        viewer={user}
-      />
+      <Header />
+      <Dashboard user={accessedUser} places={places} mode={"NON-USER"} />
     </>
   );
 }

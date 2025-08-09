@@ -87,7 +87,7 @@ export default function GravlLife({ places }: { places: PlaceInput[] }) {
     for (let i = 0; i < photos.length - 1; i++) {
       const start = photos[i].location!;
       const end = photos[i + 1].location!;
-      const timestamp = photos[i].timestamp;
+      const timestamp = photos[i + 1].timestamp;
 
       try {
         const results = await directionsService.route({

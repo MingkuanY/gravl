@@ -30,9 +30,7 @@ import classnames from "classnames";
 possible modes:
 
 USER - on the current user's own profile
-FRIEND - on the current user's friend's profile
-NON-FRIEND - on a current user's non-friend's profile
-NON-USER - on a non user's non-friend's profile
+NON-USER - on a non user's profile
 
 */
 
@@ -194,7 +192,7 @@ export default function Dashboard({
       )}
       {logTripPage === -1 && (
         <div className={styles.container}>
-          {(mode === "USER" || mode === "FRIEND") && (
+          {mode === "USER" && (
             <Timeline
               trips={sortedTrips}
               setLogTripPage={setLogTripPage}
@@ -209,13 +207,12 @@ export default function Dashboard({
           <div
             className={classnames(
               styles.main,
-              mode !== "USER" && mode !== "FRIEND" && styles.centered
+              mode !== "USER" && styles.centered
             )}
           >
             <Profile
               user={user}
               mode={mode}
-              viewer={viewer}
               setEditProfile={setEditProfile}
               trips={trips}
             />

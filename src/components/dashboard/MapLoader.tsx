@@ -61,8 +61,8 @@ export default function MapLoader({
           const state_v = {
             fips_code: stateFips,
             date: visit.date.toISOString().split("T")[0],
-            order: visit.order
-          }
+            order: visit.order,
+          };
           newSortedStates.push(state_v);
 
           if (stateFips === "11") {
@@ -73,7 +73,12 @@ export default function MapLoader({
       });
     });
 
-    const counts = [uniqueVisits.size, dcVisited ? uniqueStates.size - 1 : uniqueStates.size, 0, 0];
+    const counts = [
+      uniqueVisits.size,
+      dcVisited ? uniqueStates.size - 1 : uniqueStates.size,
+      0,
+      0,
+    ];
     setCount(counts);
 
     setSortedVisits(newSortedVisits);
@@ -120,35 +125,39 @@ export default function MapLoader({
   const renderMap = () => {
     switch (currentMap) {
       case 0:
-        return (<Counties
-          animate={true}
-          data={sortedVisits}
-          updateCount={updateCount}
-          updateDate={setMapDate}
-          total={count[0]}
-          reload={reload}
-          pause={20}
-          places={places}
-          toggleHighways={false}
-        />)
+        return (
+          <Counties
+            animate={true}
+            data={sortedVisits}
+            updateCount={updateCount}
+            updateDate={setMapDate}
+            total={count[0]}
+            reload={reload}
+            pause={20}
+            places={places}
+            toggleHighways={false}
+          />
+        );
       case 1:
-        return (<States animate={true}
-          data={sortedStates}
-          updateCount={updateCount}
-          updateDate={setMapDate}
-          total={count[1]}
-          reload={reload}
-          pause={20}
-          places={places}
-          toggleHighways={false} />)
+        return (
+          <States
+            animate={true}
+            data={sortedStates}
+            updateCount={updateCount}
+            updateDate={setMapDate}
+            total={count[1]}
+            reload={reload}
+            pause={20}
+            places={places}
+            toggleHighways={false}
+          />
+        );
     }
-  }
+  };
 
   return (
     <div className={styles.container}>
-      <div className={styles.mapContainer}>
-        {renderMap()}
-      </div>
+      <div className={styles.mapContainer}>{renderMap()}</div>
 
       <div className={styles.mapDate}>
         {mapDate &&
