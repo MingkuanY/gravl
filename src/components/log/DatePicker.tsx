@@ -1,5 +1,4 @@
 import styles from "../../styles/datepicker.module.scss";
-import Icon from "../icons/Icon";
 
 export default function DatePicker({
   date,

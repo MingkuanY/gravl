@@ -10,44 +10,24 @@ import {
   useState,
   useTransition,
 } from "react";
-import {
-  Mode,
-  PlaceInput,
-  TripInput,
-  TripWithVisits,
-  UserWithTrips,
-} from "@/utils/types";
+import { TripInput, TripWithVisits } from "@/utils/types";
 import NewTrip from "../log/NewTrip";
 import { sortTrips } from "@/utils/date";
 import Onboarding from "../onboarding/Onboarding";
 import { addTripToUser, deleteTrip, updateTrip } from "@/actions/actions";
 import ConfirmSelection from "../modals/ConfirmSelection";
-import { User } from "@prisma/client";
 import Profile from "./Profile";
 import classnames from "classnames";
+import { useUserContext } from "../../contexts/UserContext";
+import { useProfileContext } from "../../contexts/ProfileContext";
 
-/*
-possible modes:
+export default function Dashboard() {
+  const sessionUser = useUserContext();
+  const { viewingUser, isOwner } = useProfileContext();
 
-USER - on the current user's own profile
-NON-USER - on a non user's profile
-
-*/
-
-export default function Dashboard({
-  user,
-  places,
-  mode,
-  viewer,
-}: {
-  user: UserWithTrips;
-  places: PlaceInput[];
-  mode: Mode;
-  viewer?: User;
-}) {
   const [editProfile, setEditProfile] = useState(false);
 
-  const [trips, setTrips] = useState<TripWithVisits[]>(user.trips);
+  const [trips, setTrips] = useState<TripWithVisits[]>(viewingUser!.trips);
   const [optimisticTrips, setOptimisticTrips] = useOptimistic(trips);
   const [, startTransition] = useTransition();
 
@@ -56,11 +36,13 @@ export default function Dashboard({
   const [tripsForMaps, setTripsForMaps] = useState<TripWithVisits[]>([]);
 
   const addTrip = async (trip: TripInput, tempID: number) => {
+    if (!sessionUser) throw new Error("Add trip without a session");
+
     const tempTrip: TripWithVisits = {
       id: tempID,
       name: trip.trip_name,
       description: trip.description,
-      userId: user.id,
+      userId: sessionUser.id,
       createdAt: new Date(),
       updatedAt: new Date(),
       visits: trip.visits.map((visit, index) => ({
@@ -90,7 +72,7 @@ export default function Dashboard({
     } else {
       // Adding a new trip
       setOptimisticTrips((prev) => [...prev, tempTrip]);
-      updatedTrip = await addTripToUser(user.id, trip);
+      updatedTrip = await addTripToUser(sessionUser.id, trip);
       setTrips((prev) => [...prev, updatedTrip]);
       setOptimisticTrips((prev) => prev.filter((t) => t.id !== tempID));
     }
@@ -174,16 +156,9 @@ export default function Dashboard({
           noFunction={() => setConfirmDelete(-1)}
         />
       )}
-      {editProfile && (
-        <Onboarding
-          email={user.email!}
-          user={user!}
-          setClose={() => setEditProfile(false)}
-        />
-      )}
+      {editProfile && <Onboarding setClose={() => setEditProfile(false)} />}
       {logTripPage !== -1 && (
         <NewTrip
-          places={places}
           logTripPage={logTripPage}
           setLogTripPage={setLogTripPage}
           addTrip={handleAddTrip}
@@ -192,7 +167,7 @@ export default function Dashboard({
       )}
       {logTripPage === -1 && (
         <div className={styles.container}>
-          {mode === "USER" && (
+          {isOwner && (
             <Timeline
               trips={sortedTrips}
               setLogTripPage={setLogTripPage}
@@ -201,23 +176,12 @@ export default function Dashboard({
               setConfirmDelete={setConfirmDelete}
               handleEditTrip={handleEditTrip}
               setEditTrip={setEditTrip}
-              mode={mode}
             />
           )}
-          <div
-            className={classnames(
-              styles.main,
-              mode !== "USER" && styles.centered
-            )}
-          >
-            <Profile
-              user={user}
-              mode={mode}
-              setEditProfile={setEditProfile}
-              trips={trips}
-            />
+          <div className={classnames(styles.main, !isOwner && styles.centered)}>
+            <Profile setEditProfile={setEditProfile} trips={trips} />
 
-            <MapLoader trips={tripsForMaps} places={places} />
+            <MapLoader trips={tripsForMaps} />
           </div>
         </div>
       )}

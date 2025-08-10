@@ -57,7 +57,6 @@ export type MapProps = {
   reload?: boolean;
   pause?: number;
   animate: boolean;
-  places: PlaceInput[];
   visits?: VisitInput[];
   setVisits?: Function;
   currentDate?: string;

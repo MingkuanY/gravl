@@ -8,20 +8,14 @@ import { totalNationalparks } from "@/components/maps/NationalParks";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "../../styles/circularprogressbar.scss";
 import { useEffect, useState } from "react";
-import { PlaceInput, TripWithVisits, VisitInput } from "@/utils/types";
+import { TripWithVisits, VisitInput } from "@/utils/types";
 import Icon from "../icons/Icon";
 import classnames from "classnames";
 import { formatSeparatedDate } from "@/utils/date";
 
 export const mapNames = ["counties", "states", "countries", "national parks"];
 
-export default function MapLoader({
-  trips,
-  places,
-}: {
-  trips: TripWithVisits[];
-  places: PlaceInput[];
-}) {
+export default function MapLoader({ trips }: { trips: TripWithVisits[] }) {
   const [count, setCount] = useState([0, 0, 0, 0]);
 
   const [mapDate, setMapDate] = useState("");
@@ -134,7 +128,6 @@ export default function MapLoader({
             total={count[0]}
             reload={reload}
             pause={20}
-            places={places}
             toggleHighways={false}
           />
         );
@@ -148,7 +141,6 @@ export default function MapLoader({
             total={count[1]}
             reload={reload}
             pause={20}
-            places={places}
             toggleHighways={false}
           />
         );

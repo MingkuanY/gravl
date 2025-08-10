@@ -9,13 +9,11 @@ import { findStartAndEndDates } from "@/utils/date";
 import { Visit } from "@prisma/client";
 
 export default function NewTrip({
-  places,
   logTripPage,
   setLogTripPage,
   addTrip,
   editTrip,
 }: {
-  places: PlaceInput[];
   logTripPage: number;
   setLogTripPage: Function;
   addTrip: Function;
@@ -57,7 +55,6 @@ export default function NewTrip({
             tripData={tripData}
             visits={visitsData}
             setVisitsData={setVisitsData}
-            places={places}
             setLogTripPage={setLogTripPage}
             addTrip={addTrip}
           />

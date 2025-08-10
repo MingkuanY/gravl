@@ -7,13 +7,16 @@ import { BasicTripInfo } from "./BasicTripInfoCard";
 import { VisitInput } from "@/utils/types";
 import Icon from "../icons/Icon";
 import { addDays, dayOfWeek, formatMDYDate } from "@/utils/date";
-import { PlaceInput } from "@/utils/types";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { addDesignationToLabel } from "@/utils/map";
 import ConfirmSelection from "../modals/ConfirmSelection";
 import ToggleBtn from "./ToggleBtn";
-import DirectionsInput, { DirectionsInputHandle, InputField } from "./DirectionsInput";
+import DirectionsInput, {
+  DirectionsInputHandle,
+  InputField,
+} from "./DirectionsInput";
 import LoadingWheel from "../icons/LoadingWheel";
+import { usePlacesContext } from "../../contexts/PlacesContext";
 
 /**
  * Sort visit chronologically by date and order if same date.
@@ -35,14 +38,12 @@ export default function ManualFillCard({
   tripData,
   visits,
   setVisitsData,
-  places,
   setLogTripPage,
   addTrip,
 }: {
   tripData: BasicTripInfo;
   visits: VisitInput[];
   setVisitsData: Function;
-  places: PlaceInput[];
   setLogTripPage: Function;
   addTrip: Function;
 }) {
@@ -53,6 +54,7 @@ export default function ManualFillCard({
   const [errorMessage, setErrorMessage] = useState("");
 
   // Maps fips_codes to labels for displaying visits
+  const places = usePlacesContext();
   const placesMap = new Map(
     places.map((place) => [place.fips_code, place.label])
   );
@@ -67,18 +69,20 @@ export default function ManualFillCard({
 
   // Sets inputs by date to pass to DirectionsInput.tsx
 
-  const [inputsByDate, setInputsByDate] = useState<Record<string, InputField[]>>({});
+  const [inputsByDate, setInputsByDate] = useState<
+    Record<string, InputField[]>
+  >({});
   const currentInputs = inputsByDate[getCurrentDate()] || [
-    { value: '', coords: null },
-    { value: '', coords: null },
-  ]
+    { value: "", coords: null },
+    { value: "", coords: null },
+  ];
 
   const setCurrentInputs = (newInputs: InputField[]) => {
     setInputsByDate((prev) => ({
       ...prev,
       [getCurrentDate()]: newInputs,
-    }))
-  }
+    }));
+  };
 
   // Change dates
 
@@ -222,7 +226,6 @@ export default function ManualFillCard({
             </div>
             <Counties
               animate={false}
-              places={places}
               visits={visits}
               setVisits={setVisitsData}
               currentDate={getCurrentDate()}
@@ -260,11 +263,20 @@ export default function ManualFillCard({
               <p className={styles.text}>you visited...</p>
             </div>
 
-            <DirectionsInput ref={directionsRef} currentDate={getCurrentDate()} visits={visits} setVisits={setVisitsData} setLoadingRoute={setLoadingRoute} setErrorMessage={setErrorMessage} inputs={currentInputs} setInputs={setCurrentInputs} />
+            <DirectionsInput
+              ref={directionsRef}
+              currentDate={getCurrentDate()}
+              visits={visits}
+              setVisits={setVisitsData}
+              setLoadingRoute={setLoadingRoute}
+              setErrorMessage={setErrorMessage}
+              inputs={currentInputs}
+              setInputs={setCurrentInputs}
+            />
 
             <p className={styles.instruction}>
-              {visits.filter((visit) => visit.date === getCurrentDate()).length >
-                0
+              {visits.filter((visit) => visit.date === getCurrentDate())
+                .length > 0
                 ? "Drag to reorder."
                 : "Or select a place on the map..."}
             </p>
@@ -273,7 +285,9 @@ export default function ManualFillCard({
           </div>
 
           <div className={styles.middle}>
-            {loadingRoute ? <LoadingWheel /> :
+            {loadingRoute ? (
+              <LoadingWheel />
+            ) : (
               <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId={"visits"}>
                   {(droppableProvided) => (
@@ -287,7 +301,8 @@ export default function ManualFillCard({
                         .map((visit, index) => {
                           const originalIndex = optimisticState.findIndex(
                             (v) =>
-                              v.fips_code === visit.fips_code && v.date === visit.date
+                              v.fips_code === visit.fips_code &&
+                              v.date === visit.date
                           );
                           return (
                             <Draggable
@@ -320,7 +335,7 @@ export default function ManualFillCard({
                   )}
                 </Droppable>
               </DragDropContext>
-            }
+            )}
           </div>
 
           <button className={styles.clearBtn} onClick={clearToday}>

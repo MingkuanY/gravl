@@ -2,26 +2,20 @@
 
 import styles from "@/styles/wrappedloader.module.scss";
 import Counties, { totalCounties } from "@/components/maps/Counties";
-import States, { totalStates } from "@/components/maps/States";
+import { totalStates } from "@/components/maps/States";
 import { totalCountries } from "@/components/maps/Countries";
 import { totalNationalparks } from "@/components/maps/NationalParks";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "@/styles/circularprogressbar.scss";
 import { useEffect, useState } from "react";
-import { PlaceInput, TripWithVisits, VisitInput } from "@/utils/types";
+import { TripWithVisits, VisitInput } from "@/utils/types";
 import Icon from "@/components/icons/Icon";
 import classnames from "classnames";
 import { formatSeparatedDate } from "@/utils/date";
 
 export const mapNames = ["counties", "states"];
 
-export default function WrappedLoader({
-  trips,
-  places,
-}: {
-  trips: TripWithVisits[];
-  places: PlaceInput[];
-}) {
+export default function WrappedLoader({ trips }: { trips: TripWithVisits[] }) {
   const [count, setCount] = useState([0, 0]);
 
   const [mapDate, setMapDate] = useState("");
@@ -61,8 +55,8 @@ export default function WrappedLoader({
           const state_v = {
             fips_code: stateFips,
             date: visit.date.toISOString().split("T")[0],
-            order: visit.order
-          }
+            order: visit.order,
+          };
           newSortedStates.push(state_v);
 
           if (stateFips === "11") {
@@ -73,7 +67,12 @@ export default function WrappedLoader({
       });
     });
 
-    const counts = [uniqueVisits.size, dcVisited ? uniqueStates.size - 1 : uniqueStates.size, 0, 0];
+    const counts = [
+      uniqueVisits.size,
+      dcVisited ? uniqueStates.size - 1 : uniqueStates.size,
+      0,
+      0,
+    ];
     setCount(counts);
 
     setSortedVisits(newSortedVisits);
@@ -130,25 +129,24 @@ export default function WrappedLoader({
   };
 
   const renderMap = () => {
-    return (<Counties
-      animate={true}
-      data={sortedVisits}
-      updateCount={updateCount}
-      updateStates={updateStates}
-      updateDate={setMapDate}
-      total={count[0]}
-      reload={reload}
-      pause={20}
-      places={places}
-      toggleHighways={false}
-    />)
-  }
+    return (
+      <Counties
+        animate={true}
+        data={sortedVisits}
+        updateCount={updateCount}
+        updateStates={updateStates}
+        updateDate={setMapDate}
+        total={count[0]}
+        reload={reload}
+        pause={20}
+        toggleHighways={false}
+      />
+    );
+  };
 
   return (
     <div className={styles.container}>
-      <div className={styles.mapContainer}>
-        {renderMap()}
-      </div>
+      <div className={styles.mapContainer}>{renderMap()}</div>
 
       <div className={styles.mapDate}>
         {mapDate &&
@@ -165,10 +163,7 @@ export default function WrappedLoader({
       <div className={styles.stats}>
         {mapNames.map((map, index) => (
           <div
-            className={classnames(
-              styles.progressContainer,
-              styles.selected
-            )}
+            className={classnames(styles.progressContainer, styles.selected)}
             key={index}
           >
             {index > 1 && (

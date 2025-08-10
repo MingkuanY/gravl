@@ -2,33 +2,30 @@
 
 import styles from "../../styles/onboarding.module.scss";
 import { useEffect, useRef, useState } from "react";
-import Icon from "../icons/Icon.tsx";
+import Icon from "../icons/Icon";
 import { useRouter } from "next/navigation";
-import { uniqueUsername, updateUser } from "@/actions/actions.ts";
-import CloseBtn from "../log/CloseBtn.tsx";
+import { uniqueUsername, updateUser } from "@/actions/actions";
+import CloseBtn from "../log/CloseBtn";
 import classnames from "classnames";
-import { useScreenWidth } from "@/utils/hooks.ts";
+import { useScreenWidth } from "@/utils/hooks";
+import { useUserContext } from "../../contexts/UserContext";
 
 type validity = "DEFAULT" | "TAKEN" | "INVALID";
 
-export default function Onboarding({
-  email,
-  user,
-  setClose,
-}: {
-  email: string;
-  user?: any;
-  setClose?: Function;
-}) {
+export default function Onboarding({ setClose }: { setClose?: Function }) {
   const isMobile = useScreenWidth();
+  const sessionUser = useUserContext();
+  const email = sessionUser?.email;
+  if (!sessionUser || !email)
+    throw new Error("Onboarding rendered without a sessionUser");
 
   const router = useRouter();
 
   const [step, setStep] = useState(1);
   const [accountData, setAccountData] = useState({
-    username: user ? user.username : "",
-    location: user ? user.location : "",
-    bio: user ? user.bio : "",
+    username: sessionUser.username ?? "",
+    location: sessionUser.location ?? "",
+    bio: sessionUser.bio ?? "",
     pfp: "",
   });
 
@@ -50,15 +47,14 @@ export default function Onboarding({
     const regexTest = validUsernameRegex.test(input) && input.length <= 15; // True means valid
 
     // Keywords that username cannot be
-    const disallowedKeywords = [
-      "wrapped"
-    ]
+    const disallowedKeywords = ["wrapped", "life"];
     const keywordTest = !disallowedKeywords.includes(input.toLowerCase());
 
     // Ensure the inputted username passes unique, validity, and keyword checks
-    const validityTest = (await uniqueUsername(input)) && regexTest && keywordTest; // True means valid
-    return { validityTest, regexTest }
-  }
+    const validityTest =
+      (await uniqueUsername(input)) && regexTest && keywordTest; // True means valid
+    return { validityTest, regexTest };
+  };
 
   /**
    * Called when the user tries to move on to the next step, either through pressing Enter on desktop or clicking Next on mobile
@@ -66,13 +62,13 @@ export default function Onboarding({
   const handleNext = async () => {
     const input = accountData.username;
 
-    const { validityTest, regexTest } = await valid(input)
+    const { validityTest, regexTest } = await valid(input);
 
     if (step === 1) {
       // Username
-      if (user) {
+      if (sessionUser) {
         // Editing profile - profile already exists
-        if (user.username === input || validityTest) {
+        if (sessionUser.username === input || validityTest) {
           // Not changing username or the new username passes validity test
           setValidUsername("DEFAULT");
           nextStep();
@@ -125,7 +121,7 @@ export default function Onboarding({
    * Correctly guides the user to the next step if editing profile or skips to the end if onboarding
    */
   const nextStep = () => {
-    if (user) {
+    if (sessionUser) {
       // Go to next step if editing profile
       setStep((step) => Math.min(step + 1, 4));
     } else {
@@ -139,13 +135,12 @@ export default function Onboarding({
    */
   const handleSubmit = async () => {
     if (
-      user &&
-      user.username === accountData.username &&
-      user.location === accountData.location &&
-      user.bio === accountData.bio
+      sessionUser.username === accountData.username &&
+      sessionUser.location === accountData.location &&
+      sessionUser.bio === accountData.bio
     ) {
     } else {
-      if (user && user.username === accountData.username) {
+      if (sessionUser.username === accountData.username) {
         // User updated location or bio only
         // Update user in prisma
         await updateUser(
@@ -156,7 +151,7 @@ export default function Onboarding({
         );
       } else {
         // User updated username and maybe the other fields too
-        const { validityTest, regexTest } = await valid(accountData.username)
+        const { validityTest, regexTest } = await valid(accountData.username);
         if (validityTest) {
           // Update user in prisma
           await updateUser(

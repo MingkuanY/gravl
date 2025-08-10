@@ -4,7 +4,7 @@ import Icon from "../icons/Icon";
 import LogTripButton from "./LogTripButton";
 import TripCard from "./TripCard";
 import { findStartAndEndDates, formatDates } from "@/utils/date";
-import { Mode, TripWithVisits } from "@/utils/types";
+import { TripWithVisits } from "@/utils/types";
 import classnames from "classnames";
 
 export default function Timeline({
@@ -15,7 +15,6 @@ export default function Timeline({
   setConfirmDelete,
   handleEditTrip,
   setEditTrip,
-  mode,
 }: {
   trips: TripWithVisits[];
   setLogTripPage: Function;
@@ -24,7 +23,6 @@ export default function Timeline({
   setConfirmDelete: Function;
   handleEditTrip: Function;
   setEditTrip: Function;
-  mode: Mode;
 }) {
   const isMobile = useScreenWidth();
 
@@ -111,20 +109,12 @@ export default function Timeline({
           </div>
         </div>
       ) : (
-        <>
-          {mode === "USER" ? (
-            <LogTripButton
-              setLogTripPage={setLogTripPage}
-              setEditTrip={setEditTrip}
-            />
-          ) : (
-            trips.length === 0 && (
-              <p className={styles.noTripsYet}>No trips yet</p>
-            )
-          )}
-        </>
+        <LogTripButton
+          setLogTripPage={setLogTripPage}
+          setEditTrip={setEditTrip}
+        />
       )}
-      {mode === "USER" && trips.length == 0 && !isMobile && (
+      {trips.length == 0 && !isMobile && (
         <div className={styles.proTipContainer}>
           <p className={styles.proTip}>Add Your First Trip</p>
           <div className={styles.up_arrow}>
@@ -155,9 +145,8 @@ export default function Timeline({
                       handleClick(trip.id, event)
                     }
                     editTrip={() => handleEditTrip(trip.id)}
-                    mode={mode}
                   />
-                  {!isMobile && mode === "USER" && (
+                  {!isMobile && (
                     <button
                       className={styles.trashContainer}
                       onClick={() => setConfirmDelete(trip.id)}

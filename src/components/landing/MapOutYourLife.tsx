@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import styles from "../../styles/mapoutyourlifebutton.module.scss";
-import { useScreenWidth } from "../../utils/hooks.ts";
+import { useScreenWidth } from "../../utils/hooks";
 import { signIn } from "next-auth/react";
-import Icon from "../icons/Icon.tsx";
+import Icon from "../icons/Icon";
 
 export default function MapOutYourLife() {
   const isMobile = useScreenWidth();

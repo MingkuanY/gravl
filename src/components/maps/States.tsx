@@ -2,10 +2,9 @@
 
 import styles from "../../styles/states.module.scss";
 import { useEffect, useRef, useState } from "react";
-import { interpolateColors, otherColor, todayColor } from "../../utils/color";
-import { handleMapClick, loadMap, refreshMap } from "../../utils/map";
-import { MapProps, PlaceInput } from "@/utils/types.ts";
-
+import { interpolateColors } from "../../utils/color";
+import { loadMap } from "../../utils/map";
+import { MapProps } from "@/utils/types";
 export const totalStates = 50; // plus DC
 
 const statesLabels: { [key: string]: string } = {
@@ -59,8 +58,8 @@ const statesLabels: { [key: string]: string } = {
   "53": "Washington",
   "54": "West Virginia",
   "55": "Wisconsin",
-  "56": "Wyoming"
-}
+  "56": "Wyoming",
+};
 
 export default function States({
   data,
@@ -69,7 +68,6 @@ export default function States({
   total,
   reload,
   animate,
-  places,
   visits,
   setVisits,
   currentDate,
@@ -104,7 +102,6 @@ export default function States({
       };
     } else {
       // Can't directly log states yet
-
       // refreshMap(
       //   visits!,
       //   places!,

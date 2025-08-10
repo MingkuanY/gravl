@@ -1,17 +1,15 @@
 "use client";
 
-import { PlaceInput, UserWithTrips } from "@/utils/types";
 import styles from "../../../styles/gravlwrapped.module.scss";
 import WrappedLoader from "../../../components/maps/WrappedLoader";
 import { findStartAndEndDates, sortTrips } from "@/utils/date";
+import { useProfileContext } from "../../../contexts/ProfileContext";
 
-export default function GravlWrapped({
-  user,
-  places,
-}: {
-  user: UserWithTrips;
-  places: PlaceInput[];
-}) {
+export default function GravlWrapped() {
+  const { viewingUser } = useProfileContext();
+  if (!viewingUser)
+    throw new Error("Gravl Wrapped rendered without a viewingUser");
+
   const year = new Date().getFullYear();
 
   // Sets to track all previously visited counties and states
@@ -26,7 +24,7 @@ export default function GravlWrapped({
   const getStateFips = (placeFipsCode: string) => placeFipsCode.slice(0, 2);
 
   // Loop through all trips
-  sortTrips(user.trips, true).forEach((trip) => {
+  sortTrips(viewingUser.trips, true).forEach((trip) => {
     const { startDate, endDate } = findStartAndEndDates(trip.visits);
     const tripStartYear = new Date(startDate).getFullYear();
     const tripEndYear = new Date(endDate).getFullYear();
@@ -56,7 +54,7 @@ export default function GravlWrapped({
   });
 
   // Get current year's trips
-  const currentYearTrips = user.trips.filter((trip) => {
+  const currentYearTrips = viewingUser.trips.filter((trip) => {
     const { startDate, endDate } = findStartAndEndDates(trip.visits);
     const startYear = new Date(startDate).getFullYear();
     const endYear = new Date(endDate).getFullYear();
@@ -73,10 +71,7 @@ export default function GravlWrapped({
       <h1>{year}</h1>
       <p className={styles.stat}>{newCounties} new counties</p>
       <p className={styles.stat}>{newStates} new states</p>
-      <WrappedLoader
-        trips={sortTrips(currentYearTrips, true)}
-        places={places}
-      />
+      <WrappedLoader trips={sortTrips(currentYearTrips, true)} />
       <p className={styles.link}>gravl.org/wrapped</p>
     </div>
   );

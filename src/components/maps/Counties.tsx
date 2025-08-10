@@ -2,20 +2,17 @@
 
 import styles from "../../styles/counties.module.scss";
 import { useEffect, useRef, useState } from "react";
-import {
-  interpolateColors,
-  otherColor,
-  todayColor,
-} from "../../utils/color.ts";
+import { interpolateColors, otherColor, todayColor } from "../../utils/color";
 import {
   addDesignationToLabel,
   handleMapClick,
   loadMap,
   refreshMap,
 } from "../../utils/map.ts";
-import { MapProps, PlaceInput } from "@/utils/types.ts";
-import { useScreenWidth } from "@/utils/hooks.ts";
+import { MapProps, PlaceInput } from "@/utils/types";
+import { useScreenWidth } from "@/utils/hooks";
 import classnames from "classnames";
+import { usePlacesContext } from "../../contexts/PlacesContext";
 
 export const totalCounties = 3413;
 
@@ -28,13 +25,13 @@ export default function Counties({
   reload,
   pause,
   animate,
-  places,
   visits,
   setVisits,
   currentDate,
   toggleHighways,
 }: MapProps) {
   const isMobile = useScreenWidth();
+  const places = usePlacesContext();
 
   const livedInColor = "#319fff";
   const startColor = "#319fff";

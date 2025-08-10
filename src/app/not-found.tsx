@@ -1,9 +1,9 @@
 import styles from "../styles/nopage.module.scss";
-import Header from "../components/header/Header.tsx";
+import Header from "../components/header/Header";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/auth.ts";
-import { getUser } from "@/actions/actions.ts";
+import { authOptions } from "./api/auth/[...nextauth]/auth";
+import { getUser } from "@/actions/actions";
 
 export default async function NotFound() {
   // Redirect to new user landing page if not currently signed in. Else redirect to current user's home page.
