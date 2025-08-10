@@ -9,6 +9,10 @@ import Loading from "../load";
 import { useRouter } from "next/navigation";
 import { useScreenWidth } from "../../utils/hooks";
 import classNames from "classnames";
+import haversine from "haversine-distance";
+
+const MILES_THRESHOLD = 5;
+const METERS_THRESHOLD = MILES_THRESHOLD * 1609.34;
 
 type PhotoData = {
   timestamp: string;
@@ -84,57 +88,90 @@ export default function GravlLife() {
       );
   };
 
-  const getRouteSegments = async (photos: PhotoData[]) => {
-    const directionsService = new google.maps.DirectionsService();
-    const segments = [];
+  const isWithinDistance = (
+    pointA: { lat: number; lng: number },
+    pointB: { lat: number; lng: number },
+    metersThreshold = METERS_THRESHOLD
+  ) => {
+    return haversine(pointA, pointB) <= metersThreshold;
+  };
 
-    for (let i = 0; i < photos.length - 1; i++) {
-      const start = photos[i].location!;
-      const end = photos[i + 1].location!;
-      const timestamp = photos[i + 1].timestamp;
+  const filterPhotosByDistance = (photos: PhotoData[]) => {
+    const withLocation = photos.filter(
+      (p) => p.location && p.location.lat && p.location.lng
+    );
+    if (withLocation.length === 0) return [];
 
-      try {
-        const results = await directionsService.route({
-          origin: `${start.lat}, ${start.lng}`,
-          destination: `${end.lat}, ${end.lng}`,
-          travelMode: google.maps.TravelMode.DRIVING,
-        });
+    const filtered = [withLocation[0]];
+    let lastKept = withLocation[0];
 
-        const polyline = results.routes[0].overview_polyline;
-
-        const decodedPolyline = google.maps.geometry.encoding
-          .decodePath(polyline)
-          .map((latLng) => [latLng.lng(), latLng.lat()]);
-
-        const response = await fetch(
-          "https://api.gravl.org/process_polyline/",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ polyline: decodedPolyline }),
-          }
-        );
-
-        if (!response.ok) {
-          console.error("Error processing polyline:", response.statusText);
-          continue;
-        }
-
-        const data = await response.json();
-
-        segments.push({
-          start,
-          end,
-          polyline,
-          fipsCodes: data.fips_codes as string[],
-          timestamp,
-        });
-      } catch (err) {
-        console.error("Error calculating route:", err);
+    for (let i = 1; i < withLocation.length; i++) {
+      if (!isWithinDistance(lastKept.location!, withLocation[i].location!)) {
+        filtered.push(withLocation[i]);
+        lastKept = withLocation[i];
       }
     }
 
-    return segments;
+    return filtered;
+  };
+
+  const createRouteSegment = async (
+    directionsService: google.maps.DirectionsService,
+    start: { lat: number; lng: number },
+    end: { lat: number; lng: number },
+    timestamp: string
+  ) => {
+    const results = await directionsService.route({
+      origin: `${start.lat}, ${start.lng}`,
+      destination: `${end.lat}, ${end.lng}`,
+      travelMode: google.maps.TravelMode.DRIVING,
+    });
+
+    const polyline = results.routes[0].overview_polyline;
+
+    const decodedPolyline = google.maps.geometry.encoding
+      .decodePath(polyline)
+      .map((latLng) => [latLng.lng(), latLng.lat()]);
+
+    const response = await fetch("https://api.gravl.org/process_polyline/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ polyline: decodedPolyline }),
+    });
+    if (!response.ok) {
+      throw new Error(`process_polyline API failed: ${response.statusText}`);
+    }
+    const data = await response.json();
+
+    return {
+      start,
+      end,
+      polyline,
+      fipsCodes: data.fips_codes as string[],
+      timestamp,
+    };
+  };
+
+  const getRouteSegments = async (photos: PhotoData[]) => {
+    const filteredPhotos = filterPhotosByDistance(photos);
+    const directionsService = new google.maps.DirectionsService();
+
+    const segmentPromises = [];
+    for (let i = 0; i < filteredPhotos.length - 1; i++) {
+      segmentPromises.push(
+        createRouteSegment(
+          directionsService,
+          filteredPhotos[i].location!,
+          filteredPhotos[i + 1].location!,
+          filteredPhotos[i + 1].timestamp
+        )
+      );
+    }
+
+    const results = await Promise.allSettled(segmentPromises);
+    return results
+      .filter((res) => res.status === "fulfilled")
+      .map((res) => (res as PromiseFulfilledResult<any>).value);
   };
 
   const generateVisitsFromSegments = (
