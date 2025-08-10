@@ -3,8 +3,6 @@
 import styles from "@/styles/wrappedloader.module.scss";
 import Counties, { totalCounties } from "@/components/maps/Counties";
 import { totalStates } from "@/components/maps/States";
-import { totalCountries } from "@/components/maps/Countries";
-import { totalNationalparks } from "@/components/maps/NationalParks";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "@/styles/circularprogressbar.scss";
 import { useEffect, useState } from "react";
@@ -84,12 +82,7 @@ export default function WrappedLoader({ trips }: { trips: TripWithVisits[] }) {
   }, [trips]);
 
   // total counts of each map imported from the map components
-  const totalCounts = [
-    totalCounties,
-    totalStates,
-    totalCountries,
-    totalNationalparks,
-  ];
+  const totalCounts = [totalCounties, totalStates];
 
   const [currentMap, setCurrentMap] = useState(0); //defaults to counties map
   const [reload, setReload] = useState(false);
