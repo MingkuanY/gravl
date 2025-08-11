@@ -133,24 +133,36 @@ export default function GravlLife() {
       .decodePath(polyline)
       .map((latLng) => [latLng.lng(), latLng.lat()]);
 
-    const response = await fetch("https://api.gravl.org/process_polyline/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ polyline: decodedPolyline }),
-    });
-    if (!response.ok) {
-      throw new Error(`process_polyline API failed: ${response.statusText}`);
-    }
-    const data = await response.json();
-
     return {
       start,
       end,
       polyline,
-      fipsCodes: data.fips_codes as string[],
+      decodedPolyline,
       timestamp,
     };
   };
+
+  async function processPolylinesBatch(
+    decodedPolylines: Array<Array<[number, number]>>
+  ) {
+    const response = await fetch(
+      "http://localhost:8000/process_polylines_batch/",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ polylines: decodedPolylines }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        "Error processing polylines batch: " + response.statusText
+      );
+    }
+
+    const data = await response.json();
+    return data.results;
+  }
 
   const getRouteSegments = async (photos: PhotoData[]) => {
     const filteredPhotos = filterPhotosByDistance(photos);
@@ -168,10 +180,18 @@ export default function GravlLife() {
       );
     }
 
-    const results = await Promise.allSettled(segmentPromises);
-    return results
+    const segments = (await Promise.allSettled(segmentPromises))
       .filter((res) => res.status === "fulfilled")
       .map((res) => (res as PromiseFulfilledResult<any>).value);
+
+    const allFipsCodes = await processPolylinesBatch(
+      segments.map((s) => s.decodedPolyline)
+    );
+
+    return segments.map((segment, i) => ({
+      ...segment,
+      fipsCodes: allFipsCodes[i],
+    }));
   };
 
   const generateVisitsFromSegments = (
