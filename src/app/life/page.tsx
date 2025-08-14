@@ -7,9 +7,10 @@ import WrappedLoader from "../../components/maps/WrappedLoader";
 import { TripWithVisits, VisitInput } from "../../utils/types";
 import Loading from "../load";
 import { useRouter } from "next/navigation";
-import { useScreenWidth } from "../../utils/hooks";
-import classNames from "classnames";
 import haversine from "haversine-distance";
+import LifeInput from "../../components/life/LifeInput";
+import Icon from "../../components/icons/Icon";
+import { signIn } from "next-auth/react";
 
 const MILES_THRESHOLD = 5;
 const METERS_THRESHOLD = MILES_THRESHOLD * 1609.34;
@@ -23,10 +24,9 @@ type PhotoData = {
 };
 
 export default function GravlLife() {
-  const isMobile = useScreenWidth();
-
   const [visits, setVisits] = useState<VisitInput[]>([]);
   const router = useRouter();
+  const [reanimate, setReanimate] = useState(true);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [tripName, setTripName] = useState("");
@@ -270,57 +270,49 @@ export default function GravlLife() {
   return (
     <>
       {!mapReady ? (
-        <div
-          className={classNames(styles.container, !isMobile && styles.desktop)}
-        >
-          <div className={styles.centerContent}>
-            <input
-              type="text"
-              className={styles.tripNameInput}
-              placeholder="Name your trip..."
-              value={tripName}
-              onChange={(e) => setTripName(e.target.value)}
-            />
-            <button
-              className={`${styles.button} ${
-                tripName.trim() === "" ? styles.disabledButton : ""
-              }`}
-              onClick={handleButtonClick}
-              disabled={tripName.trim() === ""}
-            >
-              Map Your Trip
-            </button>
-            <input
-              type="file"
-              ref={fileInputRef}
-              accept="image/*"
-              multiple
-              onChange={handleFileChange}
-              style={{ display: "none" }}
-            />
-          </div>
-
-          <button
-            className={styles.backButton}
-            onClick={() => router.push(`/`)}
-          >
-            ←
-          </button>
-        </div>
+        <LifeInput
+          handleButtonClick={handleButtonClick}
+          handleFileChange={handleFileChange}
+          tripName={tripName}
+          setTripName={setTripName}
+          fileInputRef={fileInputRef}
+        />
       ) : (
         <div className={styles.viewport}>
           <h1>{tripName}</h1>
           <p className={styles.stat}>{newCounties} new counties</p>
           <p className={styles.stat}>{newStates} new states</p>
-          <WrappedLoader trips={[newTrip]} />
+          <WrappedLoader trips={[newTrip]} reanimate={reanimate} />
           <p className={styles.link}>gravl.org</p>
 
-          <button
-            className={styles.backButton}
-            onClick={() => router.push(`/`)}
-          >
-            ←
-          </button>
+          <div className={styles.buttonRow}>
+            <button
+              className={styles.circleButton}
+              onClick={() => router.push(`/`)}
+            >
+              <div className={styles.back}>
+                <Icon type="back_arrow" fill="#7dc2ff" />
+              </div>
+            </button>
+
+            <button
+              className={styles.circleButton}
+              onClick={() => setReanimate((prev) => !prev)}
+            >
+              <div className={styles.play}>
+                <Icon type="play" fill="#7dc2ff" />
+              </div>
+            </button>
+
+            <button
+              className={styles.circleButton}
+              onClick={() => signIn("google", { callbackUrl: "/redirect" })}
+            >
+              <div>
+                <Icon type="export" fill="#7dc2ff" />
+              </div>
+            </button>
+          </div>
         </div>
       )}
     </>

@@ -13,7 +13,13 @@ import { formatSeparatedDate } from "@/utils/date";
 
 export const mapNames = ["counties", "states"];
 
-export default function WrappedLoader({ trips }: { trips: TripWithVisits[] }) {
+export default function WrappedLoader({
+  trips,
+  reanimate,
+}: {
+  trips: TripWithVisits[];
+  reanimate: boolean;
+}) {
   const [count, setCount] = useState([0, 0]);
 
   const [mapDate, setMapDate] = useState("");
@@ -92,6 +98,10 @@ export default function WrappedLoader({ trips }: { trips: TripWithVisits[] }) {
       setReload((reload) => !reload);
     }
   };
+
+  useEffect(() => {
+    statClicked(0);
+  }, [reanimate]);
 
   /**
    * If a parameter (reset) is passed in, then set count to reset. Else, increment count by one.

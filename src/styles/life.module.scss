@@ -1,58 +1,5 @@
 @use "./mixin" as mixin;
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  position: relative;
-  padding: 5rem;
-  font-family: sans-serif;
-  text-align: center;
-}
-
-.centerContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1;
-}
-
-.tripNameInput {
-  font-size: 4.5rem;
-  font-weight: 200;
-  padding: 1.2rem 2rem;
-  margin-bottom: 5rem;
-  border: 2px solid #ccc;
-  border-radius: 4rem;
-  width: 100%;
-  max-width: 500px;
-  outline: none;
-  text-align: center;
-}
-
-.tripNameInput:focus {
-  border-color: mixin.$gravl-blue;
-}
-
-.button {
-  background-color: mixin.$gravl-blue;
-  color: white;
-  border: none;
-  padding: 2rem 4rem;
-  font-size: 4rem;
-  border-radius: 5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: background 0.2s ease;
-}
-
-.disabledButton {
-  background-color: mixin.$lighter-blue;
-  cursor: not-allowed;
-}
-
 .viewport {
   height: calc(100vh - mixin.$header-height);
   display: flex;
@@ -84,36 +31,33 @@
   }
 }
 
-.backButton {
-  position: absolute;
-  bottom: 16rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 6rem;
+.buttonRow {
+  display: flex;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.circleButton {
+  width: 8rem;
   aspect-ratio: 1;
   background-color: mixin.$very-light-blue;
   border: none;
   border-radius: 50%;
-  color: mixin.$lighter-blue;
-  font-size: 3.5rem;
-  line-height: 6rem;
-  text-align: center;
   transition: background-color 0.3s ease, color 0.3s ease;
   user-select: none;
-}
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-.desktop {
-  .tripNameInput {
-    font-size: 2.5rem;
+  div {
+    width: 5rem;
   }
-  .button {
-    font-size: 3rem;
-    cursor: pointer;
+  .back {
+    margin-right: 0.2rem;
+    margin-top: 0.2rem;
   }
-  .disabledButton {
-    cursor: not-allowed;
-  }
-  .backButton {
-    cursor: pointer;
+  .play {
+    width: 7rem;
+    margin-top: 0.3rem;
   }
 }
