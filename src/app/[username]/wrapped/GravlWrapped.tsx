@@ -71,7 +71,10 @@ export default function GravlWrapped() {
       <h1>{year}</h1>
       <p className={styles.stat}>{newCounties} new counties</p>
       <p className={styles.stat}>{newStates} new states</p>
-      <WrappedLoader trips={sortTrips(currentYearTrips, true)} />
+      <WrappedLoader
+        trips={sortTrips(currentYearTrips, true)}
+        reanimate={true}
+      />
       <p className={styles.link}>gravl.org/wrapped</p>
     </div>
   );
