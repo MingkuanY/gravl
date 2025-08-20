@@ -1,7 +1,8 @@
 @use "./mixin" as mixin;
 
 .viewport {
-  height: calc(100vh - mixin.$header-height);
+  min-height: calc(100dvh - mixin.$header-height);
+  height: calc(100dvh - mixin.$header-height);
   display: flex;
   flex-direction: column;
   justify-content: center;
