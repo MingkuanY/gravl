@@ -7,7 +7,6 @@ import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "../../styles/circularprogressbar.scss";
 import { useEffect, useState } from "react";
 import { TripWithVisits, VisitInput } from "@/utils/types";
-import Icon from "../icons/Icon";
 import classnames from "classnames";
 import { formatSeparatedDate } from "@/utils/date";
 
@@ -157,7 +156,7 @@ export default function MapLoader({ trips }: { trips: TripWithVisits[] }) {
       </div>
 
       <div className={styles.stats}>
-        {mapNames.map((map, index) => (
+        {mapNames.slice(0, 2).map((map, index) => (
           <div
             className={classnames(
               styles.progressContainer,
@@ -165,29 +164,22 @@ export default function MapLoader({ trips }: { trips: TripWithVisits[] }) {
             )}
             key={index}
           >
-            {index > 1 && (
-              <div className={classnames(styles.unselected, styles.hovered)}>
-                <Icon type="lock" fill="#7dc2ff" />
-              </div>
-            )}
             <CircularProgressbarWithChildren
               value={count[index]}
               maxValue={totalCounts[index]}
             >
-              {index <= 1 && (
-                <>
-                  <div className={styles.countContainer}>
-                    <p className={styles.count}>{count[index]}</p>
-                    <p className={styles.totalCount}>/{totalCounts[index]}</p>
-                  </div>
-                  <p className={styles.type}>{map}</p>
-                </>
-              )}
+              <>
+                <div className={styles.countContainer}>
+                  <p className={styles.count}>{count[index]}</p>
+                  <p className={styles.totalCount}>/{totalCounts[index]}</p>
+                </div>
+                <p className={styles.type}>{map}</p>
+              </>
             </CircularProgressbarWithChildren>
             <div
               className={classnames(
                 styles.progressbarBackground,
-                index <= 1 && styles.selected,
+                styles.selected,
                 "progress-circle"
               )}
               onClick={() => statClicked(index)}

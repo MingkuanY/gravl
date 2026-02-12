@@ -48,7 +48,8 @@
   .stats {
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 5rem;
 
     .progressContainer {
       width: 12rem;
@@ -115,9 +116,9 @@
 @media (max-width: 760px) {
   .container {
     .mapDate {
-      transform: scale(1.5)
+      transform: scale(1.5);
     }
-    
+
     .stats {
       width: 95%;
     }

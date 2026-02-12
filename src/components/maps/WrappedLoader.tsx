@@ -178,20 +178,18 @@ export default function WrappedLoader({
               value={count[index]}
               maxValue={totalCounts[index]}
             >
-              {index <= 1 && (
-                <>
-                  <div className={styles.countContainer}>
-                    <p className={styles.count}>{count[index]}</p>
-                    <p className={styles.totalCount}>/{totalCounts[index]}</p>
-                  </div>
-                  <p className={styles.type}>{map}</p>
-                </>
-              )}
+              <>
+                <div className={styles.countContainer}>
+                  <p className={styles.count}>{count[index]}</p>
+                  <p className={styles.totalCount}>/{totalCounts[index]}</p>
+                </div>
+                <p className={styles.type}>{map}</p>
+              </>
             </CircularProgressbarWithChildren>
             <div
               className={classnames(
                 styles.progressbarBackground,
-                index <= 1 && styles.selected,
+                styles.selected,
                 "progress-circle"
               )}
               onClick={() => statClicked(0)}

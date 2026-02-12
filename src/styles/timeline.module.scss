@@ -29,6 +29,32 @@
     }
   }
 
+  .saveTripsButton {
+    width: 100%;
+    padding: 1.3rem 2rem;
+    background-color: mixin.$gravl-blue;
+    color: mixin.$white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+
+    &:hover {
+      background-color: mixin.$darker-blue;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
   .proTipContainer {
     margin-top: 3rem;
     display: flex;
@@ -193,6 +219,23 @@
         font-size: 4.5rem;
         text-transform: uppercase;
         color: mixin.$gravl-blue;
+      }
+
+      .saveTripsButtonMobile {
+        width: 54rem;
+        height: 5rem;
+        background-color: mixin.$gravl-blue;
+        color: mixin.$white;
+        font-size: 3rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 5rem;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.15);
       }
 
       .desktopOnlyContainer {

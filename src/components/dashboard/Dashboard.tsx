@@ -7,6 +7,7 @@ import {
   useEffect,
   useMemo,
   useOptimistic,
+  useRef,
   useState,
   useTransition,
 } from "react";
@@ -30,6 +31,7 @@ export default function Dashboard() {
   const [trips, setTrips] = useState<TripWithVisits[]>(viewingUser!.trips);
   const [optimisticTrips, setOptimisticTrips] = useOptimistic(trips);
   const [, startTransition] = useTransition();
+  const hasImportedFromLife = useRef(false);
 
   const [logTripPage, setLogTripPage] = useState(-1); // Page of logging a trip
   const [currTrip, setCurrTrip] = useState<number[]>([]); // Current trip displayed
@@ -118,7 +120,61 @@ export default function Dashboard() {
 
   const [confirmDelete, setConfirmDelete] = useState(-1);
 
-  // Clicking anywhere outside of a trip card or a progress circle will display all trips
+  // Import trips from localStorage after sign-in from Gravl Life
+  useEffect(() => {
+    const importLifeTrips = async () => {
+      if (!sessionUser || !isOwner || hasImportedFromLife.current) return;
+
+      try {
+        const storedData = localStorage.getItem("gravl_life_trips_v1");
+        if (!storedData) return;
+
+        // Clear localStorage immediately to prevent re-import
+        localStorage.removeItem("gravl_life_trips_v1");
+        hasImportedFromLife.current = true;
+
+        const payload = JSON.parse(storedData);
+        if (payload.version !== 1 || payload.source !== "life-import") return;
+
+        const storedTrips = payload.trips;
+        const successfulTrips: TripWithVisits[] = [];
+
+        for (const tripInput of storedTrips) {
+          const isDuplicate = trips.some((existingTrip) => {
+            if (existingTrip.name !== tripInput.trip_name) return false;
+            if (existingTrip.visits.length !== tripInput.visits.length)
+              return false;
+
+            const firstVisitFips = existingTrip.visits[0]?.placeFipsCode;
+            const firstStoredVisitFips = tripInput.visits[0]?.fips_code;
+
+            return firstVisitFips === firstStoredVisitFips;
+          });
+
+          if (isDuplicate) {
+            continue;
+          }
+
+          try {
+            const savedTrip = await addTripToUser(sessionUser.id, tripInput);
+            successfulTrips.push(savedTrip);
+          } catch (error) {
+            console.error("Failed to import trip:", tripInput.trip_name, error);
+          }
+        }
+
+        if (successfulTrips.length > 0) {
+          setTrips((prev) => [...prev, ...successfulTrips]);
+          setOptimisticTrips((prev) => [...prev, ...successfulTrips]);
+        }
+      } catch (error) {
+        console.error("Error importing life trips:", error);
+      }
+    };
+
+    importLifeTrips();
+  }, [sessionUser, isOwner, trips]);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const tripCards = Array.from(document.querySelectorAll(".trip-card"));

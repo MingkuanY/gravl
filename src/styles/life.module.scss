@@ -1,19 +1,16 @@
 @use "./mixin" as mixin;
 
-.viewport {
-  min-height: 100vh;
-  min-height: 100dvh;
+.statsContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  width: 60rem;
-  margin: auto;
-  margin-top: -4rem;
   text-align: center;
+  margin-bottom: -2rem;
 
-  h1 {
-    font-size: 8rem;
+  .tripCount {
+    margin-top: 1.5rem;
+    font-size: 6.5rem;
+    font-weight: 700;
     color: mixin.$gravl-blue;
   }
 
@@ -22,20 +19,13 @@
     font-size: 3rem;
     font-weight: 300;
   }
-
-  .link {
-    margin-top: 3rem;
-    font-size: 2rem;
-    color: mixin.$gravl-blue;
-    text-transform: uppercase;
-    font-weight: 800;
-  }
 }
 
 .buttonRow {
   display: flex;
   gap: 3rem;
   margin-top: 3rem;
+  justify-content: center;
 }
 
 .circleButton {
@@ -44,7 +34,9 @@
   background-color: mixin.$very-light-blue;
   border: none;
   border-radius: 50%;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
   user-select: none;
   display: flex;
   justify-content: center;

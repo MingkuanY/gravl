@@ -39,6 +39,7 @@
       color: mixin.$dark;
       font-weight: 400;
       transition: 0.3s ease;
+      white-space: nowrap;
     }
 
     .description {
@@ -76,7 +77,15 @@
   &.selected {
     background-color: mixin.$gravl-blue;
 
-    .title,
+    .right {
+      mask-image: none;
+    }
+
+    .title {
+      color: mixin.$white;
+      white-space: normal;
+    }
+
     .description {
       color: mixin.$white;
     }

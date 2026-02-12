@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  min-height: 100dvh;
+  min-height: calc(100dvh - 9rem);
   position: relative;
   padding: 5rem;
   font-family: sans-serif;
@@ -19,6 +19,15 @@
   align-items: center;
   justify-content: center;
   flex-grow: 1;
+}
+
+.description {
+  font-size: 3.2rem;
+  color: mixin.$dark;
+  margin-bottom: 4rem;
+  max-width: 60rem;
+  line-height: 4rem;
+  font-weight: 300;
 }
 
 .tripNameInput {
@@ -68,11 +77,18 @@
   font-size: 3.5rem;
   line-height: 6rem;
   text-align: center;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
   user-select: none;
 }
 
 .desktop {
+  .description {
+    font-size: 3rem;
+    font-weight: 500;
+    line-height: 4rem;
+  }
   .tripNameInput {
     font-size: 2.5rem;
   }

@@ -1,16 +1,22 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import exifr from "exifr";
 import styles from "../../styles/life.module.scss";
-import WrappedLoader from "../../components/maps/WrappedLoader";
-import { TripWithVisits, VisitInput } from "../../utils/types";
+import dashboardStyles from "../../styles/dashboard.module.scss";
+import { TripWithVisits, TripInput } from "../../utils/types";
 import Loading from "../load";
 import { useRouter } from "next/navigation";
 import haversine from "haversine-distance";
 import LifeInput from "../../components/life/LifeInput";
-import Icon from "../../components/icons/Icon";
+import LifeTimeline from "../../components/life/LifeTimeline";
+import MapLoader from "../../components/dashboard/MapLoader";
 import { signIn } from "next-auth/react";
+import { dbscanClusterPhotos, generateTripName } from "../../utils/clustering";
+import classnames from "classnames";
+import Header from "../../components/header/Header";
+import NewTrip from "../../components/log/NewTrip";
+import ConfirmSelection from "../../components/modals/ConfirmSelection";
 
 const MILES_THRESHOLD = 5;
 const METERS_THRESHOLD = MILES_THRESHOLD * 1609.34;
@@ -24,14 +30,19 @@ type PhotoData = {
 };
 
 export default function GravlLife() {
-  const [visits, setVisits] = useState<VisitInput[]>([]);
   const router = useRouter();
-  const [reanimate, setReanimate] = useState(true);
-
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [tripName, setTripName] = useState("");
+
   const [mapReady, setMapReady] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [trips, setTrips] = useState<TripWithVisits[]>([]);
+  const [selectedTripId, setSelectedTripId] = useState<number | null>(null);
+  const [tripsForMaps, setTripsForMaps] = useState<TripWithVisits[]>([]);
+
+  const [logTripPage, setLogTripPage] = useState(-1);
+  const [editTrip, setEditTrip] = useState<TripWithVisits | undefined | null>(null);
+  const [confirmDelete, setConfirmDelete] = useState(-1);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -43,19 +54,157 @@ export default function GravlLife() {
 
     setIsLoading(true);
 
-    const photos = await extractPhotoMetadata(files);
-    if (photos.length < 2) {
-      console.warn("Need at least 2 geotagged photos to calculate a route.");
-      return;
+    try {
+      const photos = await extractPhotoMetadata(files);
+      if (photos.length === 0) {
+        console.error("No geotagged photos found.");
+        setIsLoading(false);
+        return;
+      }
+
+      const { clusters, singletons } = dbscanClusterPhotos(photos);
+
+      if (clusters.length === 0 && singletons.length === 0) {
+        console.error("No trip clusters found.");
+        setIsLoading(false);
+        return;
+      }
+
+      const generatedTrips: TripWithVisits[] = [];
+      let tripIndex = 0;
+
+      for (let i = 0; i < clusters.length; i++) {
+        const cluster = clusters[i];
+
+        try {
+          const routeSegments = await getRouteSegments(cluster);
+
+          const visits = generateVisitsFromSegments(routeSegments);
+
+          if (visits.length === 0) {
+            continue;
+          }
+
+          const tripName = await generateTripName(cluster, tripIndex);
+
+          const trip: TripWithVisits = {
+            id: Date.now() + tripIndex,
+            name: tripName,
+            description: "",
+            createdAt: new Date(),
+            updatedAt: null,
+            userId: "",
+            visits: visits.map((visit, index) => ({
+              id: index,
+              tripId: Date.now() + tripIndex,
+              placeId: null,
+              placeFipsCode: visit.fips_code,
+              date: new Date(visit.date),
+              order: visit.order,
+            })),
+          };
+
+          generatedTrips.push(trip);
+          tripIndex++;
+        } catch (error) {
+          console.error(`Error processing cluster ${i + 1}:`, error);
+        }
+      }
+
+      for (let i = 0; i < singletons.length; i++) {
+        const singleton = singletons[i];
+
+        try {
+          if (!singleton.location) continue;
+
+          const fipsCode = await getCountyFromPoint(
+            singleton.location.lat,
+            singleton.location.lng
+          );
+
+          if (!fipsCode) {
+            console.warn(
+              `Could not determine county for singleton photo ${i + 1}`
+            );
+            continue;
+          }
+
+          const tripName = await generateTripName([singleton], tripIndex);
+
+          const trip: TripWithVisits = {
+            id: Date.now() + tripIndex,
+            name: tripName,
+            description: "",
+            createdAt: new Date(),
+            updatedAt: null,
+            userId: "",
+            visits: [
+              {
+                id: 0,
+                tripId: Date.now() + tripIndex,
+                placeId: null,
+                placeFipsCode: fipsCode,
+                date: new Date(singleton.timestamp),
+                order: 0,
+              },
+            ],
+          };
+
+          generatedTrips.push(trip);
+          tripIndex++;
+        } catch (error) {
+          console.error(`Error processing singleton ${i + 1}:`, error);
+        }
+      }
+
+      if (generatedTrips.length === 0) {
+        console.error("All clusters failed to process. Unable to generate trips.");
+        setIsLoading(false);
+        return;
+      }
+
+      generatedTrips.sort((a, b) => {
+        const aDate = a.visits[0]?.date || new Date(0);
+        const bDate = b.visits[0]?.date || new Date(0);
+        return new Date(bDate).getTime() - new Date(aDate).getTime();
+      });
+
+      setTrips(generatedTrips);
+      setIsLoading(false);
+      setMapReady(true);
+    } catch (error) {
+      console.error("Error processing photos:", error);
+      setIsLoading(false);
     }
-
-    const routeSegments = await getRouteSegments(photos);
-    const visits = generateVisitsFromSegments(routeSegments);
-
-    setIsLoading(false);
-    setMapReady(true);
-    setVisits(visits);
   };
+
+  useEffect(() => {
+    if (selectedTripId === null) {
+      setTripsForMaps(trips);
+    } else {
+      const selectedTrip = trips.find((t) => t.id === selectedTripId);
+      setTripsForMaps(selectedTrip ? [selectedTrip] : []);
+    }
+  }, [selectedTripId, trips]);
+
+  useEffect(() => {
+    if (!mapReady) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      const tripCards = Array.from(document.querySelectorAll(".trip-card"));
+      if (
+        !tripCards.some((tripCard) => tripCard.contains(event.target as Node)) &&
+        selectedTripId !== null
+      ) {
+        setSelectedTripId(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [selectedTripId, mapReady]);
 
   const extractPhotoMetadata = async (
     files: FileList
@@ -76,7 +225,6 @@ export default function GravlLife() {
           });
         }
       } catch (err) {
-        console.error(`Error parsing ${file.name}:`, err);
       }
     }
 
@@ -184,6 +332,10 @@ export default function GravlLife() {
       .filter((res) => res.status === "fulfilled")
       .map((res) => (res as PromiseFulfilledResult<any>).value);
 
+    if (segments.length === 0) {
+      return [];
+    }
+
     const allFipsCodes = await processPolylinesBatch(
       segments.map((s) => s.decodedPolyline)
     );
@@ -208,7 +360,7 @@ export default function GravlLife() {
           seen.add(fips_code);
           visits.push({
             fips_code,
-            date: timestamp.split("T")[0], // format date as YYYY-MM-DD
+            date: timestamp.split("T")[0],
             order: visits.length,
           });
         }
@@ -218,102 +370,175 @@ export default function GravlLife() {
     return visits;
   };
 
-  // Map
-  const visitedCounties = new Set<string>();
-  const visitedStates = new Set<string>();
+  const getCountyFromPoint = async (
+    lat: number,
+    lng: number
+  ): Promise<string | null> => {
+    try {
+      const response = await fetch(
+        "https://api.gravl.org/get_county_from_point/",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ lat, lng }),
+        }
+      );
 
-  const getStateFips = (placeFipsCode: string) => placeFipsCode.slice(0, 2);
+      if (!response.ok) {
+        return null;
+      }
 
-  // Compare uploaded trip visits
-  const newVisitedCounties = new Set<string>();
-  const newVisitedStates = new Set<string>();
+      const data = await response.json();
+      return data.fips_code || null;
+    } catch (error) {
+      return null;
+    }
+  };
 
-  visits.forEach((visit) => {
-    const placeFipsCode = visit.fips_code;
-    const stateFips = getStateFips(placeFipsCode);
+  const handleAddTrip = (trip: TripInput) => {
+    const tempID = Date.now();
 
-    if (!visitedCounties.has(placeFipsCode)) {
-      newVisitedCounties.add(placeFipsCode);
+    if (editTrip) {
+      const updatedTrip: TripWithVisits = {
+        ...editTrip,
+        name: trip.trip_name,
+        description: trip.description,
+        visits: trip.visits.map((visit, index) => ({
+          id: index,
+          date: new Date(visit.date),
+          order: visit.order,
+          tripId: editTrip.id,
+          placeId: null,
+          placeFipsCode: visit.fips_code,
+        })),
+      };
+
+      setTrips((prev) => prev.map((t) => (t.id === editTrip.id ? updatedTrip : t)));
+      setEditTrip(null);
+    } else {
+      const newTrip: TripWithVisits = {
+        id: tempID,
+        name: trip.trip_name,
+        description: trip.description,
+        createdAt: new Date(),
+        updatedAt: null,
+        userId: "",
+        visits: trip.visits.map((visit, index) => ({
+          id: index,
+          tripId: tempID,
+          placeId: null,
+          placeFipsCode: visit.fips_code,
+          date: new Date(visit.date),
+          order: visit.order,
+        })),
+      };
+
+      setTrips((prev) => [newTrip, ...prev]);
     }
 
-    if (!visitedStates.has(stateFips) && stateFips !== "11") {
-      newVisitedStates.add(stateFips);
-    }
-  });
+    setLogTripPage(-1);
+  };
 
-  // Final stats
-  const newCounties = newVisitedCounties.size;
-  const newStates = newVisitedStates.size;
+  const handleEditTrip = (tripID: number) => {
+    setEditTrip(trips.find((trip) => trip.id === tripID));
+    setLogTripPage(0);
+  };
 
-  // Create new "trip" object (optional)
-  const newTrip: TripWithVisits = {
-    id: -1,
-    name: tripName,
-    description: "",
-    createdAt: new Date(),
-    updatedAt: null,
-    userId: "",
-    visits: visits.map((visit, index) => ({
-      id: index, // dummy id
-      tripId: -1, // dummy tripId
-      placeId: null, // placeholder
-      placeFipsCode: visit.fips_code,
-      date: new Date(visit.date), // convert string to Date
-      order: visit.order,
-    })),
+  const handleDelete = (tripID: number) => {
+    setTrips((prev) => prev.filter((trip) => trip.id !== tripID));
+    setSelectedTripId(null);
+    setConfirmDelete(-1);
+  };
+
+  const handleExportTrips = () => {
+    // Persist current trips to localStorage before sign-in
+    const payload = {
+      version: 1,
+      source: "life-import",
+      timestamp: Date.now(),
+      trips: trips.map((t) => ({
+        trip_name: t.name,
+        description: t.description,
+        visits: t.visits.map((v) => ({
+          fips_code: v.placeFipsCode,
+          date: v.date.toISOString().split("T")[0],
+          order: v.order,
+        })),
+      })),
+    };
+
+    localStorage.setItem("gravl_life_trips_v1", JSON.stringify(payload));
+    signIn("google", { callbackUrl: "/redirect" });
   };
 
   if (isLoading) {
     return <Loading />;
   }
 
-  return (
-    <>
-      {!mapReady ? (
+  if (!mapReady) {
+    return (
+      <>
+        <Header />
         <LifeInput
           handleButtonClick={handleButtonClick}
           handleFileChange={handleFileChange}
-          tripName={tripName}
-          setTripName={setTripName}
           fileInputRef={fileInputRef}
         />
-      ) : (
-        <div className={styles.viewport}>
-          <h1>{tripName}</h1>
-          <p className={styles.stat}>{newCounties} new counties</p>
-          <p className={styles.stat}>{newStates} new states</p>
-          <WrappedLoader trips={[newTrip]} reanimate={reanimate} />
-          <p className={styles.link}>gravl.org</p>
+      </>
+    );
+  }
 
-          <div className={styles.buttonRow}>
-            <button
-              className={styles.circleButton}
-              onClick={() => router.push(`/`)}
-            >
-              <div className={styles.back}>
-                <Icon type="back_arrow" fill="#7dc2ff" />
-              </div>
-            </button>
+  const totalTrips = trips.length;
+  const allVisits = trips.flatMap((t) => t.visits);
+  const uniqueCounties = new Set(allVisits.map((v) => v.placeFipsCode));
+  const uniqueStates = new Set(
+    allVisits.map((v) => v.placeFipsCode.slice(0, 2)).filter((s) => s !== "11")
+  );
+  const newCounties = uniqueCounties.size;
+  const newStates = uniqueStates.size;
 
-            <button
-              className={styles.circleButton}
-              onClick={() => setReanimate((prev) => !prev)}
-            >
-              <div className={styles.play}>
-                <Icon type="play" fill="#7dc2ff" />
+  return (
+    <>
+      {confirmDelete !== -1 && (
+        <ConfirmSelection
+          warningText="Delete this trip?"
+          yesFunction={() => handleDelete(confirmDelete)}
+          noFunction={() => setConfirmDelete(-1)}
+        />
+      )}
+      {logTripPage !== -1 && (
+        <NewTrip
+          logTripPage={logTripPage}
+          setLogTripPage={setLogTripPage}
+          addTrip={handleAddTrip}
+          editTrip={editTrip}
+        />
+      )}
+      {logTripPage === -1 && (
+        <>
+          <Header />
+          <div className={dashboardStyles.container}>
+            <LifeTimeline
+              trips={trips}
+              selectedTripId={selectedTripId}
+              onSelectTrip={setSelectedTripId}
+              onLoginToSave={handleExportTrips}
+              setLogTripPage={setLogTripPage}
+              setEditTrip={setEditTrip}
+              setConfirmDelete={setConfirmDelete}
+              handleEditTrip={handleEditTrip}
+            />
+            <div className={classnames(dashboardStyles.main, dashboardStyles.centered)}>
+              <div className={styles.statsContainer}>
+                <p className={styles.tripCount}>{totalTrips} trip{totalTrips !== 1 ? 's' : ''}</p>
+                <p className={styles.stat}>{newCounties} new counties</p>
+                <p className={styles.stat}>{newStates} new states</p>
               </div>
-            </button>
 
-            <button
-              className={styles.circleButton}
-              onClick={() => signIn("google", { callbackUrl: "/redirect" })}
-            >
-              <div>
-                <Icon type="export" fill="#7dc2ff" />
-              </div>
-            </button>
+              <MapLoader trips={tripsForMaps} />
+            </div>
           </div>
-        </div>
+        </>
       )}
     </>
   );
