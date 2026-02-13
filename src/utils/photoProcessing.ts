@@ -23,7 +23,7 @@ export type TripPreview = {
 };
 
 export const extractPhotoMetadata = async (
-  files: FileList
+  files: FileList,
 ): Promise<PhotoData[]> => {
   const results: PhotoData[] = [];
 
@@ -50,21 +50,21 @@ export const extractPhotoMetadata = async (
     .filter((p) => p.location)
     .sort(
       (a, b) =>
-        new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+        new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime(),
     );
 };
 
 const isWithinDistance = (
   pointA: { lat: number; lng: number },
   pointB: { lat: number; lng: number },
-  metersThreshold = METERS_THRESHOLD
+  metersThreshold = METERS_THRESHOLD,
 ) => {
   return haversine(pointA, pointB) <= metersThreshold;
 };
 
 export const filterPhotosByDistance = (photos: PhotoData[]) => {
   const withLocation = photos.filter(
-    (p) => p.location && p.location.lat && p.location.lng
+    (p) => p.location && p.location.lat && p.location.lng,
   );
   if (withLocation.length === 0) return [];
 
@@ -85,7 +85,7 @@ export const createRouteSegment = async (
   directionsService: google.maps.DirectionsService,
   start: { lat: number; lng: number },
   end: { lat: number; lng: number },
-  timestamp: string
+  timestamp: string,
 ) => {
   const results = await directionsService.route({
     origin: `${start.lat}, ${start.lng}`,
@@ -109,7 +109,7 @@ export const createRouteSegment = async (
 };
 
 export async function processPolylinesBatch(
-  decodedPolylines: Array<Array<[number, number]>>
+  decodedPolylines: Array<Array<[number, number]>>,
 ) {
   const response = await fetch(
     "https://api.gravl.org/process_polylines_batch/",
@@ -117,13 +117,11 @@ export async function processPolylinesBatch(
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ polylines: decodedPolylines }),
-    }
+    },
   );
 
   if (!response.ok) {
-    throw new Error(
-      "Error processing polylines batch: " + response.statusText
-    );
+    throw new Error("Error processing polylines batch: " + response.statusText);
   }
 
   const data = await response.json();
@@ -141,8 +139,8 @@ export const getRouteSegments = async (photos: PhotoData[]) => {
         directionsService,
         filteredPhotos[i].location!,
         filteredPhotos[i + 1].location!,
-        filteredPhotos[i + 1].timestamp
-      )
+        filteredPhotos[i + 1].timestamp,
+      ),
     );
   }
 
@@ -155,17 +153,23 @@ export const getRouteSegments = async (photos: PhotoData[]) => {
   }
 
   const allFipsCodes = await processPolylinesBatch(
-    segments.map((s) => s.decodedPolyline)
+    segments.map((s) => s.decodedPolyline),
   );
 
-  return segments.map((segment, i) => ({
+  const segmentsWithFips = segments.map((segment, i) => ({
     ...segment,
     fipsCodes: allFipsCodes[i],
   }));
+
+  segmentsWithFips.sort(
+    (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime(),
+  );
+
+  return segmentsWithFips;
 };
 
 export const generateVisitsFromSegments = (
-  segments: { fipsCodes: string[]; timestamp: string }[]
+  segments: { fipsCodes: string[]; timestamp: string }[],
 ) => {
   const seen = new Set<string>();
   const visits = [];
@@ -190,7 +194,7 @@ export const generateVisitsFromSegments = (
 
 export const getCountyFromPoint = async (
   lat: number,
-  lng: number
+  lng: number,
 ): Promise<string | null> => {
   try {
     const response = await fetch(
@@ -199,7 +203,7 @@ export const getCountyFromPoint = async (
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ lat, lng }),
-      }
+      },
     );
 
     if (!response.ok) {
@@ -214,7 +218,7 @@ export const getCountyFromPoint = async (
 };
 
 export const processPhotosIntoTrips = async (
-  files: FileList
+  files: FileList,
 ): Promise<{ trips: TripWithVisits[]; previews: TripPreview[] }> => {
   const photos = await extractPhotoMetadata(files);
   if (photos.length === 0) {
@@ -245,6 +249,13 @@ export const processPhotosIntoTrips = async (
       const visits = generateVisitsFromSegments(routeSegments);
       if (visits.length === 0) continue;
 
+      const sortedVisits = visits.sort((a, b) => {
+        const dateCompare =
+          new Date(a.date).getTime() - new Date(b.date).getTime();
+        if (dateCompare !== 0) return dateCompare;
+        return a.order - b.order;
+      });
+
       const trip: TripWithVisits = {
         id: Date.now() + tripIndex,
         name: tripName,
@@ -252,13 +263,13 @@ export const processPhotosIntoTrips = async (
         createdAt: new Date(),
         updatedAt: null,
         userId: "",
-        visits: visits.map((visit, index) => ({
+        visits: sortedVisits.map((visit, index) => ({
           id: index,
           tripId: Date.now() + tripIndex,
           placeId: null,
           placeFipsCode: visit.fips_code,
           date: new Date(visit.date),
-          order: visit.order,
+          order: index,
         })),
       };
 
@@ -304,18 +315,25 @@ export const processPhotosIntoTrips = async (
         createdAt: new Date(),
         updatedAt: null,
         userId: "",
-        visits: [{
-          id: 0,
-          tripId: Date.now() + tripIndex + i,
-          placeId: null,
-          placeFipsCode: fipsCode,
-          date: new Date(singleton.timestamp),
-          order: 0,
-        }],
+        visits: [
+          {
+            id: 0,
+            tripId: Date.now() + tripIndex + i,
+            placeId: null,
+            placeFipsCode: fipsCode,
+            date: new Date(singleton.timestamp),
+            order: 0,
+          },
+        ],
       };
 
-      return { trip, tripName, date: singleton.timestamp.split("T")[0], singletonIndex: i };
-    })
+      return {
+        trip,
+        tripName,
+        date: singleton.timestamp.split("T")[0],
+        singletonIndex: i,
+      };
+    }),
   );
 
   for (const result of singletonResults) {
@@ -347,8 +365,9 @@ export const processPhotosIntoTrips = async (
     return new Date(bDate).getTime() - new Date(aDate).getTime();
   });
 
-  previews.sort((a: TripPreview, b: TripPreview) =>
-    new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+  previews.sort(
+    (a: TripPreview, b: TripPreview) =>
+      new Date(a.startDate).getTime() - new Date(b.startDate).getTime(),
   );
 
   return { trips: generatedTrips, previews };

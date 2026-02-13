@@ -16,6 +16,7 @@ import Counties from "../maps/Counties";
 import Icon from "../icons/Icon";
 import { useScreenWidth } from "../../utils/hooks";
 import { processPhotosIntoTrips, TripPreview } from "../../utils/photoProcessing";
+import { sortTrips } from "../../utils/date";
 
 export default function LandingContent({
   initialVisitData,
@@ -52,7 +53,7 @@ export default function LandingContent({
 
     try {
       const { trips: generatedTrips, previews } = await processPhotosIntoTrips(files);
-      
+
       if (generatedTrips.length === 0 && previews.length === 0) {
         setIsLoading(false);
         return;
@@ -71,7 +72,7 @@ export default function LandingContent({
 
   useEffect(() => {
     if (selectedTripId === null) {
-      setTripsForMaps(trips);
+      setTripsForMaps(sortTrips(trips, true));
     } else {
       const selectedTrip = trips.find((t) => t.id === selectedTripId);
       setTripsForMaps(selectedTrip ? [selectedTrip] : []);
