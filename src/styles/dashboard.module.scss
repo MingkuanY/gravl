@@ -38,6 +38,9 @@
   .container {
     flex-direction: column-reverse;
     align-items: center;
+    overflow-x: hidden;
+    width: 100vw;
+    max-width: 100vw;
 
     .main {
       margin: 0 auto;

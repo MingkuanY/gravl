@@ -59,6 +59,7 @@ export default function LandingContent({
 
   const [showDiscoveryModal, setShowDiscoveryModal] = useState(false);
   const [tripPreviews, setTripPreviews] = useState<TripPreview[]>([]);
+  const [reloadMap, setReloadMap] = useState(false);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -497,6 +498,8 @@ export default function LandingContent({
     tripPreviews.forEach((preview) => URL.revokeObjectURL(preview.imageUrl));
     setShowDiscoveryModal(false);
     setTripPreviews([]);
+    // Restart the map animation
+    setReloadMap((prev) => !prev);
   };
 
   const handleExportTrips = () => {
@@ -685,7 +688,7 @@ export default function LandingContent({
               <p className={styles.stat}>{newStates} new states</p>
             </div>
 
-            <MapLoader trips={tripsForMaps} />
+            <MapLoader trips={tripsForMaps} triggerReload={reloadMap} />
           </div>
         </div>
       )}

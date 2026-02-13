@@ -162,7 +162,10 @@
 
 @media (max-width: 760px) {
   .headerContainer {
+    width: 100%;
+    max-width: 100vw;
     padding: 0 4rem;
+    box-sizing: border-box;
 
     .logoContainer {
       .logo {

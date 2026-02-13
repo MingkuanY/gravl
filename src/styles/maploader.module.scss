@@ -115,12 +115,21 @@
 
 @media (max-width: 760px) {
   .container {
+    overflow: hidden;
+    max-width: 100vw;
+
+    .mapContainer {
+      width: 100%;
+      max-width: 100vw;
+    }
+
     .mapDate {
       transform: scale(1.5);
     }
 
     .stats {
       width: 95%;
+      padding-bottom: 2rem;
     }
   }
 }

@@ -12,7 +12,7 @@ import { formatSeparatedDate } from "@/utils/date";
 
 export const mapNames = ["counties", "states", "countries", "national parks"];
 
-export default function MapLoader({ trips }: { trips: TripWithVisits[] }) {
+export default function MapLoader({ trips, triggerReload }: { trips: TripWithVisits[]; triggerReload?: boolean }) {
   const [count, setCount] = useState([0, 0, 0, 0]);
 
   const [mapDate, setMapDate] = useState("");
@@ -79,6 +79,12 @@ export default function MapLoader({ trips }: { trips: TripWithVisits[] }) {
   useEffect(() => {
     sortVisitsByType(trips);
   }, [trips]);
+
+  useEffect(() => {
+    if (triggerReload !== undefined) {
+      setReload((prev) => !prev);
+    }
+  }, [triggerReload]);
 
   // total counts of each map imported from the map components
   const totalCounts = [totalCounties, totalStates];

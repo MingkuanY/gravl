@@ -32,13 +32,15 @@
 
 @media (max-width: 760px) {
   .userStats {
+    width: 20rem;
+
     div {
       .stat {
-        font-size: 3.5rem;
+        font-size: 5rem;
       }
 
       .desc {
-        font-size: 1.4rem;
+        font-size: 2rem;
       }
     }
   }
