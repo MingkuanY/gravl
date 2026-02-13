@@ -201,6 +201,17 @@
         .pfp {
           width: 4rem;
         }
+
+        .dropdown {
+          width: 18rem;
+
+          ul {
+            li {
+              font-size: 2.2rem;
+              padding: 1.5rem 0;
+            }
+          }
+        }
       }
     }
   }

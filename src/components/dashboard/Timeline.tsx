@@ -97,9 +97,9 @@ export default function Timeline({
       ) : (
         <LogTripButton onLogTripClick={onLogTripClick} />
       )}
-      {trips.length == 0 && !isMobile && (
+      {trips.length == 0 && (
         <div className={styles.proTipContainer}>
-          <p className={styles.proTip}>Add Your First Trip</p>
+          <p className={styles.proTip}>{isMobile ? "Log Your First Trip" : "Add Your First Trip"}</p>
           <div className={styles.up_arrow}>
             <Icon type="up_arrow" fill="#319fff" />
           </div>

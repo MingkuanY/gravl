@@ -201,8 +201,10 @@
 
 @media (max-width: 760px) {
   .timeline {
-    margin: 2rem auto 0;
+    margin: 2rem auto 5rem;
     height: fit-content;
+    overflow: visible;
+    position: static;
 
     &::before {
       visibility: hidden;
@@ -253,11 +255,27 @@
       }
     }
 
+    .proTipContainer {
+      margin-top: 1.5rem;
+
+      .proTip {
+        font-size: 2.5rem;
+      }
+
+      .up_arrow {
+        width: 4rem;
+      }
+    }
+
     .pastTrips {
-      overflow-y: scroll;
+      overflow: visible;
       margin-top: 2rem;
+      margin-bottom: 5rem;
       transform: translateX(18rem);
       max-width: 100vw;
+      position: static;
+      flex: none;
+      height: auto;
 
       .tripCheckpoint {
         padding: 1.2rem 0 1.2rem;

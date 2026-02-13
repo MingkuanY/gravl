@@ -208,7 +208,7 @@ export default function Onboarding({ setClose }: { setClose?: Function }) {
                   value={accountData.username}
                   required
                   onChange={(e) =>
-                    setAccountData({ ...accountData, username: e.target.value })
+                    setAccountData({ ...accountData, username: e.target.value.toLowerCase() })
                   }
                 />
               </div>
