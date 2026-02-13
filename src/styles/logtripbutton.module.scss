@@ -30,9 +30,10 @@
 
 @media (max-width: 760px) {
   .button {
-    margin: 0 5rem;
     width: 50rem;
+    height: 5rem;
     border-radius: 4rem;
+    cursor: default;
 
     &:hover {
       background-color: mixin.$gravl-blue;

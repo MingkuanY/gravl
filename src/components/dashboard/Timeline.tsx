@@ -9,20 +9,18 @@ import classnames from "classnames";
 
 export default function Timeline({
   trips,
-  setLogTripPage,
+  onLogTripClick,
   currTrip,
   setCurrTrip,
   setConfirmDelete,
   handleEditTrip,
-  setEditTrip,
 }: {
   trips: TripWithVisits[];
-  setLogTripPage: Function;
+  onLogTripClick: () => void;
   currTrip: number[];
   setCurrTrip: Function;
   setConfirmDelete: Function;
   handleEditTrip: Function;
-  setEditTrip: Function;
 }) {
   const isMobile = useScreenWidth();
 
@@ -94,25 +92,10 @@ export default function Timeline({
     <div className={classnames(styles.timeline, !trips.length && styles.empty)}>
       {isMobile ? (
         <div className={styles.mobileOnlyContainer}>
-          <p className={styles.yourTrips}>Your Trips</p>
-          <div className={styles.desktopOnlyContainer}>
-            {trips.length === 0 ? (
-              <div className={styles.desktopOnly}>
-                Log Your First Trip on Desktop
-              </div>
-            ) : (
-              <div className={styles.desktopOnly}>Log a Trip on Desktop</div>
-            )}
-            <div className={styles.desktop}>
-              <Icon type="desktop" fill="#24292f" />
-            </div>
-          </div>
+          <LogTripButton onLogTripClick={onLogTripClick} />
         </div>
       ) : (
-        <LogTripButton
-          setLogTripPage={setLogTripPage}
-          setEditTrip={setEditTrip}
-        />
+        <LogTripButton onLogTripClick={onLogTripClick} />
       )}
       {trips.length == 0 && !isMobile && (
         <div className={styles.proTipContainer}>

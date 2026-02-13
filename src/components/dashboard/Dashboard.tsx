@@ -21,10 +21,16 @@ import Profile from "./Profile";
 import classnames from "classnames";
 import { useUserContext } from "../../contexts/UserContext";
 import { useProfileContext } from "../../contexts/ProfileContext";
+import { useScreenWidth } from "../../utils/hooks";
+import LogTripMethodModal from "./LogTripMethodModal";
+import TripDiscoveryModal from "../life/TripDiscoveryModal";
+import { processPhotosIntoTrips, TripPreview } from "../../utils/photoProcessing";
+import Loading from "../../app/load";
 
 export default function Dashboard() {
   const sessionUser = useUserContext();
   const { viewingUser, isOwner } = useProfileContext();
+  const isMobile = useScreenWidth();
 
   const [editProfile, setEditProfile] = useState(false);
 
@@ -36,6 +42,13 @@ export default function Dashboard() {
   const [logTripPage, setLogTripPage] = useState(-1); // Page of logging a trip
   const [currTrip, setCurrTrip] = useState<number[]>([]); // Current trip displayed
   const [tripsForMaps, setTripsForMaps] = useState<TripWithVisits[]>([]);
+
+  const [showMethodModal, setShowMethodModal] = useState(false);
+  const [showDiscoveryModal, setShowDiscoveryModal] = useState(false);
+  const [tripPreviews, setTripPreviews] = useState<TripPreview[]>([]);
+  const [isProcessingPhotos, setIsProcessingPhotos] = useState(false);
+  const [reloadMap, setReloadMap] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const addTrip = async (trip: TripInput, tempID: number) => {
     if (!sessionUser) throw new Error("Add trip without a session");
@@ -101,6 +114,84 @@ export default function Dashboard() {
   const handleEditTrip = (tripID: number) => {
     setEditTrip(trips.find((trip) => trip.id === tripID));
     setLogTripPage(0);
+  };
+
+  const handleLogTripClick = () => {
+    if (isMobile) {
+      fileInputRef.current?.click();
+    } else {
+      setShowMethodModal(true);
+    }
+  };
+
+  const handleMethodManual = () => {
+    setShowMethodModal(false);
+    setEditTrip(null);
+    setLogTripPage(0);
+  };
+
+  const handleMethodUpload = () => {
+    setShowMethodModal(false);
+    fileInputRef.current?.click();
+  };
+
+  const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || !sessionUser) return;
+
+    setIsProcessingPhotos(true);
+
+    try {
+      const { trips: generatedTrips, previews } = await processPhotosIntoTrips(files);
+
+      if (generatedTrips.length === 0) {
+        setIsProcessingPhotos(false);
+        return;
+      }
+
+      const savedTrips: TripWithVisits[] = [];
+      for (const trip of generatedTrips) {
+        const tripInput: TripInput = {
+          trip_name: trip.name,
+          description: trip.description,
+          visits: trip.visits.map((v) => ({
+            fips_code: v.placeFipsCode,
+            date: v.date.toISOString().split("T")[0],
+            order: v.order,
+          })),
+        };
+
+        try {
+          const savedTrip = await addTripToUser(sessionUser.id, tripInput);
+          savedTrips.push(savedTrip);
+        } catch (error) {
+          console.error("Failed to save trip:", trip.name, error);
+        }
+      }
+
+      if (savedTrips.length > 0) {
+        setTrips((prev) => [...prev, ...savedTrips]);
+        setOptimisticTrips((prev) => [...prev, ...savedTrips]);
+      }
+
+      setTripPreviews(previews);
+      setShowDiscoveryModal(true);
+      setIsProcessingPhotos(false);
+    } catch (error) {
+      console.error("Error processing photos:", error);
+      setIsProcessingPhotos(false);
+    }
+
+    if (e.target) {
+      e.target.value = "";
+    }
+  };
+
+  const handleDismissDiscovery = () => {
+    tripPreviews.forEach((preview) => URL.revokeObjectURL(preview.imageUrl));
+    setShowDiscoveryModal(false);
+    setTripPreviews([]);
+    setReloadMap((prev) => !prev);
   };
 
   useEffect(() => {
@@ -202,6 +293,7 @@ export default function Dashboard() {
 
   return (
     <>
+      {isProcessingPhotos && <Loading />}
       {confirmDelete !== -1 && (
         <ConfirmSelection
           warningText="Delete this trip?"
@@ -210,6 +302,19 @@ export default function Dashboard() {
             setConfirmDelete(-1);
           }}
           noFunction={() => setConfirmDelete(-1)}
+        />
+      )}
+      {showDiscoveryModal && (
+        <TripDiscoveryModal
+          tripPreviews={tripPreviews}
+          onDismiss={handleDismissDiscovery}
+        />
+      )}
+      {showMethodModal && (
+        <LogTripMethodModal
+          onManual={handleMethodManual}
+          onUpload={handleMethodUpload}
+          onClose={() => setShowMethodModal(false)}
         />
       )}
       {editProfile && <Onboarding setClose={() => setEditProfile(false)} />}
@@ -221,23 +326,30 @@ export default function Dashboard() {
           editTrip={editTrip}
         />
       )}
+      <input
+        type="file"
+        ref={fileInputRef}
+        accept="image/*"
+        multiple
+        onChange={handlePhotoUpload}
+        style={{ display: "none" }}
+      />
       {logTripPage === -1 && (
         <div className={styles.container}>
           {isOwner && (
             <Timeline
               trips={sortedTrips}
-              setLogTripPage={setLogTripPage}
+              onLogTripClick={handleLogTripClick}
               currTrip={currTrip}
               setCurrTrip={setCurrTrip}
               setConfirmDelete={setConfirmDelete}
               handleEditTrip={handleEditTrip}
-              setEditTrip={setEditTrip}
             />
           )}
           <div className={classnames(styles.main, !isOwner && styles.centered)}>
             <Profile setEditProfile={setEditProfile} trips={trips} />
 
-            <MapLoader trips={tripsForMaps} />
+            <MapLoader trips={tripsForMaps} triggerReload={reloadMap} />
           </div>
         </div>
       )}

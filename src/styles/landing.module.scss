@@ -116,10 +116,10 @@
   color: mixin.$white;
   cursor: pointer;
   background: mixin.$gravl-blue;
-  transition: transform 0.3s;
+  transition: background-color 0.3s;
 
   &:hover {
-    transform: scale(1.1);
+    background-color: mixin.$darker-blue;
   }
 
   .go {

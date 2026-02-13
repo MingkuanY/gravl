@@ -2,6 +2,12 @@
 
 .container {
   display: flex;
+  min-height: calc(100vh - mixin.$header-height);
+  min-height: calc(100dvh - mixin.$header-height);
+
+  &:has(.main.centered) {
+    align-items: center;
+  }
 
   .main {
     max-height: calc(100dvh - mixin.$header-height);
