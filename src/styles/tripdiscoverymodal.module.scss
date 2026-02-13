@@ -11,6 +11,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  touch-action: none;
 }
 
 .container {
@@ -154,19 +156,37 @@
     max-width: 100vw;
     height: calc(100vh - mixin.$header-height - 3rem);
     border-radius: 2rem 2rem 0 0;
-    padding: 3rem 2rem 26rem 2rem;
+    padding: 3rem 2rem 0 2rem;
+    touch-action: pan-y;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 9rem;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 4rem;
+      background: linear-gradient(to bottom, mixin.$white, transparent);
+      pointer-events: none;
+      z-index: 2;
+    }
   }
 
   .title {
     font-size: 4.5rem;
+    padding-bottom: 2rem;
   }
 
   .tripList {
     flex-direction: column;
     overflow-y: auto;
     overflow-x: hidden;
-    gap: 2.5rem;
-    padding: 2rem 0;
+    gap: 3rem;
+    padding: 4rem 0;
+    max-height: calc(100vh - mixin.$header-height - 42rem);
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
   }
 
   .tripCard {
@@ -191,7 +211,7 @@
 
   .dismissButton {
     position: fixed;
-    bottom: 14rem;
+    bottom: 3rem;
     left: 50%;
     transform: translateX(-50%);
     font-size: 2.8rem;
@@ -204,7 +224,7 @@
     &::before {
       content: "";
       position: absolute;
-      bottom: 12rem;
+      bottom: 9rem;
       left: 50%;
       transform: translateX(-50%);
       width: 100vw;

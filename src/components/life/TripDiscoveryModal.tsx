@@ -1,5 +1,6 @@
 import { formatSeparatedDate } from "@/utils/date";
 import styles from "../../styles/tripdiscoverymodal.module.scss";
+import { useEffect } from "react";
 
 type TripPreview = {
   name: string;
@@ -15,6 +16,14 @@ export default function TripDiscoveryModal({
   tripPreviews: TripPreview[];
   onDismiss: () => void;
 }) {
+  // Prevent background scrolling when modal is open
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
   const formatDateRange = (startDate: string, endDate: string) => {
     if (startDate === endDate) {
       return formatSeparatedDate(startDate).join(" ");
