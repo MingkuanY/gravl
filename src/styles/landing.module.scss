@@ -1,39 +1,243 @@
 @use "./mixin" as mixin;
 
 .mainContainer {
-  min-height: calc(100dvh - mixin.$header-height);
-  height: calc(100dvh - mixin.$header-height);
+  display: flex;
+  flex-direction: row;
+  height: 100dvh;
+  margin-top: calc(-1 * mixin.$header-height);
+  padding: 0 7rem 4rem 7rem;
+  align-items: center;
+  gap: 6rem;
+}
+
+.leftColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.rightColumn {
+  flex: 0 0 55%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 2rem;
+  min-height: 100%;
+}
+
+.bigLogoContainer {
+  display: flex;
   align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+  gap: 1.5rem;
+}
 
-  .map {
-    margin-top: -4rem;
-    width: 90rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.bigLogo {
+  width: 10.5rem;
+  height: 12rem;
+}
+
+.bigGravl {
+  font-size: 8.4rem;
+  font-weight: 400;
+  color: mixin.$dark;
+  margin: 0;
+}
+
+.map {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.description {
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: mixin.$dark;
+  margin-top: -2rem;
+  text-align: center;
+}
+
+.stepsTitle {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: mixin.$dark;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.stepsList {
+  width: 100%;
+  max-width: 50rem;
+  list-style: none;
+  padding: 0;
+  margin-left: 6rem;
+}
+
+.stepItem {
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7rem;
+    width: 0.8rem;
+    height: 0.8rem;
+    background-color: mixin.$gravl-blue;
+    border-radius: 50%;
+  }
+}
+
+.stepText {
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: mixin.$dark;
+  display: block;
+}
+
+.uploadButton {
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2.5rem 0 1.5rem;
+  height: 4.5rem;
+  text-align: center;
+  border-radius: 2.25rem;
+  font-weight: bold;
+  color: mixin.$white;
+  cursor: pointer;
+  background: mixin.$gravl-blue;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.1);
   }
 
-  .motto {
-    margin-top: -4rem;
-    font-size: 3rem;
-    font-weight: 400;
+  .go {
+    width: 4rem;
+    aspect-ratio: 1;
   }
 
-  .subtitle {
-    margin-top: 0.75rem;
-    font-size: 1.25rem;
-    color: mixin.$gravl-blue;
+  p {
     text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 500;
+    margin-top: 0.3rem;
+  }
+}
+
+.statsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: -2rem;
+
+  .tripCount {
+    margin-top: 1.5rem;
+    font-size: 6.5rem;
+    font-weight: 700;
+    color: mixin.$gravl-blue;
+  }
+
+  .stat {
+    margin-top: 1rem;
+    font-size: 3rem;
+    font-weight: 300;
   }
 }
 
 @media (max-width: 760px) {
   .mainContainer {
-    .map {
-      width: 75rem;
+    flex-direction: column;
+    height: 100dvh;
+    margin-top: calc(-1 * mixin.$header-height);
+    padding: 0 2rem 2rem 2rem;
+    gap: 2rem;
+    overflow: hidden;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .leftColumn {
+    flex: none;
+    width: 100%;
+    padding: 0;
+    min-height: auto;
+    justify-content: flex-start;
+  }
+
+  .rightColumn {
+    flex: none;
+    width: 100%;
+    gap: 1rem;
+    min-height: auto;
+    justify-content: flex-start;
+  }
+
+  .bigLogoContainer {
+    display: none;
+  }
+
+  .map {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .description {
+    font-size: 4rem;
+    line-height: 5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .stepsTitle {
+    font-size: 4rem;
+    margin-bottom: 3.5rem;
+    text-align: center;
+  }
+
+  .stepsList {
+    margin-left: 1rem;
+  }
+
+  .stepItem {
+    margin-bottom: 1.5rem;
+    padding-left: 3rem;
+
+    &::before {
+      top: 1.2rem;
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
+
+  .stepText {
+    font-size: 3rem;
+    line-height: 4rem;
+  }
+
+  .uploadButton {
+    padding: 4rem 5rem;
+    border-radius: 5rem;
+
+    &:hover {
+      transform: none;
+    }
+
+    p {
+      font-size: 3.2rem;
+      margin-left: 1rem;
     }
   }
 }

@@ -3,7 +3,7 @@
 .headerContainer {
   height: mixin.$header-height;
   width: 100vw;
-  padding: 0 4rem 0 7rem;
+  padding: 0 7rem;
   display: flex;
   align-items: center;
 
@@ -24,17 +24,6 @@
       color: mixin.$dark;
       text-decoration: none;
       cursor: pointer;
-    }
-    .testing {
-      margin-left: 0.5rem;
-      font-size: 1rem;
-      font-weight: 600;
-      color: mixin.$gravl-blue;
-      text-transform: uppercase;
-      padding: 0.3rem;
-      padding-top: 0.4rem;
-      border-radius: 2rem;
-      border: 0.2rem solid mixin.$gravl-blue;
     }
   }
 
@@ -105,7 +94,9 @@
       height: 3.5rem;
       border-radius: 1.75rem;
       background: mixin.$gravl-blue;
-      box-shadow: 0 0 0.5rem mixin.$gravl-blue, 0 0 2rem mixin.$gravl-blue;
+      box-shadow:
+        0 0 0.5rem mixin.$gravl-blue,
+        0 0 2rem mixin.$gravl-blue;
       text-transform: uppercase;
       font-size: 1.8rem;
       font-weight: 500;
@@ -172,5 +163,42 @@
 @media (max-width: 760px) {
   .headerContainer {
     padding: 0 4rem;
+
+    .logoContainer {
+      .logo {
+        width: 4rem;
+        height: 4.6rem;
+      }
+      .gravl {
+        font-size: 3.2rem;
+      }
+    }
+
+    .headerRightContainer {
+      .loginContainer,
+      .signUpContainer {
+        .login,
+        .signUp {
+          font-size: 2.3rem;
+        }
+        .account {
+          width: 3.1rem;
+        }
+        .go {
+          width: 3.5rem;
+        }
+      }
+
+      .signUpContainer {
+        height: 4rem;
+        padding: 0 1.6rem;
+      }
+
+      .pfpContainer {
+        .pfp {
+          width: 4rem;
+        }
+      }
+    }
   }
 }

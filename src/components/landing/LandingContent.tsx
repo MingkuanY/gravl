@@ -2,21 +2,22 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import exifr from "exifr";
-import styles from "../../styles/life.module.scss";
+import styles from "../../styles/landing.module.scss";
 import dashboardStyles from "../../styles/dashboard.module.scss";
-import { TripWithVisits, TripInput } from "../../utils/types";
-import Loading from "../load";
+import { TripWithVisits, TripInput, VisitInput } from "../../utils/types";
+import Loading from "../../app/load";
 import haversine from "haversine-distance";
-import LifeInput from "../../components/life/LifeInput";
 import LifeTimeline from "../../components/life/LifeTimeline";
 import MapLoader from "../../components/dashboard/MapLoader";
 import { signIn } from "next-auth/react";
 import { dbscanClusterPhotos, generateTripName } from "../../utils/clustering";
 import classnames from "classnames";
-import Header from "../../components/header/Header";
 import NewTrip from "../../components/log/NewTrip";
 import ConfirmSelection from "../../components/modals/ConfirmSelection";
 import TripDiscoveryModal from "../../components/life/TripDiscoveryModal";
+import Counties from "../maps/Counties";
+import Icon from "../icons/Icon";
+import { useScreenWidth } from "../../utils/hooks";
 
 const MILES_THRESHOLD = 5;
 const METERS_THRESHOLD = MILES_THRESHOLD * 1609.34;
@@ -37,7 +38,12 @@ type TripPreview = {
   endDate: string;
 };
 
-export default function GravlLife() {
+export default function LandingContent({
+  initialVisitData,
+}: {
+  initialVisitData: VisitInput[];
+}) {
+  const isMobile = useScreenWidth();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [mapReady, setMapReady] = useState(false);
@@ -79,7 +85,6 @@ export default function GravlLife() {
         setIsLoading(false);
         return;
       }
-
 
       const generatedTrips: TripWithVisits[] = [];
       const previews: TripPreview[] = [];
@@ -188,7 +193,6 @@ export default function GravlLife() {
           }
         }
       }
-
 
       if (generatedTrips.length === 0 && previews.length === 0) {
         setIsLoading(false);
@@ -495,7 +499,6 @@ export default function GravlLife() {
     setTripPreviews([]);
   };
 
-
   const handleExportTrips = () => {
     // Persist current trips to localStorage before sign-in
     const payload = {
@@ -523,14 +526,111 @@ export default function GravlLife() {
 
   if (!mapReady) {
     return (
-      <>
-        <Header />
-        <LifeInput
-          handleButtonClick={handleButtonClick}
-          handleFileChange={handleFileChange}
-          fileInputRef={fileInputRef}
-        />
-      </>
+      <div className={styles.mainContainer}>
+        {!isMobile ? (
+          <>
+            <div className={styles.leftColumn}>
+              <div>
+                <div className={styles.bigLogoContainer}>
+                  <div className={styles.bigLogo}>
+                    <Icon type="car" fill="#319fff" />
+                  </div>
+                  <h1 className={styles.bigGravl}>Gravl</h1>
+                </div>
+                <h2 className={styles.stepsTitle}>Generate Your Trips</h2>
+                <ul className={styles.stepsList}>
+                  <li className={styles.stepItem}>
+                    <span className={styles.stepText}>Upload photos with location metadata</span>
+                  </li>
+                  <li className={styles.stepItem}>
+                    <span className={styles.stepText}>Gravl clusters them into trips by location and time</span>
+                  </li>
+                  <li className={styles.stepItem}>
+                    <span className={styles.stepText}>Fine-tune your trips to perfection</span>
+                  </li>
+                  <li className={styles.stepItem}>
+                    <span className={styles.stepText}>Enjoy the map animations!</span>
+                  </li>
+                </ul>
+              </div>
+              <button className={styles.uploadButton} onClick={handleButtonClick}>
+                <div className={styles.go}>
+                  <Icon type="go" fill="#fff" />
+                </div>
+                <p>Upload Photos</p>
+              </button>
+              <input
+                type="file"
+                ref={fileInputRef}
+                accept="image/*"
+                multiple
+                onChange={handleFileChange}
+                style={{ display: "none" }}
+              />
+            </div>
+            <div className={styles.rightColumn}>
+              <div className={styles.map}>
+                <Counties
+                  data={initialVisitData}
+                  pause={15}
+                  animate={true}
+                  toggleHighways={false}
+                />
+              </div>
+              <p className={styles.description}>
+                Track your trips by uploading geotagged photos!
+              </p>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className={styles.rightColumn}>
+              <p className={styles.description}>
+                Track your trips by uploading geotagged photos!
+              </p>
+              <div className={styles.map}>
+                <Counties
+                  data={initialVisitData}
+                  pause={15}
+                  animate={true}
+                  toggleHighways={false}
+                />
+              </div>
+            </div>
+            <div className={styles.leftColumn}>
+              <h2 className={styles.stepsTitle}>Generate Your Trips</h2>
+              <ul className={styles.stepsList}>
+                <li className={styles.stepItem}>
+                  <span className={styles.stepText}>Upload photos with location metadata</span>
+                </li>
+                <li className={styles.stepItem}>
+                  <span className={styles.stepText}>Gravl clusters them into trips by location and time</span>
+                </li>
+                <li className={styles.stepItem}>
+                  <span className={styles.stepText}>Fine-tune your trips to perfection</span>
+                </li>
+                <li className={styles.stepItem}>
+                  <span className={styles.stepText}>Enjoy the map animations!</span>
+                </li>
+              </ul>
+              <button className={styles.uploadButton} onClick={handleButtonClick}>
+                <div className={styles.go}>
+                  <Icon type="go" fill="#fff" />
+                </div>
+                <p>Upload Photos</p>
+              </button>
+              <input
+                type="file"
+                ref={fileInputRef}
+                accept="image/*"
+                multiple
+                onChange={handleFileChange}
+                style={{ display: "none" }}
+              />
+            </div>
+          </>
+        )}
+      </div>
     );
   }
 
@@ -567,30 +667,27 @@ export default function GravlLife() {
         />
       )}
       {logTripPage === -1 && (
-        <>
-          <Header />
-          <div className={dashboardStyles.container}>
-            <LifeTimeline
-              trips={trips}
-              selectedTripId={selectedTripId}
-              onSelectTrip={setSelectedTripId}
-              onLoginToSave={handleExportTrips}
-              setLogTripPage={setLogTripPage}
-              setEditTrip={setEditTrip}
-              setConfirmDelete={setConfirmDelete}
-              handleEditTrip={handleEditTrip}
-            />
-            <div className={classnames(dashboardStyles.main, dashboardStyles.centered)}>
-              <div className={styles.statsContainer}>
-                <p className={styles.tripCount}>{totalTrips} trip{totalTrips !== 1 ? 's' : ''}</p>
-                <p className={styles.stat}>{newCounties} new counties</p>
-                <p className={styles.stat}>{newStates} new states</p>
-              </div>
-
-              <MapLoader trips={tripsForMaps} />
+        <div className={dashboardStyles.container}>
+          <LifeTimeline
+            trips={trips}
+            selectedTripId={selectedTripId}
+            onSelectTrip={setSelectedTripId}
+            onLoginToSave={handleExportTrips}
+            setLogTripPage={setLogTripPage}
+            setEditTrip={setEditTrip}
+            setConfirmDelete={setConfirmDelete}
+            handleEditTrip={handleEditTrip}
+          />
+          <div className={classnames(dashboardStyles.main, dashboardStyles.centered)}>
+            <div className={styles.statsContainer}>
+              <p className={styles.tripCount}>{totalTrips} trip{totalTrips !== 1 ? 's' : ''}</p>
+              <p className={styles.stat}>{newCounties} new counties</p>
+              <p className={styles.stat}>{newStates} new states</p>
             </div>
+
+            <MapLoader trips={tripsForMaps} />
           </div>
-        </>
+        </div>
       )}
     </>
   );

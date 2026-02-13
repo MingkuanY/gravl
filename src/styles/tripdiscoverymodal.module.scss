@@ -184,7 +184,7 @@
     overflow-x: hidden;
     gap: 3rem;
     padding: 4rem 0;
-    max-height: calc(100vh - mixin.$header-height - 42rem);
+    max-height: calc(100vh - mixin.$header-height - 40rem);
     touch-action: pan-y;
     -webkit-overflow-scrolling: touch;
   }

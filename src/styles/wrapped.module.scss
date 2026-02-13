@@ -20,3 +20,35 @@
     color: mixin.$dark;
   }
 }
+
+.signUpButton {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2.5rem 0 1.5rem;
+  height: 4.5rem;
+  text-align: center;
+  border-radius: 2.25rem;
+  font-weight: bold;
+  color: mixin.$white;
+  cursor: pointer;
+  background: mixin.$gravl-blue;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  .go {
+    width: 4rem;
+    aspect-ratio: 1;
+  }
+
+  p {
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 500;
+    margin-top: 0.3rem;
+  }
+}

@@ -64,7 +64,6 @@ export default function Header() {
         <p className={styles.gravl} onClick={goToLandingIfLoggedOut}>
           Gravl
         </p>
-        <p className={styles.testing}>Alpha</p>
       </div>
       <div className={styles.headerRightContainer}>
         {sessionUser ? (

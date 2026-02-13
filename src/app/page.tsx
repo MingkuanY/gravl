@@ -1,14 +1,23 @@
 // Welcome to Gravl
 
-import styles from "../styles/landing.module.scss";
 import Header from "@/components/header/Header";
-import Counties from "../components/maps/Counties";
-import MapOutYourLife from "@/components/landing/MapOutYourLife";
+import LandingContent from "@/components/landing/LandingContent";
 import Onboarding from "@/components/onboarding/Onboarding";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/auth";
-import welcome from "../assets/Welcome.json";
 import SignOut from "@/components/landing/SignOut";
+import { getUserByUsername } from "../actions/actions";
+import { TripWithVisits, VisitInput } from "../utils/types";
+
+function convertTripsToVisits(trips: TripWithVisits[]): VisitInput[] {
+  return trips.flatMap((trip) =>
+    trip.visits.map((v) => ({
+      fips_code: v.placeFipsCode,
+      date: v.date.toISOString().split("T")[0],
+      order: v.order,
+    }))
+  );
+}
 
 export default async function Landing({
   searchParams,
@@ -16,9 +25,8 @@ export default async function Landing({
   searchParams: { ob: string };
 }) {
   const session = await getServerSession(authOptions);
-
-  // welcome to gravl counties map
-  const welcome_to_gravl = welcome;
+  const funnyufo = await getUserByUsername("funnyufo");
+  const visitData = convertTripsToVisits(funnyufo?.trips || []);
 
   return (
     <>
@@ -27,18 +35,7 @@ export default async function Landing({
         <Onboarding />
       )}
       <Header />
-      <div className={styles.mainContainer}>
-        <div className={styles.map}>
-          <Counties
-            data={welcome_to_gravl}
-            pause={5}
-            animate={true}
-            toggleHighways={false}
-          />
-        </div>
-        <p className={styles.motto}>Not all who wander are lost</p>
-        <MapOutYourLife />
-      </div>
+      <LandingContent initialVisitData={visitData} />
     </>
   );
 }
