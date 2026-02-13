@@ -26,7 +26,7 @@ export default async function NotFound() {
         </div>
         <h1>Uh-oh! It looks like this page doesn&apos;t exist.</h1>
         <Link href={`/${path}`}>
-          <button>U-turn</button>
+          <button className={styles.button}>U-turn</button>
         </Link>
       </div>
     </>
