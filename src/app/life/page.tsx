@@ -6,7 +6,6 @@ import styles from "../../styles/life.module.scss";
 import dashboardStyles from "../../styles/dashboard.module.scss";
 import { TripWithVisits, TripInput } from "../../utils/types";
 import Loading from "../load";
-import { useRouter } from "next/navigation";
 import haversine from "haversine-distance";
 import LifeInput from "../../components/life/LifeInput";
 import LifeTimeline from "../../components/life/LifeTimeline";
@@ -17,6 +16,7 @@ import classnames from "classnames";
 import Header from "../../components/header/Header";
 import NewTrip from "../../components/log/NewTrip";
 import ConfirmSelection from "../../components/modals/ConfirmSelection";
+import TripDiscoveryModal from "../../components/life/TripDiscoveryModal";
 
 const MILES_THRESHOLD = 5;
 const METERS_THRESHOLD = MILES_THRESHOLD * 1609.34;
@@ -27,10 +27,17 @@ type PhotoData = {
     lat: number;
     lng: number;
   };
+  file?: File;
+};
+
+type TripPreview = {
+  name: string;
+  imageUrl: string;
+  startDate: string;
+  endDate: string;
 };
 
 export default function GravlLife() {
-  const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [mapReady, setMapReady] = useState(false);
@@ -43,6 +50,9 @@ export default function GravlLife() {
   const [logTripPage, setLogTripPage] = useState(-1);
   const [editTrip, setEditTrip] = useState<TripWithVisits | undefined | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(-1);
+
+  const [showDiscoveryModal, setShowDiscoveryModal] = useState(false);
+  const [tripPreviews, setTripPreviews] = useState<TripPreview[]>([]);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -70,22 +80,22 @@ export default function GravlLife() {
         return;
       }
 
+
       const generatedTrips: TripWithVisits[] = [];
+      const previews: TripPreview[] = [];
       let tripIndex = 0;
 
       for (let i = 0; i < clusters.length; i++) {
         const cluster = clusters[i];
 
         try {
-          const routeSegments = await getRouteSegments(cluster);
+          const [routeSegments, tripName] = await Promise.all([
+            getRouteSegments(cluster),
+            generateTripName(cluster, tripIndex),
+          ]);
 
           const visits = generateVisitsFromSegments(routeSegments);
-
-          if (visits.length === 0) {
-            continue;
-          }
-
-          const tripName = await generateTripName(cluster, tripIndex);
+          if (visits.length === 0) continue;
 
           const trip: TripWithVisits = {
             id: Date.now() + tripIndex,
@@ -105,60 +115,82 @@ export default function GravlLife() {
           };
 
           generatedTrips.push(trip);
+
+          const middleIndex = Math.floor(cluster.length / 2);
+          const representativePhoto = cluster[middleIndex];
+
+          if (representativePhoto?.file) {
+            const imageUrl = URL.createObjectURL(representativePhoto.file);
+            const startDate = cluster[0].timestamp.split("T")[0];
+            const endDate = cluster[cluster.length - 1].timestamp.split("T")[0];
+
+            previews.push({
+              name: tripName,
+              imageUrl,
+              startDate,
+              endDate,
+            });
+          }
+
           tripIndex++;
         } catch (error) {
           console.error(`Error processing cluster ${i + 1}:`, error);
         }
       }
 
-      for (let i = 0; i < singletons.length; i++) {
-        const singleton = singletons[i];
+      const singletonResults = await Promise.allSettled(
+        singletons.map(async (singleton, i) => {
+          if (!singleton.location) return null;
 
-        try {
-          if (!singleton.location) continue;
+          const [fipsCode, tripName] = await Promise.all([
+            getCountyFromPoint(singleton.location.lat, singleton.location.lng),
+            generateTripName([singleton], tripIndex + i),
+          ]);
 
-          const fipsCode = await getCountyFromPoint(
-            singleton.location.lat,
-            singleton.location.lng
-          );
-
-          if (!fipsCode) {
-            console.warn(
-              `Could not determine county for singleton photo ${i + 1}`
-            );
-            continue;
-          }
-
-          const tripName = await generateTripName([singleton], tripIndex);
+          if (!fipsCode) return null;
 
           const trip: TripWithVisits = {
-            id: Date.now() + tripIndex,
+            id: Date.now() + tripIndex + i,
             name: tripName,
             description: "",
             createdAt: new Date(),
             updatedAt: null,
             userId: "",
-            visits: [
-              {
-                id: 0,
-                tripId: Date.now() + tripIndex,
-                placeId: null,
-                placeFipsCode: fipsCode,
-                date: new Date(singleton.timestamp),
-                order: 0,
-              },
-            ],
+            visits: [{
+              id: 0,
+              tripId: Date.now() + tripIndex + i,
+              placeId: null,
+              placeFipsCode: fipsCode,
+              date: new Date(singleton.timestamp),
+              order: 0,
+            }],
           };
 
+          return { trip, tripName, date: singleton.timestamp.split("T")[0], singletonIndex: i };
+        })
+      );
+
+      for (const result of singletonResults) {
+        if (result.status === "fulfilled" && result.value) {
+          const { trip, tripName, date, singletonIndex } = result.value;
           generatedTrips.push(trip);
-          tripIndex++;
-        } catch (error) {
-          console.error(`Error processing singleton ${i + 1}:`, error);
+
+          const singleton = singletons[singletonIndex];
+
+          if (singleton?.file) {
+            const imageUrl = URL.createObjectURL(singleton.file);
+            previews.push({
+              name: tripName,
+              imageUrl,
+              startDate: date,
+              endDate: date,
+            });
+          }
         }
       }
 
-      if (generatedTrips.length === 0) {
-        console.error("All clusters failed to process. Unable to generate trips.");
+
+      if (generatedTrips.length === 0 && previews.length === 0) {
         setIsLoading(false);
         return;
       }
@@ -169,9 +201,15 @@ export default function GravlLife() {
         return new Date(bDate).getTime() - new Date(aDate).getTime();
       });
 
+      previews.sort((a: TripPreview, b: TripPreview) =>
+        new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+      );
+
+      setTripPreviews(previews);
       setTrips(generatedTrips);
       setIsLoading(false);
       setMapReady(true);
+      setShowDiscoveryModal(true);
     } catch (error) {
       console.error("Error processing photos:", error);
       setIsLoading(false);
@@ -222,6 +260,7 @@ export default function GravlLife() {
           results.push({
             timestamp: new Date(timestamp).toISOString(),
             location: lat && lng ? { lat, lng } : undefined,
+            file,
           });
         }
       } catch (err) {
@@ -450,6 +489,13 @@ export default function GravlLife() {
     setConfirmDelete(-1);
   };
 
+  const handleDismissDiscovery = () => {
+    tripPreviews.forEach((preview) => URL.revokeObjectURL(preview.imageUrl));
+    setShowDiscoveryModal(false);
+    setTripPreviews([]);
+  };
+
+
   const handleExportTrips = () => {
     // Persist current trips to localStorage before sign-in
     const payload = {
@@ -499,6 +545,12 @@ export default function GravlLife() {
 
   return (
     <>
+      {showDiscoveryModal && (
+        <TripDiscoveryModal
+          tripPreviews={tripPreviews}
+          onDismiss={handleDismissDiscovery}
+        />
+      )}
       {confirmDelete !== -1 && (
         <ConfirmSelection
           warningText="Delete this trip?"

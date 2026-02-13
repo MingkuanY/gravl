@@ -122,7 +122,12 @@
 
     .right {
       margin: 0 1.5rem;
-      mask-image: none;
+      mask-image: linear-gradient(
+        to right,
+        black 0%,
+        black 28rem,
+        transparent 32rem
+      );
 
       .title {
         font-size: 2.8rem;
@@ -136,11 +141,22 @@
       }
     }
 
+    &.selected {
+      .right {
+        mask-image: none;
+      }
+    }
+
     &:hover {
       transform: none;
 
       .right.editMode {
-        mask-image: none;
+        mask-image: linear-gradient(
+          to right,
+          black 0%,
+          black 28rem,
+          transparent 32rem
+        );
       }
     }
   }

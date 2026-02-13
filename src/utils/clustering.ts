@@ -14,6 +14,7 @@ type PhotoData = {
     lat: number;
     lng: number;
   };
+  file?: File;
 };
 
 /**
