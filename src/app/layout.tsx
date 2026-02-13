@@ -12,7 +12,30 @@ const josefinSans = Josefin_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Gravl",
-  description: "Track your travels interactively.",
+  description: "Generate your trips from photos.",
+  openGraph: {
+    title: "Gravl",
+    description: "Generate your trips from photos.",
+    url: "https://gravl.org",
+    siteName: "Gravl",
+    images: [
+      {
+        url: "/gravl_preview.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Gravl - Generate your trips from photos",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Gravl",
+    description: "Generate your trips from photos.",
+    images: ["/gravl_preview.jpg"],
+  },
+  metadataBase: new URL("https://gravl.org"),
 };
 
 export default async function RootLayout({
