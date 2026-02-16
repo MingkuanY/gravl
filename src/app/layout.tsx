@@ -7,6 +7,7 @@ import { authOptions } from "./api/auth/[...nextauth]/auth";
 import { getUserWithData, loadPlaces } from "../actions/actions";
 import { PlacesProvider } from "../contexts/PlacesContext";
 import { UserProvider } from "../contexts/UserContext";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const josefinSans = Josefin_Sans({ subsets: ["latin"] });
 
@@ -61,7 +62,12 @@ export default async function RootLayout({
                 defer
               ></script>
             </head>
-            <body className={josefinSans.className}>{children}</body>
+            <body className={josefinSans.className}>
+              {children}
+            </body>
+            {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+              <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+            )}
           </html>
         </PlacesProvider>
       </UserProvider>
