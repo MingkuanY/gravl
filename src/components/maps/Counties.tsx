@@ -29,6 +29,7 @@ export default function Counties({
   setVisits,
   currentDate,
   toggleHighways,
+  onRestartAnimation,
 }: MapProps) {
   const isMobile = useScreenWidth();
   const places = usePlacesContext();
@@ -123,6 +124,15 @@ export default function Counties({
 
   const placeIDs = new Set(places?.map((place) => place.fips_code));
 
+  const handleAnimationClick = (event: React.MouseEvent<SVGSVGElement>) => {
+    if (!animate || !onRestartAnimation) return;
+
+    const target = event.target as SVGPathElement;
+    if (target.tagName === "path" && placeIDs.has(target.id)) {
+      onRestartAnimation();
+    }
+  };
+
   return (
     <>
       {hoverInfo.label && !isMobile && (
@@ -143,6 +153,9 @@ export default function Counties({
         id={styles.map}
         {...(!animate && {
           onClick: handleMapClick(placeIDs!, visits!, setVisits!, currentDate!),
+        })}
+        {...(animate && onRestartAnimation && {
+          onClick: handleAnimationClick,
         })}
       >
         {/* COUNTIES */}

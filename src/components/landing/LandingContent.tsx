@@ -40,9 +40,14 @@ export default function LandingContent({
   const [showDiscoveryModal, setShowDiscoveryModal] = useState(false);
   const [tripPreviews, setTripPreviews] = useState<TripPreview[]>([]);
   const [reloadMap, setReloadMap] = useState(false);
+  const [reloadDemoMap, setReloadDemoMap] = useState(false);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
+  };
+
+  const handleRestartDemoAnimation = () => {
+    setReloadDemoMap((prev) => !prev);
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -237,6 +242,8 @@ export default function LandingContent({
                   pause={15}
                   animate={true}
                   toggleHighways={false}
+                  reload={reloadDemoMap}
+                  onRestartAnimation={handleRestartDemoAnimation}
                 />
               </div>
               <p className={styles.description}>
@@ -256,6 +263,8 @@ export default function LandingContent({
                   pause={15}
                   animate={true}
                   toggleHighways={false}
+                  reload={reloadDemoMap}
+                  onRestartAnimation={handleRestartDemoAnimation}
                 />
               </div>
             </div>

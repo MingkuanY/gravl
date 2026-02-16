@@ -61,6 +61,7 @@ export type MapProps = {
   setVisits?: Function;
   currentDate?: string;
   toggleHighways: boolean;
+  onRestartAnimation?: () => void;
 };
 
 // Dashboard

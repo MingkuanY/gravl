@@ -8,9 +8,12 @@ import { authOptions } from "./api/auth/[...nextauth]/auth";
 import SignOut from "@/components/landing/SignOut";
 import { getUserByUsername } from "../actions/actions";
 import { TripWithVisits, VisitInput } from "../utils/types";
+import { sortTrips } from "../utils/date";
 
 function convertTripsToVisits(trips: TripWithVisits[]): VisitInput[] {
-  return trips.flatMap((trip) =>
+  const sortedTrips = sortTrips(trips, true);
+
+  return sortedTrips.flatMap((trip) =>
     trip.visits.map((v) => ({
       fips_code: v.placeFipsCode,
       date: v.date.toISOString().split("T")[0],
