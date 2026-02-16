@@ -1,6 +1,8 @@
 @use "./mixin" as mixin;
 
 .headerContainer {
+  position: relative;
+  z-index: 1000;
   height: mixin.$header-height;
   width: 100vw;
   padding: 0 7rem;
